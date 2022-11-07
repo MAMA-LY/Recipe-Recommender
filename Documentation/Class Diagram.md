@@ -21,7 +21,7 @@ Date: 2022-11-06
 
 
 # **Recipe Recommender (Model)**
-![class-diagram](Class Diagram.png)
+![class-diagram](class_diagram.png)
 
 *class-diagram*
 
@@ -35,7 +35,7 @@ Date: 2022-11-06
 |weight : *float [1]*|
 |age : *Integer [1]*|
 |**Associations**|
-|BodyInfo\_Profile -  : Profile [1] - see [definition](#bookmark=id.1ksv4uv)|
+|BodyInfo\_Profile -  : Profile [1] - see [definition](#14-profile-class)|
 ## **2. Calendar (Class)**
 *In Recipe Recommender*
 
@@ -44,7 +44,7 @@ Date: 2022-11-06
 |Ingredients : *List<Ingredient> [1]*|
 |recipes : *List<Recipe> [1]*|
 |**Associations**|
-|Calendar\_Profile - profile : Profile [0..1] - see [definition](#bookmark=id.1ksv4uv)|
+|Calendar\_Profile - profile : Profile [0..1] - see [definition](#14-profile-class)|
 ## **3. CaloriesWatcher (Class)**
 *In Recipe Recommender*
 
@@ -147,7 +147,7 @@ Date: 2022-11-06
 |withName : *void* <br>- name: *String[1]*|
 |withPhoto : *void* <br>- photo: *Image[1]*|
 |**Associations**|
-|ProfileBuilder\_Profile - profile : Profile [\*] - see [definition](#bookmark=id.1ksv4uv)|
+|ProfileBuilder\_Profile - profile : Profile [\*] - see [definition](#14-profile-class)|
 ## **16. Recipe (Class)**
 *In Recipe Recommender*
 
@@ -214,7 +214,7 @@ Date: 2022-11-06
 |email : *String [1]*|
 |password : *String [1]*|
 |**Associations**|
-|UserCredentials\_Profile - profile : Profile [0..1] - see [definition](#bookmark=id.1ksv4uv)|
+|UserCredentials\_Profile - profile : Profile [0..1] - see [definition](#14-profile-class)|
 
 
 
