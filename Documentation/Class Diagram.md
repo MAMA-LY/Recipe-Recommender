@@ -70,7 +70,7 @@ Date: 2022-11-06
 |pushProfile : *void* <br>- parameter: *Profile[1]*|
 |getProfile : *Profile* <br>- parameter: *UserCredentials[1]*|
 |**Associations**|
-|DAO\_Database - database : Database [0..1] - see [definition](#bookmark=id.3dy6vkm)|
+|DAO\_Database - database : Database [0..1] - see [definition](#5-database-class)|
 ## **5. Database (Class)**
 *In Recipe Recommender*
 
@@ -82,7 +82,7 @@ Date: 2022-11-06
 |query : *void* <br>- sqlQuery: *String[1]*|
 |Database : *Database*|
 |**Associations**|
-|DAO\_Database - DAO : DAO [\*] - see [definition](#bookmark=id.tyjcwt)|
+|DAO\_Database - DAO : DAO [\*] - see [definition](#4-dao-class)|
 ## **8. Ingredient (Class)**
 *In Recipe Recommender*
 
@@ -94,7 +94,7 @@ Date: 2022-11-06
 |weight : *Integer [1]*|
 |nutritions : *Nutritions [1]*|
 |**Associations**|
-|Ingredient\_Nutritions - nutritions2 : Nutritions [0..1] - see [definition](#bookmark=id.35nkun2)|
+|Ingredient\_Nutritions - nutritions2 : Nutritions [0..1] - see [definition](#13-nutritions-class)|
 ## **12. Model (Class)**
 *In Recipe Recommender*
 
@@ -108,8 +108,8 @@ Date: 2022-11-06
 |carbs : *Integer [1]*|
 |fats : *Integer [1]*|
 |**Associations**|
-|Recipe\_Nutritions - recipe : Recipe [0..1] - see [definition](#bookmark=id.2jxsxqh)|
-|Ingredient\_Nutritions - ingredient : Ingredient [0..1] - see [definition](#bookmark=id.2s8eyo1)|
+|Recipe\_Nutritions - recipe : Recipe [0..1] - see [definition](#16-recipe-class)|
+|Ingredient\_Nutritions - ingredient : Ingredient [0..1] - see [definition](#8-ingredient-class)|
 ## **14. Profile (Class)**
 *In Recipe Recommender*
 
@@ -127,10 +127,10 @@ Date: 2022-11-06
 |calculateCalories : *void*|
 |addCalendar : *void* <br>- parameter: *List<Ingredient>[1]*|
 |**Associations**|
-|ProfileBuilder\_Profile - profileBuilder : ProfileBuilder [0..1] - see [definition](#bookmark=id.44sinio)|
-|BodyInfo\_Profile -  : BodyInfo [1] - see [definition](#bookmark=id.1fob9te)|
-|UserCredentials\_Profile - userCredentials : UserCredentials [0..1] - see [definition](#bookmark=id.4i7ojhp)|
-|Calendar\_Profile - calendar : Calendar [0..1] - see [definition](#bookmark=id.3znysh7)|
+|ProfileBuilder\_Profile - profileBuilder : ProfileBuilder [0..1] - see [definition](#15-profilebuilder-class)|
+|BodyInfo\_Profile -  : BodyInfo [1] - see [definition](#1-bodyinfo-class)|
+|UserCredentials\_Profile - userCredentials : UserCredentials [0..1] - see [definition](#20-usercredentials-class)|
+|Calendar\_Profile - calendar : Calendar [0..1] - see [definition](#2-calendar-class)|
 ## **15. ProfileBuilder (Class)**
 *In Recipe Recommender*
 
@@ -161,8 +161,8 @@ Date: 2022-11-06
 |photo : *Image [1]*|
 |nutritions : *Nutritions [1]*|
 |**Associations**|
-|Recipe\_Nutritions - nutritions2 : Nutritions [0..1] - see [definition](#bookmark=id.35nkun2)|
-|RecipeBuilder\_Recipe - recipeBuilder : RecipeBuilder [0..1] - see [definition](#bookmark=id.z337ya)|
+|Recipe\_Nutritions - nutritions2 : Nutritions [0..1] - see [definition](#13-nutritions-class)|
+|RecipeBuilder\_Recipe - recipeBuilder : RecipeBuilder [0..1] - see [definition](#17-recipebuilder-class)|
 ## **17. RecipeBuilder (Class)**
 *In Recipe Recommender*
 
@@ -182,7 +182,7 @@ Date: 2022-11-06
 |withNutritions : *void* <br>- parameter: *Nutritions[1]*|
 |reset : *void*|
 |**Associations**|
-|RecipeBuilder\_Recipe - recipe : Recipe [\*] - see [definition](#bookmark=id.2jxsxqh)|
+|RecipeBuilder\_Recipe - recipe : Recipe [\*] - see [definition](#16-recipe-class)|
 ## **18. RecipeRecommender (Class)**
 *In Recipe Recommender*
 
