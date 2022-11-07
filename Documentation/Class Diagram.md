@@ -35,7 +35,7 @@ Date: 2022-11-06
 |weight : *float [1]*|
 |age : *Integer [1]*|
 |**Associations**|
-|BodyInfo\_Profile -  : Profile [1] - see [definition](#14)|
+|BodyInfo\_Profile -  : Profile [1] - see [definition](#Profile)|
 ## **2. Calendar (Class)**
 *In Recipe Recommender*
 
