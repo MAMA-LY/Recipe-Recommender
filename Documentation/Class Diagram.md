@@ -21,7 +21,7 @@ Date: 2022-11-06
 
 
 # **Recipe Recommender (Model)**
-![class-diagram](Class Diagram.png)
+![class-diagram](class diagram.png)
 
 *class-diagram*
 
@@ -35,7 +35,7 @@ Date: 2022-11-06
 |weight : *float [1]*|
 |age : *Integer [1]*|
 |**Associations**|
-|BodyInfo\_Profile -  : Profile [1] - see [definition](#bookmark=id.1ksv4uv)|
+|BodyInfo\_Profile -  : Profile [1] - see [definition](#14. Profile (Class))|
 ## **2. Calendar (Class)**
 *In Recipe Recommender*
 
