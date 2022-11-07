@@ -21,7 +21,7 @@ Date: 2022-11-06
 
 
 # **Recipe Recommender (Model)**
-![class-diagram](Aspose.Words.89eaa9b9-8aa6-4324-9838-a0e6b9819e21.002.png)
+![class-diagram](Class Diagram.png)
 
 *class-diagram*
 
