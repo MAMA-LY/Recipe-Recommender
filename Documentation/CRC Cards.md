@@ -16,11 +16,11 @@
 
 ## RestfulAPI
 
-|- Creates an account.</p><p>- Gets a profile data.</p><p>- Authenticates a user.</p><p>- Get all ingredients in the database.</p><p>- Search for recipes with a given list of ingredients.</p><p>- Modifes the meal plan for a user.</p><p>- Modifes the user's consumed daily calories by eating a meal.</p><p>- Adds favorite recipes to the user's profile.</p><p>- Removes favorite recipes from the user's profile.</p>|<p>- DAO</p><p>- RecipeRecommender</p><p>- CaloriesWatcher</p>|
+|- Creates an account.</p><p>- Gets a profile data.</p><p>- Authenticates a user.</p><p>- Get all ingredients in the database.</p><p>- Search for recipes with a given list of ingredients.</p><p>- Modifies the meal plan for a user.</p><p>- Modifies the user's consumed daily calories by eating a meal.</p><p>- Adds favorite recipes to the user's profile.</p><p>- Removes favorite recipes from the user's profile.</p>|<p>- DAO</p><p>- RecipeRecommender</p><p>- CaloriesWatcher</p>|
 |---|---|
 
 ## Profile
-|<p> Encapsulates user's data such as his name, credentials, favorite recipes, daily calories, meal plan, and body information.</p><p> Calculates the amount of calories the user should consume daily based on his body information.</p><p> Modifes the meal plan by adding recipes to the user calendar.</p>|<p> ProfileBuilder</p><p>- BodyInfo</p><p>- UserCredentials</p><p> Calendar</p>|
+|<p> Encapsulates user's data such as his name, credentials, favorite recipes, daily calories, meal plan, and body information.</p><p> Calculates the amount of calories the user should consume daily based on his body information.</p><p> Modifies the meal plan by adding recipes to the user calendar.</p>|<p> ProfileBuilder</p><p>- BodyInfo</p><p>- UserCredentials</p><p> Calendar</p>|
 |---|---|
 
 ## ProfileBuilder
@@ -55,7 +55,7 @@
 ## CaloriesWatcher
 
 
-|<p> Calculates the number of calories in a certain ingredient.</p><p>- Calculates the number of calories in a certain recipe.</p><p>- Modifes the user's consumed daily calories by eating a meal.</p>|<p> RestfulAPI</p><p> Recipe</p>|
+|<p> Calculates the number of calories in a certain ingredient.</p><p>- Calculates the number of calories in a certain recipe.</p><p>- Modifies the user's consumed daily calories by eating a meal.</p>|<p> RestfulAPI</p><p> Recipe</p>|
 |---|---|
 ## RecipeRecommender
 
