@@ -23,9 +23,7 @@ Date: 2022-11-06
 # **Recipe Recommender (Model)**
 ![class-diagram](class_diagram.png)
 
-*class-diagram*
 
-*class-diagram - copy*
 ## **1. BodyInfo (Class)**
 *In Recipe Recommender*
 
