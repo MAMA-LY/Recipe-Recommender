@@ -1,7 +1,7 @@
 ﻿# CRC Card
 - [RestfulAPI](#restfulapi)
 - [Profile](#profile)
-- [Profle Builder](#proflebuilder)
+- [Profile Builder](#profilebuilder)
 - [Recipe](#recipe)
 - [RecipeBuilder](#recipebuilder)
 - [DAO](#dao)
@@ -16,16 +16,16 @@
 
 ## RestfulAPI
 
-|- Creates an account.</p><p>- Gets a profle data.</p><p>- Authenticates a user.</p><p>- Get all ingredients in the database.</p><p>- Search for recipes with a given list of ingredients.</p><p>- Modifes the meal plan for a user.</p><p>- Modifes the user's consumed daily calories by eating a meal.</p><p>- Adds favorite recipes to the user's profle.</p><p>- Removes favorite recipes from the user's profle.</p>|<p>- DAO</p><p>- RecipeRecommender</p><p>- CaloriesWatcher</p>|
+|- Creates an account.</p><p>- Gets a profile data.</p><p>- Authenticates a user.</p><p>- Get all ingredients in the database.</p><p>- Search for recipes with a given list of ingredients.</p><p>- Modifes the meal plan for a user.</p><p>- Modifes the user's consumed daily calories by eating a meal.</p><p>- Adds favorite recipes to the user's profile.</p><p>- Removes favorite recipes from the user's profile.</p>|<p>- DAO</p><p>- RecipeRecommender</p><p>- CaloriesWatcher</p>|
 |---|---|
 
 ## Profile
-|<p> Encapsulates user's data such as his name, credentials, favorite recipes, daily calories, meal plan, and body information.</p><p> Calculates the amount of calories the user should consume daily based on his body information.</p><p> Modifes the meal plan by adding recipes to the user calendar.</p>|<p> ProfleBuilder</p><p>- BodyInfo</p><p>- UserCredentials</p><p> Calendar</p>|
+|<p> Encapsulates user's data such as his name, credentials, favorite recipes, daily calories, meal plan, and body information.</p><p> Calculates the amount of calories the user should consume daily based on his body information.</p><p> Modifes the meal plan by adding recipes to the user calendar.</p>|<p> ProfileBuilder</p><p>- BodyInfo</p><p>- UserCredentials</p><p> Calendar</p>|
 |---|---|
 
-## ProfleBuilder
+## ProfileBuilder
 
-|<p> Builds the profle for a new user during the creation of his account.</p><p> Sets initial attributes like the user's name, credentials, photo, and body information.</p>| Profle|
+|<p> Builds the profile for a new user during the creation of his account.</p><p> Sets initial attributes like the user's name, credentials, photo, and body information.</p>| profile|
 |---|---|
 
 ## Recipe
@@ -43,7 +43,7 @@
 ## DAO
 
 
-|<p>- Communicates with the database for the following purposes:</p><p>- Add a new profle</p><p>- Get a profle</p><p>- Get a recipe by its ingredients</p><p>- Get a recipe by its ID</p><p>- Get all ingredients</p><p>- Add a favorite recipe to a user's profle</p><p>- Delete a favorite recipe from a user's profle</p><p>- Get authentication credentials</p>|<p> Database</p><p>- Profle</p><p>- Ingredient</p><p>- RecipeRecommender</p><p>- RestfulAPI</p>|
+|<p>- Communicates with the database for the following purposes:</p><p>- Add a new profile</p><p>- Get a profile</p><p>- Get a recipe by its ingredients</p><p>- Get a recipe by its ID</p><p>- Get all ingredients</p><p>- Add a favorite recipe to a user's profile</p><p>- Delete a favorite recipe from a user's profile</p><p>- Get authentication credentials</p>|<p> Database</p><p>- Profile</p><p>- Ingredient</p><p>- RecipeRecommender</p><p>- RestfulAPI</p>|
 |---|---|
 
 ## Database
@@ -78,16 +78,16 @@
 ## UserCredentials
 
 
-| Encapsulates user's credential data such as his email, hashed password, and account's id.| Profle|
+| Encapsulates user's credential data such as his email, hashed password, and account's id.| Profile|
 |---|---|
 ## BodyInfo
 
 
-| Encapsulates user's data such as his height, weight, and age.|! Profle|
+| Encapsulates user's data such as his height, weight, and age.|! Profile|
 |---|---|
 
 ## Calendar
 
 
-| Encapsulates user's meal plan data such as his planned recipes for each day.| Profle|
+| Encapsulates user's meal plan data such as his planned recipes for each day.| Profile|
 |---|---|
