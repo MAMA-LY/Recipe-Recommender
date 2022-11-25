@@ -28,7 +28,7 @@ jobs:
       
       - name: Run tests
         run: flutter test
-        
+
   build(web):
     runs-on: ubuntu-latest
     defaults:
@@ -126,8 +126,9 @@ jobs:
         run: flutter pub get
 
       - name: Build App
-        run: flutter config --enable-windows-desktop
-        run: flutter build windows
+        run: |
+          flutter config --enable-windows-desktop
+          flutter build windows
 
   build(macOS):
     runs-on: macos-latest
@@ -146,6 +147,7 @@ jobs:
         run: flutter pub get
       
       - name: Build App
-        run: flutter config --enable-macos-desktop
-        run: flutter build macos
+        run: |
+          flutter config --enable-macos-desktop
+          flutter build macos
       
