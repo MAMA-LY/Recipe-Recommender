@@ -1,0 +1,210 @@
+[
+  {
+    "name": "RestfulAPI",
+    "superclasses": "",
+    "subclasses": "",
+    "type": 1,
+    "responsibilities": [
+      "Creates an account.",
+      "Gets a profile data.",
+      "Authenticates a user.",
+      "Get all ingredients in the database.",
+      "Search for recipes with a given list of ingredients.",
+      "Modifies the meal plan for a user.",
+      "Modifies the user's consumed daily calories by eating a meal.",
+      "Adds favorite recipes to the user's profile.",
+      "Removes favorite recipes from the user's profile."
+    ],
+    "collaborators": [
+      "DAO",
+      "RecipeRecommender",
+      "CaloriesWatcher"
+    ]
+  },
+  {
+    "name": "Profile",
+    "superclasses": "",
+    "subclasses": "",
+    "type": 1,
+    "responsibilities": [
+      "Encapsulates user's data such as his name, credentials, favorite recipes, daily calories, meal plan, and body information.",
+      "Calculates the amount of calories the user should consume daily based on his body information.",
+      "Modifies the meal plan by adding recipes to the user calendar."
+    ],
+    "collaborators": [
+      "ProfileBuilder",
+      "BodyInfo",
+      "UserCredentials",
+      "Calendar"
+    ]
+  },
+  {
+    "name": "ProfileBuilder",
+    "superclasses": "",
+    "subclasses": "",
+    "type": 1,
+    "responsibilities": [
+      "Builds the profile for a new user during the creation of his account.",
+      "Sets initial attributes like the user's name, credentials, photo, and body information."
+    ],
+    "collaborators": [
+      "Profile"
+    ]
+  },
+  {
+    "name": "Recipe",
+    "superclasses": "",
+    "subclasses": "",
+    "type": 1,
+    "responsibilities": [
+      "Represents all information about a recipe, including its name, ingredients, nutritions, photo, cuisines, and tags."
+    ],
+    "collaborators": [
+      "RecipeBuilder",
+      "DAO",
+      "CaloriesWatcher",
+      "Nutrition"
+    ]
+  },
+  {
+    "name": "RecipeBuilder",
+    "superclasses": "",
+    "subclasses": "",
+    "type": 1,
+    "responsibilities": [
+      "Builds the contents of a recipe during its creation.",
+      "Sets initial attributes like the recipe's name, ingredients, photo, nutrition, cuisines, and tags.",
+      "Cancel the recipe's building if its creation is aborted by the user."
+    ],
+    "collaborators": [
+      "Recipe"
+    ]
+  },
+  {
+    "name": "DAO",
+    "superclasses": "",
+    "subclasses": "",
+    "type": 1,
+    "responsibilities": [
+      "Communicates with the database for the following purposes:",
+      "Add a new profile",
+      "Get a profile",
+      "Get a recipe by its ingredients",
+      "Get a recipe by its ID",
+      "Get all ingredients",
+      "Add a favorite recipe to a user's profile",
+      "Delete a favorite recipe from a user's profile",
+      "Get authentication credentials",
+      ""
+    ],
+    "collaborators": [
+      "Database",
+      "Profile",
+      "Ingredient",
+      "RecipeRecommender",
+      "RestfulAPI"
+    ]
+  },
+  {
+    "name": "Database",
+    "superclasses": "",
+    "subclasses": "",
+    "type": 1,
+    "responsibilities": [
+      "Maintaining a singleton representing the database.",
+      "Sending queries to the database server and receiving its response."
+    ],
+    "collaborators": [
+      "DAO"
+    ]
+  },
+  {
+    "name": "CaloriesWatcher",
+    "superclasses": "",
+    "subclasses": "",
+    "type": 1,
+    "responsibilities": [
+      "Calculates the number of calories in a certain ingredient.",
+      "Calculates the number of calories in a certain recipe.",
+      "Modifies the user's consumed daily calories by eating a meal."
+    ],
+    "collaborators": [
+      "RestfulAPI",
+      "Recipe"
+    ]
+  },
+  {
+    "name": "RecipeRecommender",
+    "superclasses": "",
+    "subclasses": "",
+    "type": 1,
+    "responsibilities": [
+      "Recommends recipes for a user given its past activities and preferences."
+    ],
+    "collaborators": [
+      "DAO"
+    ]
+  },
+  {
+    "name": "Ingredient",
+    "superclasses": "",
+    "subclasses": "",
+    "type": 1,
+    "responsibilities": [
+      "Encapsulates ingredient's data such as its name, id, weight, icon, and nutrition."
+    ],
+    "collaborators": [
+      "DAO",
+      "Nutritions"
+    ]
+  },
+  {
+    "name": "Nutritions",
+    "superclasses": "",
+    "subclasses": "",
+    "type": 1,
+    "responsibilities": [
+      "Encapsulates recipe or ingredient's nutrition data such as number of calories, amount of protein, carbohydrates, and fats."
+    ],
+    "collaborators": [
+      "Recipe",
+      "Ingredient"
+    ]
+  },
+  {
+    "name": "UserCredentials",
+    "superclasses": "",
+    "subclasses": "",
+    "type": 1,
+    "responsibilities": [
+      "Encapsulates user's credential data such as his email, hashed password, and account's id."
+    ],
+    "collaborators": [
+      "Profile"
+    ]
+  },
+  {
+    "name": "BodyInfo",
+    "superclasses": "",
+    "subclasses": "",
+    "type": 1,
+    "responsibilities": [
+      "Encapsulates user's data such as his height, weight, and age."
+    ],
+    "collaborators": [
+      "Profile"
+    ]
+  },
+  {
+    "name": "Calendar",
+    "superclasses": "",
+    "subclasses": "",
+    "type": 1,
+    "responsibilities": [
+      "Encapsulates user's meal plan data such as his planned recipes for each day."
+    ],
+    "collaborators": [
+      "Profile"
+    ]
+  }
+]
