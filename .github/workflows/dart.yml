@@ -29,7 +29,7 @@ jobs:
       - name: Run tests
         run: flutter test
 
-  build(web):
+  build_web:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -43,10 +43,10 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Build (Web)
+      - name: Build App
         run: flutter build web
 
-  build(android):
+  build_android:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -65,13 +65,12 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Build APK
-        run: flutter build apk
+      - name: Build App
+        run: |
+          flutter build apk
+          flutter build appbundle
 
-      - name: Build bundle
-        run: flutter build appbundle
-
-  build(iOS):
+  build_iOS:
     runs-on: macos-latest
     defaults:
       run:
@@ -88,7 +87,7 @@ jobs:
       - name: Build App
         run: flutter build ios --release --no-codesign
 
-  build(linux):
+  build_linux:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -102,14 +101,14 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Build (Linux)
+      - name: Build App
         run: |
           sudo apt-get update -y
           sudo apt-get install -y ninja-build libgtk-3-dev
           flutter config --enable-linux-desktop
           flutter build linux
 
-  build(windows):
+  build_windows:
     runs-on: windows-latest
     defaults:
       run:
@@ -130,7 +129,7 @@ jobs:
           flutter config --enable-windows-desktop
           flutter build windows
 
-  build(macOS):
+  build_macOS:
     runs-on: macos-latest
     defaults:
       run:
