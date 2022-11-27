@@ -1,5 +1,6 @@
-package SWE Project;
+package com.brainfood.backend;
 
+import java.util.List;
 
 /**
 * @generated
@@ -24,7 +25,7 @@ public class RecipeRecommender {
     /**
     * @generated
     */
-    public Model setModel(Model model) {
+    public void setModel(Model model) {
         this.model = model;
     }
     
@@ -38,7 +39,7 @@ public class RecipeRecommender {
     * @generated
     */
     public List<Recipe> recommend() {
-        //TODO
+        //
         return null;
     }
     

@@ -1,4 +1,4 @@
-package SWE Project;
+package com.brainfood.backend;
 
 
 /**
@@ -19,13 +19,11 @@ public class ProfileBuilder {
     /**
     * @generated
     */
-    private  ProfileBuilder;
     
     
     /**
     * @generated
     */
-    private Set<Profile> profile;
     
     
 
@@ -39,7 +37,7 @@ public class ProfileBuilder {
     /**
     * @generated
     */
-    public Recipe setRecipe(Recipe recipe) {
+    public void setRecipe(Recipe recipe) {
         this.recipe = recipe;
     }
     
@@ -54,43 +52,28 @@ public class ProfileBuilder {
     /**
     * @generated
     */
-    private Profile setProfile(Profile profile) {
+    private void setProfile(Profile profile) {
         this.profile = profile;
     }
     
     
-    /**
-    * @generated
-    */
-    public  getProfileBuilder() {
-        return this.ProfileBuilder;
-    }
+    // /**
+    // * @generated
+    // */
+    // public  getProfileBuilder() {
+    //     return this.ProfileBuilder;
+    // }
     
-    /**
-    * @generated
-    */
-    public  setProfileBuilder(invalid ProfileBuilder) {
-        this.ProfileBuilder = ProfileBuilder;
-    }
+    // /**
+    // * @generated
+    // */
+    // public void setProfileBuilder(invalid ProfileBuilder) {
+    //     this.ProfileBuilder = ProfileBuilder;
+    // }
     
     
-    
-    /**
-    * @generated
-    */
-    public Set<Profile> getProfile() {
-        if (this.profile == null) {
-            this.profile = new HashSet<Profile>();
-        }
-        return this.profile;
-    }
-    
-    /**
-    * @generated
-    */
-    public Set<Profile> setProfile(Profile profile) {
-        this.profile = profile;
-    }
+  
+ 
     
     
     
@@ -101,48 +84,42 @@ public class ProfileBuilder {
     * @generated
     */
     public void withUserCredentials() {
-        //TODO
-        return null;
+        //
     }
     
     /**
     * @generated
     */
     public void withFavoritRecipes() {
-        //TODO
-        return null;
+        //
     }
     
     /**
     * @generated
     */
     public void withFavoriteRecipe() {
-        //TODO
-        return null;
+        //
     }
     
     /**
     * @generated
     */
     public void withBodyInfo() {
-        //TODO
-        return null;
+        //
     }
     
     /**
     * @generated
     */
     public void withName() {
-        //TODO
-        return null;
+        //
     }
     
     /**
     * @generated
     */
     public void withPhoto() {
-        //TODO
-        return null;
+        //
     }
     
     

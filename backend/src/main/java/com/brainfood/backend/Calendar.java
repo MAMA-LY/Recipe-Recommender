@@ -1,5 +1,7 @@
-package SWE Project;
 
+package com.brainfood.backend;
+
+import java.util.List;
 
 /**
 * @generated
@@ -29,7 +31,7 @@ public class Calendar {
     /**
     * @generated
     */
-    public List<Ingredient> setIngredients(List<Ingredient> Ingredients) {
+    public void setIngredients(List<Ingredient> Ingredients) {
         this.Ingredients = Ingredients;
     }
     
@@ -44,7 +46,7 @@ public class Calendar {
     /**
     * @generated
     */
-    public List<Recipe> setRecipes(List<Recipe> recipes) {
+    public void setRecipes(List<Recipe> recipes) {
         this.recipes = recipes;
     }
     

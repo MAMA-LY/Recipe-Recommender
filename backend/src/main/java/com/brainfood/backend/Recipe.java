@@ -1,5 +1,6 @@
-package SWE Project;
+package com.brainfood.backend;
 
+import java.util.List;
 
 /**
 * @generated
@@ -59,7 +60,7 @@ public class Recipe {
     /**
     * @generated
     */
-    public String setID(String ID) {
+    public void setID(String ID) {
         this.ID = ID;
     }
     
@@ -74,7 +75,7 @@ public class Recipe {
     /**
     * @generated
     */
-    public List<String> setTags(List<String> Tags) {
+    public void setTags(List<String> Tags) {
         this.Tags = Tags;
     }
     
@@ -89,7 +90,7 @@ public class Recipe {
     /**
     * @generated
     */
-    public String setCuisine (String Cuisine ) {
+    public void setCuisine(String Cuisine ) {
         this.Cuisine  = Cuisine ;
     }
     
@@ -104,7 +105,7 @@ public class Recipe {
     /**
     * @generated
     */
-    public String setName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
     
@@ -119,7 +120,7 @@ public class Recipe {
     /**
     * @generated
     */
-    public List<Ingredient> setIngredients(List<Ingredient> ingredients) {
+    public void setIngredients(List<Ingredient> ingredients) {
         this.ingredients = ingredients;
     }
     
@@ -134,7 +135,7 @@ public class Recipe {
     /**
     * @generated
     */
-    public Image setPhoto(Image photo) {
+    public void setPhoto(Image photo) {
         this.photo = photo;
     }
     
@@ -149,7 +150,7 @@ public class Recipe {
     /**
     * @generated
     */
-    public Nutritions setNutritions(Nutritions nutritions) {
+    public void setNutritions(Nutritions nutritions) {
         this.nutritions = nutritions;
     }
     
@@ -165,7 +166,7 @@ public class Recipe {
     /**
     * @generated
     */
-    public RecipeBuilder setRecipeBuilder(RecipeBuilder recipeBuilder) {
+    public void setRecipeBuilder(RecipeBuilder recipeBuilder) {
         this.recipeBuilder = recipeBuilder;
     }
     

@@ -1,4 +1,4 @@
-package SWE Project;
+package com.brainfood.backend;
 
 
 /**
@@ -39,7 +39,7 @@ public class Nutritions {
     /**
     * @generated
     */
-    public int setCalories(Integer calories) {
+    public void setCalories(Integer calories) {
         this.calories = calories;
     }
     
@@ -54,7 +54,7 @@ public class Nutritions {
     /**
     * @generated
     */
-    public int setProteins(Integer proteins) {
+    public void setProteins(Integer proteins) {
         this.proteins = proteins;
     }
     
@@ -69,7 +69,7 @@ public class Nutritions {
     /**
     * @generated
     */
-    public int setCarbs(Integer carbs) {
+    public void setCarbs(Integer carbs) {
         this.carbs = carbs;
     }
     
@@ -84,7 +84,7 @@ public class Nutritions {
     /**
     * @generated
     */
-    public int setFats(Integer fats) {
+    public void setFats(Integer fats) {
         this.fats = fats;
     }
     
