@@ -94,7 +94,6 @@ public class Ingredient {
         this.weight = weight;
     }
 
-
     /**
      * @generated
      */
