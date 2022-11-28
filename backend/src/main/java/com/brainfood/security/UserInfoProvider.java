@@ -12,7 +12,6 @@ public class UserInfoProvider implements UserDetailsService{
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxx  ");
         return new UserInfo();
     }
     

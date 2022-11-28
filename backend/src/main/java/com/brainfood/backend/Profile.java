@@ -2,6 +2,8 @@ package com.brainfood.backend;
 
 import java.util.List;
 
+import com.brainfood.entities.UserCredentials;
+
 /**
 * @generated
 */
