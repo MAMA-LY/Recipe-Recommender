@@ -1,4 +1,4 @@
-package SWE Project;
+package com.brainfood.backend;
 
 
 /**
@@ -44,7 +44,7 @@ public class Ingredient {
     /**
     * @generated
     */
-    public String setName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
     
@@ -59,7 +59,7 @@ public class Ingredient {
     /**
     * @generated
     */
-    public String setID(String ID) {
+    public void setID(String ID) {
         this.ID = ID;
     }
     
@@ -74,7 +74,7 @@ public class Ingredient {
     /**
     * @generated
     */
-    public Image setIcon (Image icon ) {
+    public void setIcon(Image icon ) {
         this.icon  = icon ;
     }
     
@@ -89,7 +89,7 @@ public class Ingredient {
     /**
     * @generated
     */
-    public int setWeight(Integer weight) {
+    public void setWeight(Integer weight) {
         this.weight = weight;
     }
     
@@ -104,7 +104,7 @@ public class Ingredient {
     /**
     * @generated
     */
-    public Nutritions setNutritions(Nutritions nutritions) {
+    public void setNutritions(Nutritions nutritions) {
         this.nutritions = nutritions;
     }
     

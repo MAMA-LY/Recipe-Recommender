@@ -1,5 +1,8 @@
-package SWE Project;
 
+package com.brainfood.backend;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
 * @generated
@@ -22,14 +25,14 @@ public class Database {
     /**
     * @generated
     */
-    private Database getInstance() {
-        return this.instance;
-    }
+    // private Database getInstance() {
+    //     return this.instance;
+    // }
     
     /**
     * @generated
     */
-    private Database setInstance(Database instance) {
+    private void setInstance(Database instance) {
         this.instance = instance;
     }
     
@@ -48,7 +51,7 @@ public class Database {
     /**
     * @generated
     */
-    public Set<DAO> setDAO(DAO DAO) {
+    public void setDAO(Set<DAO> DAO) {
         this.DAO = DAO;
     }
     
@@ -61,7 +64,7 @@ public class Database {
     * @generated
     */
     public Database getInstance() {
-        //TODO
+        //
         return null;
     }
     
@@ -69,15 +72,14 @@ public class Database {
     * @generated
     */
     public void query() {
-        //TODO
-        return null;
+        //
     }
     
     /**
     * @generated
     */
     private Database() {
-        //TODO
+        //
     }
     
 }
