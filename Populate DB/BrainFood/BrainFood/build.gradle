@@ -6,7 +6,7 @@ plugins {
 
 group = 'MAMA-LY'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '19'
+sourceCompatibility = '17'
 
 repositories {
 	mavenCentral()

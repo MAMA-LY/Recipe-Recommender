@@ -1,5 +1,3 @@
-package SWE Project;
-
 
 /**
 * @generated
