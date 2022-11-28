@@ -70,22 +70,22 @@ jobs:
           flutter build apk
           flutter build appbundle
 
-  build_iOS:
-    runs-on: macos-latest
-    defaults:
-      run:
-        working-directory: ./frontend
+  # build_iOS:
+  #   runs-on: macos-latest
+  #   defaults:
+  #     run:
+  #       working-directory: ./frontend
 
-    steps:
-      - uses: actions/checkout@v3
+  #   steps:
+  #     - uses: actions/checkout@v3
 
-      - uses: subosito/flutter-action@v2
+  #     - uses: subosito/flutter-action@v2
 
-      - name: Install dependencies
-        run: flutter pub get
+  #     - name: Install dependencies
+  #       run: flutter pub get
       
-      - name: Build App
-        run: flutter build ios --release --no-codesign
+  #     - name: Build App
+  #       run: flutter build ios --release --no-codesign
 
   build_linux:
     runs-on: ubuntu-latest
@@ -108,45 +108,45 @@ jobs:
           flutter config --enable-linux-desktop
           flutter build linux
 
-  build_windows:
-    runs-on: windows-latest
-    defaults:
-      run:
-        working-directory: ./frontend
+  # build_windows:
+  #   runs-on: windows-latest
+  #   defaults:
+  #     run:
+  #       working-directory: ./frontend
 
-    steps:
-      - uses: actions/checkout@v3
+  #   steps:
+  #     - uses: actions/checkout@v3
 
-      - uses: subosito/flutter-action@v2
-        with:
-          channel: 'beta'
+  #     - uses: subosito/flutter-action@v2
+  #       with:
+  #         channel: 'beta'
 
-      - name: Install dependencies
-        run: flutter pub get
+  #     - name: Install dependencies
+  #       run: flutter pub get
 
-      - name: Build App
-        run: |
-          flutter config --enable-windows-desktop
-          flutter build windows
+  #     - name: Build App
+  #       run: |
+  #         flutter config --enable-windows-desktop
+  #         flutter build windows
 
-  build_macOS:
-    runs-on: macos-latest
-    defaults:
-      run:
-        working-directory: ./frontend
+  # build_macOS:
+  #   runs-on: macos-latest
+  #   defaults:
+  #     run:
+  #       working-directory: ./frontend
 
-    steps:
-      - uses: actions/checkout@v3
-      - uses: subosito/flutter-action@v2
-        with:
-          channel: 'stable'
-          architecture: x64
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - uses: subosito/flutter-action@v2
+  #       with:
+  #         channel: 'stable'
+  #         architecture: x64
 
-      - name: Install dependencies
-        run: flutter pub get
+  #     - name: Install dependencies
+  #       run: flutter pub get
       
-      - name: Build App
-        run: |
-          flutter config --enable-macos-desktop
-          flutter build macos
+  #     - name: Build App
+  #       run: |
+  #         flutter config --enable-macos-desktop
+  #         flutter build macos
       
