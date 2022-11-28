@@ -1,93 +1,93 @@
-
+package MAMALY.DatabaseObjectsPackage;
 
 /**
-* @generated
-*/
+ * @generated
+ */
 public class Nutritions {
-    
-    /**
-    * @generated
-    */
-    private int calories;
-    
-    /**
-    * @generated
-    */
-    private int proteins;
-    
-    /**
-    * @generated
-    */
-    private int carbs;
-    
-    /**
-    * @generated
-    */
-    private int fats;
-    
-    
-    
 
     /**
-    * @generated
-    */
+     * @generated
+     */
+    private int calories;
+
+    /**
+     * @generated
+     */
+    private int proteins;
+
+    /**
+     * @generated
+     */
+    private int carbs;
+
+    /**
+     * @generated
+     */
+    private int fats;
+
+
+
+
+    /**
+     * @generated
+     */
     public int getCalories() {
         return this.calories;
     }
-    
+
     /**
-    * @generated
-    */
-    public int setCalories(Integer calories) {
+     * @generated
+     */
+    public void setCalories(Integer calories) {
         this.calories = calories;
     }
-    
-    
+
+
     /**
-    * @generated
-    */
+     * @generated
+     */
     public int getProteins() {
         return this.proteins;
     }
-    
+
     /**
-    * @generated
-    */
-    public int setProteins(Integer proteins) {
+     * @generated
+     */
+    public void setProteins(Integer proteins) {
         this.proteins = proteins;
     }
-    
-    
+
+
     /**
-    * @generated
-    */
+     * @generated
+     */
     public int getCarbs() {
         return this.carbs;
     }
-    
+
     /**
-    * @generated
-    */
-    public int setCarbs(Integer carbs) {
+     * @generated
+     */
+    public void setCarbs(Integer carbs) {
         this.carbs = carbs;
     }
-    
-    
+
+
     /**
-    * @generated
-    */
+     * @generated
+     */
     public int getFats() {
         return this.fats;
     }
-    
+
     /**
-    * @generated
-    */
-    public int setFats(Integer fats) {
+     * @generated
+     */
+    public void setFats(Integer fats) {
         this.fats = fats;
     }
-    
-    
-    
-    
+
+
+
+
 }
