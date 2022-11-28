@@ -56,25 +56,7 @@ public class ProfileBuilder {
         this.profile = profile;
     }
     
-    
-    // /**
-    // * @generated
-    // */
-    // public  getProfileBuilder() {
-    //     return this.ProfileBuilder;
-    // }
-    
-    // /**
-    // * @generated
-    // */
-    // public void setProfileBuilder(invalid ProfileBuilder) {
-    //     this.ProfileBuilder = ProfileBuilder;
-    // }
-    
-    
-  
- 
-    
+
     
     
 
