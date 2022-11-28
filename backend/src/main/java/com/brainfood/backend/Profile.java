@@ -1,5 +1,6 @@
-package SWE Project;
+package com.brainfood.backend;
 
+import java.util.List;
 
 /**
 * @generated
@@ -64,7 +65,7 @@ public class Profile {
     /**
     * @generated
     */
-    public UserCredentials setUserCredentials (UserCredentials userCredentials ) {
+    public void setUserCredentials(UserCredentials userCredentials ) {
         this.userCredentials  = userCredentials ;
     }
     
@@ -79,7 +80,7 @@ public class Profile {
     /**
     * @generated
     */
-    public List<Recipe> setFavoriteRecipes(List<Recipe> favoriteRecipes) {
+    public void setFavoriteRecipes(List<Recipe> favoriteRecipes) {
         this.favoriteRecipes = favoriteRecipes;
     }
     
@@ -94,7 +95,7 @@ public class Profile {
     /**
     * @generated
     */
-    public Image setPhoto (Image photo ) {
+    public void setPhoto (Image photo ) {
         this.photo  = photo ;
     }
     
@@ -109,7 +110,7 @@ public class Profile {
     /**
     * @generated
     */
-    public String setName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
     
@@ -124,7 +125,7 @@ public class Profile {
     /**
     * @generated
     */
-    public int setDailyCalories(Integer dailyCalories) {
+    public void setDailyCalories(Integer dailyCalories) {
         this.dailyCalories = dailyCalories;
     }
     
@@ -139,7 +140,7 @@ public class Profile {
     /**
     * @generated
     */
-    public int setCaloriesDate(Integer caloriesDate) {
+    public void setCaloriesDate(Integer caloriesDate) {
         this.caloriesDate = caloriesDate;
     }
     
@@ -154,7 +155,7 @@ public class Profile {
     /**
     * @generated
     */
-    public BodyInfo setBodyInfo(BodyInfo bodyInfo) {
+    public void setBodyInfo(BodyInfo bodyInfo) {
         this.bodyInfo = bodyInfo;
     }
     
@@ -169,7 +170,7 @@ public class Profile {
     /**
     * @generated
     */
-    public Calendar setCalendar(Calendar calendar) {
+    public void setCalendar(Calendar calendar) {
         this.calendar = calendar;
     }
     
@@ -185,7 +186,7 @@ public class Profile {
     /**
     * @generated
     */
-    public ProfileBuilder setProfileBuilder(ProfileBuilder profileBuilder) {
+    public void setProfileBuilder(ProfileBuilder profileBuilder) {
         this.profileBuilder = profileBuilder;
     }
     
@@ -198,16 +199,14 @@ public class Profile {
     * @generated
     */
     public void calculateCalories() {
-        //TODO
-        return null;
+        //
     }
     
     /**
     * @generated
     */
     public void addCalendar() {
-        //TODO
-        return null;
+        //
     }
     
     

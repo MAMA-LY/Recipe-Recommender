@@ -1,0 +1,7 @@
+server:
+   port: 8443
+   ssl:
+      key-store: classpath:keystore.p12
+      key-store-password: 81075416
+      keyStoreType: PKCS12
+      keyAlias: kotb

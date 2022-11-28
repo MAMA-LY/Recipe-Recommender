@@ -1,5 +1,8 @@
-package SWE Project;
+package com.brainfood.backend;
 
+import java.util.List;
+
+import lombok.Data;
 
 /**
 * @generated
@@ -15,7 +18,6 @@ public class DAO {
     /**
     * @generated
     */
-    private Database database;
     
     
 
@@ -29,25 +31,10 @@ public class DAO {
     /**
     * @generated
     */
-    private Database setDatabase(Database database) {
+    private void setDatabase(Database database) {
         this.database = database;
     }
     
-    
-    
-    /**
-    * @generated
-    */
-    public Database getDatabase() {
-        return this.database;
-    }
-    
-    /**
-    * @generated
-    */
-    public Database setDatabase(Database database) {
-        this.database = database;
-    }
     
     
     
@@ -58,13 +45,13 @@ public class DAO {
     * @generated
     */
     public DAO() {
-        //TODO
+        //
     }
     /**
     * @generated
     */
     public boolean loginAuthentication() {
-        //TODO
+        //
         return false;
     }
     
@@ -72,15 +59,14 @@ public class DAO {
     * @generated
     */
     public void addFavRecipe() {
-        //TODO
-        return null;
+        //
     }
     
     /**
     * @generated
     */
     public List<Recipe> getRecipes() {
-        //TODO
+        //
         return null;
     }
     
@@ -88,7 +74,7 @@ public class DAO {
     * @generated
     */
     public Recipe getRecipeByID() {
-        //TODO
+        //
         return null;
     }
     
@@ -96,15 +82,14 @@ public class DAO {
     * @generated
     */
     public void deleteFavRecipe() {
-        //TODO
-        return null;
+        //
     }
     
     /**
     * @generated
     */
     public List<Ingredient> getAllIngredients() {
-        //TODO
+        //
         return null;
     }
     
@@ -112,15 +97,14 @@ public class DAO {
     * @generated
     */
     public void pushProfile() {
-        //TODO
-        return null;
+        //
     }
     
     /**
     * @generated
     */
     public Profile getProfile() {
-        //TODO
+        //
         return null;
     }
     
