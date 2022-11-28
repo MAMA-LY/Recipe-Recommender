@@ -1,94 +1,93 @@
-package com.brainfood.backend;
-
+package MAMALY.DatabaseObjectsPackage;
 
 /**
-* @generated
-*/
+ * @generated
+ */
 public class Nutritions {
-    
-    /**
-    * @generated
-    */
-    private int calories;
-    
-    /**
-    * @generated
-    */
-    private int proteins;
-    
-    /**
-    * @generated
-    */
-    private int carbs;
-    
-    /**
-    * @generated
-    */
-    private int fats;
-    
-    
-    
 
     /**
-    * @generated
-    */
+     * @generated
+     */
+    private int calories;
+
+    /**
+     * @generated
+     */
+    private int proteins;
+
+    /**
+     * @generated
+     */
+    private int carbs;
+
+    /**
+     * @generated
+     */
+    private int fats;
+
+
+
+
+    /**
+     * @generated
+     */
     public int getCalories() {
         return this.calories;
     }
-    
+
     /**
-    * @generated
-    */
+     * @generated
+     */
     public void setCalories(Integer calories) {
         this.calories = calories;
     }
-    
-    
+
+
     /**
-    * @generated
-    */
+     * @generated
+     */
     public int getProteins() {
         return this.proteins;
     }
-    
+
     /**
-    * @generated
-    */
+     * @generated
+     */
     public void setProteins(Integer proteins) {
         this.proteins = proteins;
     }
-    
-    
+
+
     /**
-    * @generated
-    */
+     * @generated
+     */
     public int getCarbs() {
         return this.carbs;
     }
-    
+
     /**
-    * @generated
-    */
+     * @generated
+     */
     public void setCarbs(Integer carbs) {
         this.carbs = carbs;
     }
-    
-    
+
+
     /**
-    * @generated
-    */
+     * @generated
+     */
     public int getFats() {
         return this.fats;
     }
-    
+
     /**
-    * @generated
-    */
+     * @generated
+     */
     public void setFats(Integer fats) {
         this.fats = fats;
     }
-    
-    
-    
-    
+
+
+
+
 }

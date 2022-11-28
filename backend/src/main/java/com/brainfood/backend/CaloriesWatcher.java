@@ -1,5 +1,5 @@
-package SWE Project;
 
+package com.brainfood.backend;
 
 /**
 * @generated
@@ -18,7 +18,6 @@ public class CaloriesWatcher {
     * @generated
     */
     public Recipe eat() {
-        //TODO
         return null;
     }
     
@@ -26,7 +25,6 @@ public class CaloriesWatcher {
     * @generated
     */
     private int unboxRecipeCalories() {
-        //TODO
         return 0;
     }
     
@@ -34,7 +32,6 @@ public class CaloriesWatcher {
     * @generated
     */
     private int unboxIngredientCalories() {
-        //TODO
         return 0;
     }
     

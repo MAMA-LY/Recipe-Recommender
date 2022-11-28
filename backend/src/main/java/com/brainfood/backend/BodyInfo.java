@@ -1,4 +1,4 @@
-package SWE Project;
+package com.brainfood.backend;
 
 
 /**
@@ -34,7 +34,7 @@ public class BodyInfo {
     /**
     * @generated
     */
-    public float setHeight(float height) {
+    public void setHeight(float height) {
         this.height = height;
     }
     
@@ -49,7 +49,7 @@ public class BodyInfo {
     /**
     * @generated
     */
-    public float setWeight(float weight) {
+    public void setWeight(float weight) {
         this.weight = weight;
     }
     
@@ -64,7 +64,7 @@ public class BodyInfo {
     /**
     * @generated
     */
-    public int setAge(Integer age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
     

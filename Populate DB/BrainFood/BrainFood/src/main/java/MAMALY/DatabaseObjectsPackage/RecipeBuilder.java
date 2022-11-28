@@ -1,120 +1,120 @@
-package com.brainfood.backend;
+package MAMALY.DatabaseObjectsPackage;
 /**
-* @generated
-*/
+ * @generated
+ */
 public class RecipeBuilder {
-    
-    /**
-    * @generated
-    */
-    private Recipe recipe;
-    
-    /**
-    * @generated
-    */
-    
-    /**
-    * @generated
-    */
-    private RecipeBuilder RecipeBuilder;
-    
-    
-    /**
-    * @generated
-    */
-    
-    
 
     /**
-    * @generated
-    */
+     * @generated
+     */
+    private Recipe recipe;
+
+    /**
+     * @generated
+     */
+
+    /**
+     * @generated
+     */
+    private RecipeBuilder RecipeBuilder;
+
+
+    /**
+     * @generated
+     */
+
+
+
+    /**
+     * @generated
+     */
     public Recipe getRecipe() {
         return this.recipe;
     }
-    
-   
+
+
     /**
-    * @generated
-    */
+     * @generated
+     */
     private void setRecipe(Recipe recipe) {
         this.recipe = recipe;
     }
-    
-    
+
+
     /**
-    * @generated
-    */
+     * @generated
+     */
     public RecipeBuilder getRecipeBuilder() {
         return this.RecipeBuilder;
     }
-    
+
     /**
-    * @generated
-    */
+     * @generated
+     */
     public void setRecipeBuilder(RecipeBuilder RecipeBuilder) {
         this.RecipeBuilder = RecipeBuilder;
     }
-    
-    
-    
-  
-    
 
-    //                          Operations                                  
-    
+
+
+
+
+
+    //                          Operations
+
     /**
-    * @generated
-    */
+     * @generated
+     */
     public void withID() {
     }
-    
+
     /**
-    * @generated
-    */
+     * @generated
+     */
     public void withListTags() {
     }
-    
+
     /**
-    * @generated
-    */
+     * @generated
+     */
     public void withCuisine() {
         //
     }
-    
+
     /**
-    * @generated
-    */
+     * @generated
+     */
     public void withName() {
         //
     }
-    
+
     /**
-    * @generated
-    */
+     * @generated
+     */
     public void withPhoto() {
         //
     }
-    
+
     /**
-    * @generated
-    */
+     * @generated
+     */
     public void withIngredients() {
         //
     }
-    
+
     /**
-    * @generated
-    */
+     * @generated
+     */
     public void withNutritions() {
         //
     }
-    
+
     /**
-    * @generated
-    */
+     * @generated
+     */
     public void reset() {
         //
     }
-    
-    
+
+
 }

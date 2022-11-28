@@ -1,4 +1,4 @@
-package SWE Project;
+package com.brainfood.backend;
 
 
 /**
@@ -34,7 +34,7 @@ public class UserCredentials {
     /**
     * @generated
     */
-    public String setID(String ID) {
+    public void setID(String ID) {
         this.ID = ID;
     }
     
@@ -49,7 +49,7 @@ public class UserCredentials {
     /**
     * @generated
     */
-    public String setEmail(String email) {
+    public void setEmail(String email) {
         this.email = email;
     }
     
@@ -64,7 +64,7 @@ public class UserCredentials {
     /**
     * @generated
     */
-    public String setPassword(String password) {
+    public void setPassword(String password) {
         this.password = password;
     }
     

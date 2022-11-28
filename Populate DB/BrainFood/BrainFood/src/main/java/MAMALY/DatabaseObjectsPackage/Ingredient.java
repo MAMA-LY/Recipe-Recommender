@@ -1,114 +1,114 @@
-package com.brainfood.backend;
+package MAMALY.DatabaseObjectsPackage;
 
+import java.awt.*;
 
 /**
-* @generated
-*/
+ * @generated
+ */
 public class Ingredient {
-    
-    /**
-    * @generated
-    */
-    private String name;
-    
-    /**
-    * @generated
-    */
-    private String ID;
-    
-    /**
-    * @generated
-    */
-    private Image icon ;
-    
-    /**
-    * @generated
-    */
-    private int weight;
-    
-    /**
-    * @generated
-    */
-    private Nutritions nutritions;
-    
-    
-    
 
     /**
-    * @generated
-    */
+     * @generated
+     */
+    private String name;
+
+    /**
+     * @generated
+     */
+    private String ID;
+
+    /**
+     * @generated
+     */
+    private Image icon ;
+
+    /**
+     * @generated
+     */
+    private int weight;
+
+    /**
+     * @generated
+     */
+    private Nutritions nutritions;
+
+
+
+
+    /**
+     * @generated
+     */
     public String getName() {
         return this.name;
     }
-    
+
     /**
-    * @generated
-    */
+     * @generated
+     */
     public void setName(String name) {
         this.name = name;
     }
-    
-    
+
+
     /**
-    * @generated
-    */
+     * @generated
+     */
     public String getID() {
         return this.ID;
     }
-    
+
     /**
-    * @generated
-    */
+     * @generated
+     */
     public void setID(String ID) {
         this.ID = ID;
     }
-    
-    
+
+
     /**
-    * @generated
-    */
+     * @generated
+     */
     public Image getIcon () {
         return this.icon ;
     }
-    
+
     /**
-    * @generated
-    */
+     * @generated
+     */
     public void setIcon(Image icon ) {
         this.icon  = icon ;
     }
-    
-    
+
+
     /**
-    * @generated
-    */
+     * @generated
+     */
     public int getWeight() {
         return this.weight;
     }
-    
+
     /**
-    * @generated
-    */
+     * @generated
+     */
     public void setWeight(Integer weight) {
         this.weight = weight;
     }
-    
-    
+
     /**
-    * @generated
-    */
+     * @generated
+     */
     public Nutritions getNutritions() {
         return this.nutritions;
     }
-    
+
     /**
-    * @generated
-    */
+     * @generated
+     */
     public void setNutritions(Nutritions nutritions) {
         this.nutritions = nutritions;
     }
-    
-    
-    
-    
+
+
+
+
 }

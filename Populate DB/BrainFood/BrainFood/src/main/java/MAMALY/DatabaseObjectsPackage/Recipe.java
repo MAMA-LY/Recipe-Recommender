@@ -1,175 +1,175 @@
-package com.brainfood.backend;
-
+package MAMALY.DatabaseObjectsPackage;
+import java.awt.*;
 import java.util.List;
 
 /**
-* @generated
-*/
+ * @generated
+ */
 public class Recipe {
-    
-    /**
-    * @generated
-    */
-    private String ID;
-    
-    /**
-    * @generated
-    */
-    private List<String> Tags;
-    
-    /**
-    * @generated
-    */
-    private String Cuisine ;
-    
-    /**
-    * @generated
-    */
-    private String name;
-    
-    /**
-    * @generated
-    */
-    private List<Ingredient> ingredients;
-    
-    /**
-    * @generated
-    */
-    private Image photo;
-    
-    /**
-    * @generated
-    */
-    private Nutritions nutritions;
-    
-    
-    /**
-    * @generated
-    */
-    private RecipeBuilder recipeBuilder;
-    
-    
 
     /**
-    * @generated
-    */
+     * @generated
+     */
+    private String ID;
+
+    /**
+     * @generated
+     */
+    private List<String> Tags;
+
+    /**
+     * @generated
+     */
+    private String Cuisine ;
+
+    /**
+     * @generated
+     */
+    private String name;
+
+    /**
+     * @generated
+     */
+    private List<Ingredient> ingredients;
+
+    /**
+     * @generated
+     */
+    private Image photo;
+
+    /**
+     * @generated
+     */
+    private Nutritions nutritions;
+
+
+    /**
+     * @generated
+     */
+    private RecipeBuilder recipeBuilder;
+
+
+
+    /**
+     * @generated
+     */
     public String getID() {
         return this.ID;
     }
-    
+
     /**
-    * @generated
-    */
+     * @generated
+     */
     public void setID(String ID) {
         this.ID = ID;
     }
-    
-    
+
+
     /**
-    * @generated
-    */
+     * @generated
+     */
     public List<String> getTags() {
         return this.Tags;
     }
-    
+
     /**
-    * @generated
-    */
+     * @generated
+     */
     public void setTags(List<String> Tags) {
         this.Tags = Tags;
     }
-    
-    
+
+
     /**
-    * @generated
-    */
+     * @generated
+     */
     public String getCuisine () {
         return this.Cuisine ;
     }
-    
+
     /**
-    * @generated
-    */
+     * @generated
+     */
     public void setCuisine(String Cuisine ) {
         this.Cuisine  = Cuisine ;
     }
-    
-    
+
+
     /**
-    * @generated
-    */
+     * @generated
+     */
     public String getName() {
         return this.name;
     }
-    
+
     /**
-    * @generated
-    */
+     * @generated
+     */
     public void setName(String name) {
         this.name = name;
     }
-    
-    
+
+
     /**
-    * @generated
-    */
+     * @generated
+     */
     public List<Ingredient> getIngredients() {
         return this.ingredients;
     }
-    
+
     /**
-    * @generated
-    */
+     * @generated
+     */
     public void setIngredients(List<Ingredient> ingredients) {
         this.ingredients = ingredients;
     }
-    
-    
+
+
     /**
-    * @generated
-    */
+     * @generated
+     */
     public Image getPhoto() {
         return this.photo;
     }
-    
+
     /**
-    * @generated
-    */
+     * @generated
+     */
     public void setPhoto(Image photo) {
         this.photo = photo;
     }
-    
-    
+
+
     /**
-    * @generated
-    */
+     * @generated
+     */
     public Nutritions getNutritions() {
         return this.nutritions;
     }
-    
+
     /**
-    * @generated
-    */
+     * @generated
+     */
     public void setNutritions(Nutritions nutritions) {
         this.nutritions = nutritions;
     }
-    
-    
-    
+
+
+
     /**
-    * @generated
-    */
+     * @generated
+     */
     public RecipeBuilder getRecipeBuilder() {
         return this.recipeBuilder;
     }
-    
+
     /**
-    * @generated
-    */
+     * @generated
+     */
     public void setRecipeBuilder(RecipeBuilder recipeBuilder) {
         this.recipeBuilder = recipeBuilder;
     }
-    
-    
-    
+
+
+
 }
