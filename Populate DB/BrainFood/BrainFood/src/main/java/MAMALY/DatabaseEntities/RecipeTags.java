@@ -1,7 +1,7 @@
 package MAMALY.DatabaseEntities;
 
 import lombok.Builder;
-import javax.persistence.Entity;
+import jakarta.persistence.Entity;
 
 @Entity
 @Builder
