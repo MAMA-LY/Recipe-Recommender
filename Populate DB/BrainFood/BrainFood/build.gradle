@@ -16,6 +16,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
+	implementation 'org.hibernate:hibernate-core:5.6.12.Final'
 	implementation 'javax.persistence:javax.persistence-api:2.2'
 	implementation 'org.projectlombok:lombok:1.18.24'
 	implementation 'org.json:json:20090211'
