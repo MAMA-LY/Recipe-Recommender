@@ -1,13 +1,14 @@
 package com.BrainFood.DatabaseEntities;
 
 import jakarta.persistence.*;
-import lombok.Builder;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
+import java.io.Serializable;
 
 @Entity
-@Table(name = "Ingredient")
-@Builder
-public class Ingredient {
+@Table(name = "\"Ingredient\"")
+@Data @Builder
+public class Ingredient implements Serializable {
 
     @Id
     @GeneratedValue(generator="system-uuid")

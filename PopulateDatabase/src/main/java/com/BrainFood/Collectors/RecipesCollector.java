@@ -20,14 +20,14 @@ public class RecipesCollector implements ApplicationRunner {
     @Autowired private RecipeIngredientsRepository recipeIngredientsRepository;
 
     public void collect() throws IOException, InterruptedException, JSONException {
-//        JSONObject result = LowCarbRecipesSwagger.getRandomRecipe();
+//
         Recipe recipe = Recipe.builder()
                 .name("flafel")
                 .cuisine("egypt")
                 .calories(122)
                 .proteins(25)
                 .fats(33)
-                .fats(23)
+                .carbs(23)
                 .photo("lol")
                 .build();
         recipeRepository.save(recipe);
