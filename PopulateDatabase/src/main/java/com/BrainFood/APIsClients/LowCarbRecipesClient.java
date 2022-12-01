@@ -1,4 +1,4 @@
-package com.BrainFood.Swaggers;
+package com.BrainFood.APIsClients;
 
 import org.json.JSONObject;
 
@@ -8,7 +8,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-public class LowCarbRecipesSwagger {
+public class LowCarbRecipesClient {
     public static JSONObject getRandomRecipe() throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("https://low-carb-recipes.p.rapidapi.com/random"))

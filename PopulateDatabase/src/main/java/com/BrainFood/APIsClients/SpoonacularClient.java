@@ -1,4 +1,4 @@
-package com.BrainFood.Swaggers;
+package com.BrainFood.APIsClients;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -10,7 +10,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-public class SpoonacularSwagger {
+public class SpoonacularClient {
     public static JSONObject getRandomRecipe(int number) throws IOException, InterruptedException {
          HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/random?&number="+ number))
