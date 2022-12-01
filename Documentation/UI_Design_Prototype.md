@@ -23,9 +23,11 @@
 
 ### **Home Page**
 
-    The user can find in the home page his last visited recipes (or some recommeneded recipes if the recommendation system is built) and the user can click on the recipe to see its information.
+    The user can find in the home page his last visited recipes (or some recommeneded recipes if the recommendation system is built),
+    and the user can click on the recipe to see its information.
     The user can go to his nutritions from the button on the upper left corner.
-    The navigation bar holds the home page, meals calendar page, search page, favorite recipes page, and settings page, where user can navigate the app using it. 
+    The navigation bar holds the home page, meals calendar page, search page, favorite recipes page, and settings page,
+    where user can navigate the app using it. 
 
 ![Home-Page](Pages-UI/Home-Page.png)
 
@@ -46,6 +48,7 @@
 
 ### **Account Settings Page**
 
-    Where the user can edit his email, password, and profile photo or delete the account (This feature we didn't decide if this is the best design or not).
+    Where the user can edit his email, password, and profile photo or delete the account
+    (This feature we didn't decide if this is the best design or not).
 
 ![Account-Setting-Page](Pages-UI/Account-Setting-Page.png)
