@@ -11,7 +11,7 @@
 
     It's the loading screen that shows up when the user open the app.
 
-![class-diagram](Pages UI/Splash.png)
+![Splash](Pages-UI/Splash.png)
 
 ### **Login Page**
 
@@ -19,7 +19,7 @@
     to make the app remembers him/her.
     And can sign up/ log in using google or facebook account (This feature can change).
 
-![class-diagram](Pages UI/Login Page.png)
+![Login-Page](Pages-UI/Login Page.png)
 
 ### **Home Page**
 
@@ -27,14 +27,14 @@
     The user can go to his nutritions from the button on the upper left corner.
     The navigation bar holds the home page, meals calendar page, search page, favorite recipes page, and settings page, where user can navigate the app using it. 
 
-![class-diagram](Pages UI/Home Page.png)
+![Home-Page](Pages-UI/Home Page.png)
 
 ### **Search Page**
 
     Where the user can add the ingerdients he/she has and hit the recommendation button to see what recipes he/she cans make.
     There is cart for the search session so the user can double-check what he/she added in it.
 
-![class-diagram](Pages UI/Search Page.png)
+![Search-Page](Pages-UI/Search Page.png)
 
 ### **Settings Page**
 
@@ -42,10 +42,10 @@
     The second one is to switch between light and dark mode.
     The last one is to go to help page if the user needs to know how to do something in the app. 
 
-![class-diagram](Pages UI/Settings Page.png)
+![Settings-Page](Pages-UI/Settings Page.png)
 
 ### **Account Settings Page**
 
     Where the user can edit his email, password, and profile photo or delete the account (This feature we didn't decide if this is the best design or not).
 
-![class-diagram](Pages UI/Account Setting Page.png)
+![Account-Setting-Page](Pages-UI/Account Setting Page.png)
