@@ -1,4 +1,5 @@
-package com.BrainFood.Collectors;
+package com.BrainFood.PopulateDatabase;
+
 
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +11,7 @@ import java.util.stream.Stream;
 
 public class UnitTester {
     @Test
-    public void testMerger(){
+    public void testNullMerger(){
         List<String> a = Arrays.asList("2","5");
         List<String> b = null;
         List<String> c = Arrays.asList("1","9");

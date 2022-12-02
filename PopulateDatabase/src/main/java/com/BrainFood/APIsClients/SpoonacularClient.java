@@ -11,13 +11,14 @@ public class SpoonacularClient {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
         defaultClient.setBasePath("https://api.spoonacular.com");
         ApiKeyAuth apiKeyScheme = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyScheme");
-        apiKeyScheme.setApiKey(System.getenv("SpoonacularApiKey"));
+        apiKeyScheme.setApiKey("7f8f2feba63d4488843d574aaba79686");
+        apiKeyScheme.setApiKeyPrefix(null);
         recipesApi = new RecipesApi(defaultClient);
 
     }
     public GetRandomRecipes200Response getRandomRecipes(int number, String tag) {
 
-        Boolean limitLicense = true;
+        Boolean limitLicense = false;
         try {
             return this.recipesApi.getRandomRecipes(limitLicense, tag, number);
         } catch (ApiException e) {

@@ -1,6 +1,6 @@
 package com.BrainFood.Collectors;
 
-import com.BrainFood.APIsClients.CalorieNinjaClient;
+import com.BrainFood.APIsClients.CalorieNinjasClient;
 import com.BrainFood.APIsClients.SpoonacularClient;
 import com.BrainFood.DatabaseEntities.*;
 import com.BrainFood.Repositories.IngredientRepository;
@@ -50,7 +50,7 @@ public class RecipesCollector implements ApplicationRunner {
                 }
 
                 List<String> collectedTags = collectTags(recipesInner);
-                JSONObject recipeNutrition = CalorieNinjaClient.getNutrition(recipesInner.getTitle());
+                JSONObject recipeNutrition = CalorieNinjasClient.getNutrition(recipesInner.getTitle());
                 Recipe recipe = Recipe.builder().name(recipesInner.getTitle())
                         .photo(recipesInner.getImage()).cuisine(cuisine).build();
 
@@ -60,7 +60,7 @@ public class RecipesCollector implements ApplicationRunner {
                 if (recipesInner.getExtendedIngredients() != null){
                     for (GetRecipeInformation200ResponseExtendedIngredientsInner ingredientsInner:
                             recipesInner.getExtendedIngredients()) {
-                        JSONObject ingredientNutrition = CalorieNinjaClient.getNutrition(ingredientsInner.getOriginal());
+                        JSONObject ingredientNutrition = CalorieNinjasClient.getNutrition(ingredientsInner.getOriginal());
                         Ingredient ingredient = Ingredient.builder().name(ingredientsInner.getName())
                                 .amount(ingredientsInner.getOriginal()).build();
 

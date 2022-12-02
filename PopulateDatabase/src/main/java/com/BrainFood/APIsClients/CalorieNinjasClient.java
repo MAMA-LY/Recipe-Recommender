@@ -8,7 +8,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-public class CalorieNinjaClient {
+public class CalorieNinjasClient {
     public static JSONObject getNutrition(String food) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("https://calorieninjas.p.rapidapi.com/v1/nutrition?query=bread"))
