@@ -12,12 +12,3 @@ public class RecipeIngredients implements Serializable{
     private RecipeIngredientsCK compositeKey;
 
 }
-@Embeddable
-@Data @Builder
-class RecipeIngredientsCK implements Serializable {
-    @Column(name = "recipeID", nullable = false)
-    private String recipeID;
-
-    @Column(name = "ingredientID", nullable = false)
-    private String ingredientID;
-}

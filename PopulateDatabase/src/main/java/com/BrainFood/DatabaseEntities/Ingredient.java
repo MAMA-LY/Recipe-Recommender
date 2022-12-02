@@ -16,7 +16,7 @@ public class Ingredient implements Serializable {
     @Column(name = "ID", nullable = false)
     private String ID;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = false, unique = true)
     private String name;
 
     @Column(name = "icon")
@@ -25,8 +25,8 @@ public class Ingredient implements Serializable {
     @Column(name = "calories", nullable = false)
     private int calories;
 
-    @Column(name = "weight")
-    private int weight;
+    @Column(name = "amount")
+    private String amount;
 
     @Column(name = "proteins", nullable = false)
     private int proteins;

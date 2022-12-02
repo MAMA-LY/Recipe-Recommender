@@ -17,10 +17,10 @@ public class Recipe implements Serializable {
     @Column(name = "ID", nullable = false)
     private String ID;
 
-    @Column(name = "cuisine", nullable = false)
+    @Column(name = "cuisine")
     private String cuisine ;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = false, unique = true)
     private String name;
 
     @Column(name = "calories", nullable = false)

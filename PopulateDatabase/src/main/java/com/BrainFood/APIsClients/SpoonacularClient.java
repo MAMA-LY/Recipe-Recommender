@@ -1,38 +1,34 @@
 package com.BrainFood.APIsClients;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
+import com.spoonacular.RecipesApi;
+import com.spoonacular.client.*;
+import com.spoonacular.client.auth.ApiKeyAuth;
+import com.spoonacular.client.model.GetRandomRecipes200Response;
 
 public class SpoonacularClient {
-    public static JSONObject getRandomRecipe(int number) throws IOException, InterruptedException {
-         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/random?&number="+ number))
-                .header("X-RapidAPI-Key", "2179e35da2mshf75f9d6bd9fca69p169778jsn475f5672c929")
-                .header("X-RapidAPI-Host", "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com")
-                .method("GET", HttpRequest.BodyPublishers.noBody())
-                .build();
-        HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-        return new JSONObject(response);
-    }
-    public static JSONArray getIngredientsByID(int ID) throws IOException, InterruptedException, JSONException {
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/"+ ID +"/ingredientWidget.json"))
-                .header("X-RapidAPI-Key", "2179e35da2mshf75f9d6bd9fca69p169778jsn475f5672c929")
-                .header("X-RapidAPI-Host", "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com")
-                .method("GET", HttpRequest.BodyPublishers.noBody())
-                .build();
-        HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-        JSONObject jsonObject = new JSONObject(response);
-        System.out.println(jsonObject);
+    private final RecipesApi recipesApi;
+    public SpoonacularClient(){
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setBasePath("https://api.spoonacular.com");
+        ApiKeyAuth apiKeyScheme = (ApiKeyAuth) defaultClient.getAuthentication("apiKeyScheme");
+        apiKeyScheme.setApiKey(System.getenv("SpoonacularApiKey"));
+        recipesApi = new RecipesApi(defaultClient);
 
-        return jsonObject.getJSONArray("ingredients");
     }
+    public GetRandomRecipes200Response getRandomRecipes(int number, String tag) {
+
+        Boolean limitLicense = true;
+        try {
+            return this.recipesApi.getRandomRecipes(limitLicense, tag, number);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling RecipesApi#getRandomRecipes");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
 }
