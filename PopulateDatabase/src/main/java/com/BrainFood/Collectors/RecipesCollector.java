@@ -57,6 +57,7 @@ public class RecipesCollector implements ApplicationRunner {
                 //if nutritions not found get another recipe Note: that should rarely happen
                 if (recipeNutrition.getJSONArray("items")==null || recipeNutrition.getJSONArray("items").length()==0)
                     continue;
+
                 recipes[i] = Recipe.builder().name(recipesInner.getTitle())
                         .photo(recipesInner.getImage()).cuisine(cuisine).build();
 
@@ -86,10 +87,12 @@ public class RecipesCollector implements ApplicationRunner {
                     saveIntoDB(recipes[i],ingredients,collectedTags);
                     i++;
                 }
+
             }
         }
         System.out.println("Complete Collection");
     }
+
     private void saveIntoDB(Recipe recipe,Ingredient[] ingredients,List<String> collectedTags){
 
         recipeRepository.save(recipe);  //recipe saved in DB
