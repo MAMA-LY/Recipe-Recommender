@@ -34,11 +34,13 @@ public class RecipesCollector implements ApplicationRunner {
                                                 "breakfast", "dessert", "salad", "main course", "appetizer");
     public void collect() throws IOException, InterruptedException, JSONException {
         SpoonacularClient spoonacularClient = new SpoonacularClient();
-
+        CollectorFitters collectorFitters=new CollectorFitters();
         for (String tag: tags) {
-            int reqNumber=3 ;//number of recipes in single  request
-            GetRandomRecipes200Response recipes = spoonacularClient.getRandomRecipes(reqNumber,tag);
-            for (GetRandomRecipes200ResponseRecipesInner recipesInner: recipes.getRecipes()) {
+            int reqNumber=100 ;//number of recipes in single  request
+            GetRandomRecipes200Response recipes200Response = spoonacularClient.getRandomRecipes(reqNumber,tag);
+            Recipe[] recipes=new Recipe[reqNumber];
+            int i=0;
+            for (GetRandomRecipes200ResponseRecipesInner recipesInner: recipes200Response.getRecipes()) {
 
                 if(recipeRepository.existsRecipeByName(recipesInner.getTitle())){
                     continue;
@@ -55,56 +57,56 @@ public class RecipesCollector implements ApplicationRunner {
                 //if nutritions not found get another recipe Note: that should rarely happen
                 if (recipeNutrition.getJSONArray("items")==null || recipeNutrition.getJSONArray("items").length()==0)
                     continue;
-                Recipe recipe = Recipe.builder().name(recipesInner.getTitle())
+                recipes[i] = Recipe.builder().name(recipesInner.getTitle())
                         .photo(recipesInner.getImage()).cuisine(cuisine).build();
 
-                recipeNutritionFitter(recipe, recipeNutrition);
-                recipeRepository.save(recipe);  //recipe saved in DB
-
-                if (recipesInner.getExtendedIngredients() != null){
+                collectorFitters.recipeNutritionFitter( recipes[i], recipeNutrition);
+                if (recipesInner.getExtendedIngredients() != null && recipesInner.getExtendedIngredients().size()!=0){
+                    boolean ingredientNutritionFlag=false;
+                    Ingredient[] ingredients=new Ingredient[recipesInner.getExtendedIngredients().size()];
+                    int j=0;
                     for (GetRecipeInformation200ResponseExtendedIngredientsInner ingredientsInner:
                             recipesInner.getExtendedIngredients()) {
                         JSONObject ingredientNutrition = CalorieNinjasClient.getNutrition(ingredientsInner.getOriginal());
-                        Ingredient ingredient = Ingredient.builder().name(ingredientsInner.getName())
+
+                        ingredients[j] = Ingredient.builder().name(ingredientsInner.getName())
                                 .amount(ingredientsInner.getOriginal()).build();
-
-                        ingredientNutritionFitter(ingredient, ingredientNutrition);
-                        ingredientRepository.save(ingredient);
-
-                        RecipeIngredients recipeIngredients = RecipeIngredients.builder()
-                                .compositeKey(RecipeIngredientsCK.builder().recipeID(recipe.getID())
-                                .ingredientID(ingredient.getID()).build())
-                                .build();
-                        recipeIngredientsRepository.save(recipeIngredients);
+                        //if nutritions not found get another recipe Note: that should rarely happen
+                        if (ingredientNutrition.getJSONArray("items")==null || ingredientNutrition.getJSONArray("items").length()==0) {
+                            ingredientNutritionFlag = true;
+                            continue;
+                        }
+                        collectorFitters.ingredientNutritionFitter(ingredients[j], ingredientNutrition);
+                        j++;
                     }
-                }
-                for (String collectedTag: collectedTags) {
-                    RecipeTags recipeTags = RecipeTags.builder().compositeKey(RecipeTagsCK.builder()
-                            .recipeID(recipe.getID()).tag(collectedTag).build()).build();
-                    recipeTagsRepository.save(recipeTags);
-                }
+                    if(ingredientNutritionFlag==true) // dont save recipe that has unknown certain ingredient nutrition
+                        continue;
 
+                    // save all data before fetching other nutritions of the next recipe
+                    saveIntoDB(recipes[i],ingredients,collectedTags);
+                    i++;
+                }
             }
         }
         System.out.println("Complete Collection");
     }
+    private void saveIntoDB(Recipe recipe,Ingredient[] ingredients,List<String> collectedTags){
 
-    private void recipeNutritionFitter(Recipe recipe,JSONObject nutrition){
-        JSONArray items = nutrition.getJSONArray("items");
-        JSONObject nutritionFacts = items.getJSONObject(0);
-        recipe.setCalories(((BigDecimal) nutritionFacts.get("calories")).intValue());
-        recipe.setFats(((BigDecimal) nutritionFacts.get("fat_total_g")).intValue());
-        recipe.setProteins(((BigDecimal) nutritionFacts.get("protein_g")).intValue());
-        recipe.setCarbs(((BigDecimal) nutritionFacts.get("carbohydrates_total_g")).intValue());
-    }
+        recipeRepository.save(recipe);  //recipe saved in DB
+        for(int i=0;i<ingredients.length;i++) {
+            ingredientRepository.save(ingredients[i]);
+            RecipeIngredients recipeIngredients = RecipeIngredients.builder()
+                    .compositeKey(RecipeIngredientsCK.builder().recipeID(recipe.getID())
+                            .ingredientID(ingredients[i].getID()).build())
+                    .build();
+            recipeIngredientsRepository.save(recipeIngredients);
+        }
+        for (String collectedTag : collectedTags) {
+            RecipeTags recipeTags = RecipeTags.builder().compositeKey(RecipeTagsCK.builder()
+                    .recipeID(recipe.getID()).tag(collectedTag).build()).build();
+            recipeTagsRepository.save(recipeTags);
+        }
 
-    private void ingredientNutritionFitter(Ingredient ingredient,JSONObject nutrition){
-        JSONArray items = nutrition.getJSONArray("items");
-        JSONObject nutritionFacts = items.getJSONObject(0);
-        ingredient.setCalories(((BigDecimal) nutritionFacts.get("calories")).intValue());
-        ingredient.setFats(((BigDecimal) nutritionFacts.get("fat_total_g")).intValue());
-        ingredient.setProteins(((BigDecimal) nutritionFacts.get("protein_g")).intValue());
-        ingredient.setCarbs(((BigDecimal) nutritionFacts.get("carbohydrates_total_g")).intValue());
     }
 
     private List<String> collectTags(GetRandomRecipes200ResponseRecipesInner recipe){
