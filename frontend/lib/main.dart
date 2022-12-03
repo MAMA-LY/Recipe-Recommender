@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_recommender_frontend/constants.dart';
+
+import 'screens/nav/bottom_nav_screen.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -6,13 +9,13 @@ void main() {
     theme: ThemeData(
       fontFamily: 'Satoshi',
       primarySwatch: Colors.orange,
-      primaryColor: Colors.orange,
+      primaryColor: Constants.primaryColor,
       textTheme: const TextTheme(
         headline1: TextStyle(
           fontFamily: 'Telma',
           fontSize: 24,
           fontWeight: FontWeight.bold,
-          color: Colors.orange,
+          color: Constants.primaryColor,
         ),
       ),
     ),
@@ -25,6 +28,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return const BottomNavView();
   }
 }
