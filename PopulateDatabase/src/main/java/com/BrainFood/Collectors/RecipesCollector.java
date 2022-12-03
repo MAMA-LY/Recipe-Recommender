@@ -36,7 +36,7 @@ public class RecipesCollector implements ApplicationRunner {
         SpoonacularClient spoonacularClient = new SpoonacularClient();
         CollectorFitters collectorFitters=new CollectorFitters();
         for (int k=0;k<100;k++) {
-            int reqNumber=100 ;//number of recipes in single  request
+            int reqNumber=10 ;//number of recipes in single  request
             GetRandomRecipes200Response recipes200Response = spoonacularClient.getRandomRecipes(reqNumber, tags.get((int)(Math.random() *tags.size())));
             Recipe[] recipes=new Recipe[reqNumber];
             int i=0;
@@ -55,7 +55,7 @@ public class RecipesCollector implements ApplicationRunner {
                 List<String> collectedTags = collectTags(recipesInner);
                 JSONObject recipeNutrition = CalorieNinjasClient.getNutrition(recipesInner.getTitle());
                 //if nutritions not found get another recipe Note: that should rarely happen
-                if (recipeNutrition.getJSONArray("items")==null || recipeNutrition.getJSONArray("items").length()==0)
+                if (recipeNutrition.toString().equals("{}"))
                     continue;
 
                 recipes[i] = Recipe.builder().name(recipesInner.getTitle())
@@ -73,7 +73,7 @@ public class RecipesCollector implements ApplicationRunner {
                         ingredients[j] = Ingredient.builder().name(ingredientsInner.getName())
                                 .amount(ingredientsInner.getOriginal()).build();
                         //if nutritions not found get another recipe Note: that should rarely happen
-                        if (ingredientNutrition.getJSONArray("items")==null || ingredientNutrition.getJSONArray("items").length()==0) {
+                        if(ingredientNutrition.toString().equals("{}")){
                             ingredientNutritionFlag = true;
                             continue;
                         }
