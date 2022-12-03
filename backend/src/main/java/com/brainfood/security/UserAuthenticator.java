@@ -34,12 +34,10 @@ public class UserAuthenticator {
     @Autowired
     public BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @Autowired
-    private SessionRegistry sessionRegistry;
 
-    public String createAuthentications(String username, String password, String email) {
-        if(userExistsByUsername(username)) return "Username already exists";
-        if(userExistsByEmail(email)) return "Email already exists ";
+    public Response createAuthentications(String username, String password, String email) {
+        if(userExistsByUsername(username)) return Response.UsernameAlreadyExists;
+        if(userExistsByEmail(email)) return Response.EmailAlreadyExists;
         String encryptedPD = this.bCryptPasswordEncoder.encode(password);
         UserCredentials userCredentials = new UserCredentials();
         userCredentials.setPassword(encryptedPD);
@@ -47,7 +45,7 @@ public class UserAuthenticator {
         userCredentials.setEmail(email);
         userRepository.save(userCredentials);
         System.out.println(encryptedPD.length());
-        return "Username Created";
+        return Response.UserCreated;
     }
 
    

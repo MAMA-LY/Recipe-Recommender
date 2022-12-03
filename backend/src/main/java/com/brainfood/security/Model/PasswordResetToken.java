@@ -27,7 +27,7 @@ public class PasswordResetToken implements Serializable {
         this.token = UUID.randomUUID().toString();
     }
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "UserID", referencedColumnName = "ID")
     private UserCredentials user;
 }
