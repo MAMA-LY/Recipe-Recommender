@@ -9,6 +9,7 @@ void main() {
       fontFamily: 'Satoshi',
       primarySwatch: Colors.blue,
       primaryColor: Colors.redAccent,
+
       textTheme: const TextTheme(
         headline1: TextStyle(
           fontFamily: 'Telma',
