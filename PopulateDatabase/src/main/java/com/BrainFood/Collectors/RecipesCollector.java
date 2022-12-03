@@ -52,6 +52,9 @@ public class RecipesCollector implements ApplicationRunner {
 
                 List<String> collectedTags = collectTags(recipesInner);
                 JSONObject recipeNutrition = CalorieNinjasClient.getNutrition(recipesInner.getTitle());
+                //if nutritions not found get another recipe Note: that should rarely happen
+                if (recipeNutrition.getJSONArray("items")==null || recipeNutrition.getJSONArray("items").length()==0)
+                    continue;
                 Recipe recipe = Recipe.builder().name(recipesInner.getTitle())
                         .photo(recipesInner.getImage()).cuisine(cuisine).build();
 
