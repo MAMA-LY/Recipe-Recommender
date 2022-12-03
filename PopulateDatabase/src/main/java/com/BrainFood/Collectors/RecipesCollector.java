@@ -36,8 +36,8 @@ public class RecipesCollector implements ApplicationRunner {
         SpoonacularClient spoonacularClient = new SpoonacularClient();
 
         for (String tag: tags) {
-
-            GetRandomRecipes200Response recipes = spoonacularClient.getRandomRecipes(1,tag);
+            int reqNumber=3 ;//number of recipes in single  request
+            GetRandomRecipes200Response recipes = spoonacularClient.getRandomRecipes(reqNumber,tag);
             for (GetRandomRecipes200ResponseRecipesInner recipesInner: recipes.getRecipes()) {
 
                 if(recipeRepository.existsRecipeByName(recipesInner.getTitle())){
@@ -86,8 +86,6 @@ public class RecipesCollector implements ApplicationRunner {
 
             }
         }
-
-
         System.out.println("Complete Collection");
     }
 
