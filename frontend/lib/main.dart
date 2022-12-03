@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_recommender_frontend/screens/sign/signin.dart';
+import 'package:recipe_recommender_frontend/constants.dart';
 
 import 'screens/nav/bottom_nav_screen.dart';
 
@@ -8,14 +8,14 @@ void main() {
     debugShowCheckedModeBanner: false,
     theme: ThemeData(
       fontFamily: 'Satoshi',
-      primarySwatch: Colors.blue,
-      primaryColor: Colors.redAccent,
+      primarySwatch: Colors.orange,
+      primaryColor: Constants.primaryColor,
       textTheme: const TextTheme(
         headline1: TextStyle(
           fontFamily: 'Telma',
           fontSize: 24,
           fontWeight: FontWeight.bold,
-          color: Colors.redAccent,
+          color: Constants.primaryColor,
         ),
       ),
     ),
@@ -28,6 +28,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SignInPage();
+    return const BottomNavView();
   }
 }
