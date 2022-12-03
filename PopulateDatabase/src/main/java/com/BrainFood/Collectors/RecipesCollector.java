@@ -35,9 +35,9 @@ public class RecipesCollector implements ApplicationRunner {
     public void collect() throws IOException, InterruptedException, JSONException {
         SpoonacularClient spoonacularClient = new SpoonacularClient();
         CollectorFitters collectorFitters=new CollectorFitters();
-        for (String tag: tags) {
+        for (int k=0;k<100;k++) {
             int reqNumber=100 ;//number of recipes in single  request
-            GetRandomRecipes200Response recipes200Response = spoonacularClient.getRandomRecipes(reqNumber,tag);
+            GetRandomRecipes200Response recipes200Response = spoonacularClient.getRandomRecipes(reqNumber, tags.get((int)(Math.random() *tags.size())));
             Recipe[] recipes=new Recipe[reqNumber];
             int i=0;
             for (GetRandomRecipes200ResponseRecipesInner recipesInner: recipes200Response.getRecipes()) {
