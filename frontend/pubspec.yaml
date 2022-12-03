@@ -88,17 +88,17 @@ flutter:
     - family: Telma
       fonts:
         - asset: assets/fonts/Telma-Medium.ttf
-    - family: Arslan
-      fonts:
-        - asset: assets/fonts/ArbFONTS-Arslan-Wessam-B.ttf
-    - family: Roboto
-      fonts:
-        - asset: assets/fonts/Roboto-Bold.ttf
-        - asset: assets/fonts/Roboto-BoldItalic.ttf
-        - asset: assets/fonts/Roboto-Italic.ttf
-        - asset: assets/fonts/Roboto-Medium.ttf
-        - asset: assets/fonts/Roboto-MediumItalic.ttf
-        - asset: assets/fonts/Roboto-Regular.ttf
+    # - family: Arslan
+    #   fonts:
+    #     - asset: assets/fonts/ArbFONTS-Arslan-Wessam-B.ttf
+    # - family: Roboto
+    #   fonts:
+    #     - asset: assets/fonts/Roboto-Bold.ttf
+    #     - asset: assets/fonts/Roboto-BoldItalic.ttf
+    #     - asset: assets/fonts/Roboto-Italic.ttf
+    #     - asset: assets/fonts/Roboto-Medium.ttf
+    #     - asset: assets/fonts/Roboto-MediumItalic.ttf
+    #     - asset: assets/fonts/Roboto-Regular.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
