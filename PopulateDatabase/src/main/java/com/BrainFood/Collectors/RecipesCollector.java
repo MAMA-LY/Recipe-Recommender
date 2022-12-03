@@ -55,7 +55,9 @@ public class RecipesCollector implements ApplicationRunner {
                 List<String> collectedTags = collectTags(recipesInner);
                 JSONObject recipeNutrition = CalorieNinjasClient.getNutrition(recipesInner.getTitle());
                 //if nutritions not found get another recipe Note: that should rarely happen
-                if (recipeNutrition.toString().equals("{}"))
+                if (recipeNutrition.toString().equals("{}")
+                        || recipeNutrition.getJSONArray("items")==null
+                            || recipeNutrition.getJSONArray("items").length()==0)
                     continue;
 
                 recipes[i] = Recipe.builder().name(recipesInner.getTitle())
@@ -73,7 +75,9 @@ public class RecipesCollector implements ApplicationRunner {
                         ingredients[j] = Ingredient.builder().name(ingredientsInner.getName())
                                 .amount(ingredientsInner.getOriginal()).build();
                         //if nutritions not found get another recipe Note: that should rarely happen
-                        if(ingredientNutrition.toString().equals("{}")){
+                        if(ingredientNutrition.toString().equals("{}")
+                                || ingredientNutrition.getJSONArray("items")==null
+                                    || ingredientNutrition.getJSONArray("items").length()==0) {
                             ingredientNutritionFlag = true;
                             continue;
                         }
