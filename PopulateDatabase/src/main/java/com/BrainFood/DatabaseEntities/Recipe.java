@@ -9,6 +9,9 @@ import java.io.Serializable;
 @Entity
 @Table(name = "\"Recipe\"")
 @Data @Builder
+
+@AllArgsConstructor
+@NoArgsConstructor
 public class Recipe implements Serializable {
 
     @Id

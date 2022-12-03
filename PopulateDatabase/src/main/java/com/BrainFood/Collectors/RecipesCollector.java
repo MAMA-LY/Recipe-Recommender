@@ -19,6 +19,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Stream;
 
@@ -29,7 +30,7 @@ public class RecipesCollector implements ApplicationRunner {
     @Autowired private IngredientRepository ingredientRepository;
     @Autowired private RecipeTagsRepository recipeTagsRepository;
     @Autowired private RecipeIngredientsRepository recipeIngredientsRepository;
-    private final List<String> tags = Arrays.asList("Gluten Free", "Ketogenic", "Vegetarian", "Dairy", "Seafood", "Wheat", "snack",
+    private final List<String> tags = Arrays.asList("gluten free", "ketogenic", "vegetarian", "dairy", "dairy free", "seafood", "wheat", "snack",
                                                 "breakfast", "dessert", "salad", "main course", "appetizer");
     public void collect() throws IOException, InterruptedException, JSONException {
         SpoonacularClient spoonacularClient = new SpoonacularClient();
@@ -43,7 +44,7 @@ public class RecipesCollector implements ApplicationRunner {
                     continue;
                 }
                 String cuisine;
-                if(recipesInner.getCuisines() == null){
+                if(recipesInner.getCuisines()==null || recipesInner.getCuisines().size() == 0){
                     cuisine = null;
                 }else {
                     cuisine = recipesInner.getCuisines().get(0);
@@ -55,7 +56,7 @@ public class RecipesCollector implements ApplicationRunner {
                         .photo(recipesInner.getImage()).cuisine(cuisine).build();
 
                 recipeNutritionFitter(recipe, recipeNutrition);
-                recipeRepository.save(recipe);
+                recipeRepository.save(recipe);  //recipe saved in DB
 
                 if (recipesInner.getExtendedIngredients() != null){
                     for (GetRecipeInformation200ResponseExtendedIngredientsInner ingredientsInner:
@@ -69,7 +70,8 @@ public class RecipesCollector implements ApplicationRunner {
 
                         RecipeIngredients recipeIngredients = RecipeIngredients.builder()
                                 .compositeKey(RecipeIngredientsCK.builder().recipeID(recipe.getID())
-                                        .ingredientID(ingredient.getID()).build()).build();
+                                .ingredientID(ingredient.getID()).build())
+                                .build();
                         recipeIngredientsRepository.save(recipeIngredients);
                     }
                 }
@@ -89,19 +91,19 @@ public class RecipesCollector implements ApplicationRunner {
     private void recipeNutritionFitter(Recipe recipe,JSONObject nutrition){
         JSONArray items = nutrition.getJSONArray("items");
         JSONObject nutritionFacts = items.getJSONObject(0);
-        recipe.setCalories((Integer) nutritionFacts.get("calories"));
-        recipe.setFats((Integer) nutritionFacts.get("fat_total_g"));
-        recipe.setProteins((Integer) nutritionFacts.get("protein_g"));
-        recipe.setCarbs((Integer) nutritionFacts.get("carbohydrates_total_g"));
+        recipe.setCalories(((BigDecimal) nutritionFacts.get("calories")).intValue());
+        recipe.setFats(((BigDecimal) nutritionFacts.get("fat_total_g")).intValue());
+        recipe.setProteins(((BigDecimal) nutritionFacts.get("protein_g")).intValue());
+        recipe.setCarbs(((BigDecimal) nutritionFacts.get("carbohydrates_total_g")).intValue());
     }
 
     private void ingredientNutritionFitter(Ingredient ingredient,JSONObject nutrition){
         JSONArray items = nutrition.getJSONArray("items");
         JSONObject nutritionFacts = items.getJSONObject(0);
-        ingredient.setCalories((Integer) nutritionFacts.get("calories"));
-        ingredient.setFats((Integer) nutritionFacts.get("fat_total_g"));
-        ingredient.setProteins((Integer) nutritionFacts.get("protein_g"));
-        ingredient.setCarbs((Integer) nutritionFacts.get("carbohydrates_total_g"));
+        ingredient.setCalories(((BigDecimal) nutritionFacts.get("calories")).intValue());
+        ingredient.setFats(((BigDecimal) nutritionFacts.get("fat_total_g")).intValue());
+        ingredient.setProteins(((BigDecimal) nutritionFacts.get("protein_g")).intValue());
+        ingredient.setCarbs(((BigDecimal) nutritionFacts.get("carbohydrates_total_g")).intValue());
     }
 
     private List<String> collectTags(GetRandomRecipes200ResponseRecipesInner recipe){

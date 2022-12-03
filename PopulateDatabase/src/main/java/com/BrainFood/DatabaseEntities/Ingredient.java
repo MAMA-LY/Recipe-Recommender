@@ -8,6 +8,9 @@ import java.io.Serializable;
 @Entity
 @Table(name = "\"Ingredient\"")
 @Data @Builder
+
+@AllArgsConstructor
+@NoArgsConstructor
 public class Ingredient implements Serializable {
 
     @Id
