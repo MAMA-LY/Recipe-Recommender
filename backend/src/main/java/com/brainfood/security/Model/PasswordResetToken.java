@@ -1,9 +1,7 @@
-package com.brainfood.security;
+package com.brainfood.security.Model;
 
 import java.io.Serializable;
 import java.util.UUID;
-
-import com.brainfood.backend.UserCredentials;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

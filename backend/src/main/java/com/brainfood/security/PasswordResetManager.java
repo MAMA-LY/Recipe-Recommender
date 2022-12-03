@@ -5,7 +5,9 @@ import org.springframework.orm.hibernate5.SpringSessionContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import com.brainfood.backend.UserCredentials;
+import com.brainfood.security.Model.PasswordResetToken;
+import com.brainfood.security.Model.UserCredentials;
+import com.brainfood.security.Repository.PasswordResetTokenRepository;
 
 
 @Service
@@ -32,18 +34,19 @@ public class PasswordResetManager {
         emailSender.sendEmail(user.getEmail(), "Brainfood Reset Password", emailBody);
     }
 
-    public boolean verifyToken(String tokenStr) {
+    public String verifyToken(String tokenStr) {
         PasswordResetToken token = passwordResetTokenRepository.findByToken(tokenStr);
-        if(token == null) return false;
-        return true;
+        if(token == null) return "Invalid Token";
+        return "Token Verified";
     }
 
-    public boolean changePassword(String tokenStr, String password) {
+    public String changePassword(String tokenStr, String password) {
+        PasswordResetToken token = passwordResetTokenRepository.findByToken(tokenStr);
+        if(token == null) return "Invalid Token";
         UserCredentials user = passwordResetTokenRepository.findById(tokenStr).get().getUser();
         user.setPassword(userAuthenticator.bCryptPasswordEncoder.encode(password));
         passwordResetTokenRepository.deleteById(tokenStr);
-        userAuthenticator.expireUserByUsername(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
-        return true; 
+        return "Password Changed"; 
     }
 
 }

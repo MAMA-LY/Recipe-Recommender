@@ -18,8 +18,10 @@ import org.springframework.security.web.authentication.logout.LogoutHandler;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import com.brainfood.security.Model.UserCredentials;
+
 import  org.springframework.security.authentication.AuthenticationProvider;
-import com.brainfood.backend.UserCredentials;
 import org.springframework.security.web.csrf.CsrfFilter;
 
 
@@ -31,28 +33,23 @@ public class SecurityConfiguration {
     UserDetailsService userDetailsService;
 
 
-    @Autowired
-    LogoutHandler logoutHandler;
-
-
+    // SHOULD BE MODIFIED EVERYTIME A NEW URI ADDED TO ANY REST CONTROLLER TO CONTROL AUTHORIZATION
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-            .authorizeHttpRequests().requestMatchers("/signin/**").permitAll().and()
+        
+        http.authorizeHttpRequests().requestMatchers("/signin/**").permitAll().and()
             .authorizeHttpRequests().requestMatchers(HttpMethod.POST, "/forgetPassword/**").permitAll().and()
             .authorizeHttpRequests().requestMatchers(HttpMethod.GET, "/resetPassword/**").permitAll().and()
             .authorizeHttpRequests().requestMatchers(HttpMethod.POST, "/changePassword/**").permitAll().and()
             .authorizeHttpRequests().requestMatchers("/home/**").authenticated().and()
             .authorizeHttpRequests().requestMatchers(HttpMethod.POST, "/signup/**").permitAll().and()
-            .formLogin().loginPage("/signin").defaultSuccessUrl("/home").loginProcessingUrl("/signin")./*failureForwardUrl("/signinFailed").*/and()
-            .logout()
-            .logoutUrl("/signout")
-            .logoutRequestMatcher(new AntPathRequestMatcher("/signout"))
-            .logoutSuccessUrl("/signin")
+            .formLogin().loginPage("/signin").defaultSuccessUrl("/home").loginProcessingUrl("/signin").and()
+            .logout().logoutUrl("/signout").logoutRequestMatcher(new AntPathRequestMatcher("/signout")).logoutSuccessUrl("/signin")
             .invalidateHttpSession(true)
             .clearAuthentication(true)
             .addLogoutHandler(new SecurityContextLogoutHandler()).and()
             .csrf().disable();
+
             return http.build();
     }
 

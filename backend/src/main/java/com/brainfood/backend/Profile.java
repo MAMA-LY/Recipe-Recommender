@@ -1,6 +1,8 @@
 package com.brainfood.backend;
 import java.util.List;
 
+import com.brainfood.security.Model.UserCredentials;
+
 /**
 * @generated
 */

@@ -1,4 +1,5 @@
 package com.brainfood.security;
+import java.security.Principal;
 import java.util.Enumeration;
 import java.util.Map;
 
@@ -16,7 +17,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import com.brainfood.backend.UserCredentials;
+
+import com.brainfood.security.Model.UserCredentials;
+import com.brainfood.security.Repository.UserRepository;
+import com.brainfood.security.Repository.UserRepository;
+
+
 import jakarta.servlet.http.HttpServletRequest;
 
 
@@ -24,7 +30,6 @@ import jakarta.servlet.http.HttpServletRequest;
 @Component
 @RestController
 public class AuthController {
-
 
     @Autowired
     UserAuthenticator userAuthenticator;
@@ -35,55 +40,38 @@ public class AuthController {
     @Autowired
     PasswordResetManager passwordResetManager;
 
-    // @GetMapping("/login")
-    // public boolean authenticate(HttpServletRequest httpServletRequest) {
-    //     String authHeader = httpServletRequest.getHeader("Authorization").substring(6);
-    //     String decodedAuth = new String(Base64.decodeBase64(authHeader));
-    //     String username = decodedAuth.substring(0, decodedAuth.indexOf(":"));
-    //     String password = decodedAuth.substring(decodedAuth.indexOf(":"), decodedAuth.length());
-    //     return userAuthenticator.authenticate(username, password);
-    // }
-
-
     @PostMapping("/forgetPassword")
     public void forgestPassword(@RequestParam Map<String, String> body){
         passwordResetManager.sendResetPassword(body.get("email"));
     }
 
     @GetMapping("/resetPassword")
-    public boolean resetPassword(@RequestParam(name = "tk") String token) {
+    public String resetPassword(@RequestParam(name = "tk") String token) {
         return passwordResetManager.verifyToken(token);
     }
 
     @PostMapping("/changePassword")
-    public boolean changePassword(@RequestParam Map<String, String> body) {
+    public String changePassword(@RequestParam Map<String, String> body) {
         return passwordResetManager.changePassword(body.get("tk"), body.get("password"));
     }
 
     @PostMapping("/signup")
-    public boolean createAuthentications(@RequestParam Map<String, String> auths) {
+    public String createAuthentications(@RequestParam Map<String, String> auths) {
         return userAuthenticator.createAuthentications(auths.get("username"), auths.get("password"), auths.get("email"));
     }
 
     @GetMapping("/home")
     public String test() {
-        UserInfo userInfo2 = (UserInfo) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        System.out.println(userInfo2.getUsername());
-        System.out.println(userRepository.findByUsername(userInfo2.getUsername()).getEmail());
-        return "Home";
+        return "UserInfo";
     }
 
     @GetMapping("/signin")
-    public String test3() {
-        return "Signin";
+    public String signin() {
+        return "Sign In";
     }
 
 
-    @GetMapping("/signinFailed")
-    public String test4() {
-        return "SignInFalied";
-    }
+    
 
-   
 
 }

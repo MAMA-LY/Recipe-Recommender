@@ -9,7 +9,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
-import com.brainfood.backend.UserCredentials;
+import com.brainfood.security.Model.UserCredentials;
 
 
 
@@ -37,9 +37,6 @@ public class UserInfo implements UserDetails {
         return this.userCredentials.getUsername();
     }
 
-    // public String getEmail() {
-    //     return this.userCredentials.getEmail();
-    // }
 
     @Override
     public boolean isAccountNonExpired() {

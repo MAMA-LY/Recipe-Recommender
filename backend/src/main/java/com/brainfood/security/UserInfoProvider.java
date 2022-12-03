@@ -6,7 +6,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import com.brainfood.backend.UserCredentials;
+import com.brainfood.security.Model.UserCredentials;
+import com.brainfood.security.Repository.UserRepository;
 
 import java.util.Optional;
 
@@ -24,7 +25,6 @@ public class UserInfoProvider implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserCredentials userCredentials = userRepository.findByUsername(username);
-      //  System.out.println(userCredentials.getUsername());
         if(userCredentials == null) throw new UsernameNotFoundException("Username Not Found : " + username );
         return new UserInfo(userCredentials);
     }

@@ -15,7 +15,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import com.brainfood.backend.UserCredentials;
+import com.brainfood.security.Model.UserCredentials;
+import com.brainfood.security.Repository.UserRepository;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -36,19 +37,9 @@ public class UserAuthenticator {
     @Autowired
     private SessionRegistry sessionRegistry;
 
-    // public boolean authenticate(String username, String password) {
-    //     UserCredentials userCredentials = repository.
-    //     if(!repository.findByUsername(username).isPresent()) return false;
-    //     String encryptedPD = repository.findByUsername(username).getPassword();
-    //     if(this.bCryptPasswordEncoder.matches(password, encryptedPD)) return true;
-    //     return false;
-    // }
-
-
-
-    public boolean createAuthentications(String username, String password, String email) {
-        // TODO: EMAIL SHOULD BE UNIQUE (GET IT DONE)
-        if(userExistsByUsername(username)) return false;
+    public String createAuthentications(String username, String password, String email) {
+        if(userExistsByUsername(username)) return "Username already exists";
+        if(userExistsByEmail(email)) return "Email already exists ";
         String encryptedPD = this.bCryptPasswordEncoder.encode(password);
         UserCredentials userCredentials = new UserCredentials();
         userCredentials.setPassword(encryptedPD);
@@ -56,14 +47,10 @@ public class UserAuthenticator {
         userCredentials.setEmail(email);
         userRepository.save(userCredentials);
         System.out.println(encryptedPD.length());
-        return true;
+        return "Username Created";
     }
 
-    // DOES NOT WORK
-    public void expireUserByUsername(Object authentication) {
-        List<SessionInformation> infos = sessionRegistry.getAllSessions(authentication, false);
-        infos.forEach(info -> info.expireNow());
-    }
+   
     public UserCredentials getUserByUsername(String username) {
         return userRepository.findByUsername(username);
     }
