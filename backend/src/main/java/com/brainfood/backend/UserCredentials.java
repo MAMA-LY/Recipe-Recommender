@@ -1,74 +1,37 @@
 package com.brainfood.backend;
 
+import java.io.Serializable;
 
-/**
-* @generated
-*/
-public class UserCredentials {
+import org.springframework.stereotype.Component;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.Data;
+import lombok.ToString;
+
+
+@Component
+@ToString
+@Entity
+@Table(name = "\"UserCredentials\"")
+@Data
+public class UserCredentials implements Serializable {
     
-    /**
-    * @generated
-    */
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private String ID;
-    
-    /**
-    * @generated
-    */
-    private String email;
-    
-    /**
-    * @generated
-    */
-    private String password;
-    
-    
-    
 
-    /**
-    * @generated
-    */
-    public String getID() {
-        return this.ID;
-    }
-    
-    /**
-    * @generated
-    */
-    public void setID(String ID) {
-        this.ID = ID;
-    }
-    
-    
-    /**
-    * @generated
-    */
-    public String getEmail() {
-        return this.email;
-    }
-    
-    /**
-    * @generated
-    */
-    public void setEmail(String email) {
-        this.email = email;
-    }
-    
-    
-    /**
-    * @generated
-    */
-    public String getPassword() {
-        return this.password;
-    }
-    
-    /**
-    * @generated
-    */
-    public void setPassword(String password) {
-        this.password = password;
-    }
-    
-    
-    
+    @Column(name = "username")
+    private String username;
+  
+    @Column(name = "password")
+    private String password;
+ 
+    @Column(name = "email")
+    private String email;
     
 }
