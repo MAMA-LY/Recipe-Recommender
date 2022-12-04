@@ -10,21 +10,28 @@ import java.math.BigDecimal;
 
 @NoArgsConstructor
 public class CollectorFitters {
+
+    private int getTotalOf(JSONArray items,String nutritionFact){
+        int sum=0;
+        for(int i=0;i<items.length();i++) {
+            JSONObject nutritionFacts = items.getJSONObject(i);
+            sum+= ((BigDecimal)nutritionFacts.get(nutritionFact)).intValue();
+        }
+        return  sum;
+    }
     public void recipeNutritionFitter(Recipe recipe, JSONObject nutrition){
         JSONArray items = nutrition.getJSONArray("items");
-        JSONObject nutritionFacts = items.getJSONObject(0);
-        recipe.setCalories(((BigDecimal) nutritionFacts.get("calories")).intValue());
-        recipe.setFats(((BigDecimal) nutritionFacts.get("fat_total_g")).intValue());
-        recipe.setProteins(((BigDecimal) nutritionFacts.get("protein_g")).intValue());
-        recipe.setCarbs(((BigDecimal) nutritionFacts.get("carbohydrates_total_g")).intValue());
+        recipe.setCalories(getTotalOf(items,"calories"));
+        recipe.setFats(getTotalOf(items,"fat_total_g"));
+        recipe.setProteins(getTotalOf(items,"protein_g"));
+        recipe.setCarbs(getTotalOf(items,"carbohydrates_total_g"));
     }
 
     public void ingredientNutritionFitter(Ingredient ingredient, JSONObject nutrition){
         JSONArray items = nutrition.getJSONArray("items");
-        JSONObject nutritionFacts = items.getJSONObject(0);
-        ingredient.setCalories(((BigDecimal) nutritionFacts.get("calories")).intValue());
-        ingredient.setFats(((BigDecimal) nutritionFacts.get("fat_total_g")).intValue());
-        ingredient.setProteins(((BigDecimal) nutritionFacts.get("protein_g")).intValue());
-        ingredient.setCarbs(((BigDecimal) nutritionFacts.get("carbohydrates_total_g")).intValue());
+        ingredient.setCalories(getTotalOf(items,"calories"));
+        ingredient.setFats(getTotalOf(items,"fat_total_g"));
+        ingredient.setProteins(getTotalOf(items,"protein_g"));
+        ingredient.setCarbs(getTotalOf(items,"carbohydrates_total_g"));
     }
 }
