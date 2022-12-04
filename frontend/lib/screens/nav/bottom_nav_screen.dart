@@ -34,6 +34,16 @@ class _BottomNavViewState extends State<BottomNavView> {
     const Center(
       child: SettingsPage(),
     ),
+    //  BlocProvider(
+    //    create: (context) => HomeRecipesBloc(),
+    //    child: const HomeRecipeScreen(),
+    //  ),
+    //  BlocProvider(
+    //    create: (context) => SearchPageCubit(),
+    //    child: const SearchPage(),
+    //  ),
+    //  const FavoriteScreen(),
+    //  const More(),
   ];
 
   List<PersistentBottomNavBarItem> _navBarsItems() {
