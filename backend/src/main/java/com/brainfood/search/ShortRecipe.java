@@ -2,11 +2,12 @@ package com.brainfood.search;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Recipe {
+public class ShortRecipe {
+    @JsonProperty("id")
     String id ;
 
     @JsonProperty("annotation")
-    String Name;
+    String name;
 
     @JsonProperty("tag")
     String tag;
