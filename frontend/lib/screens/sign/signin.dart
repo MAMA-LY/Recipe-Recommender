@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'dart:io';
 
 class SignInPage extends StatefulWidget {
   static String routeName = "/signin";
@@ -80,7 +81,9 @@ class _SignInPageState extends State<SignInPage> {
                         ),
                         child: const Text('Log In'),
                         onPressed: () async {
-                          var url = Uri.http("localhost:8080", "/signin");
+                          var url = Uri.http(
+                              "${const String.fromEnvironment("BrainFoodBackendIP", defaultValue: "localhost")}:8080",
+                              "/signin");
                           var response = await http.post(url, body: {
                             "username": usernameController.text,
                             "password": passwordController.text
@@ -97,8 +100,6 @@ class _SignInPageState extends State<SignInPage> {
                   ),
                 ],
               ),
-            )
-        )
-    );
+            )));
   }
 }

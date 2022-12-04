@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:recipe_recommender_frontend/screens/sign/signin.dart';
 import 'screens/nav/bottom_nav_screen.dart';
@@ -9,7 +11,6 @@ void main() {
       fontFamily: 'Satoshi',
       primarySwatch: Colors.blue,
       primaryColor: Colors.redAccent,
-
       textTheme: const TextTheme(
         headline1: TextStyle(
           fontFamily: 'Telma',

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -30,7 +32,6 @@ class _SignUpPageState extends State<SignUpPage> {
           // Notice that the counter didn't reset back to zero; the application
           // is not restarted.
           primarySwatch: Colors.blue,
-
         ),
         home: Scaffold(
             appBar: AppBar(
@@ -93,7 +94,9 @@ class _SignUpPageState extends State<SignUpPage> {
                         ),
                         child: const Text('Sign up'),
                         onPressed: () async {
-                          var url = Uri.http("localhost:8080", "/signup");
+                          var url = Uri.http(
+                              "${const String.fromEnvironment("BrainFoodBackendIP", defaultValue: "localhost")}:8080",
+                              "/signup");
                           var response = await http.post(url, body: {
                             "username": usernameController.text,
                             "email": emailController.text,
@@ -111,8 +114,6 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                 ],
               ),
-            )
-        )
-    );
+            )));
   }
 }
