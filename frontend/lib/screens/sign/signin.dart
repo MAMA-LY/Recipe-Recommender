@@ -100,16 +100,12 @@ class _SignInPageState extends State<SignInPage> {
                             cacheFile = await cacheFile!.writeAsString(session.cookie);
                             var urlHome = Uri.http("localhost:8080", "/home");
                             var responseHome = await http.post(url, headers: {"cookie" : cookie});
-                            // ignore: use_build_context_synchronously
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
                                         const BottomNavView()));
                           }}
-                          // var cookieSession = cookie!.substring(8);
-                          // cookieSession = cookieSession.substring(0, cookieSession.indexOf(";"));
-                          // debugPrint(cookieSession);
                         
                         },
                       )),
