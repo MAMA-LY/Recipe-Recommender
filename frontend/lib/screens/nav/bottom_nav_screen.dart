@@ -34,16 +34,6 @@ class _BottomNavViewState extends State<BottomNavView> {
     const Center(
       child: SettingsPage(),
     ),
-    //  BlocProvider(
-    //    create: (context) => HomeRecipesBloc(),
-    //    child: const HomeRecipeScreen(),
-    //  ),
-    //  BlocProvider(
-    //    create: (context) => SearchPageCubit(),
-    //    child: const SearchPage(),
-    //  ),
-    //  const FavoriteScreen(),
-    //  const More(),
   ];
 
   List<PersistentBottomNavBarItem> _navBarsItems() {
@@ -113,6 +103,7 @@ class _BottomNavViewState extends State<BottomNavView> {
   @override
   Widget build(BuildContext context) {
     return Center(
+      
       child: PersistentTabView(
         this.context,
         controller: _controller,
@@ -140,7 +131,8 @@ class _BottomNavViewState extends State<BottomNavView> {
         hideNavigationBarWhenKeyboardShows: true,
         popAllScreensOnTapOfSelectedTab: true,
         navBarStyle: NavBarStyle.style13,
-      ),
+      )
+    
     );
   }
 }
