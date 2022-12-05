@@ -97,7 +97,6 @@ class _SignUpPageState extends State<SignUpPage> {
                               "email": emailController.text
                             };
                             var response = await http.post(url, body: creds);
-
                             setState(() {
                               responseTextController.text = response.body;
                               switch(response.body) {

@@ -88,10 +88,7 @@ class _SignInPageState extends State<SignInPage> {
                             "password": passwordController.text
                           };
                           var response = await http.post(url, body: creds);
-                          debugPrint(response.statusCode.toString());
                           var cookie = response.headers['set-cookie'];
-                          debugPrint(response.headers['location']);
-                          debugPrint(cookie);
                           var responseLocation = response.headers['location'];
                           if(responseLocation == "http://localhost:8080/signin?error") {
                             setState(() {
