@@ -25,6 +25,7 @@ Future<File> getLocalFile() async {
 }
 
 void main() {
+
   getLocalFile().then((value) => {
         cacheFile = value,
         cookieStr = cacheFile!.readAsStringSync(),
@@ -58,6 +59,7 @@ Future<String?> getServerInitResponse() async {
   } else {
     return null; // null tells FutureBuilder that no data is stored
   }
+
 }
 
 class MyApp extends StatelessWidget {

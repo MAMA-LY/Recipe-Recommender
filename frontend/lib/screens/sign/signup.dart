@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:recipe_recommender_frontend/screens/sign/ResponseEnum.dart';
@@ -25,7 +27,9 @@ class _SignUpPageState extends State<SignUpPage> {
         title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
+
           primarySwatch: Colors.orange,
+
         ),
         home: Scaffold(
             appBar: AppBar(
@@ -87,10 +91,13 @@ class _SignUpPageState extends State<SignUpPage> {
                         ),
                         child: const Text('Sign up'),
                         onPressed: () async {
+
                           bool emailValid =
                               EmailValidator.validate(emailController.text);
                           if (emailValid) {
-                            var url = Uri.http("localhost:8080", "/signup");
+                           var url = Uri.http(
+                              "${const String.fromEnvironment("BrainFoodBackendIP", defaultValue: "localhost")}:8080",
+                              "/signup");
                             var creds = {
                               "username": usernameController.text,
                               "password": passwordController.text,
@@ -111,6 +118,7 @@ class _SignUpPageState extends State<SignUpPage> {
                               resp = "Please enter a valid email address";
                             });
                           }
+
                         },
                       )),
                   TextButton(

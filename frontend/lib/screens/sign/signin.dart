@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+
 import 'package:path_provider/path_provider.dart';
 import 'package:recipe_recommender_frontend/api/session.dart';
 import 'package:recipe_recommender_frontend/screens/home/home.dart';
@@ -10,6 +11,7 @@ import 'package:recipe_recommender_frontend/screens/sign/signup.dart';
 
 import '../../main.dart';
 import '../nav/bottom_nav_screen.dart';
+
 
 class SignInPage extends StatefulWidget {
   static String routeName = "/signin";
@@ -82,12 +84,17 @@ class _SignInPageState extends State<SignInPage> {
                         ),
                         child: const Text('Sign in'),
                         onPressed: () async {
-                          var url = Uri.http("localhost:8080", "/signin");
-                          var creds = {
+           
+                         
+                          var url = Uri.http(
+                              "${const String.fromEnvironment("BrainFoodBackendIP", defaultValue: "localhost")}:8080",
+                              "/signin");
+                          var response = await http.post(url, body: {
+
                             "username": usernameController.text,
                             "password": passwordController.text
                           };
-                          var response = await http.post(url, body: creds);
+           
                           var cookie = response.headers['set-cookie'];
                           var responseLocation = response.headers['location'];
                           if(responseLocation == "http://localhost:8080/signin?error") {
