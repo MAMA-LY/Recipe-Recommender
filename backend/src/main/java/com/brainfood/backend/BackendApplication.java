@@ -15,7 +15,7 @@ import com.brainfood.security.EmailSender;
 
 
 @ComponentScan(basePackages = {"com.brainfood.backend", "com.brainfood.security" , "com.brainfood.search"})
-@SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
+@SpringBootApplication(/*exclude = { SecurityAutoConfiguration.class }*/)
 @EntityScan({"com.brainfood.backend", "com.brainfood.security", "com.brainfood.search"})
 @EnableJpaRepositories({"com.brainfood.security", "com.brainfood.search"})
 public class BackendApplication {

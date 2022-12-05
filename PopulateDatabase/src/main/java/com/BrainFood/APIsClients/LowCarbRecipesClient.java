@@ -17,6 +17,6 @@ public class LowCarbRecipesClient {
                 .method("GET", HttpRequest.BodyPublishers.noBody())
                 .build();
         HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-        return new JSONObject(response);
+        return new JSONObject(response.body());
     }
 }
