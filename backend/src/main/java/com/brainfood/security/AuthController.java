@@ -41,23 +41,23 @@ public class AuthController {
     PasswordResetManager passwordResetManager;
 
     @PostMapping("/forgetPassword")
-    public Response forgestPassword(@RequestParam Map<String, String> body){
-        return passwordResetManager.sendResetPassword(body.get("email"));
+    public String forgestPassword(@RequestParam Map<String, String> body){
+        return passwordResetManager.sendResetPassword(body.get("email")).name();
     }
 
     @GetMapping("/resetPassword")
-    public Response resetPassword(@RequestParam(name = "tk") String token) {
-        return passwordResetManager.verifyToken(token);
+    public String resetPassword(@RequestParam(name = "tk") String token) {
+        return passwordResetManager.verifyToken(token).name();
     }
 
     @PostMapping("/changePassword")
-    public Response changePassword(@RequestParam Map<String, String> body) {
-        return passwordResetManager.changePassword(body.get("tk"), body.get("password"));
+    public String changePassword(@RequestParam Map<String, String> body) {
+        return passwordResetManager.changePassword(body.get("tk"), body.get("password")).name();
     }
 
     @PostMapping("/signup")
-    public Response createAuthentications(@RequestParam Map<String, String> auths) {
-        return userAuthenticator.createAuthentications(auths.get("username"), auths.get("password"), auths.get("email"));
+    public String createAuthentications(@RequestParam Map<String, String> auths) {
+        return userAuthenticator.createAuthentications(auths.get("username"), auths.get("password"), auths.get("email")).name();
     }
 
     @GetMapping("/home")
@@ -66,11 +66,9 @@ public class AuthController {
     }
 
     @GetMapping("/signin")
-    public Response signin() {
-        return Response.PleaseSignIn;
+    public String signin() {
+        return Response.PleaseSignIn.name();
     }
-
-
     
 
 

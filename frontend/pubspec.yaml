@@ -29,6 +29,9 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  path_provider: ^2.0.11
+  flutter_pw_validator: ^1.4.2
+  email_validator: '^2.1.16'
   http: ^0.13.5
   flutter:
     sdk: flutter
@@ -88,17 +91,17 @@ flutter:
     - family: Telma
       fonts:
         - asset: assets/fonts/Telma-Medium.ttf
-    # - family: Arslan
-    #   fonts:
-    #     - asset: assets/fonts/ArbFONTS-Arslan-Wessam-B.ttf
-    # - family: Roboto
-    #   fonts:
-    #     - asset: assets/fonts/Roboto-Bold.ttf
-    #     - asset: assets/fonts/Roboto-BoldItalic.ttf
-    #     - asset: assets/fonts/Roboto-Italic.ttf
-    #     - asset: assets/fonts/Roboto-Medium.ttf
-    #     - asset: assets/fonts/Roboto-MediumItalic.ttf
-    #     - asset: assets/fonts/Roboto-Regular.ttf
+    - family: Arslan
+      fonts:
+        - asset: assets/fonts/ArbFONTS-Arslan-Wessam-B.ttf
+    - family: Roboto
+      fonts:
+        - asset: assets/fonts/Roboto-Bold.ttf
+        - asset: assets/fonts/Roboto-BoldItalic.ttf
+        - asset: assets/fonts/Roboto-Italic.ttf
+        - asset: assets/fonts/Roboto-Medium.ttf
+        - asset: assets/fonts/Roboto-MediumItalic.ttf
+        - asset: assets/fonts/Roboto-Regular.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

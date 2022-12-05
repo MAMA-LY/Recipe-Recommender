@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:recipe_recommender_frontend/screens/sign/ResponseEnum.dart';
+import 'package:email_validator/email_validator.dart';
 
 class SignUpPage extends StatefulWidget {
   static String routeName = "/signup";
@@ -14,23 +16,16 @@ class _SignUpPageState extends State<SignUpPage> {
   var usernameController = TextEditingController();
   var passwordController = TextEditingController();
   var emailController = TextEditingController();
+  var responseTextController = TextEditingController();
+  String resp = "";
   @override
   Widget build(BuildContext context) {
+    responseTextController.text = "";
     return MaterialApp(
         title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          // This is the theme of your application.
-          //
-          // Try running your application with "flutter run". You'll see the
-          // application has a blue toolbar. Then, without quitting the app, try
-          // changing the primarySwatch below to Colors.green and then invoke
-          // "hot reload" (press "r" in the console where you ran "flutter run",
-          // or simply save your changes to "hot reload" in a Flutter IDE).
-          // Notice that the counter didn't reset back to zero; the application
-          // is not restarted.
-          primarySwatch: Colors.blue,
-
+          primarySwatch: Colors.orange,
         ),
         home: Scaffold(
             appBar: AppBar(
@@ -42,10 +37,9 @@ class _SignUpPageState extends State<SignUpPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Container(
+                    width: MediaQuery.of(context).size.width / 3,
                     padding: const EdgeInsets.fromLTRB(20, 20, 20, 70),
-                    child: const FlutterLogo(
-                      size: 40,
-                    ),
+                    child: const Image(image: AssetImage("assets/images/Logo.png"), fit: BoxFit.fill)
                   ),
                   Container(
                     padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
@@ -93,26 +87,48 @@ class _SignUpPageState extends State<SignUpPage> {
                         ),
                         child: const Text('Sign up'),
                         onPressed: () async {
-                          var url = Uri.http("localhost:8080", "/signup");
-                          var response = await http.post(url, body: {
-                            "username": usernameController.text,
-                            "email": emailController.text,
-                            "password": passwordController.text
-                          });
-                          debugPrint(response.headers.toString());
+                          bool emailValid =
+                              EmailValidator.validate(emailController.text);
+                          if (emailValid) {
+                            var url = Uri.http("localhost:8080", "/signup");
+                            var creds = {
+                              "username": usernameController.text,
+                              "password": passwordController.text,
+                              "email": emailController.text
+                            };
+                            var response = await http.post(url, body: creds);
+
+                            setState(() {
+                              responseTextController.text = response.body;
+                              switch(response.body) {
+                                case "EmailAlreadyExists" : resp = "An account with this email address already exists"; break;
+                                case "UsernameAlreadyExists" : resp = "This username is already taken"; break;
+                                case "UserCreated" : resp = "Account is Created Successfully"; break;
+                              }
+                            });
+                            debugPrint(response.body);
+                          } else {
+                            setState(() {
+                              resp = "Please enter a valid email address";
+                            });
+                          }
                         },
                       )),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
                     child: Text(
-                      'Forgot Password?',
+                      'Sign in',
                       style: TextStyle(color: Colors.grey[600]),
                     ),
                   ),
+                  Text(resp,
+                      style: resp == "Account is Created Successfully"
+                          ? const TextStyle(color: Colors.green, fontSize: 20)
+                          : const TextStyle(color: Colors.red, fontSize: 20))
                 ],
               ),
-            )
-        )
-    );
+            )));
   }
 }

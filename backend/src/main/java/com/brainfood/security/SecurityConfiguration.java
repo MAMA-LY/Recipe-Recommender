@@ -37,18 +37,19 @@ public class SecurityConfiguration {
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         
-        http.authorizeHttpRequests().requestMatchers("/signin/**").permitAll().and()
+        http.anonymous().disable().authorizeHttpRequests().requestMatchers("/signin/**").permitAll().and()
             .authorizeHttpRequests().requestMatchers(HttpMethod.POST, "/forgetPassword/**").permitAll().and()
             .authorizeHttpRequests().requestMatchers(HttpMethod.GET, "/resetPassword/**").permitAll().and()
             .authorizeHttpRequests().requestMatchers(HttpMethod.POST, "/changePassword/**").permitAll().and()
             .authorizeHttpRequests().requestMatchers("/home/**").authenticated().and()
+            .authorizeHttpRequests().requestMatchers("/").authenticated().and()
             .authorizeHttpRequests().requestMatchers(HttpMethod.POST, "/signup/**").permitAll().and()
             .formLogin().loginPage("/signin").defaultSuccessUrl("/home").loginProcessingUrl("/signin").and()
             .logout().logoutUrl("/signout").logoutRequestMatcher(new AntPathRequestMatcher("/signout")).logoutSuccessUrl("/signin")
             .invalidateHttpSession(true)
             .clearAuthentication(true)
             .addLogoutHandler(new SecurityContextLogoutHandler()).and()
-            .csrf().disable();
+            .csrf().disable();;
 
             return http.build();
     }

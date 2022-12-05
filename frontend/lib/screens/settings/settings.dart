@@ -1,4 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:recipe_recommender_frontend/screens/nav/bottom_nav_screen.dart';
+import 'package:recipe_recommender_frontend/screens/sign/signin.dart';
+import 'package:http/http.dart' as http;
+
+import '../../main.dart';
 
 class SettingsPage extends StatelessWidget {
   static String routeName = "/settings";
@@ -6,6 +13,19 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Text("Settings");
+    return ElevatedButton(
+        onPressed: () async {
+          var url = Uri.http("localhost:8080", "/signout");
+          var response =
+              await http.post(url, headers: {"cookie": session.cookie});
+          debugPrint(response.statusCode.toString());
+          // ignore: use_build_context_synchronously
+          Navigator.of(context, rootNavigator: true).pushReplacement(MaterialPageRoute(builder: (context) => const SignInPage()));
+          cacheFile!.delete();
+          // Navigator.pushReplacement(context,
+          //     MaterialPageRoute(builder: (context) => const SignInPage()));
+          // session.cookie = "";
+        },
+        child: const Text("Sign out"));
   }
 }
