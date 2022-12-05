@@ -41,3 +41,5 @@ public class SpoonacularAPI {
         return HttpRequest.BodyPublishers.ofString(urlEncoded);
     }
 }
+
+

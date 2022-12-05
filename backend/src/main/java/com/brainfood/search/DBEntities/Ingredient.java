@@ -1,7 +1,9 @@
 package com.brainfood.search.DBEntities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -10,6 +12,8 @@ import java.util.Set;
 @Entity
 @Table(name = "\"Ingredient\"")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Ingredient implements Serializable {
     @Id
     @Column(name = "id")

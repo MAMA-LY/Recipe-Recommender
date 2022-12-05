@@ -13,9 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @ComponentScan
 @RestController
@@ -26,48 +24,40 @@ public class SearchController {
     SpoonacularAPI spoonacularAPI;
 
     @Autowired
-    RecipeRepository recipeRepository;
+    DishIngredientClassifier dishIngredientClassifier;
+
+    @Autowired
+    RecipeDAO recipeDAO;
 
     @GetMapping("/sentence")
     public ShortRecipe[] searchSentence(@RequestParam String sentence) throws JSONException, IOException, InterruptedException {
-        JSONArray food = spoonacularAPI.foodText(sentence).getJSONArray("annotations");
-        int size = food.toString().split("annotation").length - 1;
-        List<ShortRecipe> result = new ArrayList<>();
-        List<ShortRecipe> Ingredients = new ArrayList<>() ;
+        JSONArray APIresult = spoonacularAPI.foodText(sentence).getJSONArray("annotations");
+        List<ShortRecipe> food = new ArrayList<>();
 
         ObjectMapper mapper = new ObjectMapper();
+        for (int i = 0; !APIresult.isNull(i); i++)
+            food.add(mapper.readValue(APIresult.getJSONObject(i).toString(), ShortRecipe.class)) ;
 
-        //iterate over all food came from spoonacular
-        for (int i = 0; i < size; i++) {
-            ShortRecipe current = mapper.readValue(food.getJSONObject(i).toString(), ShortRecipe.class) ;
+        dishIngredientClassifier.classify(food);
+        List<ShortRecipe> dishes = dishIngredientClassifier.getDish();
+        List<ShortRecipe> ingredients = dishIngredientClassifier.getIngredient();
 
-            //if the food is a dish get similar food like it from database
-            if(Objects.equals(current.tag, "dish")){
-                var similarDishes = recipeRepository.findByName("%"+current.name+"%") ;
-                for (Recipe recipe : similarDishes) {
-                    var sr = new ShortRecipe();
-                    sr.id = recipe.id;
-                    sr.name = recipe.name;
-                    sr.image = recipe.photo;
-                    result.add(sr) ;
-                }
+        List<Recipe> result = new ArrayList<>();
+        result.addAll(recipeDAO.findSimilarDishes(dishes));
+        result.addAll(recipeDAO.findByIngredientsLike(ingredients));
 
-                //if it is an ingredient save it later to get dishes that contain that ingredient
-            }else
-                Ingredients.add(current) ;
-        }
+        return eliminateDuplicates(result);
+    }
 
-        for(ShortRecipe ingredient : Ingredients){
-            List<Recipe> dishWithIngredient = recipeRepository.findByIngredientsLike("%"+ingredient.name+"%") ;
-            for (Recipe recipe : dishWithIngredient) {
-                var sr = new ShortRecipe();
-                sr.id = recipe.id;
-                sr.name = recipe.name;
-                sr.image = recipe.photo;
-                result.add(sr) ;
+    private ShortRecipe[] eliminateDuplicates(List<Recipe> list){
+        Set<String> ids = new TreeSet<>();
+        List<ShortRecipe> unique = new ArrayList<>() ;
+        for(Recipe recipe : list){
+            if(!ids.contains(recipe.id)){
+                unique.add(new ShortRecipe(recipe));
+                ids.add(recipe.id);
             }
         }
-
-        return result.toArray(new ShortRecipe[result.size()]);
+        return unique.toArray(new ShortRecipe[unique.size()]);
     }
 }
