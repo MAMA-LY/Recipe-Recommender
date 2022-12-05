@@ -8,7 +8,8 @@ public class ShortRecipe {
     @JsonProperty("id")
     String id;
 
-    @JsonProperty("annotation")
+    @JsonProperty("name")
+    @JsonAlias("annotation")
     String name;
 
     @JsonProperty("tag")
