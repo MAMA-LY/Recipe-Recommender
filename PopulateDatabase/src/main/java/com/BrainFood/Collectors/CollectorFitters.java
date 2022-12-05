@@ -4,6 +4,7 @@ import com.BrainFood.DatabaseEntities.Ingredient;
 import com.BrainFood.DatabaseEntities.Recipe;
 import lombok.NoArgsConstructor;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.math.BigDecimal;
@@ -11,13 +12,16 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class CollectorFitters {
 
-    private int getTotalOf(JSONArray items,String nutritionFact){
-        int sum=0;
-        for(int i=0;i<items.length();i++) {
+    public int getTotalOf(JSONArray items,String nutritionFact) throws JSONException{
+        int sum = 0;
+        for(int i = 0 ; i < items.length() ; i++) {
             JSONObject nutritionFacts = items.getJSONObject(i);
-            sum+= ((BigDecimal)nutritionFacts.get(nutritionFact)).intValue();
+            if(!nutritionFacts.has(nutritionFact)){
+                throw new JSONException("Non-Compatible Keys");
+            }
+            sum += ((BigDecimal)nutritionFacts.get(nutritionFact)).intValue();
         }
-        return  sum;
+        return sum;
     }
     public void recipeNutritionFitter(Recipe recipe, JSONObject nutrition){
         JSONArray items = nutrition.getJSONArray("items");
