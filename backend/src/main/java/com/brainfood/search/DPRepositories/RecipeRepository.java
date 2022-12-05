@@ -10,7 +10,9 @@ import java.util.List;
 
 @Repository
 public interface RecipeRepository extends JpaRepository<Recipe, String> {
-
-    @Query("select r1 from Recipe r1 where lower(r1.name) like lower(:name)")
+    @Query("select r from Recipe r where lower(r.name) like lower(:name)")
     List<Recipe> findByName(@Param("name") String name);
+
+    @Query("select r from Recipe r JOIN r.recipeIngredients ri JOIN ri.compositeKey.ingredientID i where lower(i.name) like lower(:name)")
+    List<Recipe> findByIngredientsLike(@Param("name") String name);
 }

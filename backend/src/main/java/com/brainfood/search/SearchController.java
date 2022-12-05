@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @ComponentScan
 @RestController
@@ -30,14 +32,42 @@ public class SearchController {
     public ShortRecipe[] searchSentence(@RequestParam String sentence) throws JSONException, IOException, InterruptedException {
         JSONArray food = spoonacularAPI.foodText(sentence).getJSONArray("annotations");
         int size = food.toString().split("annotation").length - 1;
-        ShortRecipe[] result = new ShortRecipe[size];
+        List<ShortRecipe> result = new ArrayList<>();
+        List<ShortRecipe> Ingredients = new ArrayList<>() ;
 
         ObjectMapper mapper = new ObjectMapper();
-        for (int i = 0; i < result.length; i++)
-            result[i] = mapper.readValue(food.getJSONObject(i).toString(), ShortRecipe.class);
 
-        return result;
+        //iterate over all food came from spoonacular
+        for (int i = 0; i < size; i++) {
+            ShortRecipe current = mapper.readValue(food.getJSONObject(i).toString(), ShortRecipe.class) ;
+
+            //if the food is a dish get similar food like it from database
+            if(Objects.equals(current.tag, "dish")){
+                var similarDishes = recipeRepository.findByName("%"+current.name+"%") ;
+                for (Recipe recipe : similarDishes) {
+                    var sr = new ShortRecipe();
+                    sr.id = recipe.id;
+                    sr.name = recipe.name;
+                    sr.image = recipe.photo;
+                    result.add(sr) ;
+                }
+
+                //if it is an ingredient save it later to get dishes that contain that ingredient
+            }else
+                Ingredients.add(current) ;
+        }
+
+        for(ShortRecipe ingredient : Ingredients){
+            List<Recipe> dishWithIngredient = recipeRepository.findByIngredientsLike("%"+ingredient.name+"%") ;
+            for (Recipe recipe : dishWithIngredient) {
+                var sr = new ShortRecipe();
+                sr.id = recipe.id;
+                sr.name = recipe.name;
+                sr.image = recipe.photo;
+                result.add(sr) ;
+            }
+        }
+
+        return result.toArray(new ShortRecipe[result.size()]);
     }
-
-
 }

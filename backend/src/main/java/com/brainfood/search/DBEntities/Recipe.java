@@ -1,13 +1,13 @@
 package com.brainfood.search.DBEntities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "\"Recipe\"")
@@ -35,4 +35,7 @@ public class Recipe implements Serializable {
 
     @Column(name = "photo")
     public String photo;
+
+    @OneToMany(mappedBy = "compositeKey.recipeID" , cascade = CascadeType.ALL , orphanRemoval = true)
+    public Set<RecipeIngredients> recipeIngredients = new HashSet<>() ;
 }
