@@ -49,8 +49,8 @@ public class SecurityConfiguration {
             .invalidateHttpSession(true)
             .clearAuthentication(true)
             .addLogoutHandler(new SecurityContextLogoutHandler()).and()
-            .csrf().disable();;
-
+            .csrf().disable() ;
+        
             return http.build();
     }
 

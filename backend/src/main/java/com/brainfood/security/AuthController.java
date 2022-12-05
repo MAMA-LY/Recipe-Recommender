@@ -40,6 +40,7 @@ public class AuthController {
     @Autowired
     PasswordResetManager passwordResetManager;
 
+
     @PostMapping("/forgetPassword")
     public String forgestPassword(@RequestParam Map<String, String> body){
         return passwordResetManager.sendResetPassword(body.get("email")).name();
@@ -50,10 +51,12 @@ public class AuthController {
         return passwordResetManager.verifyToken(token).name();
     }
 
+    
     @PostMapping("/changePassword")
     public String changePassword(@RequestParam Map<String, String> body) {
         return passwordResetManager.changePassword(body.get("tk"), body.get("password")).name();
     }
+
 
     @PostMapping("/signup")
     public String createAuthentications(@RequestParam Map<String, String> auths) {
@@ -64,6 +67,7 @@ public class AuthController {
     public String test() {
         return "UserInfo";
     }
+
 
     @GetMapping("/signin")
     public String signin() {

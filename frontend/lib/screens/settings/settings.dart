@@ -15,7 +15,9 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
         onPressed: () async {
-          var url = Uri.http("localhost:8080", "/signout");
+          var url = Uri.http(
+              "${const String.fromEnvironment("BrainFoodBackendIP", defaultValue: "localhost")}:8080",
+              "/signout");
           debugPrint(session.cookie);
           var response =
               await http.post(url, headers: {"cookie": session.cookie});

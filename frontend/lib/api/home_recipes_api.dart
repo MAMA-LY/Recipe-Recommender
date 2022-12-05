@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:recipe_recommender_frontend/models/recipe.dart';
 import 'package:http/http.dart' as http;
@@ -7,7 +8,8 @@ import '../models/failure.dart';
 
 class GetRecipesAPI {
   Future<List<Recipe>> getRecipes(String path) async {
-    var url = Uri.http("localhost:8080", "/$path");
+    var url = Uri.http(
+        "${const String.fromEnvironment("BrainFoodBackendIP")}:8080", "/$path");
     var response = await http.get(url);
 
     if (response.statusCode == 200) {

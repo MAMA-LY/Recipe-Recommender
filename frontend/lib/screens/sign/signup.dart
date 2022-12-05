@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:recipe_recommender_frontend/screens/sign/ResponseEnum.dart';
@@ -37,10 +39,11 @@ class _SignUpPageState extends State<SignUpPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Container(
-                    width: MediaQuery.of(context).size.width / 3,
-                    padding: const EdgeInsets.fromLTRB(20, 20, 20, 70),
-                    child: const Image(image: AssetImage("assets/images/Logo.png"), fit: BoxFit.fill)
-                  ),
+                      width: MediaQuery.of(context).size.width / 3,
+                      padding: const EdgeInsets.fromLTRB(20, 20, 20, 70),
+                      child: const Image(
+                          image: AssetImage("assets/images/Logo.png"),
+                          fit: BoxFit.fill)),
                   Container(
                     padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
                     child: TextField(
@@ -90,19 +93,35 @@ class _SignUpPageState extends State<SignUpPage> {
                           bool emailValid =
                               EmailValidator.validate(emailController.text);
                           if (emailValid) {
-                            var url = Uri.http("localhost:8080", "/signup");
+                            var url = Uri.http(
+                                "${const String.fromEnvironment("BrainFoodBackendIP", defaultValue: "localhost")}:8080",
+                                "/signup");
                             var creds = {
                               "username": usernameController.text,
                               "password": passwordController.text,
                               "email": emailController.text
                             };
-                            var response = await http.post(url, body: creds);
+                            var response =
+                                await http.post(url, body: creds, headers: {
+                              "Access-Control-Allow-Origin": "*",
+                              "Access-Control-Allow-Methods":
+                                  "POST, OPTIONS, GET",
+                              "Access-Control-Allow-Headers":
+                                  "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale",
+                            });
                             setState(() {
                               responseTextController.text = response.body;
-                              switch(response.body) {
-                                case "EmailAlreadyExists" : resp = "An account with this email address already exists"; break;
-                                case "UsernameAlreadyExists" : resp = "This username is already taken"; break;
-                                case "UserCreated" : resp = "Account is Created Successfully"; break;
+                              switch (response.body) {
+                                case "EmailAlreadyExists":
+                                  resp =
+                                      "An account with this email address already exists";
+                                  break;
+                                case "UsernameAlreadyExists":
+                                  resp = "This username is already taken";
+                                  break;
+                                case "UserCreated":
+                                  resp = "Account is Created Successfully";
+                                  break;
                               }
                             });
                             debugPrint(response.body);
@@ -115,6 +134,9 @@ class _SignUpPageState extends State<SignUpPage> {
                       )),
                   TextButton(
                     onPressed: () {
+                      setState(() {
+                        resp = "";
+                      });
                       Navigator.pop(context);
                     },
                     child: Text(
