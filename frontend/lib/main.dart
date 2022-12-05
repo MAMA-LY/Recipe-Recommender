@@ -49,6 +49,7 @@ void main() {
 }
 
 Future<String?> getServerInitResponse() async {
+  session.cookie = cookieStr;
   var url = Uri.http("localhost:8080", "/home");
   var serverResponse = await http.get(url, headers: {"cookie": cookieStr});
   final bool hasData = serverResponse.body != null;
@@ -64,7 +65,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //getServerInitResponse().then((value) => serverResponse = value);
 
     return Scaffold(
       body: FutureBuilder(
@@ -85,13 +85,5 @@ class MyApp extends StatelessWidget {
       ),
     );
 
-    // String? serverResponse;
-    // getServerInitResponse().then((String value){
-    //   if(value == "PleaseSignIn") {
-    //     serverResponse = value;
-    //   }
-    // });
-    // debugPrint(serverResponse);
-    // return const BottomNavView();
   }
 }

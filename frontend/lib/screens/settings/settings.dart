@@ -20,12 +20,8 @@ class SettingsPage extends StatelessWidget {
           var response =
               await http.post(url, headers: {"cookie": session.cookie});
           debugPrint(response.statusCode.toString());
-          // ignore: use_build_context_synchronously
           Navigator.of(context, rootNavigator: true).pushReplacement(MaterialPageRoute(builder: (context) => const SignInPage()));
           cacheFile!.delete();
-          // Navigator.pushReplacement(context,
-          //     MaterialPageRoute(builder: (context) => const SignInPage()));
-          // session.cookie = "";
         },
         child: const Text("Sign out"));
   }
