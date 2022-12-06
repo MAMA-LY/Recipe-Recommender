@@ -60,25 +60,20 @@ class _SearchPageState extends State<SearchPage> {
         ),
         body: _isLoading
             ? const Center(
-            child: CircularProgressIndicator(
-              color: Constants.primaryColor,
-            ))
-            : Column(
-              children: <Widget>[
+                child: CircularProgressIndicator(
+                color: Constants.primaryColor,
+              ))
+            : Column(children: <Widget>[
                 Expanded(
-                  child: ListView.builder(
+                    child: ListView.builder(
                   itemCount: _recipes.length,
                   itemBuilder: (context, index) {
                     return RecipeCard(
-                      title: _recipes[index].name,
-                      thumbnailUrl: _recipes[index].photo
-                    );
+                        title: _recipes[index].name,
+                        thumbnailUrl: _recipes[index].photo);
                   },
-                )
-              )
-              ]
-            )
-    );
+                ))
+              ]));
   }
 
   Future<void> _showSearch() async {
@@ -88,11 +83,9 @@ class _SearchPageState extends State<SearchPage> {
       query: "any query",
     );
   }
-
 }
 
 class TheSearch extends SearchDelegate<String> {
-
   final suggestions1 = ["https://www.google.com"];
 
   @override
@@ -130,27 +123,25 @@ class TheSearch extends SearchDelegate<String> {
     debugPrint("I'm here");
     return FutureBuilder<List<Recipe>>(
       initialData: [], // You can set initial data or check snapshot.hasData in the builder
-      future: api.getRecipes("/search/sentence?sentence=$query"), // Run check for a single queryRow
+      future: api.getRecipes(
+          "search/sentence?sentence=$query"), // Run check for a single queryRow
       builder: (context, snapshot) {
-        if (snapshot.data != null) { // snapshot.data is what being return from the above async function
+        if (snapshot.hasData) {
+          // snapshot.data is what being return from the above async function
           // True: Return your UI element with Name and Avatar here for number in Contacts
-          return Column(
-            children: <Widget>[
-                Expanded(
-                  child: ListView.builder(
-                  itemCount: snapshot.data?.length,
-                  itemBuilder: (context, index) {
-                    return RecipeCard(
-                      title: snapshot.data![index].name,
-                      thumbnailUrl: snapshot.data![index].photo
-                    );
-                  },
-                )
-              )
-            ]
-    );
+          return Column(children: <Widget>[
+            Expanded(
+                child: ListView.builder(
+              itemCount: snapshot.data?.length,
+              itemBuilder: (context, index) {
+                return RecipeCard(
+                    title: snapshot.data![index].name,
+                    thumbnailUrl: snapshot.data![index].photo);
+              },
+            ))
+          ]);
         } else {
-            return Column();
+          return Column();
         }
       },
     );
@@ -162,7 +153,8 @@ class TheSearch extends SearchDelegate<String> {
     return ListView.builder(
       itemCount: suggestions.length,
       itemBuilder: (content, index) => ListTile(
-        leading: const Icon(Icons.arrow_left), title: Text(suggestions[index])),
+          leading: const Icon(Icons.arrow_left),
+          title: Text(suggestions[index])),
     );
   }
 }
