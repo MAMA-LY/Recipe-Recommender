@@ -97,7 +97,8 @@ class _SignInPageState extends State<SignInPage> {
                           var responseLocation = response.headers['location'];
                           debugPrint(cookie);
                           debugPrint(responseLocation);
-                          debugPrint("${const String.fromEnvironment("BrainFoodBackendIP", defaultValue: "localhost")}:8080/signin?error");
+                          debugPrint(
+                              "${const String.fromEnvironment("BrainFoodBackendIP", defaultValue: "localhost")}:8080/signin?error");
                           if (responseLocation ==
                               "http://${const String.fromEnvironment("BrainFoodBackendIP", defaultValue: "localhost")}:8080/signin?error") {
                             setState(() {
@@ -109,8 +110,11 @@ class _SignInPageState extends State<SignInPage> {
                               cookie != null) {
                             {
                               session.cookie = cookie;
-                              cacheFile = await cacheFile!
-                                  .writeAsString(session.cookie);
+                              if (cacheFile != null) {
+                                cacheFile = await cacheFile!
+                                    .writeAsString(session.cookie);
+                              }
+
                               var urlHome = Uri.http(
                                   "${const String.fromEnvironment("BrainFoodBackendIP", defaultValue: "localhost")}:8080",
                                   "/home");
