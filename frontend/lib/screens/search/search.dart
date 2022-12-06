@@ -14,10 +14,10 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> {
   List<Recipe> _recipes = [
+    //Recipe(name: "name", photo: "photo", ID: "ID"),
     Recipe(name: "name", photo: "photo", ID: "ID"),
-    Recipe(name: "name", photo: "photo", ID: "ID"),
-    Recipe(name: "name", photo: "photo", ID: "ID"),
-    Recipe(name: "name", photo: "photo", ID: "ID"),
+    Recipe(name: "tutu", photo: "https://picsum.photos/250?image=9", ID: "ID"),
+    //Recipe(name: "name", photo: "photo", ID: "ID"),
   ];
   bool _isLoading = false;
   final searchAPI = GetRecipesAPI();
@@ -51,13 +51,8 @@ class _SearchPageState extends State<SearchPage> {
           ),
           actions: [
             IconButton(
-              onPressed: () {
-                // TODO Navigate to nutrition page
-              },
-              icon: const Icon(
-                Icons.analytics_outlined,
-                color: Constants.primaryColor,
-              ),
+              icon: const Icon(Icons.search),
+              onPressed: _showSearch,
             ),
           ],
         ),
@@ -66,13 +61,98 @@ class _SearchPageState extends State<SearchPage> {
             child: CircularProgressIndicator(
               color: Constants.primaryColor,
             ))
-            : ListView.builder(
-          itemCount: _recipes.length,
-          itemBuilder: (context, index) {
-            return RecipeCard(
-                title: _recipes[index].name,
-                thumbnailUrl: _recipes[index].photo);
-          },
-        ));
+            : Column(
+              children: <Widget>[
+                Expanded(
+                  child: ListView.builder(
+                  itemCount: _recipes.length,
+                  itemBuilder: (context, index) {
+                    return RecipeCard(
+                      title: _recipes[index].name,
+                      thumbnailUrl: _recipes[index].photo
+                    );
+                  },
+                )
+              )
+              ]
+            )
+    );
+  }
+
+  Future<void> _showSearch() async {
+    await showSearch(
+      context: context,
+      delegate: TheSearch(),
+      query: "any query",
+    );
+  }
+
+}
+
+class TheSearch extends SearchDelegate<String> {
+
+  final suggestions1 = ["https://www.google.com"];
+
+  @override
+  String get searchFieldLabel => "Enter a web address";
+
+  @override
+  List<Widget> buildActions(BuildContext context) {
+    return [
+      IconButton(
+        icon: const Icon(Icons.clear),
+        onPressed: () {
+          query = "";
+        },
+      )
+    ];
+  }
+
+  @override
+  Widget buildLeading(BuildContext context) {
+    return IconButton(
+      icon: AnimatedIcon(
+        icon: AnimatedIcons.menu_arrow,
+        progress: transitionAnimation,
+      ),
+      onPressed: () {
+        close(context, "");
+      },
+    );
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    List<Recipe> _recipes = [
+    //Recipe(name: "name", photo: "photo", ID: "ID"),
+    Recipe(name: "name", photo: "photo", ID: "ID"),
+    Recipe(name: "tutu", photo: "https://picsum.photos/250?image=9", ID: "ID"),
+    //Recipe(name: "name", photo: "photo", ID: "ID"),
+  ];
+    return Column(
+      children: <Widget>[
+                Expanded(
+                  child: ListView.builder(
+                  itemCount: _recipes.length,
+                  itemBuilder: (context, index) {
+                    return RecipeCard(
+                      title: _recipes[index].name,
+                      thumbnailUrl: _recipes[index].photo
+                    );
+                  },
+                )
+              )
+              ]
+    );
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    final suggestions = query.isEmpty ? suggestions1 : [];
+    return ListView.builder(
+      itemCount: suggestions.length,
+      itemBuilder: (content, index) => ListTile(
+        leading: const Icon(Icons.arrow_left), title: Text(suggestions[index])),
+    );
   }
 }

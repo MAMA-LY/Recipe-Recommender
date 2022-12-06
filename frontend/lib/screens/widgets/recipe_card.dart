@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 class RecipeCard extends StatelessWidget {
-  final String name = "default";
-  final String thumbnailUrl = "default";
+  final String title;
+  final String thumbnailUrl;
 
   const RecipeCard({
     super.key,
-    required String title,
-    required String thumbnailUrl,
+    required this.title,
+    required this.thumbnailUrl,
   });
 
   @override
@@ -36,7 +36,7 @@ class RecipeCard extends StatelessWidget {
               Colors.black.withOpacity(0.35),
               BlendMode.multiply,
             ),
-            image: const AssetImage("assets/images/Logo.png"),
+            image: Image.network(thumbnailUrl).image,
             fit: BoxFit.cover,
           ),
         ),
@@ -47,7 +47,7 @@ class RecipeCard extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 5.0),
                 child: Text(
-                  name,
+                  title,
                   style: const TextStyle(
                     fontSize: 19,
                   ),
