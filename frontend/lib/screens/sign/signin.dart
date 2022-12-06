@@ -1,17 +1,11 @@
-import 'dart:convert';
+
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-
-import 'package:path_provider/path_provider.dart';
-import 'package:recipe_recommender_frontend/api/session.dart';
-import 'package:recipe_recommender_frontend/screens/home/home.dart';
-import 'package:recipe_recommender_frontend/screens/sign/ResponseEnum.dart';
 import 'package:recipe_recommender_frontend/screens/sign/signup.dart';
 
 import '../../main.dart';
 import '../nav/bottom_nav_screen.dart';
-
 
 class SignInPage extends StatefulWidget {
   static String routeName = "/signin";
@@ -46,10 +40,11 @@ class _SignInPageState extends State<SignInPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Container(
-                    width: MediaQuery.of(context).size.width / 3,
-                    padding: const EdgeInsets.fromLTRB(20, 20, 20, 70),
-                    child: const Image(image: AssetImage("assets/images/Logo.png"), fit: BoxFit.fill)
-                  ),
+                      width: MediaQuery.of(context).size.width / 3,
+                      padding: const EdgeInsets.fromLTRB(20, 20, 20, 70),
+                      child: const Image(
+                          image: AssetImage("assets/images/Logo.png"),
+                          fit: BoxFit.fill)),
                   Container(
                     padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
                     child: TextField(
@@ -84,39 +79,70 @@ class _SignInPageState extends State<SignInPage> {
                         ),
                         child: const Text('Sign in'),
                         onPressed: () async {
-           
-                         
                           var url = Uri.http(
                               "${const String.fromEnvironment("BrainFoodBackendIP", defaultValue: "localhost")}:8080",
                               "/signin");
                           var response = await http.post(url, body: {
                             "username": usernameController.text,
                             "password": passwordController.text
+                          }, headers: {
+                            "Access-Control-Allow-Origin": "*",
+                            "Access-Control-Allow-Methods":
+                                "POST, OPTIONS, GET",
+                            "Access-Control-Allow-Headers":
+                                "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale",
                           });
-           
+                          debugPrint(response.statusCode.toString());
+                          print(response.statusCode.toString());
+
                           var cookie = response.headers['set-cookie'];
                           var responseLocation = response.headers['location'];
-                          if(responseLocation == "http://localhost:8080/signin?error") {
+                          debugPrint(cookie);
+                          debugPrint(responseLocation);
+                          debugPrint(
+                              "${const String.fromEnvironment("BrainFoodBackendIP", defaultValue: "localhost")}:8080/signin?error");
+                          if (responseLocation ==
+                              "http://${const String.fromEnvironment("BrainFoodBackendIP", defaultValue: "localhost")}:8080/signin?error") {
                             setState(() {
                               resp = "Wrong Credentials";
                             });
                           }
-                          if(responseLocation == "http://localhost:8080/home" && cookie != null) {{
-                            session.cookie = cookie;
-                            cacheFile = await cacheFile!.writeAsString(session.cookie);
-                            var urlHome = Uri.http("localhost:8080", "/home");
-                            var responseHome = await http.post(url, headers: {"cookie" : cookie});
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const BottomNavView()));
-                          }}
-                        
+                          if (responseLocation ==
+                                  "http://${const String.fromEnvironment("BrainFoodBackendIP", defaultValue: "localhost")}:8080/home" &&
+                              cookie != null) {
+                            {
+                              session.cookie = cookie;
+                              if (cacheFile != null) {
+                                cacheFile = await cacheFile!
+                                    .writeAsString(session.cookie);
+                              }
+
+                              var urlHome = Uri.http(
+                                  "${const String.fromEnvironment("BrainFoodBackendIP", defaultValue: "localhost")}:8080",
+                                  "/home");
+                              var responseHome = await http.post(url, headers: {
+                                "cookie": cookie,
+                                "Access-Control-Allow-Origin": "*",
+                                "Access-Control-Allow-Methods":
+                                    "POST, OPTIONS, GET",
+                                "Access-Control-Allow-Headers":
+                                    "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale",
+                              });
+                              // ignore: use_build_context_synchronously
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const BottomNavView()));
+                            }
+                          }
                         },
                       )),
                   TextButton(
                     onPressed: () {
+                      setState(() {
+                        resp = "";
+                      });
                       Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -148,3 +174,4 @@ class _SignInPageState extends State<SignInPage> {
             )));
   }
 }
+
