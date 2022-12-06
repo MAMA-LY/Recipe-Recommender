@@ -90,10 +90,9 @@ class _SignInPageState extends State<SignInPage> {
                               "${const String.fromEnvironment("BrainFoodBackendIP", defaultValue: "localhost")}:8080",
                               "/signin");
                           var response = await http.post(url, body: {
-
                             "username": usernameController.text,
                             "password": passwordController.text
-                          };
+                          });
            
                           var cookie = response.headers['set-cookie'];
                           var responseLocation = response.headers['location'];
