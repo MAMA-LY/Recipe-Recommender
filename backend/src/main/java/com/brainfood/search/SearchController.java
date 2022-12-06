@@ -17,7 +17,6 @@ import java.util.*;
 
 @ComponentScan
 @RestController
-@RequestMapping("search")
 public class SearchController {
 
     @Autowired
@@ -29,8 +28,8 @@ public class SearchController {
     @Autowired
     RecipeDAO recipeDAO;
 
-    @GetMapping("/sentence")
-    public ShortRecipe[] searchSentence(@RequestParam String sentence) throws JSONException, IOException, InterruptedException {
+    @GetMapping("/search/sentence")
+    public ShortRecipe[] searchSentence(@RequestParam(name="sentence") String sentence) throws JSONException, IOException, InterruptedException {
         System.out.println(sentence);
         JSONArray APIresult = spoonacularAPI.foodText(sentence).getJSONArray("annotations");
         List<ShortRecipe> food = new ArrayList<>();

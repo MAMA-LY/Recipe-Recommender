@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import 'ingredient.dart';
 import 'nutrition.dart';
 
@@ -32,9 +34,8 @@ class Recipe {
   }
 
   static List<Recipe> recipesFromSnapshot(List<dynamic> snapshot) {
-    return snapshot.map((data) {
-      return Recipe.fromJson(data);
-    }).toList();
+    debugPrint(snapshot.map((data) => Recipe.fromJson(data.toString())).toList().toString());
+    return snapshot.map((data) => Recipe.fromJson(data.toString())).toList();
   }
 
   @override

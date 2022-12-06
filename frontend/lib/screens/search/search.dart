@@ -123,10 +123,11 @@ class TheSearch extends SearchDelegate<String> {
     debugPrint("I'm here");
     return FutureBuilder<List<Recipe>>(
       initialData: [], // You can set initial data or check snapshot.hasData in the builder
-      future: api.getRecipes(
-          "search/sentence?sentence=$query"), // Run check for a single queryRow
+      future: api.getRecipesWithQuery(
+          "search/sentence", {"sentence": query}), // Run check for a single queryRow
       builder: (context, snapshot) {
         if (snapshot.hasData) {
+          debugPrint("SNAPSHOT: " + snapshot.data.toString());
           // snapshot.data is what being return from the above async function
           // True: Return your UI element with Name and Avatar here for number in Contacts
           return Column(children: <Widget>[
