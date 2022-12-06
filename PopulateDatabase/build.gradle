@@ -28,12 +28,15 @@ dependencies {
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.0'
 	implementation "com.spoonacular:java-client:1.1"
 	implementation 'org.json:json:20220924'
+	implementation 'org.testcontainers:testcontainers-bom:1.17.6'
+	testImplementation 'junit:junit:4.13.2'
 	compileOnly 'org.projectlombok:lombok'
 	implementation 'org.postgresql:postgresql'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'io.projectreactor:reactor-test'
 	testImplementation 'org.springframework.security:spring-security-test'
+	testImplementation 'org.testcontainers:testcontainers-bom:1.17.6'
 }
 
 tasks.named('test') {
