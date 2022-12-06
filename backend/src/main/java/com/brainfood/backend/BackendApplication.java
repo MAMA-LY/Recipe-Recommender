@@ -14,10 +14,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import com.brainfood.security.EmailSender;
 
 
-@ComponentScan(basePackages = {"com.brainfood.backend", "com.brainfood.security"})
+
+@ComponentScan(basePackages = {"com.brainfood.backend", "com.brainfood.security" , "com.brainfood.search"})
 @SpringBootApplication(/*exclude = { SecurityAutoConfiguration.class }*/)
-@EntityScan({"com.brainfood.backend", "com.brainfood.security"})
-@EnableJpaRepositories("com.brainfood.security")
+@EntityScan({"com.brainfood.backend", "com.brainfood.security", "com.brainfood.search"})
+@EnableJpaRepositories({"com.brainfood.security", "com.brainfood.search"})
 public class BackendApplication {
 
 	@Autowired

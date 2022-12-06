@@ -22,6 +22,7 @@ public class CollectorFitters {
             sum += ((BigDecimal)nutritionFacts.get(nutritionFact)).intValue();
         }
         return sum;
+   
     }
     public void recipeNutritionFitter(Recipe recipe, JSONObject nutrition){
         JSONArray items = nutrition.getJSONArray("items");
