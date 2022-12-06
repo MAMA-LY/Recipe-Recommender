@@ -8,6 +8,7 @@ import com.BrainFood.Repositories.RecipeRepository;
 import com.BrainFood.Repositories.RecipeTagsRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,8 @@ public class DatabaseTesting {
     @Autowired
     private RecipeTagsRepository recipeTagsRepository;
 
+    Recipe recipe;
+    Ingredient ingredient;
 //    @BeforeAll
 //    static void init() {
 //        new MySQLContainer("mysql")
@@ -40,8 +43,9 @@ public class DatabaseTesting {
 //                .start();
 //    }
     @Test
-    public void recipeRepositoryTest() {
-        Recipe recipe = Recipe.builder()
+    @Order(1)
+    public void recipeRepositoryInsertionTest() {
+        recipe = Recipe.builder()
                             .name("Pizza")
                             .cuisine("Italy")
                             .photo("https//www.gharipSite.Pizza.png")
@@ -52,11 +56,19 @@ public class DatabaseTesting {
                             .build();
         Recipe savedRecipe = recipeRepository.save(recipe);
         Assertions.assertEquals(savedRecipe.getName(),recipe.getName());
-        recipeRepository.delete(recipe);
     }
     @Test
-    public void ingredientRepositoryTest() {
-        Ingredient ingredient = Ingredient.builder()
+    @Order(2)
+    public void recipeRepositoryyDeletionTest() {
+
+        Assertions.assertTrue(recipeRepository.existsRecipeByName(recipe.getName()));
+        recipeRepository.delete(recipe);
+        Assertions.assertFalse(recipeRepository.existsRecipeByName(recipe.getName()));
+    }
+    @Test
+    @Order(3)
+    public void ingredientRepositoryInsertionTest() {
+        ingredient = Ingredient.builder()
                                     .name("tomato")
                                     .amount("2 pieces of tomato")
                                     .icon("https//www.gharipSite.tomato.png")
@@ -67,7 +79,15 @@ public class DatabaseTesting {
                                     .build();
         Ingredient savedIngredient = ingredientRepository.save(ingredient);
         Assertions.assertEquals(savedIngredient.getFats(), ingredient.getFats());
+    }
+
+
+    @Test
+    @Order(4)
+    public void ingredientRepositoryDeletionTest() {
+        Assertions.assertTrue(ingredientRepository.existsIngredientByName(ingredient.getName()));
         ingredientRepository.delete(ingredient);
+        Assertions.assertFalse(ingredientRepository.existsIngredientByName(ingredient.getName()));
     }
 
 }
