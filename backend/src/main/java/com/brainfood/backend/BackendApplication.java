@@ -17,14 +17,15 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import com.brainfood.security.EmailSender;
 
 
-@ComponentScan(basePackages = {"com.brainfood.backend", "com.brainfood.security"})
-@SpringBootApplication(/*exclude = { SecurityAutoConfiguration.class }*/)
-@EntityScan({"com.brainfood.backend", "com.brainfood.security"})
-@EnableJpaRepositories("com.brainfood.security")
+
+@ComponentScan(basePackages = {"com.brainfood.backend", "com.brainfood.security" , "com.brainfood.search"})
+@SpringBootApplication
+@EntityScan({"com.brainfood.backend", "com.brainfood.security", "com.brainfood.search"})
+@EnableJpaRepositories({"com.brainfood.security", "com.brainfood.search"})
+
 public class BackendApplication {
 
-	@Autowired
-	EmailSender emailSender;	
+	
 
 	public static void main(String[] args) {
 		SpringApplication.run(BackendApplication.class, args);
@@ -40,9 +41,6 @@ public class BackendApplication {
         };
     }
 
-	// @EventListener(ApplicationReadyEvent.class)
-	// public void sendEmail() {
-	// 	emailSender.sendEmail("muhammad175ib59@gmail.com", "hello BrainFood", "I am hungry");
-	// }
+
 
 }

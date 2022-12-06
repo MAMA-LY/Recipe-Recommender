@@ -42,6 +42,7 @@ public class SecurityConfiguration {
             .authorizeHttpRequests().requestMatchers(HttpMethod.GET, "/resetPassword/**").permitAll().and()
             .authorizeHttpRequests().requestMatchers(HttpMethod.POST, "/changePassword/**").permitAll().and()
             .authorizeHttpRequests().requestMatchers("/home/**").authenticated().and()
+            .authorizeHttpRequests().requestMatchers("/search/**").authenticated().and()
             .authorizeHttpRequests().requestMatchers("/").authenticated().and()
             .authorizeHttpRequests().requestMatchers(HttpMethod.POST, "/signup/**").permitAll().and()
             .formLogin().loginPage("/signin").defaultSuccessUrl("/home").loginProcessingUrl("/signin").and()
@@ -49,7 +50,7 @@ public class SecurityConfiguration {
             .invalidateHttpSession(true)
             .clearAuthentication(true)
             .addLogoutHandler(new SecurityContextLogoutHandler()).and()
-            .csrf().disable() ;
+            .csrf().disable();
         
             return http.build();
     }

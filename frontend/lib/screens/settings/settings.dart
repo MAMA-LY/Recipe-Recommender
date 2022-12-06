@@ -1,3 +1,4 @@
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -28,3 +29,4 @@ class SettingsPage extends StatelessWidget {
         child: const Text("Sign out"));
   }
 }
+
