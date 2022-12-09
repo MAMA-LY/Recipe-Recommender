@@ -6,7 +6,7 @@ name: Build and deploy JAR app to Azure Web App - brainfood
 on:
   push:
     branches:
-      - main
+      - '**'
   workflow_dispatch:
 
 env:
