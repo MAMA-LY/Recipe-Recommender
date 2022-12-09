@@ -10,9 +10,9 @@ on:
     branches: [ "main" ]
 
 env:
-  BrainFoodEndPoint: jdbc:postgresql://db.ohqnkjfaffdkgvzybdwu.supabase.co:5432/postgres
-  BrainFoodPassword: OQf40nKStUpXrDGQ
-  BrainFoodUsername: postgres
+  BrainFoodEndPoint: ${{ secrets.DATABASE_ENDPOINT }}
+  BrainFoodPassword: ${{ secrets.DATABASE_PASSWORD }}
+  BrainFoodUsername: ${{ secrets.DATABASE_USERNAME }}
   
 permissions:
   contents: read
