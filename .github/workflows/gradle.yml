@@ -9,6 +9,11 @@ on:
   pull_request:
     branches: [ "main" ]
 
+env:
+  BrainFoodEndPoint: ${{ secrets.DATABASE_ENDPOINT }}
+  BrainFoodPassword: ${{ secrets.DATABASE_PASSWORD }}
+  BrainFoodUsername: ${{ secrets.DATABASE_USERNAME }}
+  
 permissions:
   contents: read
 
