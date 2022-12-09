@@ -35,11 +35,11 @@ jobs:
         arguments: build
         build-root-directory: ./backend
 
-      - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v2
-        with:
-          name: java-app
-          path: '${{ github.workspace }}/backend/target/*.jar'
+    - name: Upload artifact for deployment job
+      uses: actions/upload-artifact@v2
+      with:
+        name: java-app
+        path: '${{ github.workspace }}/backend/target/*.jar'
 
   deploy:
     runs-on: ubuntu-latest
