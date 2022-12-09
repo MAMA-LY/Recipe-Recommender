@@ -61,4 +61,4 @@ jobs:
           app-name: 'brainfood'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_5F714D213A2D41FF8F17ADA522A51F80 }}
-          package: 'backend-0.0.1.jar'
+          package: 'backend-SNAPSHOT-0.0.1.jar'
