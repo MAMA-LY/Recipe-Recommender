@@ -6,7 +6,7 @@ name: Deploy to Test
 on:
   push:
     branches:
-      - '**'
+      - '!main'
   workflow_dispatch:
 
 env:
@@ -58,7 +58,7 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'brainfood'
+          app-name: 'brainfood-test'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_96C0CCF7C5DA4C31B78250D7EE90832B }}
           package: 'backend-0.0.1-SNAPSHOT.jar'
