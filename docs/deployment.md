@@ -15,6 +15,6 @@ There are currently two different environments that our backend can be deployed 
 ![image](https://user-images.githubusercontent.com/20494891/206859827-9c2ff744-7a9f-43f4-8946-a19e5f9ad219.png)
 
 ## Deployment Process
-The backend is automatically deployed to the test environment whose url is brainfood-test.azurewebsites.net whenever a commit is pushed to any branch in this repository. It is also automatically deployed to the production environment brainfood.azurewebsites.net when a PR is merged into `main`.
+The backend is automatically deployed to the test environment whose url is [brainfood-test.azurewebsites.net](brainfood-test.azurewebsites.net) whenever a commit is pushed to any branch in this repository. It is also automatically deployed to the production environment [brainfood.azurewebsites.net](brainfood.azurewebsites.net) when a PR is merged into `main`.
 
 Note that you can also trigger a deployment manually by running the `deploy-test.yml` or `deploy-production.yml` workflows in Github Actions.
