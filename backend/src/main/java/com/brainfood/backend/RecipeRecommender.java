@@ -14,10 +14,7 @@ public class RecipeRecommender {
     private Model model;
 
     //                          Operations                                  
-    
-    /**
-    * @generated
-    */
+
     public List<Recipe> recommend() {
         //
         return null;

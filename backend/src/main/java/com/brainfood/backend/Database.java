@@ -31,17 +31,11 @@ public class Database {
         else
             return this.instance;
     }
-    
-    /**
-    * @generated
-    */
+
     public void query() {
         //
     }
-    
-    /**
-    * @generated
-    */
+
     private Database() {
         //
     }
