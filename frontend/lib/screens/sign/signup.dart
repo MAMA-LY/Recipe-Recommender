@@ -94,8 +94,8 @@ class _SignUpPageState extends State<SignUpPage> {
                           bool emailValid =
                               EmailValidator.validate(emailController.text);
                           if (emailValid) {
-                            var url = Uri.http(
-                                "${const String.fromEnvironment("BrainFoodBackendIP", defaultValue: "localhost")}:8080",
+                            var url = Uri.https(
+                                "${const String.fromEnvironment("BrainFoodBackendIP", defaultValue: "brainfood.azurewebsites.net")}",
                                 "/signup");
                             var creds = {
                               "username": usernameController.text,
