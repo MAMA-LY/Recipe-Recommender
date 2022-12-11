@@ -27,17 +27,14 @@ public class Profile {
     private Calendar calendar;
 
     private ProfileBuilder profileBuilder;
-    
+
 
     //                          Operations                                  
 
     public void calculateCalories() {
         //
     }
-    
-    /**
-    * @generated
-    */
+
     public void addCalendar() {
         //
     }

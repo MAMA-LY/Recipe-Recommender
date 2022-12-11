@@ -1,34 +1,14 @@
 package com.brainfood.backend;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.List;
 
-/**
-* @generated
-*/
+@Getter @Setter
 public class RecipeRecommender {
-    
-    /**
-    * @generated
-    */
-    private Model model;
 
-    /**
-    * @generated
-    */
-    public Model getModel() {
-        return this.model;
-    }
-    
-    /**
-    * @generated
-    */
-    public void setModel(Model model) {
-        this.model = model;
-    }
-    
-    
-    
-    
+    private Model model;
 
     //                          Operations                                  
     
