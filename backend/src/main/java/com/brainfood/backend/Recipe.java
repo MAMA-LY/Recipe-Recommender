@@ -24,8 +24,6 @@ public class Recipe {
     private Nutritions nutritions;
 
     private RecipeBuilder recipeBuilder;
-
-    
     
     
 }
