@@ -18,7 +18,6 @@ public class UserAuthenticator {
     @Autowired
     UserRepository userRepository;
 
-
     @Getter
     @Setter
     @Autowired
