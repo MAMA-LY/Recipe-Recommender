@@ -25,8 +25,6 @@ public class Profile {
 
     private Calendar calendar;
 
-    private ProfileBuilder profileBuilder;
-
 
     //                          Operations                                  
 
