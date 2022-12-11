@@ -57,7 +57,7 @@ class CalendarTest {
 
     @Test
     @Order(4)
-    void setRecipes() throws NoSuchFieldException, IllegalAccessException {
+    void setRecipes() {
         final Calendar calendar = new Calendar();
 
         List<Recipe> recipes = new ArrayList<>();
