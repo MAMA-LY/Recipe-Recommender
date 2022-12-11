@@ -1,12 +1,14 @@
 package com.brainfood.backend;
 
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter @Setter
+@AllArgsConstructor @NoArgsConstructor
 public class BodyInfo {
-    
 
     private float height;
 
@@ -14,6 +16,4 @@ public class BodyInfo {
 
     private int age;
 
-    
-    
 }

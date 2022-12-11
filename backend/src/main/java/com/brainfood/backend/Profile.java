@@ -3,12 +3,11 @@ import java.util.List;
 import java.awt.Image;
 
 import com.brainfood.security.Model.UserCredentials;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 
 @Getter @Setter @Builder
+@AllArgsConstructor @NoArgsConstructor
 public class Profile {
     private UserCredentials userCredentials ;
 
