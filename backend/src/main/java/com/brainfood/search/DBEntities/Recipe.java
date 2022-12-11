@@ -1,19 +1,15 @@
 package com.brainfood.search.DBEntities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.stereotype.Component;
+import lombok.*;
 
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "\"Recipe\"")
-@Data
+@Getter @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Recipe implements Serializable {
