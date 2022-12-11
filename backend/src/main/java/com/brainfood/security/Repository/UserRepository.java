@@ -1,7 +1,6 @@
 package com.brainfood.security.Repository;
 
 
-import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.brainfood.security.Model.UserCredentials;
