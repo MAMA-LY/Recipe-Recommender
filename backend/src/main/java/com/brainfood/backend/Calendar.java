@@ -11,7 +11,7 @@ import java.util.List;
 @AllArgsConstructor @NoArgsConstructor
 public class Calendar {
 
-    private List<Ingredient> Ingredients;
+    private List<Ingredient> ingredients;
 
     private List<Recipe> recipes;
 
