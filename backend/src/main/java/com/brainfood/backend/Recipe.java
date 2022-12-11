@@ -21,7 +21,6 @@ public class Recipe {
     private List<Ingredient> ingredients;
 
     private Image photo;
-    
 
     private Nutritions nutritions;
 

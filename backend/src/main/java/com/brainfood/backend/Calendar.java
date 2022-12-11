@@ -13,6 +13,4 @@ public class Calendar {
     private List<Recipe> recipes;
 
     
-    
-    
 }
