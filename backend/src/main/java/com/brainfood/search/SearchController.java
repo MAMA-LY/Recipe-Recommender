@@ -1,7 +1,6 @@
 package com.brainfood.search;
 
 import com.brainfood.search.DBEntities.Recipe;
-import com.brainfood.search.DPRepositories.RecipeRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.configurationprocessor.json.JSONArray;
