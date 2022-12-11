@@ -1,5 +1,6 @@
 package com.brainfood.backend;
 import java.util.List;
+import java.awt.Image;
 
 import com.brainfood.security.Model.UserCredentials;
 

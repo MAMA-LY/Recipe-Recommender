@@ -1,17 +1,13 @@
 package com.brainfood.backend;
-
+import com.brainfood.backend.Ingredient;
 import java.util.List;
+
 
 /**
 * @generated
 */
 public class RestfulAPI {
-    
-    
-    
 
-    
-    
 
     //                          Operations                                  
     

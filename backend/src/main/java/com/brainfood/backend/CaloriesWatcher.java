@@ -5,12 +5,6 @@ package com.brainfood.backend;
 * @generated
 */
 public class CaloriesWatcher {
-    
-    
-    
-
-    
-    
 
     //                          Operations                                  
     

@@ -54,9 +54,6 @@ public class Database {
     public void setDAO(Set<DAO> DAO) {
         this.DAO = DAO;
     }
-    
-    
-    
 
     //                          Operations                                  
     

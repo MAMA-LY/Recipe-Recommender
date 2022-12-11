@@ -11,9 +11,6 @@ public class RecipeRecommender {
     * @generated
     */
     private Model model;
-    
-    
-    
 
     /**
     * @generated
