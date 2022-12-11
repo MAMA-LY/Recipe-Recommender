@@ -3,41 +3,17 @@ package com.brainfood.backend;
 import java.util.List;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-/**
-* @generated
-*/
+@Getter @Setter
 public class DAO {
     
     /**
     * @generated
     */
     private Database database;
-    
-    
-    /**
-    * @generated
-    */
-    
-    
 
-    /**
-    * @generated
-    */
-    private Database getDatabase() {
-        return this.database;
-    }
-    
-    /**
-    * @generated
-    */
-    private void setDatabase(Database database) {
-        this.database = database;
-    }
-    
-    
-    
-    
 
     //                          Operations                                  
     

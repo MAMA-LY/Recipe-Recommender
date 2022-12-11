@@ -62,7 +62,7 @@ public class Database {
     */
     public Database getInstance() {
         //
-        return null;
+        
     }
     
     /**
