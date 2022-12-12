@@ -2,6 +2,8 @@ package com.brainfood.security.Model;
 
 import java.io.Serializable;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.stereotype.Component;
 
 import jakarta.persistence.Column;
@@ -10,7 +12,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.Data;
 import lombok.ToString;
 
 
@@ -18,7 +19,7 @@ import lombok.ToString;
 @ToString
 @Entity
 @Table(name = "\"UserCredentials\"")
-@Data
+@Getter @Setter
 public class UserCredentials implements Serializable {
     
     @Id

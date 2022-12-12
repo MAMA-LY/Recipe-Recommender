@@ -1,94 +1,21 @@
 package com.brainfood.backend;
 
 
-/**
-* @generated
-*/
-public class Nutritions {
-    
-    /**
-    * @generated
-    */
-    private int calories;
-    
-    /**
-    * @generated
-    */
-    private int proteins;
-    
-    /**
-    * @generated
-    */
-    private int carbs;
-    
-    /**
-    * @generated
-    */
-    private int fats;
-    
-    
-    
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-    /**
-    * @generated
-    */
-    public int getCalories() {
-        return this.calories;
-    }
-    
-    /**
-    * @generated
-    */
-    public void setCalories(Integer calories) {
-        this.calories = calories;
-    }
-    
-    
-    /**
-    * @generated
-    */
-    public int getProteins() {
-        return this.proteins;
-    }
-    
-    /**
-    * @generated
-    */
-    public void setProteins(Integer proteins) {
-        this.proteins = proteins;
-    }
-    
-    
-    /**
-    * @generated
-    */
-    public int getCarbs() {
-        return this.carbs;
-    }
-    
-    /**
-    * @generated
-    */
-    public void setCarbs(Integer carbs) {
-        this.carbs = carbs;
-    }
-    
-    
-    /**
-    * @generated
-    */
-    public int getFats() {
-        return this.fats;
-    }
-    
-    /**
-    * @generated
-    */
-    public void setFats(Integer fats) {
-        this.fats = fats;
-    }
-    
-    
-    
+@Setter @Getter
+@AllArgsConstructor @NoArgsConstructor
+public class Nutritions {
+
+    private int calories;
+
+    private int proteins;
+
+    private int carbs;
+
+    private int fats;
     
 }
