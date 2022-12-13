@@ -5,7 +5,6 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -13,7 +12,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class CalendarTest {
 
     @Test
-    @Order(1)
     void getIngredients() throws NoSuchFieldException, IllegalAccessException {
         final Calendar calendar = new Calendar();
         final Field field = calendar.getClass().getDeclaredField("ingredients");
@@ -28,7 +26,6 @@ class CalendarTest {
     }
 
     @Test
-    @Order(2)
     void getRecipes() throws NoSuchFieldException, IllegalAccessException {
         final Calendar calendar = new Calendar();
         final Field field = calendar.getClass().getDeclaredField("recipes");
@@ -43,27 +40,28 @@ class CalendarTest {
     }
 
     @Test
-    @Order(3)
-    void setIngredients() {
-
+    void setIngredients() throws NoSuchFieldException, IllegalAccessException {
         final Calendar calendar = new Calendar();
+        final Field field = calendar.getClass().getDeclaredField("ingredients");
+        field.setAccessible(true);
+        List<Ingredient> ingredientsExpected = new ArrayList<>();
 
-        List<Ingredient> ingredients = new ArrayList<>();
-        ingredients.add(new Ingredient());
-        calendar.setIngredients(ingredients);
+        calendar.setIngredients(ingredientsExpected);
 
-        assertEquals(ingredients,calendar.getIngredients(),"setIngredients problem");
+        List<Ingredient> ingredientsActual= ( List<Ingredient>) field.get(calendar);
+        assertEquals(ingredientsActual,ingredientsExpected,"setIngredients problem");
     }
 
     @Test
-    @Order(4)
-    void setRecipes() {
+    void setRecipes() throws NoSuchFieldException, IllegalAccessException {
         final Calendar calendar = new Calendar();
+        final Field field = calendar.getClass().getDeclaredField("recipes");
+        field.setAccessible(true);
+        List<Recipe> recipesExpected = new ArrayList<>();
 
-        List<Recipe> recipes = new ArrayList<>();
-        recipes.add(new Recipe());
-        calendar.setRecipes(recipes);
+        calendar.setRecipes(recipesExpected);
 
-        assertEquals(recipes,calendar.getRecipes(),"setIngredients problem");
+        List<Recipe> recipesActual= ( List<Recipe>) field.get(calendar);
+        assertEquals(recipesActual,recipesExpected,"setIngredients problem");
     }
 }
