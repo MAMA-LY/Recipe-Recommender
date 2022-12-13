@@ -114,16 +114,16 @@ class RecipeTest {
     }
 
     @Test
-    void getNutritions() throws NoSuchFieldException, IllegalAccessException {
+    void getNutrition() throws NoSuchFieldException, IllegalAccessException {
 
-        Nutritions nutritions= new Nutritions();
+        Nutrition nutrition = new Nutrition();
 
         final Recipe recipe =new Recipe();
-        final Field field = recipe.getClass().getDeclaredField("nutritions");
+        final Field field = recipe.getClass().getDeclaredField("nutrition");
         field.setAccessible(true);
-        field.set(recipe, nutritions);
+        field.set(recipe, nutrition);
 
-        assertEquals(nutritions,recipe.getNutritions(), "problem in getNutritions");
+        assertEquals(nutrition,recipe.getNutrition(), "problem in getNutrition");
     }
 
     @Test
@@ -231,16 +231,16 @@ class RecipeTest {
     }
 
     @Test
-    void setNutritions() throws NoSuchFieldException, IllegalAccessException {
+    void setNutrition() throws NoSuchFieldException, IllegalAccessException {
 
-        Nutritions nutritionsExpected = new Nutritions();
+        Nutrition nutritionExpected = new Nutrition();
 
         final Recipe recipe=new Recipe();
-        final Field field = recipe.getClass().getDeclaredField("nutritions");
+        final Field field = recipe.getClass().getDeclaredField("nutrition");
         field.setAccessible(true);
 
-        recipe.setNutritions(nutritionsExpected);
-        Nutritions nutritionsActual =(Nutritions) field.get(recipe);
-        assertEquals(nutritionsExpected,nutritionsActual, "problem in setNutritions");
+        recipe.setNutrition(nutritionExpected);
+        Nutrition nutritionActual =(Nutrition) field.get(recipe);
+        assertEquals(nutritionExpected, nutritionActual, "problem in setNutrition");
     }
 }
