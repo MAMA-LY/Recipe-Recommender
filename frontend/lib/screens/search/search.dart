@@ -4,6 +4,8 @@ import 'package:recipe_recommender_frontend/constants.dart';
 import 'package:recipe_recommender_frontend/models/recipe.dart';
 import 'package:recipe_recommender_frontend/screens/widgets/recipe_card.dart';
 
+import '../../main.dart';
+
 class SearchPage extends StatefulWidget {
   static String routeName = "/search";
   const SearchPage({super.key});
@@ -123,26 +125,34 @@ class TheSearch extends SearchDelegate<String> {
 
   @override
   Widget buildResults(BuildContext context) {
-    List<Recipe> _recipes = [
-    //Recipe(name: "name", photo: "photo", ID: "ID"),
-    Recipe(name: "name", photo: "photo", ID: "ID"),
-    Recipe(name: "tutu", photo: "https://picsum.photos/250?image=9", ID: "ID"),
-    //Recipe(name: "name", photo: "photo", ID: "ID"),
-  ];
-    return Column(
-      children: <Widget>[
+    GetRecipesAPI api = GetRecipesAPI.fromCookie(session.cookie);
+    List<Recipe>? _recipes = [];
+    debugPrint("I'm here");
+    return FutureBuilder<List<Recipe>>(
+      initialData: [], // You can set initial data or check snapshot.hasData in the builder
+      future: api.getRecipes("/search/sentence?sentence=$query"), // Run check for a single queryRow
+      builder: (context, snapshot) {
+        if (snapshot.data != null) { // snapshot.data is what being return from the above async function
+          // True: Return your UI element with Name and Avatar here for number in Contacts
+          return Column(
+            children: <Widget>[
                 Expanded(
                   child: ListView.builder(
-                  itemCount: _recipes.length,
+                  itemCount: snapshot.data?.length,
                   itemBuilder: (context, index) {
                     return RecipeCard(
-                      title: _recipes[index].name,
-                      thumbnailUrl: _recipes[index].photo
+                      title: snapshot.data![index].name,
+                      thumbnailUrl: snapshot.data![index].photo
                     );
                   },
                 )
               )
-              ]
+            ]
+    );
+        } else {
+            return Column();
+        }
+      },
     );
   }
 

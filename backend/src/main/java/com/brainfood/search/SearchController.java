@@ -31,6 +31,7 @@ public class SearchController {
 
     @GetMapping("/sentence")
     public ShortRecipe[] searchSentence(@RequestParam String sentence) throws JSONException, IOException, InterruptedException {
+        System.out.println(sentence);
         JSONArray APIresult = spoonacularAPI.foodText(sentence).getJSONArray("annotations");
         List<ShortRecipe> food = new ArrayList<>();
 
