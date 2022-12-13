@@ -113,14 +113,14 @@ class ProfileTest {
 
     @Test
     void getCaloriesDate() throws NoSuchFieldException, IllegalAccessException {
-        int caloriesData = 80 ;
+        int caloriesDate = 80 ;
 
         final Profile profile =new Profile();
         final Field field = profile.getClass().getDeclaredField("caloriesDate");
         field.setAccessible(true);
-        field.set(profile, caloriesData);
+        field.set(profile, caloriesDate);
 
-        assertEquals(caloriesData,profile.getCaloriesDate(), "problem in getCaloriesDate");
+        assertEquals(caloriesDate,profile.getCaloriesDate(), "problem in getCaloriesDate");
     }
 
     @Test
@@ -249,15 +249,15 @@ class ProfileTest {
 
     @Test
     void setCaloriesDate() throws IllegalAccessException, NoSuchFieldException {
-        int caloriesData =  1000;
+        int caloriesDate =  1000;
         final Profile profile =new Profile();
         final Field field = profile.getClass().getDeclaredField("caloriesDate");
         field.setAccessible(true);
-        profile.setCaloriesDate(caloriesData);
+        profile.setCaloriesDate(caloriesDate);
 
         int actual= (int) field.get(profile);
 
-        assertEquals(caloriesData,actual, "problem in setCaloriesDate");
+        assertEquals(caloriesDate,actual, "problem in setCaloriesDate");
     }
 
 
