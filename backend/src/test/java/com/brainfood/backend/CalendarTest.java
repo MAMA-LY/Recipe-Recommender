@@ -36,7 +36,7 @@ class CalendarTest {
 
         List<Recipe> result = calendar.getRecipes();
 
-        assertEquals(recipes, result, "problem in getIngredients");
+        assertEquals(recipes, result, "problem in getRecipes");
     }
 
     @Test
@@ -62,6 +62,6 @@ class CalendarTest {
         calendar.setRecipes(recipesExpected);
 
         List<Recipe> recipesActual= ( List<Recipe>) field.get(calendar);
-        assertEquals(recipesActual,recipesExpected,"setIngredients problem");
+        assertEquals(recipesActual,recipesExpected,"setRecipes problem");
     }
 }

@@ -20,7 +20,6 @@ class IngredientTest {
         field.set(ingredient, expectedValue);
 
         assertEquals(expectedValue,ingredient.getName(), "problem in getName");
-
     }
 
     @Test
