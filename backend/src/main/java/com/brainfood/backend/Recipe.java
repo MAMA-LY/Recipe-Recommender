@@ -21,7 +21,7 @@ public class Recipe {
 
     private Image photo;
 
-    private Nutritions nutritions;
+    private Nutrition nutrition;
     
 
 }

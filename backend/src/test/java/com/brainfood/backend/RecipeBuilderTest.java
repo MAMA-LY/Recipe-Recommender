@@ -1,6 +1,5 @@
 package com.brainfood.backend;
 
-import com.brainfood.security.Model.UserCredentials;
 import org.junit.jupiter.api.Test;
 
 import java.awt.*;
@@ -118,13 +117,13 @@ public class RecipeBuilderTest {
     void buildNutrition() throws NoSuchFieldException, IllegalAccessException {
 
 
-        Nutritions nutritionsExpected = new Nutritions();
-        final Recipe recipe = Recipe.builder().nutritions(nutritionsExpected).build();
+        Nutrition nutritionExpected = new Nutrition();
+        final Recipe recipe = Recipe.builder().nutrition(nutritionExpected).build();
 
-        final Field field = recipe.getClass().getDeclaredField("nutritions");
+        final Field field = recipe.getClass().getDeclaredField("nutrition");
         field.setAccessible(true);
-        Nutritions nutritionActual= (Nutritions) field.get(recipe);
+        Nutrition nutritionActual= (Nutrition) field.get(recipe);
 
-        assertEquals(nutritionsExpected,nutritionActual, "problem in buildNutrition");
+        assertEquals(nutritionExpected,nutritionActual, "problem in buildNutrition");
     }
 }

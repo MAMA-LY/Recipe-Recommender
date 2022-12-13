@@ -10,94 +10,94 @@ class NutritionsTest {
 
     @Test
     void getCalories() throws IllegalAccessException, NoSuchFieldException {
-        final Nutritions nutritions =new Nutritions();
-        final Field field = nutritions.getClass().getDeclaredField("calories");
+        final Nutrition nutrition =new Nutrition();
+        final Field field = nutrition.getClass().getDeclaredField("calories");
         field.setAccessible(true);
         int expectedValue = 10;
-        field.set(nutritions, expectedValue);
+        field.set(nutrition, expectedValue);
 
-        assertEquals(expectedValue,nutritions.getCalories(), "problem in getCalories");
+        assertEquals(expectedValue, nutrition.getCalories(), "problem in getCalories");
     }
 
     @Test
     void getProteins() throws IllegalAccessException, NoSuchFieldException {
-        final Nutritions nutritions =new Nutritions();
-        final Field field = nutritions.getClass().getDeclaredField("proteins");
+        final Nutrition nutrition =new Nutrition();
+        final Field field = nutrition.getClass().getDeclaredField("proteins");
         field.setAccessible(true);
         int expectedValue = 4;
-        field.set(nutritions, expectedValue);
-        assertEquals(expectedValue,nutritions.getProteins(), "problem in getProteins");
+        field.set(nutrition, expectedValue);
+        assertEquals(expectedValue, nutrition.getProteins(), "problem in getProteins");
     }
 
     @Test
     void getCarbs() throws IllegalAccessException, NoSuchFieldException{
-        final Nutritions nutritions =new Nutritions();
-        final Field field = nutritions.getClass().getDeclaredField("carbs");
+        final Nutrition nutrition =new Nutrition();
+        final Field field = nutrition.getClass().getDeclaredField("carbs");
         field.setAccessible(true);
         int expectedValue =123;
-        field.set(nutritions, expectedValue);
+        field.set(nutrition, expectedValue);
 
 
-        assertEquals(expectedValue,nutritions.getCarbs(), "problem in getCarbs");
+        assertEquals(expectedValue, nutrition.getCarbs(), "problem in getCarbs");
     }
 
     @Test
     void getFats() throws IllegalAccessException, NoSuchFieldException{
-        final Nutritions nutritions =new Nutritions();
-        final Field field = nutritions.getClass().getDeclaredField("fats");
+        final Nutrition nutrition =new Nutrition();
+        final Field field = nutrition.getClass().getDeclaredField("fats");
         field.setAccessible(true);
         int expectedValue =42;
-        field.set(nutritions, expectedValue);
+        field.set(nutrition, expectedValue);
 
-        assertEquals(expectedValue,nutritions.getFats(), "problem in getFats");
+        assertEquals(expectedValue, nutrition.getFats(), "problem in getFats");
     }
 
     @Test
     void setCalories() throws IllegalAccessException, NoSuchFieldException{
-        final Nutritions nutritions =new Nutritions();
-        final Field field =nutritions.getClass().getDeclaredField("calories");
+        final Nutrition nutrition =new Nutrition();
+        final Field field = nutrition.getClass().getDeclaredField("calories");
         field.setAccessible(true);
 
         int expectedValue=13;
-        nutritions.setCalories(expectedValue);
-        int actualValue= (int)field.get(nutritions);
+        nutrition.setCalories(expectedValue);
+        int actualValue= (int)field.get(nutrition);
         assertEquals(expectedValue,actualValue,"problem in setCalories");
 
     }
 
     @Test
     void setProteins() throws IllegalAccessException, NoSuchFieldException{
-        final Nutritions nutritions =new Nutritions();
-        final Field field =nutritions.getClass().getDeclaredField("proteins");
+        final Nutrition nutrition =new Nutrition();
+        final Field field = nutrition.getClass().getDeclaredField("proteins");
         field.setAccessible(true);
 
         int expectedValue=13;
-        nutritions.setProteins(expectedValue);
-        int actualValue= (int)field.get(nutritions);
+        nutrition.setProteins(expectedValue);
+        int actualValue= (int)field.get(nutrition);
         assertEquals(expectedValue,actualValue,"problem in setProteins");
     }
 
     @Test
     void setCarbs() throws IllegalAccessException, NoSuchFieldException{
-        final Nutritions nutritions =new Nutritions();
-        final Field field =nutritions.getClass().getDeclaredField("carbs");
+        final Nutrition nutrition =new Nutrition();
+        final Field field = nutrition.getClass().getDeclaredField("carbs");
         field.setAccessible(true);
 
         int expectedValue=13;
-        nutritions.setCarbs(expectedValue);
-        int actualValue= (int)field.get(nutritions);
+        nutrition.setCarbs(expectedValue);
+        int actualValue= (int)field.get(nutrition);
         assertEquals(expectedValue,actualValue,"problem in setCarbs");
     }
 
     @Test
     void setFats() throws IllegalAccessException, NoSuchFieldException{
-        final Nutritions nutritions =new Nutritions();
-        final Field field =nutritions.getClass().getDeclaredField("fats");
+        final Nutrition nutrition =new Nutrition();
+        final Field field = nutrition.getClass().getDeclaredField("fats");
         field.setAccessible(true);
 
         int expectedValue=13;
-        nutritions.setFats(expectedValue);
-        int actualValue= (int)field.get(nutritions);
+        nutrition.setFats(expectedValue);
+        int actualValue= (int)field.get(nutrition);
         assertEquals(expectedValue,actualValue,"problem in setFats");
     }
 }
