@@ -27,9 +27,8 @@ public class Database {
     public Database getInstance() {
         //
         if(this.instance==null)
-            return new Database();
-        else
-            return this.instance;
+            this.instance= new Database();
+        return this.instance;
     }
 
     public void query() {

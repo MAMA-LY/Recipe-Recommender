@@ -19,6 +19,7 @@ public class Ingredient {
     private int weight;
 
     private Nutrition nutrition;
+
     
     
 }
