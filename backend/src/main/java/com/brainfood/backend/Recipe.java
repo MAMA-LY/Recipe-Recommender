@@ -11,9 +11,9 @@ public class Recipe {
 
     private String ID;
 
-    private List<String> Tags;
+    private List<String> tags;
 
-    private String Cuisine ;
+    private String cuisine ;
 
     private String name;
 
@@ -21,11 +21,7 @@ public class Recipe {
 
     private Image photo;
 
-    private Nutritions nutritions;
+    private Nutrition nutrition;
+    
 
-    private RecipeBuilder recipeBuilder;
-
-    
-    
-    
 }
