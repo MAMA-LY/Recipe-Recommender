@@ -3,6 +3,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:recipe_recommender_frontend/api/api_constants.dart';
+import 'package:recipe_recommender_frontend/api/sign_api.dart';
 import 'package:recipe_recommender_frontend/screens/sign/ResponseEnum.dart';
 import 'package:email_validator/email_validator.dart';
 
@@ -21,6 +23,33 @@ class _SignUpPageState extends State<SignUpPage> {
   var emailController = TextEditingController();
   var responseTextController = TextEditingController();
   String resp = "";
+
+  Future<void> _signup() async {
+    bool emailValid = EmailValidator.validate(emailController.text);
+    if (emailValid) {
+      String? body = await SignAPI.signup(usernameController.text, passwordController.text, emailController.text);
+      setState(() {
+        responseTextController.text = body!;
+        switch (body) {
+          case "EmailAlreadyExists":
+            resp =
+                "An account with this email address already exists";
+            break;
+          case "UsernameAlreadyExists":
+            resp = "This username is already taken";
+            break;
+          case "UserCreated":
+            resp = "Account is Created Successfully";
+            break;
+        }
+      });
+      debugPrint(body);
+    } else {
+      setState(() {
+        resp = "Please enter a valid email address";
+      });
+    }
+  }
   @override
   Widget build(BuildContext context) {
     responseTextController.text = "";
@@ -90,48 +119,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           minimumSize: const Size.fromHeight(50),
                         ),
                         child: const Text('Sign up'),
-                        onPressed: () async {
-                          bool emailValid =
-                              EmailValidator.validate(emailController.text);
-                          if (emailValid) {
-                            var url = Uri.https(
-                                "${const String.fromEnvironment("BrainFoodBackendIP", defaultValue: "brainfood.azurewebsites.net")}",
-                                "/signup");
-                            var creds = {
-                              "username": usernameController.text,
-                              "password": passwordController.text,
-                              "email": emailController.text
-                            };
-                            var response =
-                                await http.post(url, body: creds, headers: {
-                              "Access-Control-Allow-Origin": "*",
-                              "Access-Control-Allow-Methods":
-                                  "POST, OPTIONS, GET",
-                              "Access-Control-Allow-Headers":
-                                  "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale",
-                            });
-                            setState(() {
-                              responseTextController.text = response.body;
-                              switch (response.body) {
-                                case "EmailAlreadyExists":
-                                  resp =
-                                      "An account with this email address already exists";
-                                  break;
-                                case "UsernameAlreadyExists":
-                                  resp = "This username is already taken";
-                                  break;
-                                case "UserCreated":
-                                  resp = "Account is Created Successfully";
-                                  break;
-                              }
-                            });
-                            debugPrint(response.body);
-                          } else {
-                            setState(() {
-                              resp = "Please enter a valid email address";
-                            });
-                          }
-                        },
+                        onPressed: _signup
                       )),
                   TextButton(
                     onPressed: () {

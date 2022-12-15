@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:recipe_recommender_frontend/api/sign_api.dart';
 import 'package:recipe_recommender_frontend/screens/sign/signup.dart';
 
 import '../../main.dart';
@@ -21,6 +22,23 @@ class _SignInPageState extends State<SignInPage> {
   var passwordController = TextEditingController();
 
   String resp = "";
+  
+  Future<void> _signin() async {
+      String? status = await SignAPI.signin(usernameController.text, passwordController.text);
+      debugPrint(status);
+      if(status == "wrong credintials"){
+        setState((){
+          resp = "Wrong Credintials";
+        });
+      }else if(status == "right credintials"){
+        // ignore: use_build_context_synchronously
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  const BottomNavView()));
+      }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,66 +96,8 @@ class _SignInPageState extends State<SignInPage> {
                           minimumSize: const Size.fromHeight(50),
                         ),
                         child: const Text('Sign in'),
-                        onPressed: () async {
-                          var url = Uri.https(
-                              "${const String.fromEnvironment("BrainFoodBackendIP", defaultValue: "brainfood.azurewebsites.net")}",
-                              "/signin");
-                          var response = await http.post(url, body: {
-                            "username": usernameController.text,
-                            "password": passwordController.text
-                          }, headers: {
-                            "Access-Control-Allow-Origin": "*",
-                            "Access-Control-Allow-Methods":
-                                "POST, OPTIONS, GET",
-                            "Access-Control-Allow-Headers":
-                                "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale",
-                          });
-                          debugPrint(response.statusCode.toString());
-                          print(response.statusCode.toString());
-
-                          var cookie = response.headers['set-cookie'];
-                          var responseLocation = response.headers['location'];
-                          debugPrint(cookie);
-                          debugPrint(responseLocation);
-                          debugPrint(
-                              "${const String.fromEnvironment("BrainFoodBackendIP", defaultValue: "brainfood.azurewebsites.net")}/signin?error");
-                          if (responseLocation ==
-                              "https://${const String.fromEnvironment("BrainFoodBackendIP", defaultValue: "brainfood.azurewebsites.net")}/signin?error") {
-                            setState(() {
-                              resp = "Wrong Credentials";
-                            });
-                          }
-                          if (responseLocation ==
-                                  "https://${const String.fromEnvironment("BrainFoodBackendIP", defaultValue: "brainfood.azurewebsites.net")}/home" &&
-                              cookie != null) {
-                            {
-                              session.cookie = cookie;
-                              if (cacheFile != null) {
-                                cacheFile = await cacheFile!
-                                    .writeAsString(session.cookie);
-                              }
-
-                              var urlHome = Uri.https(
-                                  "${const String.fromEnvironment("BrainFoodBackendIP", defaultValue: "brainfood.azurewebsites.net")}",
-                                  "/home");
-                              var responseHome = await http.post(url, headers: {
-                                "cookie": cookie,
-                                "Access-Control-Allow-Origin": "*",
-                                "Access-Control-Allow-Methods":
-                                    "POST, OPTIONS, GET",
-                                "Access-Control-Allow-Headers":
-                                    "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale",
-                              });
-                              // ignore: use_build_context_synchronously
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const BottomNavView()));
-                            }
-                          }
-                        },
-                      )),
+                        onPressed: _signin      
+                        )),
                   TextButton(
                     onPressed: () {
                       setState(() {
