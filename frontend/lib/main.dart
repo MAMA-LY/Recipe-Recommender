@@ -86,7 +86,7 @@ class MyApp extends StatelessWidget {
             }
           } else {
             debugPrint("IN2");
-            return const SplashScreenPage();
+            return const SignInPage();
           }
         },
       ),
