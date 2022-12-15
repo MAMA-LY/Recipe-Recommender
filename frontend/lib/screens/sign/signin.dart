@@ -120,7 +120,7 @@ class _SignInPageState extends State<SignInPage> {
                               var urlHome = Uri.https(
                                   "${const String.fromEnvironment("BrainFoodBackendIP", defaultValue: "brainfood.azurewebsites.net")}",
                                   "/home");
-                              var responseHome = await http.post(url, headers: {
+                              var responseHome = await http.post(urlHome, headers: {
                                 "cookie": cookie,
                                 "Access-Control-Allow-Origin": "*",
                                 "Access-Control-Allow-Methods":
