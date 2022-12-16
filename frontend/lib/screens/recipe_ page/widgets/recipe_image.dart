@@ -15,6 +15,7 @@ class RecipeImage extends StatelessWidget {
       child: Image.network(
         imageURL,
         fit: BoxFit.cover,
+        opacity: const AlwaysStoppedAnimation(.75),
       ),
     );
   }

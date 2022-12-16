@@ -1,3 +1,4 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:recipe_recommender_frontend/models/nutrition.dart';
@@ -20,12 +21,26 @@ class NutritionView extends StatefulWidget {
 class _NutritionViewState extends State<NutritionView>  {
   @override
   void initState(){
+    widget.data = [
+                    ChartData('Fats', widget.nutrition.fats / (widget.nutrition.fats + widget.nutrition.proteins + widget.nutrition.carbs + 10) * 100),
+                    ChartData('Proteins', widget.nutrition.proteins / (widget.nutrition.fats + widget.nutrition.proteins + widget.nutrition.carbs + 10)* 100),
+                    ChartData('Carbs', widget.nutrition.carbs / (widget.nutrition.fats + widget.nutrition.proteins + widget.nutrition.carbs + 10) * 100),
+                  ];
+    widget.data.add(ChartData('Others', (10/ (widget.nutrition.fats + widget.nutrition.proteins + widget.nutrition.carbs + 10) * 100)));
     super.initState();
   }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: SfCircularChart(
+            annotations: [
+                    CircularChartAnnotation(
+                      widget: Text(
+                        "Calories: ${widget.nutrition.calories} kcal",
+                        style: Theme.of(context).textTheme.caption,
+                      )
+                    )
+                  ],
             tooltipBehavior: widget.tooltip,
             legend: Legend(isVisible: true),
             series: <DoughnutSeries<ChartData, String>>[
@@ -34,16 +49,12 @@ class _NutritionViewState extends State<NutritionView>  {
                   innerRadius: '65%',
                   explode: true,
                   explodeOffset: '10%',
-                  dataSource: widget.data = [
-                    ChartData('Fats', widget.nutrition.fats),
-                    ChartData('Proteins', widget.nutrition.proteins),
-                    ChartData('Carbs', widget.nutrition.carbs)
-                  ],
+                  dataSource: widget.data,
                   xValueMapper: (ChartData data, _) => data.x,
                   yValueMapper: (ChartData data, _) => data.y,
-                  dataLabelMapper: (ChartData data, _) => "${data.x}: ${data.y}%",
+                  dataLabelMapper: (ChartData data, _) => "${data.x} ${data.y}%",
                   dataLabelSettings: const DataLabelSettings(isVisible: false, textStyle: TextStyle(fontFamily:"Roboto", fontStyle: FontStyle.normal)),
-                  name: 'Details')
+                  name: 'Percentage')
             ]));
   }
 }
@@ -51,5 +62,5 @@ class _NutritionViewState extends State<NutritionView>  {
 class ChartData {
   ChartData(this.x, this.y);
   final String x;
-  final int y;
+  final double y;
 }

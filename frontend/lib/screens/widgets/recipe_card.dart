@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_recommender_frontend/api/recipes_api.dart';
 import 'package:recipe_recommender_frontend/constants.dart';
+import 'package:recipe_recommender_frontend/main.dart';
 import 'package:recipe_recommender_frontend/models/ingredient.dart';
 import 'package:recipe_recommender_frontend/models/nutrition.dart';
 import 'package:recipe_recommender_frontend/models/recipe.dart';
@@ -48,6 +50,16 @@ class RecipeCard extends StatelessWidget {
     required this.name,
     required this.thumbnailUrl,
   });
+
+  Future<void> _getRecipeByID(BuildContext context, String id) async {
+    RecipesAPI api = RecipesAPI.fromCookie(session.cookie);
+    Recipe apiRecipe = await api.getRecipeByID(id);
+    // ignore: use_build_context_synchronously
+    Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) =>   RecipePage(recipe: apiRecipe, inFavorites: false)),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -107,9 +119,8 @@ class RecipeCard extends StatelessWidget {
       onPressed: () {
         Navigator.push(
           context,
-          
-          MaterialPageRoute(builder: (context) =>  RecipePage(recipe: _recipe, inFavorites: false)),
-        );
+          MaterialPageRoute(builder: (context) =>   RecipePage(recipe: _recipe, inFavorites: false)),
+    );
       },
     );
   }
