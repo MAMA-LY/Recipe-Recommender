@@ -1,6 +1,7 @@
 package com.brainfood.search;
 
-import com.brainfood.search.DBEntities.Recipe;
+import com.brainfood.models.ShortRecipeModel;
+import com.brainfood.backend.db_entities.Recipe;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.configurationprocessor.json.JSONArray;
@@ -29,17 +30,18 @@ public class SearchController {
     RecipeDAO recipeDAO;
 
     @GetMapping("/sentence")
-    public ShortRecipe[] searchSentence(@RequestParam String sentence) throws JSONException, IOException, InterruptedException {
-        JSONArray APIresult = spoonacularAPI.foodText(sentence).getJSONArray("annotations");
-        List<ShortRecipe> food = new ArrayList<>();
+    public ShortRecipeModel[] searchSentence(@RequestParam String sentence) throws JSONException, IOException, InterruptedException {
+        JSONArray APIResult = spoonacularAPI.foodText(sentence).getJSONArray("annotations");
+        List<ShortRecipeModel> food = new ArrayList<>();
 
         ObjectMapper mapper = new ObjectMapper();
-        for (int i = 0; !APIresult.isNull(i); i++)
-            food.add(mapper.readValue(APIresult.getJSONObject(i).toString(), ShortRecipe.class)) ;
+        for (int i = 0; !APIResult.isNull(i); i++)
+            food.add(mapper.readValue(APIResult.getJSONObject(i).toString(), ShortRecipeModel.class)) ;
 
         dishIngredientClassifier.classify(food);
-        List<ShortRecipe> dishes = dishIngredientClassifier.getDish();
-        List<ShortRecipe> ingredients = dishIngredientClassifier.getIngredient();
+        List<ShortRecipeModel> dishes = dishIngredientClassifier.getDish();
+        List<ShortRecipeModel> ingredients = dishIngredientClassifier.getIngredient();
+        System.out.println(sentence + " " + ingredients.size());
 
         List<Recipe> result = new ArrayList<>();
         result.addAll(recipeDAO.findSimilarDishes(dishes));
@@ -48,15 +50,15 @@ public class SearchController {
         return eliminateDuplicates(result);
     }
 
-    private ShortRecipe[] eliminateDuplicates(List<Recipe> list){
+    private ShortRecipeModel[] eliminateDuplicates(List<Recipe> list){
         Set<String> ids = new TreeSet<>();
-        List<ShortRecipe> unique = new ArrayList<>() ;
+        List<ShortRecipeModel> unique = new ArrayList<>() ;
         for(Recipe recipe : list){
             if(!ids.contains(recipe.id)){
-                unique.add(new ShortRecipe(recipe));
+                unique.add(new ShortRecipeModel(recipe));
                 ids.add(recipe.id);
             }
         }
-        return unique.toArray(new ShortRecipe[unique.size()]);
+        return unique.toArray(new ShortRecipeModel[unique.size()]);
     }
 }

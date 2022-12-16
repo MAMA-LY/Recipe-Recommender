@@ -1,11 +1,9 @@
-package com.brainfood.search.DBEntities;
+package com.brainfood.backend.db_entities;
 
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "\"Recipe\"")
@@ -33,9 +31,9 @@ public class Recipe implements Serializable {
     @Column(name = "fats")
     public int fats;
 
+    @Column(name = "carbs")
+    public int carbs;
+
     @Column(name = "photo")
     public String photo;
-
-    @OneToMany(mappedBy = "compositeKey.recipeID" , cascade = CascadeType.ALL , orphanRemoval = true)
-    public Set<RecipeIngredients> recipeIngredients = new HashSet<>() ;
 }

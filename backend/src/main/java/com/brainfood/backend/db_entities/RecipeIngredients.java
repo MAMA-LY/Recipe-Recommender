@@ -1,4 +1,4 @@
-package com.brainfood.search.DBEntities;
+package com.brainfood.backend.db_entities;
 
 import jakarta.persistence.*;
 import lombok.*;

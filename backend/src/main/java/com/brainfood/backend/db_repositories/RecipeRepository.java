@@ -1,6 +1,6 @@
-package com.brainfood.search.DPRepositories;
+package com.brainfood.backend.db_repositories;
 
-import com.brainfood.search.DBEntities.Recipe;
+import com.brainfood.backend.db_entities.Recipe;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -13,6 +13,11 @@ public interface RecipeRepository extends JpaRepository<Recipe, String> {
     @Query("select r from Recipe r where lower(r.name) like lower(:name)")
     List<Recipe> findByName(@Param("name") String name);
 
-    @Query("select r from Recipe r JOIN r.recipeIngredients ri JOIN ri.compositeKey.ingredientID i where lower(i.name) like lower(:name)")
+    @Query("select r, i.id, i.name from Recipe r " +
+            "JOIN RecipeIngredients ri on ri.compositeKey.recipeID = r.id " +
+            "JOIN Ingredient i on ri.compositeKey.ingredientID = i.id " +
+            "where i.name like :name")
     List<Recipe> findByIngredientsLike(@Param("name") String name);
+
+    Recipe findRecipeById(@Param("id") String id);
 }

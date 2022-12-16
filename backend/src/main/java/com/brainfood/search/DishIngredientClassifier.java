@@ -1,5 +1,6 @@
 package com.brainfood.search;
 
+import com.brainfood.models.ShortRecipeModel;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -8,25 +9,25 @@ import java.util.Objects;
 
 @Service
 public class DishIngredientClassifier {
-    private List<ShortRecipe> dish ;
-    private List<ShortRecipe> ingredient ;
+    private List<ShortRecipeModel> dish ;
+    private List<ShortRecipeModel> ingredient ;
 
-    void classify(List<ShortRecipe> food){
+    void classify(List<ShortRecipeModel> food){
         dish = new ArrayList<>() ;
         ingredient = new ArrayList<>() ;
-        for(ShortRecipe recipe : food){
-            if(Objects.equals(recipe.tag, "dish"))
+        for(ShortRecipeModel recipe : food){
+            if(Objects.equals(recipe.getTag(), "dish"))
                 dish.add(recipe);
             else
                 ingredient.add(recipe);
         }
     }
 
-    List<ShortRecipe> getDish(){
+    List<ShortRecipeModel> getDish(){
         return dish ;
     }
 
-    List<ShortRecipe> getIngredient(){
+    List<ShortRecipeModel> getIngredient(){
         return ingredient ;
     }
 }
