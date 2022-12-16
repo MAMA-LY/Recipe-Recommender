@@ -51,7 +51,13 @@ class Recipe {
       return Recipe.recipeFromJson(data);
     }).toList();
   }
-
+  String getTags(){
+    String tagsList = "";
+    for (var tag in tags!) {
+      tagsList += ", $tag";
+    }
+    return tagsList.substring(1);
+  }
   @override
   String toString() {
     return 'Recipe {name: $name, image: $image, tags: $tags, ID: $id, cuisine: $cuisine, nutrition: $nutrition, ingredients: $ingredients}';
