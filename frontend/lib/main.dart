@@ -30,7 +30,7 @@ Future<File> getLocalFile() async {
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  var url = Uri.https(APIConstants.baseUrl, "/home");
+  var url = Uri.https(APIConstants.baseUrl, APIConstants.homeEndPoint);
   debugPrint(url.toString());
   getLocalFile()
       .then((value) => {
@@ -47,14 +47,8 @@ void main() {
 
 Future<String?> getServerInitResponse() async {
   session.cookie = cookieStr;
-  var url = Uri.https(APIConstants.baseUrl, "/home");
-  var serverResponse = await http.get(url, headers: {
-    "cookie": session.cookie,
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "POST, OPTIONS, GET",
-    "Access-Control-Allow-Headers":
-        "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale",
-  });
+  var url = Uri.https(APIConstants.baseUrl, APIConstants.homeEndPoint);
+  var serverResponse = await http.get(url, headers: APIConstants.headerCORS(session.cookie));
   final bool hasData = serverResponse.body != null;
   if (hasData) {
     return serverResponse.body;

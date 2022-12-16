@@ -17,13 +17,7 @@ class RecipesAPI {
 
   Future<List<Recipe>> getRecipes(String path) async {
     var url = Uri.https(APIConstants.baseUrl, path);
-    var response = await http.get(url, headers: {
-      "cookie": session.cookie,
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "POST, OPTIONS, GET",
-      "Access-Control-Allow-Headers":
-          "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale",
-    });
+    var response = await http.get(url, headers: APIConstants.headerCORS(session.cookie));
     debugPrint(response.statusCode.toString());
 
     if (response.statusCode == 200) {
@@ -35,17 +29,25 @@ class RecipesAPI {
           code: response.statusCode, message: response.headers.toString());
     }
   }
+  Future<Recipe> getRecipeByID(String id) async {
+    var url = Uri.https(APIConstants.baseUrl, APIConstants.recipeEndPoint, {"id": id});
+    var response = await http.get(url, headers: APIConstants.headerCORS(session.cookie));
+    debugPrint(response.statusCode.toString());
+
+    if (response.statusCode == 200) {
+      return Recipe.recipeFromJson(jsonDecode(response.body));
+    } else if (response.statusCode == 401) {
+      throw Failure(code: 401, message: "fail");
+    } else {
+      throw Failure(
+          code: response.statusCode, message: response.headers.toString());
+    }
+  }
 
   Future<List<Recipe>> getRecipesWithQuery(
       String path, Map<String, String> query) async {
     var url = Uri.https(APIConstants.baseUrl, path, query);
-    var response = await http.get(url, headers: {
-      "cookie": session.cookie,
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "POST, OPTIONS, GET",
-      "Access-Control-Allow-Headers":
-          "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale",
-    });
+    var response = await http.get(url, headers: APIConstants.headerCORS(session.cookie));
     debugPrint(response.statusCode.toString());
     debugPrint(response.body.toString());
     if (response.statusCode == 200) {
