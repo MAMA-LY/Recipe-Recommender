@@ -27,19 +27,23 @@ class _NutritionViewState extends State<NutritionView>  {
     return Scaffold(
         body: SfCircularChart(
             tooltipBehavior: widget.tooltip,
-            series: <CircularSeries<ChartData, String>>[
+            legend: Legend(isVisible: true),
+            series: <DoughnutSeries<ChartData, String>>[
               DoughnutSeries<ChartData, String>(
+                  radius: '80%',
+                  innerRadius: '65%',
+                  explode: true,
+                  explodeOffset: '10%',
                   dataSource: widget.data = [
                     ChartData('Fats', widget.nutrition.fats),
                     ChartData('Proteins', widget.nutrition.proteins),
-                    ChartData('Carbs', widget.nutrition.carbs),
-                    ChartData('Calories', widget.nutrition.calories)
+                    ChartData('Carbs', widget.nutrition.carbs)
                   ],
                   xValueMapper: (ChartData data, _) => data.x,
                   yValueMapper: (ChartData data, _) => data.y,
                   dataLabelMapper: (ChartData data, _) => "${data.x}: ${data.y}%",
-                  dataLabelSettings: const DataLabelSettings(isVisible: true),
-                  name: 'Gold')
+                  dataLabelSettings: const DataLabelSettings(isVisible: false, textStyle: TextStyle(fontFamily:"Roboto", fontStyle: FontStyle.normal)),
+                  name: 'Details')
             ]));
   }
 }
