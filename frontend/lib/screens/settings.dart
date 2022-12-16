@@ -25,14 +25,14 @@ class SettingsPage extends StatelessWidget {
           cacheFile!.delete();
         },
         child: const Text(
-            "Sign out",
+          "Sign out",
           style: TextStyle(
             color: Constants.secondaryColor,
             fontStyle: FontStyle.italic,
             fontFamily: "Roboto",
             fontWeight: FontWeight.bold,
-            fontSize: 18,),
-        )
-    );
+            fontSize: 18,
+          ),
+        ));
   }
 }
