@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_recommender_frontend/constants.dart';
-import 'package:recipe_recommender_frontend/screens/recipe_page.dart';
+import 'package:recipe_recommender_frontend/screens/recipe_%20page/recipe_page.dart';
 
 class RecipeCard extends StatelessWidget {
   final String id;
@@ -72,6 +72,7 @@ class RecipeCard extends StatelessWidget {
       onPressed: () {
         Navigator.push(
           context,
+          Recipe
           MaterialPageRoute(builder: (context) => const RecipePage()),
         );
       },

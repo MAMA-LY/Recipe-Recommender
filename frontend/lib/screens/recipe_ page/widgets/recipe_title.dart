@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:flutter_tags/flutter_tags.dart';
 import 'package:recipe_recommender_frontend/constants.dart';
-import 'package:recipe_recommender_frontend/screens/widgets/tags_view.dart';
 import '../../../models/recipe.dart';
 
 class RecipeTitle extends StatelessWidget {
@@ -43,11 +43,9 @@ class RecipeTitle extends StatelessWidget {
                     title: recipe.tags![index],
                     color: Constants.primaryColor,
                     activeColor: const Color.fromARGB(255, 192, 73, 14),
-                    onPressed: (Item item) {
-                      print('pressed');
-                    },
-                    highlightColor: Colors.transparent,
-                    splashColor: Colors.transparent,
+                    onPressed:null,
+                    highlightColor: const Color.fromARGB(174, 184, 178, 178),
+                    splashColor: const Color.fromARGB(174, 184, 178, 178),
                     elevation: 0.0,
                     borderRadius: const BorderRadius.all(Radius.circular(7.0)),
                     textColor: Constants.secondaryColor,
