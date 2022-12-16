@@ -15,4 +15,6 @@ public interface RecipeRepository extends JpaRepository<Recipe, String> {
 
     @Query("select r from Recipe r JOIN r.recipeIngredients ri JOIN ri.compositeKey.ingredientID i where lower(i.name) like lower(:name)")
     List<Recipe> findByIngredientsLike(@Param("name") String name);
+
+    Recipe findByIdEquals(@Param("id") String id);
 }
