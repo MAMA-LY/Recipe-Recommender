@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_recommender_frontend/api/sign_api.dart';
-import 'package:recipe_recommender_frontend/constants.dart';
 import 'package:recipe_recommender_frontend/screens/sign/signup.dart';
 import 'package:recipe_recommender_frontend/screens/sign/widgets/custom_button.dart';
 import 'package:recipe_recommender_frontend/screens/sign/widgets/text_field.dart';
@@ -59,13 +58,17 @@ class _SignInPageState extends State<SignInPage> {
                           image: AssetImage("assets/images/Logo.png"),
                           fit: BoxFit.fill)),
                   CustomTextField(
-                      promptText: "Username",
-                      bottomPadding: 25,
-                      controller: usernameController),
+                    promptText: "Username",
+                    bottomPadding: 25,
+                    controller: usernameController,
+                    obscureText: false,
+                  ),
                   CustomTextField(
-                      promptText: "Password",
-                      bottomPadding: 20,
-                      controller: passwordController),
+                    promptText: "Password",
+                    bottomPadding: 20,
+                    controller: passwordController,
+                    obscureText: true,
+                  ),
                   CustomButton(onPressFn: _signin, text: "Sign in"),
                   TextButton(
                     onPressed: () {

@@ -6,12 +6,14 @@ class CustomTextField extends StatelessWidget {
   final String promptText;
   final int bottomPadding;
   final TextEditingController controller;
+  final bool obscureText;
 
   const CustomTextField({
     Key? key,
     required this.promptText,
     required this.bottomPadding,
     required this.controller,
+    required this.obscureText,
   }) : super(key: key);
 
   @override
@@ -47,6 +49,7 @@ class CustomTextField extends StatelessWidget {
           ),
           labelText: promptText,
         ),
+        obscureText: obscureText,
       ),
     );
   }

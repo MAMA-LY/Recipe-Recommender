@@ -5,7 +5,7 @@ import 'package:recipe_recommender_frontend/main.dart';
 class SignAPI {
   static Future<String?> signup(
       String username, String password, String email) async {
-    var url = Uri.https(ApiConstants.baseUrl, ApiConstants.signupEndPoint);
+    var url = Uri.https(APIConstants.baseUrl, APIConstants.signupEndPoint);
     var credentials = {
       "username": username,
       "password": password,
@@ -21,7 +21,7 @@ class SignAPI {
   }
 
   static Future<String?> signin(String username, String password) async {
-    var url = Uri.https(ApiConstants.baseUrl, ApiConstants.signinEndPoint);
+    var url = Uri.https(APIConstants.baseUrl, APIConstants.signinEndPoint);
     var response = await http.post(url, body: {
       "username": username,
       "password": password
@@ -35,17 +35,17 @@ class SignAPI {
     var cookie = response.headers['set-cookie'];
     var responseLocation = response.headers['location'];
     if (responseLocation ==
-        "https://${ApiConstants.baseUrl + ApiConstants.signinEndPoint}?error") {
+        "https://${APIConstants.baseUrl + APIConstants.signinEndPoint}?error") {
       return "wrong credentials";
     }
     if (responseLocation ==
-            "https://${ApiConstants.baseUrl + ApiConstants.homeEndPoint}" &&
+            "https://${APIConstants.baseUrl + APIConstants.homeEndPoint}" &&
         cookie != null) {
       session.cookie = cookie;
       if (cacheFile != null) {
         cacheFile = await cacheFile!.writeAsString(session.cookie);
       }
-      var urlHome = Uri.https(ApiConstants.baseUrl, ApiConstants.homeEndPoint);
+      var urlHome = Uri.https(APIConstants.baseUrl, APIConstants.homeEndPoint);
       var responseHome = await http.post(urlHome, headers: {
         "cookie": cookie,
         "Access-Control-Allow-Origin": "*",

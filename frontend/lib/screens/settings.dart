@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:recipe_recommender_frontend/screens/sign/signin.dart';
 
+import '../api/api_constants.dart';
+import '../constants.dart';
 import '../main.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -13,10 +15,7 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
         onPressed: () async {
-          var url = Uri.https(
-              const String.fromEnvironment("BrainFoodBackendIP",
-                  defaultValue: "brainfood.azurewebsites.net"),
-              "signout");
+          var url = Uri.https(APIConstants.baseUrl, "signout");
           debugPrint(session.cookie);
           var response =
               await http.post(url, headers: {"cookie": session.cookie});
@@ -25,6 +24,15 @@ class SettingsPage extends StatelessWidget {
               MaterialPageRoute(builder: (context) => const SignInPage()));
           cacheFile!.delete();
         },
-        child: const Text("Sign out"));
+        child: const Text(
+            "Sign out",
+          style: TextStyle(
+            color: Constants.secondaryColor,
+            fontStyle: FontStyle.italic,
+            fontFamily: "Roboto",
+            fontWeight: FontWeight.bold,
+            fontSize: 18,),
+        )
+    );
   }
 }
