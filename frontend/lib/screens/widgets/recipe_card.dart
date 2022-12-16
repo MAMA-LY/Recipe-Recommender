@@ -1,13 +1,48 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_recommender_frontend/constants.dart';
+import 'package:recipe_recommender_frontend/models/ingredient.dart';
+import 'package:recipe_recommender_frontend/models/nutrition.dart';
+import 'package:recipe_recommender_frontend/models/recipe.dart';
 import 'package:recipe_recommender_frontend/screens/recipe_%20page/recipe_page.dart';
 
 class RecipeCard extends StatelessWidget {
   final String id;
   final String name;
   final String thumbnailUrl;
+  // ignore: prefer_final_fields
+  final Recipe _recipe = Recipe(
+          name: "shaksouka",
+          image: "https://welcome2jordan.com/wp-content/uploads/2022/09/Shakshuka-Recipe-Welcome2Jordan.jpg",
+          id: "32325",
+          cuisine: "egypt",
+          tags: ["diary", "diet", "breakfast"],
+          nutrition: Nutrition(calories: 50, fats: 30, carbs: 25, proteins: 12),
+          ingredients: [Ingredient(
+            name: "tomato",
+            id: "12222",
+            icon: "icon",
+            amount: "3 pieces of tomatos",
+            nutrition: Nutrition(
+              calories: 18, 
+              fats: 20, 
+              carbs: 9, 
+              proteins: 6
+            )
+          ),Ingredient(
+            name: "egg",
+            id: "12222",
+            icon: "icon",
+            amount: "3 eggs",
+            nutrition: Nutrition(
+              calories: 18, 
+              fats: 20, 
+              carbs: 9, 
+              proteins: 6
+            )
+          )]
+        );
 
-  const RecipeCard({
+  RecipeCard({
     super.key,
     required this.id,
     required this.name,
@@ -72,8 +107,8 @@ class RecipeCard extends StatelessWidget {
       onPressed: () {
         Navigator.push(
           context,
-          Recipe
-          MaterialPageRoute(builder: (context) => const RecipePage()),
+          
+          MaterialPageRoute(builder: (context) =>  RecipePage(recipe: _recipe, inFavorites: false)),
         );
       },
     );

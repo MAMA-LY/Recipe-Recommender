@@ -3,4 +3,5 @@ class APIConstants {
   static String signupEndPoint = "/signup";
   static String signinEndPoint = "/signin";
   static String homeEndPoint = "/home";
+  static String recipeEndPoint = "/home/recipe";
 }

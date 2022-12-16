@@ -57,6 +57,7 @@ class _RecipePageState extends State<RecipePage> with SingleTickerProviderStateM
         headerSliverBuilder: (BuildContext context, bool innerViewIsScrolled) {
           return <Widget>[
             SliverAppBar(
+              
               backgroundColor: Colors.white,
               flexibleSpace: FlexibleSpaceBar(
                 collapseMode: CollapseMode.pin,
@@ -74,9 +75,10 @@ class _RecipePageState extends State<RecipePage> with SingleTickerProviderStateM
               elevation: 2.0,
               forceElevated: innerViewIsScrolled,
               bottom: TabBar(
+                labelColor: Constants.primaryColor,
                 tabs: const <Widget>[
-                  Tab(text: "Nutrition"),
                   Tab(text: "Ingredients"),
+                  Tab(text: "Nutrition")
                 ],
                 controller: _tabController,
               ),

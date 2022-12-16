@@ -23,10 +23,18 @@ class RecipeTitle extends StatelessWidget {
         // Default value for crossAxisAlignment is CrossAxisAlignment.center.
         // We want to align title and description of recipes left:
         crossAxisAlignment: CrossAxisAlignment.start,
+        
         children: <Widget>[
-          Text(
-            recipe.name,
-            style: Theme.of(context).textTheme.headline6,
+          Row(
+            children:[
+              const Icon(Icons.fastfood_outlined, size: 22.0),
+              const SizedBox(width: 5.0),
+              Text(
+                recipe.name,
+                style: Theme.of(context).textTheme.titleLarge,
+                selectionColor: const Color.fromARGB(174, 184, 178, 178),
+              ),
+            ]
           ),
           // Empty space:
           const SizedBox(height: 10.0),
@@ -42,7 +50,7 @@ class RecipeTitle extends StatelessWidget {
                     index: index,
                     title: recipe.tags![index],
                     color: Constants.primaryColor,
-                    activeColor: const Color.fromARGB(255, 192, 73, 14),
+                    activeColor: Constants.primaryColor,
                     onPressed:null,
                     highlightColor: const Color.fromARGB(174, 184, 178, 178),
                     splashColor: const Color.fromARGB(174, 184, 178, 178),
@@ -55,10 +63,7 @@ class RecipeTitle extends StatelessWidget {
                   );
                 },
               ),
-              Text(
-                recipe.getTags(),
-                style: Theme.of(context).textTheme.caption,
-              ),
+              
             ],
           ),
         ],
