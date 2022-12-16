@@ -11,12 +11,7 @@ class SignAPI {
       "password": password,
       "email": email
     };
-    var response = await http.post(url, body: credentials, headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "POST, OPTIONS, GET",
-      "Access-Control-Allow-Headers":
-          "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale",
-    });
+    var response = await http.post(url, body: credentials, headers: APIConstants.headerCORS(""));
     return response.body;
   }
 
@@ -25,12 +20,7 @@ class SignAPI {
     var response = await http.post(url, body: {
       "username": username,
       "password": password
-    }, headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "POST, OPTIONS, GET",
-      "Access-Control-Allow-Headers":
-          "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale",
-    });
+    }, headers: APIConstants.headerCORS(""));
 
     var cookie = response.headers['set-cookie'];
     var responseLocation = response.headers['location'];
@@ -46,13 +36,7 @@ class SignAPI {
         cacheFile = await cacheFile!.writeAsString(session.cookie);
       }
       var urlHome = Uri.https(APIConstants.baseUrl, APIConstants.homeEndPoint);
-      var responseHome = await http.post(urlHome, headers: {
-        "cookie": cookie,
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "POST, OPTIONS, GET",
-        "Access-Control-Allow-Headers":
-            "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale",
-      });
+      var responseHome = await http.post(urlHome, headers: APIConstants.headerCORS("cookie"));
       return "right credentials";
     }
     return null;

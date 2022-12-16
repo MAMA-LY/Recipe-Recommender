@@ -15,7 +15,7 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
         onPressed: () async {
-          var url = Uri.https(APIConstants.baseUrl, "signout");
+          var url = Uri.https(APIConstants.baseUrl, APIConstants.signoutEndPoint);
           debugPrint(session.cookie);
           var response =
               await http.post(url, headers: {"cookie": session.cookie});
