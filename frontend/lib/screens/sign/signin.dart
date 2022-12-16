@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_recommender_frontend/api/sign_api.dart';
 import 'package:recipe_recommender_frontend/screens/sign/signup.dart';
-import '../nav/bottom_nav_screen.dart';
+import '../page_view_controller.dart';
 
 class SignInPage extends StatefulWidget {
   static String routeName = "/signin";
@@ -23,17 +23,17 @@ class _SignInPageState extends State<SignInPage> {
   Future<void> _signin() async {
       String? status = await SignAPI.signin(usernameController.text, passwordController.text);
       debugPrint(status);
-      if(status == "wrong credintials"){
+      if(status == "wrong credentials"){
         setState((){
-          resp = "Wrong Credintials";
+          resp = "Wrong credentials";
         });
-      }else if(status == "right credintials"){
+      }else if(status == "right credentials"){
         // ignore: use_build_context_synchronously
         Navigator.push(
           context,
           MaterialPageRoute(
               builder: (context) =>
-                  const BottomNavView()));
+                  const PageViewController()));
       }
   }
 
@@ -105,7 +105,7 @@ class _SignInPageState extends State<SignInPage> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const BottomNavView()));
+                                builder: (context) => const PageViewController()));
                       },
                       child: Text(
                         'Forgot Password?',
