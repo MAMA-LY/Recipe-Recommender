@@ -1,19 +1,21 @@
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
 import 'package:recipe_recommender_frontend/constants.dart';
-import 'package:recipe_recommender_frontend/cookieManager.dart';
 import 'package:recipe_recommender_frontend/screens/sign/signin.dart';
 import 'package:recipe_recommender_frontend/screens/splash_screen/splash_screen.dart';
+
 import 'api/session.dart';
 import 'screens/nav/bottom_nav_screen.dart';
-import 'package:http/http.dart' as http;
 
 var session = Session("");
 
 String cookieStr = "";
 File? cacheFile;
+
 Future<String> getLocalPath() async {
   final directory = await getTemporaryDirectory();
   return directory.path;
@@ -21,45 +23,47 @@ Future<String> getLocalPath() async {
 
 Future<File> getLocalFile() async {
   final path = await getLocalPath();
+  debugPrint(path);
   return File('$path/cookie.txt').create();
 }
 
 void main() {
-
-  getLocalFile().then((value) => {
-        cacheFile = value,
-        cookieStr = cacheFile!.readAsStringSync(),
-        runApp(MaterialApp(
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            fontFamily: 'Satoshi',
-            primarySwatch: Colors.orange,
-            primaryColor: Constants.primaryColor,
-            textTheme: const TextTheme(
-              headline1: TextStyle(
-                fontFamily: 'Telma',
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: Constants.primaryColor,
-              ),
-            ),
-          ),
-          home: const MyApp(),
-        ))
-      }).onError((error, stackTrace) => {debugPrint(error.toString())});
+  WidgetsFlutterBinding.ensureInitialized();
+  var url = Uri.https(
+      "${const String.fromEnvironment("BrainFoodBackendIP", defaultValue: "brainfood.azurewebsites.net")}",
+      "/home");
+  print(url.toString());
+  getLocalFile()
+      .then((value) => {
+            cacheFile = value,
+            cookieStr = cacheFile!.readAsStringSync(),
+            runApp(const BuildApp())
+          })
+      .onError((error, stackTrace) => {
+            debugPrint(error.toString()),
+            debugPrint("Can't get cache file"),
+            runApp(const BuildApp())
+          });
 }
 
 Future<String?> getServerInitResponse() async {
   session.cookie = cookieStr;
-  var url = Uri.http("localhost:8080", "/home");
-  var serverResponse = await http.get(url, headers: {"cookie": cookieStr});
+  var url = Uri.https(
+      "${const String.fromEnvironment("BrainFoodBackendIP", defaultValue: "brainfood.azurewebsites.net")}",
+      "/home");
+  var serverResponse = await http.get(url, headers: {
+    "cookie": session.cookie,
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "POST, OPTIONS, GET",
+    "Access-Control-Allow-Headers":
+        "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale",
+  });
   final bool hasData = serverResponse.body != null;
   if (hasData) {
     return serverResponse.body;
   } else {
     return null; // null tells FutureBuilder that no data is stored
   }
-
 }
 
 class MyApp extends StatelessWidget {
@@ -67,7 +71,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: FutureBuilder(
         future: getServerInitResponse(),
@@ -78,14 +81,41 @@ class MyApp extends StatelessWidget {
             if (response == "UserInfo") {
               return const BottomNavView();
             } else {
+              debugPrint("IN");
               return const SignInPage();
             }
           } else {
-            return const SplashScreenPage();
+            debugPrint("IN2");
+            return const SignInPage();
           }
         },
       ),
     );
-
   }
 }
+
+class BuildApp extends StatelessWidget {
+  const BuildApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        fontFamily: 'Satoshi',
+        primarySwatch: Colors.orange,
+        primaryColor: Constants.primaryColor,
+        textTheme: const TextTheme(
+          headline1: TextStyle(
+            fontFamily: 'Telma',
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            color: Constants.primaryColor,
+          ),
+        ),
+      ),
+      home: const MyApp(),
+    );
+  }
+}
+

@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "\"RecipeIngredients\"")
-@Data
+@Getter @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class RecipeIngredients implements Serializable{

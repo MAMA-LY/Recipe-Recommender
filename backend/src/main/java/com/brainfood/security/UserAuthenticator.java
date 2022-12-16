@@ -1,18 +1,8 @@
 package com.brainfood.security;
 
-import java.security.Principal;
-import java.security.SecureRandom;
-import java.util.List;
-import java.util.UUID;
-
-import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.session.SessionInformation;
-import org.springframework.security.core.session.SessionRegistry;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.brainfood.security.Model.UserCredentials;
@@ -27,7 +17,6 @@ public class UserAuthenticator {
     
     @Autowired
     UserRepository userRepository;
-
 
     @Getter
     @Setter

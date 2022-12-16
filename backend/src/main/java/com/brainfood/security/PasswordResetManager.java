@@ -1,8 +1,7 @@
 package com.brainfood.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.hibernate5.SpringSessionContext;
-import org.springframework.security.core.context.SecurityContextHolder;
+
 import org.springframework.stereotype.Service;
 
 import com.brainfood.security.Model.PasswordResetToken;
@@ -52,7 +51,9 @@ public class PasswordResetManager {
     public Response changePassword(String tokenStr, String password) {
         PasswordResetToken token = passwordResetTokenRepository.findByToken(tokenStr);
         if(token == null) return Response.InvalidToken;
-        UserCredentials user = passwordResetTokenRepository.findById(tokenStr).get().getUser();
+        token =passwordResetTokenRepository.findById(tokenStr).orElse(null);
+        UserCredentials user =token!=null? token.getUser():null;
+        if(user == null) return Response.InvalidToken;
         user.setPassword(userAuthenticator.bCryptPasswordEncoder.encode(password));
         passwordResetTokenRepository.deleteById(tokenStr);
         return Response.PasswordChanged; 

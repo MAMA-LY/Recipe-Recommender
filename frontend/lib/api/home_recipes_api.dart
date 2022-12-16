@@ -1,3 +1,4 @@
+
 import 'dart:convert';
 import 'dart:io';
 
@@ -8,8 +9,8 @@ import '../models/failure.dart';
 
 class GetRecipesAPI {
   Future<List<Recipe>> getRecipes(String path) async {
-    var url = Uri.http(
-        "${const String.fromEnvironment("BrainFoodBackendIP")}:8080", "/$path");
+    var url = Uri.https(
+        "${const String.fromEnvironment("BrainFoodBackendIP", defaultValue: "brainfood.azurewebsites.net")}", "/$path");
     var response = await http.get(url);
 
     if (response.statusCode == 200) {
@@ -22,6 +23,10 @@ class GetRecipesAPI {
     }
   }
 }
+
+
+
+
 
 
 
