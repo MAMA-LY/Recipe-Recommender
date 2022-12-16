@@ -1,11 +1,8 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:recipe_recommender_frontend/api/sign_api.dart';
 import 'package:recipe_recommender_frontend/screens/sign/signup.dart';
-
-import '../../main.dart';
 import '../nav/bottom_nav_screen.dart';
 
 class SignInPage extends StatefulWidget {
@@ -52,86 +49,88 @@ class _SignInPageState extends State<SignInPage> {
             appBar: AppBar(
               title: const Text('Login Screen'),
             ),
+            resizeToAvoidBottomInset: false,
             body: Center(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Container(
-                      width: MediaQuery.of(context).size.width / 3,
-                      padding: const EdgeInsets.fromLTRB(20, 20, 20, 70),
-                      child: const Image(
-                          image: AssetImage("assets/images/Logo.png"),
-                          fit: BoxFit.fill)),
-                  Container(
-                    padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-                    child: TextField(
-                      controller: usernameController,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(90.0),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                        width: MediaQuery.of(context).size.width / 3,
+                        padding: const EdgeInsets.fromLTRB(20, 20, 20, 70),
+                        child: const Image(
+                            image: AssetImage("assets/images/Logo.png"),
+                            fit: BoxFit.fill)),
+                    Container(
+                      padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+                      child: TextField(
+                        controller: usernameController,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(90.0),
+                          ),
+                          labelText: 'Username',
                         ),
-                        labelText: 'Username',
                       ),
                     ),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-                    child: TextField(
-                      controller: passwordController,
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(90.0),
+                    Container(
+                      padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+                      child: TextField(
+                        controller: passwordController,
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(90.0),
+                          ),
+                          labelText: 'Password',
                         ),
-                        labelText: 'Password',
                       ),
                     ),
-                  ),
-                  Container(
-                      height: 80,
-                      padding: const EdgeInsets.all(20),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          minimumSize: const Size.fromHeight(50),
-                        ),
-                        child: const Text('Sign in'),
-                        onPressed: _signin      
-                        )),
-                  TextButton(
-                    onPressed: () {
-                      setState(() {
-                        resp = "";
-                      });
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const BottomNavView()));
-                    },
-                    child: Text(
-                      'Forgot Password?',
-                      style: TextStyle(color: Colors.grey[600]),
+                    Container(
+                        height: 80,
+                        padding: const EdgeInsets.all(20),
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            minimumSize: const Size.fromHeight(50),
+                          ),
+                          onPressed: _signin,
+                          child: const Text('Sign in')      
+                          )),
+                    TextButton(
+                      onPressed: () {
+                        setState(() {
+                          resp = "";
+                        });
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const BottomNavView()));
+                      },
+                      child: Text(
+                        'Forgot Password?',
+                        style: TextStyle(color: Colors.grey[600]),
+                      ),
                     ),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const SignUpPage()));
-                    },
-                    child: Text(
-                      'Don\'t have an account?',
-                      style: TextStyle(color: Colors.grey[600]),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const SignUpPage()));
+                      },
+                      child: Text(
+                        'Don\'t have an account?',
+                        style: TextStyle(color: Colors.grey[600]),
+                      ),
                     ),
-                  ),
-                  Text(
-                    resp,
-                    style: const TextStyle(color: Colors.red, fontSize: 15),
-                  )
-                ],
-              ),
-            )));
+                    Text(
+                      resp,
+                      style: const TextStyle(color: Colors.red, fontSize: 15),
+                    )
+                  ],
+                ),
+    ))));
   }
 }
 

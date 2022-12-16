@@ -63,83 +63,85 @@ class _SignUpPageState extends State<SignUpPage> {
             appBar: AppBar(
               title: const Text('Sign up Screen'),
             ),
+            
             body: Center(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Container(
-                      width: MediaQuery.of(context).size.width / 3,
-                      padding: const EdgeInsets.fromLTRB(20, 20, 20, 70),
-                      child: const Image(
-                          image: AssetImage("assets/images/Logo.png"),
-                          fit: BoxFit.fill)),
-                  Container(
-                    padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-                    child: TextField(
-                      controller: usernameController,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(90.0),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                        width: MediaQuery.of(context).size.width / 3,
+                        padding: const EdgeInsets.fromLTRB(20, 20, 20, 70),
+                        child: const Image(
+                            image: AssetImage("assets/images/Logo.png"),
+                            fit: BoxFit.fill)),
+                    Container(
+                      padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+                      child: TextField(
+                        controller: usernameController,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(90.0),
+                          ),
+                          labelText: 'Username',
                         ),
-                        labelText: 'Username',
                       ),
                     ),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-                    child: TextField(
-                      controller: emailController,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(90.0),
+                    Container(
+                      padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+                      child: TextField(
+                        controller: emailController,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(90.0),
+                          ),
+                          labelText: 'Email',
                         ),
-                        labelText: 'Email',
                       ),
                     ),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-                    child: TextField(
-                      controller: passwordController,
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(90.0),
+                    Container(
+                      padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+                      child: TextField(
+                        controller: passwordController,
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(90.0),
+                          ),
+                          labelText: 'Password',
                         ),
-                        labelText: 'Password',
                       ),
                     ),
-                  ),
-                  Container(
-                      height: 80,
-                      padding: const EdgeInsets.all(20),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          minimumSize: const Size.fromHeight(50),
-                        ),
-                        child: const Text('Sign up'),
-                        onPressed: _signup
-                      )),
-                  TextButton(
-                    onPressed: () {
-                      setState(() {
-                        resp = "";
-                      });
-                      Navigator.pop(context);
-                    },
-                    child: Text(
-                      'Sign in',
-                      style: TextStyle(color: Colors.grey[600]),
+                    Container(
+                        height: 80,
+                        padding: const EdgeInsets.all(20),
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            minimumSize: const Size.fromHeight(50),
+                          ),
+                          onPressed: _signup,
+                          child: const Text('Sign up')
+                        )),
+                    TextButton(
+                      onPressed: () {
+                        setState(() {
+                          resp = "";
+                        });
+                        Navigator.pop(context);
+                      },
+                      child: Text(
+                        'Sign in',
+                        style: TextStyle(color: Colors.grey[600]),
+                      ),
                     ),
-                  ),
-                  Text(resp,
-                      style: resp == "Account is Created Successfully"
-                          ? const TextStyle(color: Colors.green, fontSize: 20)
-                          : const TextStyle(color: Colors.red, fontSize: 20))
-                ],
-              ),
-            )));
+                    Text(resp,
+                        style: resp == "Account is Created Successfully"
+                            ? const TextStyle(color: Colors.green, fontSize: 20)
+                            : const TextStyle(color: Colors.red, fontSize: 20))
+                  ],
+                ),
+    ))));
   }
 }
 
