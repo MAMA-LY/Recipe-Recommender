@@ -1,4 +1,4 @@
-package com.brainfood.backend;
+package com.brainfood.models;
 
 
 import lombok.AllArgsConstructor;

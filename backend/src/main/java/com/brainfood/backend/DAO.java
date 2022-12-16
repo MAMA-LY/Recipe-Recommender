@@ -2,7 +2,9 @@ package com.brainfood.backend;
 
 import java.util.List;
 
-import lombok.Data;
+import com.brainfood.models.IngredientModel;
+import com.brainfood.models.ProfileModel;
+import com.brainfood.models.RecipeModel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -27,12 +29,12 @@ public class DAO {
         //
     }
 
-    public List<Recipe> getRecipes() {
+    public List<RecipeModel> getRecipes() {
         //
         return null;
     }
 
-    public Recipe getRecipeByID() {
+    public RecipeModel getRecipeByID() {
         //
         return null;
     }
@@ -41,7 +43,7 @@ public class DAO {
         //
     }
 
-    public List<Ingredient> getAllIngredients() {
+    public List<IngredientModel> getAllIngredients() {
         //
         return null;
     }
@@ -50,7 +52,7 @@ public class DAO {
         //
     }
 
-    public Profile getProfile() {
+    public ProfileModel getProfile() {
         //
         return null;
     }

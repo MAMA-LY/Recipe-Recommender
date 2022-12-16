@@ -1,10 +1,16 @@
-package com.brainfood.search;
+package com.brainfood.models;
 
-import com.brainfood.search.DBEntities.Recipe;
+import com.brainfood.backend.db_entities.Recipe;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.*;
 
-public class ShortRecipe {
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class ShortRecipeModel {
 
     @JsonProperty("id")
     String id;
@@ -19,12 +25,9 @@ public class ShortRecipe {
     @JsonProperty("image")
     String image;
 
-    public ShortRecipe(Recipe recipe) {
+    public ShortRecipeModel(Recipe recipe) {
         this.id = recipe.id;
         this.name = recipe.name;
         this.image = recipe.photo;
-    }
-
-    public ShortRecipe(){
     }
 }

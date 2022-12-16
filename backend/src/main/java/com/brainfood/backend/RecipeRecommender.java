@@ -1,5 +1,6 @@
 package com.brainfood.backend;
 
+import com.brainfood.models.RecipeModel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,7 +16,7 @@ public class RecipeRecommender {
 
     //                          Operations                                  
 
-    public List<Recipe> recommend() {
+    public List<RecipeModel> recommend() {
         //
         return null;
     }

@@ -1,4 +1,8 @@
 package com.brainfood.backend;
+import com.brainfood.models.IngredientModel;
+import com.brainfood.models.ProfileModel;
+import com.brainfood.models.RecipeModel;
+
 import java.util.List;
 
 
@@ -8,7 +12,7 @@ public class RestfulAPI {
 
     //                          Operations                                  
 
-    public List<Recipe> SearchRecipes() {
+    public List<RecipeModel> SearchRecipes() {
         //
         return null;
     }
@@ -17,7 +21,7 @@ public class RestfulAPI {
         return false;
     }
 
-    public List<Ingredient> getAllIngredients() {
+    public List<IngredientModel> getAllIngredients() {
         //
         return null;
     }
@@ -30,7 +34,7 @@ public class RestfulAPI {
         //
     }
 
-    public Profile getProfile() {
+    public ProfileModel getProfile() {
         //
 
         return null;

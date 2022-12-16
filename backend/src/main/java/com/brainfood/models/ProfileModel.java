@@ -1,17 +1,17 @@
-package com.brainfood.backend;
+package com.brainfood.models;
 import java.util.List;
 import java.awt.Image;
 
-import com.brainfood.security.Model.UserCredentials;
+import com.brainfood.security.model.UserCredentials;
 import lombok.*;
 
 
 @Getter @Setter @Builder
 @AllArgsConstructor @NoArgsConstructor
-public class Profile {
+public class ProfileModel {
     private UserCredentials userCredentials ;
 
-    private List<Recipe> favoriteRecipes;
+    private List<RecipeModel> favoriteRecipeModels;
 
     private Image photo ;
 

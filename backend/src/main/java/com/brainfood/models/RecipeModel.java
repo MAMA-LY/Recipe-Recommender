@@ -1,13 +1,12 @@
-package com.brainfood.backend;
+package com.brainfood.models;
 
 import lombok.*;
 
 import java.util.List;
-import java.awt.Image;
 
 @Getter @Setter @Builder
 @AllArgsConstructor @NoArgsConstructor
-public class Recipe {
+public class RecipeModel {
 
     private String ID;
 
@@ -17,11 +16,11 @@ public class Recipe {
 
     private String name;
 
-    private List<Ingredient> ingredients;
+    private List<IngredientModel> ingredientModels;
 
-    private Image photo;
+    private String photo;
 
-    private Nutrition nutrition;
+    private NutritionModel nutritionModel;
     
 
 }

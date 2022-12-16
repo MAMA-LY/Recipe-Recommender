@@ -1,4 +1,4 @@
-package com.brainfood.backend;
+package com.brainfood.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,10 +11,10 @@ import java.util.List;
 @AllArgsConstructor @NoArgsConstructor
 public class Calendar {
 
-    private List<Ingredient> ingredients;
+    private List<IngredientModel> ingredientModels;
 
 
-    private List<Recipe> recipes;
+    private List<RecipeModel> recipeModels;
 
     
 }
