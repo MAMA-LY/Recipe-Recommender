@@ -4,8 +4,6 @@ import 'package:recipe_recommender_frontend/api/sign_api.dart';
 import 'package:recipe_recommender_frontend/screens/sign/widgets/custom_button.dart';
 import 'package:recipe_recommender_frontend/screens/sign/widgets/text_field.dart';
 
-import '../../constants.dart';
-
 class SignUpPage extends StatefulWidget {
   static String routeName = "/signup";
 
@@ -72,17 +70,23 @@ class _SignUpPageState extends State<SignUpPage> {
                       image: AssetImage("assets/images/Logo.png"),
                       fit: BoxFit.fill)),
               CustomTextField(
-                  promptText: "Username",
-                  bottomPadding: 25,
-                  controller: usernameController),
+                promptText: "Username",
+                bottomPadding: 25,
+                controller: usernameController,
+                obscureText: false,
+              ),
               CustomTextField(
-                  promptText: "Email",
-                  bottomPadding: 25,
-                  controller: emailController),
+                promptText: "Email",
+                bottomPadding: 25,
+                controller: emailController,
+                obscureText: false,
+              ),
               CustomTextField(
-                  promptText: "Password",
-                  bottomPadding: 20,
-                  controller: passwordController),
+                promptText: "Password",
+                bottomPadding: 20,
+                controller: passwordController,
+                obscureText: false,
+              ),
               CustomButton(onPressFn: _signup, text: "Sign up"),
               TextButton(
                 onPressed: () {

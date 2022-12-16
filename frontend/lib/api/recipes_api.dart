@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:recipe_recommender_frontend/api/api_constants.dart';
 import 'package:recipe_recommender_frontend/main.dart';
 import 'package:recipe_recommender_frontend/models/recipe.dart';
 
@@ -15,8 +16,7 @@ class RecipesAPI {
   RecipesAPI.fromCookie(var this.cookie);
 
   Future<List<Recipe>> getRecipes(String path) async {
-    var url =
-        Uri.https(const String.fromEnvironment("BrainFoodBackendIP"), path);
+    var url = Uri.https(APIConstants.baseUrl, path);
     var response = await http.get(url, headers: {
       "cookie": session.cookie,
       "Access-Control-Allow-Origin": "*",
@@ -38,8 +38,7 @@ class RecipesAPI {
 
   Future<List<Recipe>> getRecipesWithQuery(
       String path, Map<String, String> query) async {
-    var url = Uri.https(
-        const String.fromEnvironment("BrainFoodBackendIP"), path, query);
+    var url = Uri.https(APIConstants.baseUrl, path, query);
     var response = await http.get(url, headers: {
       "cookie": session.cookie,
       "Access-Control-Allow-Origin": "*",
