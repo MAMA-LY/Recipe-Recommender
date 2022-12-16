@@ -15,7 +15,7 @@ public class RecipeController {
     RecipeDAO recipeDAO;
 
     @RequestMapping("recipe")
-    public Recipe getRecipeInfo(@RequestParam String id) {
+    public Recipe getRecipeDetails(@RequestParam String id) {
         return recipeDAO.findRecipe(id);
     }
 }
