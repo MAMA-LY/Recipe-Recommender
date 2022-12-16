@@ -1,9 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:recipe_recommender_frontend/constants.dart';
-import 'package:recipe_recommender_frontend/models/nutrition.dart';
 import 'package:recipe_recommender_frontend/models/recipe.dart';
 import 'package:recipe_recommender_frontend/screens/recipe_%20page/widgets/ingredients_view.dart';
+import 'package:recipe_recommender_frontend/screens/recipe_%20page/widgets/nutrition_view.dart';
 import 'package:recipe_recommender_frontend/screens/recipe_%20page/widgets/recipe_image.dart';
 import 'package:recipe_recommender_frontend/screens/recipe_%20page/widgets/recipe_title.dart';
 
@@ -88,7 +87,7 @@ class _RecipePageState extends State<RecipePage> with SingleTickerProviderStateM
           controller: _tabController,
           children: <Widget>[
             IngredientsView(ingredients: widget.getIngredientsNames()),
-            // NutritionView(widget.recipe.preparation),
+            NutritionView(nutrition: widget.recipe.nutrition!),
           ],
         ),
       ),
