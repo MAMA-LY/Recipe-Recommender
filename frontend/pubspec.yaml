@@ -43,7 +43,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   persistent_bottom_nav_bar: ^5.0.2
   flutter_native_splash: ^2.0.4
-
+  flutter_tags: "^0.4.9+1"
+  flutter_typeahead: 
 dev_dependencies:
   flutter_test:
     sdk: flutter
