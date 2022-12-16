@@ -1,22 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_recommender_frontend/constants.dart';
+import 'package:recipe_recommender_frontend/screens/recipe_page.dart';
 
 class RecipeCard extends StatelessWidget {
-  final String name = "default";
-  final String thumbnailUrl = "default";
+  final String id;
+  final String name;
+  final String thumbnailUrl;
 
   const RecipeCard({
     super.key,
-    required String title,
-    required String thumbnailUrl,
+    required this.id,
+    required this.name,
+    required this.thumbnailUrl,
   });
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return TextButton(
       child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+        margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         width: MediaQuery.of(context).size.width,
-        height: 250,
+        height: MediaQuery.of(context).size.height / 4,
         decoration: BoxDecoration(
           color: Colors.black,
           borderRadius: BorderRadius.circular(15),
@@ -33,10 +37,12 @@ class RecipeCard extends StatelessWidget {
           ],
           image: DecorationImage(
             colorFilter: ColorFilter.mode(
-              Colors.black.withOpacity(0.35),
+              Colors.black.withOpacity(0.20),
               BlendMode.multiply,
             ),
-            image: const AssetImage("assets/images/Logo.png"),
+            image: Image.network(thumbnailUrl,
+                    height: MediaQuery.of(context).size.height)
+                .image,
             fit: BoxFit.cover,
           ),
         ),
@@ -49,7 +55,10 @@ class RecipeCard extends StatelessWidget {
                 child: Text(
                   name,
                   style: const TextStyle(
-                    fontSize: 19,
+                    fontSize: 24,
+                    color: Constants.secondaryColor,
+                    fontFamily: "Roboto",
+                    fontWeight: FontWeight.bold,
                   ),
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,
@@ -57,35 +66,14 @@ class RecipeCard extends StatelessWidget {
                 ),
               ),
             ),
-            Align(
-              alignment: Alignment.bottomLeft,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(5),
-                    margin: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.4),
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.all(5),
-                    margin: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.4),
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                  )
-                ],
-              ),
-            ),
           ],
         ),
       ),
-      onTap: () {
-
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const RecipePage()),
+        );
       },
     );
   }
