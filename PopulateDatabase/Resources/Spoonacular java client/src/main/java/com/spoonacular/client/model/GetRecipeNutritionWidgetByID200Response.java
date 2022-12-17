@@ -291,6 +291,9 @@ public class GetRecipeNutritionWidgetByID200Response {
     openapiFields.add("protein");
     openapiFields.add("bad");
     openapiFields.add("good");
+    openapiFields.add("expires");
+    openapiFields.add("isStale");
+
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -300,74 +303,10 @@ public class GetRecipeNutritionWidgetByID200Response {
     openapiRequiredFields.add("protein");
     openapiRequiredFields.add("bad");
     openapiRequiredFields.add("good");
+    openapiRequiredFields.add("expires");
+    openapiRequiredFields.add("isStale");
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to GetRecipeNutritionWidgetByID200Response
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (GetRecipeNutritionWidgetByID200Response.openapiRequiredFields.isEmpty()) {
-          return;
-        } else { // has required fields
-          throw new IllegalArgumentException(String.format("The required field(s) %s in GetRecipeNutritionWidgetByID200Response is not found in the empty JSON string", GetRecipeNutritionWidgetByID200Response.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
-        if (!GetRecipeNutritionWidgetByID200Response.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `GetRecipeNutritionWidgetByID200Response` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
-        }
-      }
-
-      // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : GetRecipeNutritionWidgetByID200Response.openapiRequiredFields) {
-        if (jsonObj.get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
-        }
-      }
-      if (jsonObj.get("calories") != null && !jsonObj.get("calories").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `calories` to be a primitive type in the JSON string but got `%s`", jsonObj.get("calories").toString()));
-      }
-      if (jsonObj.get("carbs") != null && !jsonObj.get("carbs").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `carbs` to be a primitive type in the JSON string but got `%s`", jsonObj.get("carbs").toString()));
-      }
-      if (jsonObj.get("fat") != null && !jsonObj.get("fat").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `fat` to be a primitive type in the JSON string but got `%s`", jsonObj.get("fat").toString()));
-      }
-      if (jsonObj.get("protein") != null && !jsonObj.get("protein").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `protein` to be a primitive type in the JSON string but got `%s`", jsonObj.get("protein").toString()));
-      }
-      JsonArray jsonArraybad = jsonObj.getAsJsonArray("bad");
-      if (jsonArraybad != null) {
-        // ensure the json data is an array
-        if (!jsonObj.get("bad").isJsonArray()) {
-          throw new IllegalArgumentException(String.format("Expected the field `bad` to be an array in the JSON string but got `%s`", jsonObj.get("bad").toString()));
-        }
-
-        // validate the optional field `bad` (array)
-        for (int i = 0; i < jsonArraybad.size(); i++) {
-          GetRecipeNutritionWidgetByID200ResponseBadInner.validateJsonObject(jsonArraybad.get(i).getAsJsonObject());
-        };
-      }
-      JsonArray jsonArraygood = jsonObj.getAsJsonArray("good");
-      if (jsonArraygood != null) {
-        // ensure the json data is an array
-        if (!jsonObj.get("good").isJsonArray()) {
-          throw new IllegalArgumentException(String.format("Expected the field `good` to be an array in the JSON string but got `%s`", jsonObj.get("good").toString()));
-        }
-
-        // validate the optional field `good` (array)
-        for (int i = 0; i < jsonArraygood.size(); i++) {
-          GetRecipeNutritionWidgetByID200ResponseGoodInner.validateJsonObject(jsonArraygood.get(i).getAsJsonObject());
-        };
-      }
-  }
 
   public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
     @SuppressWarnings("unchecked")
@@ -390,7 +329,6 @@ public class GetRecipeNutritionWidgetByID200Response {
            @Override
            public GetRecipeNutritionWidgetByID200Response read(JsonReader in) throws IOException {
              JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
              return thisAdapter.fromJsonTree(jsonObj);
            }
 
