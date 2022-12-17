@@ -42,6 +42,8 @@ dependencies:
   flutter_tags: "^0.4.9+1"
   flutter_typeahead: 
   syncfusion_flutter_charts: ^20.3.61
+  flutter_native_splash: ^2.0.4
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

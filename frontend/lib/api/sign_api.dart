@@ -36,7 +36,8 @@ class SignAPI {
         cacheFile = await cacheFile!.writeAsString(session.cookie);
       }
       var urlHome = Uri.https(APIConstants.baseUrl, APIConstants.homeEndPoint);
-      var responseHome = await http.post(urlHome, headers: APIConstants.headerCORS("cookie"));
+
+      var responseHome = await http.post(urlHome, headers: APIConstants.headerCORS(cookie));
       return "right credentials";
     }
     return null;

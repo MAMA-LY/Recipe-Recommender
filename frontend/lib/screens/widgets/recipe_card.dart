@@ -7,6 +7,7 @@ import 'package:recipe_recommender_frontend/models/nutrition.dart';
 import 'package:recipe_recommender_frontend/models/recipe.dart';
 import 'package:recipe_recommender_frontend/screens/recipe_page/recipe_page.dart';
 
+
 class RecipeCard extends StatelessWidget {
   final String id;
   final String name;
@@ -43,6 +44,7 @@ class RecipeCard extends StatelessWidget {
             )
           )]
         );
+
 
   RecipeCard({
     super.key,
@@ -120,7 +122,7 @@ class RecipeCard extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) =>   RecipePage(recipe: _recipe, inFavorites: false)),
-    );
+        );
       },
     );
   }
