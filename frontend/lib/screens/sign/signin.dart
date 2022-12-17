@@ -1,11 +1,10 @@
-
-
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'package:recipe_recommender_frontend/api/sign_api.dart';
 import 'package:recipe_recommender_frontend/screens/sign/signup.dart';
+import 'package:recipe_recommender_frontend/screens/sign/widgets/custom_button.dart';
+import 'package:recipe_recommender_frontend/screens/sign/widgets/text_field.dart';
 
-import '../../main.dart';
-import '../nav/bottom_nav_screen.dart';
+import '../page_view_controller.dart';
 
 class SignInPage extends StatefulWidget {
   static String routeName = "/signin";
@@ -22,122 +21,55 @@ class _SignInPageState extends State<SignInPage> {
 
   String resp = "";
 
+  Future<void> _signin() async {
+    String? status =
+        await SignAPI.signin(usernameController.text, passwordController.text);
+    debugPrint(status);
+    if (status == "wrong credentials") {
+      setState(() {
+        resp = "Wrong credentials";
+      });
+    } else if (status == "right credentials") {
+      // ignore: use_build_context_synchronously
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => const PageViewController()));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primarySwatch: Colors.orange,
         ),
         home: Scaffold(
-            appBar: AppBar(
-              title: const Text('Login Screen'),
-            ),
+            resizeToAvoidBottomInset: false,
             body: Center(
+                child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Container(
-                      width: MediaQuery.of(context).size.width / 3,
-                      padding: const EdgeInsets.fromLTRB(20, 20, 20, 70),
+                      width: MediaQuery.of(context).size.width / 2,
+                      padding: const EdgeInsets.fromLTRB(20, 20, 20, 40),
                       child: const Image(
                           image: AssetImage("assets/images/Logo.png"),
                           fit: BoxFit.fill)),
-                  Container(
-                    padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-                    child: TextField(
-                      controller: usernameController,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(90.0),
-                        ),
-                        labelText: 'Username',
-                      ),
-                    ),
+                  CustomTextField(
+                    promptText: "Username",
+                    bottomPadding: 25,
+                    controller: usernameController,
+                    obscureText: false,
                   ),
-                  Container(
-                    padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-                    child: TextField(
-                      controller: passwordController,
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(90.0),
-                        ),
-                        labelText: 'Password',
-                      ),
-                    ),
+                  CustomTextField(
+                    promptText: "Password",
+                    bottomPadding: 20,
+                    controller: passwordController,
+                    obscureText: true,
                   ),
-                  Container(
-                      height: 80,
-                      padding: const EdgeInsets.all(20),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          minimumSize: const Size.fromHeight(50),
-                        ),
-                        child: const Text('Sign in'),
-                        onPressed: () async {
-                          var url = Uri.https(
-                              "${const String.fromEnvironment("BrainFoodBackendIP", defaultValue: "brainfood.azurewebsites.net")}",
-                              "/signin");
-                          var response = await http.post(url, body: {
-                            "username": usernameController.text,
-                            "password": passwordController.text
-                          }, headers: {
-                            "Access-Control-Allow-Origin": "*",
-                            "Access-Control-Allow-Methods":
-                                "POST, OPTIONS, GET",
-                            "Access-Control-Allow-Headers":
-                                "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale",
-                          });
-                          debugPrint(response.statusCode.toString());
-                          print(response.statusCode.toString());
-
-                          var cookie = response.headers['set-cookie'];
-                          var responseLocation = response.headers['location'];
-                          debugPrint(cookie);
-                          debugPrint(responseLocation);
-                          debugPrint(
-                              "${const String.fromEnvironment("BrainFoodBackendIP", defaultValue: "brainfood.azurewebsites.net")}/signin?error");
-                          if (responseLocation ==
-                              "https://${const String.fromEnvironment("BrainFoodBackendIP", defaultValue: "brainfood.azurewebsites.net")}/signin?error") {
-                            setState(() {
-                              resp = "Wrong Credentials";
-                            });
-                          }
-                          if (responseLocation ==
-                                  "https://${const String.fromEnvironment("BrainFoodBackendIP", defaultValue: "brainfood.azurewebsites.net")}/home" &&
-                              cookie != null) {
-                            {
-                              session.cookie = cookie;
-                              if (cacheFile != null) {
-                                cacheFile = await cacheFile!
-                                    .writeAsString(session.cookie);
-                              }
-
-                              var urlHome = Uri.https(
-                                  "${const String.fromEnvironment("BrainFoodBackendIP", defaultValue: "brainfood.azurewebsites.net")}",
-                                  "/home");
-                              var responseHome = await http.post(urlHome, headers: {
-                                "cookie": cookie,
-                                "Access-Control-Allow-Origin": "*",
-                                "Access-Control-Allow-Methods":
-                                    "POST, OPTIONS, GET",
-                                "Access-Control-Allow-Headers":
-                                    "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale",
-                              });
-                              // ignore: use_build_context_synchronously
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const BottomNavView()));
-                            }
-                          }
-                        },
-                      )),
+                  CustomButton(onPressFn: _signin, text: "Sign in"),
                   TextButton(
                     onPressed: () {
                       setState(() {
@@ -146,7 +78,8 @@ class _SignInPageState extends State<SignInPage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const BottomNavView()));
+                              builder: (context) =>
+                                  const PageViewController()));
                     },
                     child: Text(
                       'Forgot Password?',
@@ -171,7 +104,6 @@ class _SignInPageState extends State<SignInPage> {
                   )
                 ],
               ),
-            )));
+            ))));
   }
 }
-

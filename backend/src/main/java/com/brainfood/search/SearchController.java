@@ -30,12 +30,12 @@ public class SearchController {
 
     @GetMapping("/sentence")
     public ShortRecipe[] searchSentence(@RequestParam String sentence) throws JSONException, IOException, InterruptedException {
-        JSONArray APIresult = spoonacularAPI.foodText(sentence).getJSONArray("annotations");
+        JSONArray APIResult = spoonacularAPI.foodText(sentence).getJSONArray("annotations");
         List<ShortRecipe> food = new ArrayList<>();
 
         ObjectMapper mapper = new ObjectMapper();
-        for (int i = 0; !APIresult.isNull(i); i++)
-            food.add(mapper.readValue(APIresult.getJSONObject(i).toString(), ShortRecipe.class)) ;
+        for (int i = 0; !APIResult.isNull(i); i++)
+            food.add(mapper.readValue(APIResult.getJSONObject(i).toString(), ShortRecipe.class)) ;
 
         dishIngredientClassifier.classify(food);
         List<ShortRecipe> dishes = dishIngredientClassifier.getDish();
