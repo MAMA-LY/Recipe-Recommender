@@ -2,6 +2,7 @@ package com.brainfood.search;
 
 import com.brainfood.search.DBEntities.Recipe;
 import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ShortRecipe {
@@ -14,6 +15,7 @@ public class ShortRecipe {
     String name;
 
     @JsonProperty("tag")
+    @JsonIgnore
     String tag;
 
     @JsonProperty("image")

@@ -18,6 +18,7 @@ import java.util.*;
 @RestController
 @RequestMapping("search")
 public class SearchController {
+    int requestSize = 100 ;
 
     @Autowired
     SpoonacularAPI spoonacularAPI;
@@ -48,15 +49,40 @@ public class SearchController {
         return eliminateDuplicates(result);
     }
 
+    @GetMapping("/random")
+    public ShortRecipe[] getRandom(@RequestParam int number){
+        var result = recipeDAO.getRandomRecipes(number) ;
+        return this.castToArray(result);
+    }
+
+    @GetMapping("/withIngredients")
+    public ShortRecipe[] getRecipeWithIngredients(@RequestParam String[] Ingredients){
+        var result = recipeDAO.recipesWithIngredients(Ingredients);
+        if(result == null)
+            return null;
+        return this.castToArray(result);
+    }
+
     private ShortRecipe[] eliminateDuplicates(List<Recipe> list){
         Set<String> ids = new TreeSet<>();
         List<ShortRecipe> unique = new ArrayList<>() ;
         for(Recipe recipe : list){
-            if(!ids.contains(recipe.id)){
+            if(!ids.contains(recipe.id) && recipe.photo != null){
                 unique.add(new ShortRecipe(recipe));
                 ids.add(recipe.id);
+                if(ids.size() == requestSize)
+                    break;
             }
         }
         return unique.toArray(new ShortRecipe[unique.size()]);
+    }
+
+    private ShortRecipe[] castToArray(List<Recipe> result){
+        List<ShortRecipe> toReturn = new ArrayList<>();
+        for(Recipe recipe : result){
+            if(recipe.photo != null)
+                toReturn.add(new ShortRecipe(recipe));
+        }
+        return toReturn.toArray(new ShortRecipe[toReturn.size()]);
     }
 }
