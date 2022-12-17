@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_recommender_frontend/constants.dart';
 import 'package:recipe_recommender_frontend/models/recipe.dart';
-import 'package:recipe_recommender_frontend/screens/recipe_%20page/widgets/ingredients_view.dart';
-import 'package:recipe_recommender_frontend/screens/recipe_%20page/widgets/nutrition_view.dart';
-import 'package:recipe_recommender_frontend/screens/recipe_%20page/widgets/recipe_image.dart';
-import 'package:recipe_recommender_frontend/screens/recipe_%20page/widgets/recipe_title.dart';
+import 'package:recipe_recommender_frontend/screens/recipe_page/widgets/ingredients_view.dart';
+import 'package:recipe_recommender_frontend/screens/recipe_page/widgets/nutrition_view.dart';
+import 'package:recipe_recommender_frontend/screens/recipe_page/widgets/recipe_image.dart';
+import 'package:recipe_recommender_frontend/screens/recipe_page/widgets/recipe_title.dart';
 
 class RecipePage extends StatefulWidget {
   final Recipe recipe;

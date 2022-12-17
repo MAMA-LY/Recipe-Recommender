@@ -5,7 +5,7 @@ import 'package:recipe_recommender_frontend/main.dart';
 import 'package:recipe_recommender_frontend/models/ingredient.dart';
 import 'package:recipe_recommender_frontend/models/nutrition.dart';
 import 'package:recipe_recommender_frontend/models/recipe.dart';
-import 'package:recipe_recommender_frontend/screens/recipe_%20page/recipe_page.dart';
+import 'package:recipe_recommender_frontend/screens/recipe_page/recipe_page.dart';
 
 class RecipeCard extends StatelessWidget {
   final String id;
