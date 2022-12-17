@@ -24,7 +24,7 @@ public class RecipesCollector implements ApplicationRunner {
     private final CollectorFitters collectorFitters = new CollectorFitters();
     private final IngredientCollector ingredientCollector = new IngredientCollector();
     private final List<String> tags = Arrays.asList("gluten free", "ketogenic", "vegetarian", "dairy", "dairy free", "seafood", "wheat", "snack",
-            "dairy-free","cake","milk","breakfast", "dessert", "salad", "main course", "appetizer");
+            "dairy-free","cake","milk","breakfast", "dessert", "salad", "main course", "appetizer","primal","paleo","vegan","pescetarian");
 
     public void collect() throws  JSONException {
         SpoonacularClient spoonacularClient = new SpoonacularClient();
