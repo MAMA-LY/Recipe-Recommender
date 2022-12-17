@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 @ComponentScan
 @RestController
@@ -55,11 +58,12 @@ public class SearchController {
         return this.castToArray(result);
     }
 
-    @GetMapping("/withIngredients")
-    public ShortRecipe[] getRecipeWithIngredients(@RequestParam String[] Ingredients){
+    @GetMapping("/withIngredientsAndTags")
+    public ShortRecipe[] getRecipeWithIngredientsAndTags(@RequestParam String[] Ingredients , @RequestParam String[] Tags){
         var result = recipeDAO.recipesWithIngredients(Ingredients);
-        if(result == null)
-            return null;
+        if (result.size() == 0 && Ingredients.length > 0)
+                return null;
+        result = recipeDAO.filterWithTags(Tags , result);
         return this.castToArray(result);
     }
 

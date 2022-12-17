@@ -1,5 +1,6 @@
 package com.brainfood.search.DBEntities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -35,7 +36,4 @@ public class Recipe implements Serializable {
 
     @Column(name = "photo")
     public String photo;
-
-    @OneToMany(mappedBy = "compositeKey.recipeID" , cascade = CascadeType.ALL , orphanRemoval = true)
-    public Set<RecipeIngredients> recipeIngredients = new HashSet<>() ;
 }
