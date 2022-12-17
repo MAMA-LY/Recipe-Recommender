@@ -4,15 +4,18 @@ import lombok.*;
 
 import java.util.List;
 
-@Getter @Setter @Builder
-@AllArgsConstructor @NoArgsConstructor
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class RecipeModel {
 
     private String ID;
 
     private List<String> tags;
 
-    private String cuisine ;
+    private String cuisine;
 
     private String name;
 
@@ -21,6 +24,6 @@ public class RecipeModel {
     private String photo;
 
     private NutritionModel nutritionModel;
-    
+
 
 }

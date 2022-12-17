@@ -8,7 +8,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
-import com.brainfood.security.model.UserCredentials;
+import com.brainfood.security.Model.UserCredentials;
 
 
 

@@ -10,14 +10,15 @@ import java.util.List;
 
 @Repository
 public interface RecipeRepository extends JpaRepository<Recipe, String> {
-    @Query("select r from Recipe r where lower(r.name) like lower(:name)")
-    List<Recipe> findByName(@Param("name") String name);
+    List<Recipe> findByName(String name);
 
-    @Query("select r, i.id, i.name from Recipe r " +
+    List<Recipe> findByNameContaining(String name);
+
+    /*@Query("select r, i.id, i.name from Recipe r " +
             "JOIN RecipeIngredients ri on ri.compositeKey.recipeID = r.id " +
             "JOIN Ingredient i on ri.compositeKey.ingredientID = i.id " +
             "where i.name like :name")
-    List<Recipe> findByIngredientsLike(@Param("name") String name);
+    List<Recipe> findByIngredientsLike(@Param("name") String name);*/
 
     Recipe findRecipeById(@Param("id") String id);
 }

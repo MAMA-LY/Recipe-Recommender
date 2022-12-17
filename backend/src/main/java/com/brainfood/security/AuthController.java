@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.brainfood.security.repository.UserRepository;
+import com.brainfood.security.Repository.UserRepository;
 
 @Component
 @RestController

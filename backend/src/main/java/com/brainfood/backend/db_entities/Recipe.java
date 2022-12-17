@@ -4,10 +4,13 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "\"Recipe\"")
-@Getter @Setter
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Recipe implements Serializable {
@@ -17,7 +20,7 @@ public class Recipe implements Serializable {
     public String id;
 
     @Column(name = "cuisine")
-    public String cuisine ;
+    public String cuisine;
 
     @Column(name = "name")
     public String name;
@@ -36,4 +39,7 @@ public class Recipe implements Serializable {
 
     @Column(name = "photo")
     public String photo;
+
+    @OneToMany(mappedBy = "recipe")
+    public List<RecipeIngredients> recipeIngredients;
 }

@@ -8,13 +8,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 @Entity
 @Table(name = "\"RecipeTags\"")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class RecipeTags {
+public class RecipeTags implements Serializable {
     @EmbeddedId
     private RecipeTagsCK compositeKey;
 }

@@ -16,7 +16,7 @@ class SignAPI {
   }
 
   static Future<String?> signin(String username, String password) async {
-    var url = Uri.https(APIConstants.baseUrl, APIConstants.signinEndPoint);
+    var url = Uri.http(APIConstants.baseUrl, APIConstants.signinEndPoint);
     var response = await http.post(url, body: {
       "username": username,
       "password": password
@@ -24,18 +24,19 @@ class SignAPI {
 
     var cookie = response.headers['set-cookie'];
     var responseLocation = response.headers['location'];
+    print(response.statusCode.toString());
     if (responseLocation ==
-        "https://${APIConstants.baseUrl + APIConstants.signinEndPoint}?error") {
+        "http://${APIConstants.baseUrl + APIConstants.signinEndPoint}?error") {
       return "wrong credentials";
     }
     if (responseLocation ==
-            "https://${APIConstants.baseUrl + APIConstants.homeEndPoint}" &&
+            "http://${APIConstants.baseUrl + APIConstants.homeEndPoint}" &&
         cookie != null) {
       session.cookie = cookie;
       if (cacheFile != null) {
         cacheFile = await cacheFile!.writeAsString(session.cookie);
       }
-      var urlHome = Uri.https(APIConstants.baseUrl, APIConstants.homeEndPoint);
+      var urlHome = Uri.http(APIConstants.baseUrl, APIConstants.homeEndPoint);
       var responseHome = await http.post(urlHome, headers: APIConstants.headerCORS(cookie));
       return "right credentials";
     }

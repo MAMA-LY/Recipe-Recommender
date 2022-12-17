@@ -2,7 +2,7 @@ package com.brainfood.models;
 import java.util.List;
 import java.awt.Image;
 
-import com.brainfood.security.model.UserCredentials;
+import com.brainfood.security.Model.UserCredentials;
 import lombok.*;
 
 

@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "\"Ingredient\"")
@@ -35,6 +37,9 @@ public class Ingredient implements Serializable {
 
     @Column(name = "fats")
     public int fats;
+
+    @OneToMany(mappedBy = "ingredient")
+    public List<RecipeIngredients> recipeIngredient;
 
 
 }
