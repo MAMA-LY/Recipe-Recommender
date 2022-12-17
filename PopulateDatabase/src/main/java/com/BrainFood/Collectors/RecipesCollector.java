@@ -7,6 +7,7 @@ import com.BrainFood.DatabaseEntities.*;
 import com.spoonacular.client.model.GetRandomRecipes200Response;
 import com.spoonacular.client.model.GetRandomRecipes200ResponseRecipesInner;
 import com.spoonacular.client.model.GetRecipeInformation200ResponseExtendedIngredientsInner;
+import com.spoonacular.client.model.GetRecipeNutritionWidgetByID200Response;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +36,12 @@ public class RecipesCollector implements ApplicationRunner {
             int reqNumber = 70 ;
             GetRandomRecipes200Response recipes200Response =
                     spoonacularClient.getRandomRecipes(reqNumber, tags.get((int)(Math.random() *tags.size())));
-            for (GetRandomRecipes200ResponseRecipesInner recipesInner: recipes200Response.getRecipes()) {
 
+            for (GetRandomRecipes200ResponseRecipesInner recipesInner: recipes200Response.getRecipes()) {
+                GetRecipeNutritionWidgetByID200Response nutritionWidgetByID200Response =spoonacularClient.getRecipeNutritionWidgetByID200Response(recipesInner.getId() );
+                System.out.println(nutritionWidgetByID200Response.getCalories());
+                System.out.println( recipesInner.getId());
+                System.out.println(recipesInner.getTitle());
                 if(dataAccessObject.existsRecipe(recipesInner.getTitle()))
                     continue;
 
