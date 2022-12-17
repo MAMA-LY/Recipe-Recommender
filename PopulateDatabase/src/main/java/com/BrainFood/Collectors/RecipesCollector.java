@@ -23,8 +23,13 @@ public class RecipesCollector implements ApplicationRunner {
     @Autowired private  DAO dataAccessObject;
     private final CollectorFitters collectorFitters = new CollectorFitters();
     private final IngredientCollector ingredientCollector = new IngredientCollector();
-    private final List<String> tags = Arrays.asList("gluten free", "ketogenic", "vegetarian", "dairy", "dairy free", "seafood", "wheat", "snack",
-            "dairy-free","cake","milk","breakfast", "dessert", "salad", "main course", "appetizer","primal","paleo","vegan","pescetarian");
+    private final List<String> tags = Arrays.asList(
+            "mediterranean","french","beverage","gluten free", "ketogenic", "vegetarian", "dairy", "dairy free", "seafood", "wheat", "snack",
+            "dairy-free","cake","milk","breakfast","dinner", "lunch","dessert", "salad", "main course", "appetizer",
+            "primal","paleo","vegan","pescetarian","lacto ovo vegetarian", "whole 30","fall","winter","soup",
+            "fodmap friendly","summer","dessert","side dish", "valentine's day","mother's day", "father's day",
+            "beverage","appetizer","hor d'oeuvre","4th of july","antipasto"
+    );
 
     public void collect() throws  JSONException {
         SpoonacularClient spoonacularClient = new SpoonacularClient();
