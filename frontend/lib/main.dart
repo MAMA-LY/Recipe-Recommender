@@ -45,6 +45,8 @@ void main() {
           });
 }
 
+
+
 Future<String?> getServerInitResponse() async {
   session.cookie = cookieStr;
   var url = Uri.https(APIConstants.baseUrl, APIConstants.homeEndPoint);
@@ -75,9 +77,10 @@ class MyApp extends StatelessWidget {
               debugPrint("IN");
               return const SignInPage();
             }
+
           } else {
             debugPrint("IN2");
-            return const SignInPage();
+            return const SplashScreenPage();
           }
         },
       ),

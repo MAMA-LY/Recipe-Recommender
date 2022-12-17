@@ -9,6 +9,7 @@ typedef TagTitle<String> = Widget Function(String tag);
 
 
 
+// ignore: must_be_immutable
 class FlutterTagView extends StatefulWidget {
   List<String> tags;
   Color tagBackgroundColor;
@@ -32,6 +33,7 @@ class FlutterTagView extends StatefulWidget {
   });
 
   @override
+  // ignore: library_private_types_in_public_api
   _FlutterTagViewState createState() => _FlutterTagViewState();
 
 }

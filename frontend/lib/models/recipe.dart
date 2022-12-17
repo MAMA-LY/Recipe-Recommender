@@ -29,14 +29,16 @@ class Recipe {
   }
 
   factory Recipe.recipeFromJson(dynamic json) {
+    var jsonIngredients = json['ingredients'] as List;
     return Recipe(
         name: json['name'] as String,
         image: json['image'] as String,
-        tags: json['tag'] as List<String>,
+        tags: json['tags'] as List<String>,
         id: json['id'] as String,
         cuisine: json['cuisine'] as String,
-        nutrition: json['nutrition'] as Nutrition,
-        ingredients: json['ingredients'] as List<Ingredient>);
+        nutrition: Nutrition.fromJson(['nutrition']),
+        ingredients: jsonIngredients.map<Ingredient>((json) => Ingredient.fromJson(json)).toList()
+    );
   }
 
   static List<Recipe> shortRecipesFromSnapshot(List<dynamic> snapshot) {
