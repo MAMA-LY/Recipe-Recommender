@@ -24,7 +24,7 @@ public class RecipesCollector implements ApplicationRunner {
     private final CollectorFitters collectorFitters = new CollectorFitters();
     private final IngredientCollector ingredientCollector = new IngredientCollector();
     private final List<String> tags = Arrays.asList(
-            "mediterranean","french","beverage","gluten free", "ketogenic", "vegetarian", "dairy", "dairy free", "seafood", "wheat", "snack",
+            "mediterranean","french","asian","beverage","gluten free", "ketogenic", "vegetarian", "dairy", "dairy free", "seafood", "wheat", "snack",
             "dairy-free","cake","milk","breakfast","dinner", "lunch","dessert", "salad", "main course", "appetizer",
             "primal","paleo","vegan","pescetarian","lacto ovo vegetarian", "whole 30","fall","winter","soup",
             "fodmap friendly","summer","dessert","side dish", "valentine's day","mother's day", "father's day",
@@ -34,10 +34,11 @@ public class RecipesCollector implements ApplicationRunner {
     public void collect() throws  JSONException {
         SpoonacularClient spoonacularClient = new SpoonacularClient();
 
-        for (int k = 0 ; k < 100 ; k++) {
-            int reqNumber = 70 ;
+        for(String tag : tags) {
+            System.out.println("working tag : "+ tag);
+            int reqNumber = 100 ;
             GetRandomRecipes200Response recipes200Response =
-                    spoonacularClient.getRandomRecipes(reqNumber, tags.get((int)(Math.random() *tags.size())));
+                    spoonacularClient.getRandomRecipes(reqNumber, tag.toLowerCase());
 
             for (GetRandomRecipes200ResponseRecipesInner recipesInner: recipes200Response.getRecipes()) {
                 GetRecipeNutritionWidgetByID200Response nutritionWidgetByID200Response =spoonacularClient.getRecipeNutritionWidgetByID200Response(recipesInner.getId() );
