@@ -5,11 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="110e55e1-0580-4624-b627-2379bae5198c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../Populate DB/.idea/workspace.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Resources/Spoonacular java client/src/main/java/com/spoonacular/client/model/GetRecipeNutritionWidgetByID200Response.java" beforeDir="false" afterPath="$PROJECT_DIR$/Resources/Spoonacular java client/src/main/java/com/spoonacular/client/model/GetRecipeNutritionWidgetByID200Response.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Resources/Spoonacular java client/src/main/java/com/spoonacular/client/model/GetRecipeNutritionWidgetByID200ResponseBadInner.java" beforeDir="false" afterPath="$PROJECT_DIR$/Resources/Spoonacular java client/src/main/java/com/spoonacular/client/model/GetRecipeNutritionWidgetByID200ResponseBadInner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Resources/Spoonacular java client/src/main/java/com/spoonacular/client/model/GetRecipeNutritionWidgetByID200ResponseGoodInner.java" beforeDir="false" afterPath="$PROJECT_DIR$/Resources/Spoonacular java client/src/main/java/com/spoonacular/client/model/GetRecipeNutritionWidgetByID200ResponseGoodInner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/BrainFood/Collectors/CollectorFitters.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/BrainFood/Collectors/CollectorFitters.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/BrainFood/Collectors/IngredientCollector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/BrainFood/Collectors/IngredientCollector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/BrainFood/Collectors/RecipesCollector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/BrainFood/Collectors/RecipesCollector.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -164,15 +163,6 @@
     </option>
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/BrainFood/Collectors/RecipesCollector.java</url>
-          <line>44</line>
-          <option name="timeStamp" value="24" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
         <watch expression="((RealCall)localVarCall).originalRequest" custom="okhttp3.internal.connection.RealCall" />

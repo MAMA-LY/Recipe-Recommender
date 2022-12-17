@@ -5,15 +5,13 @@ import com.BrainFood.DatabaseEntities.Ingredient;
 import com.spoonacular.client.model.GetRecipeInformation200ResponseExtendedIngredientsInner;
 import lombok.NoArgsConstructor;
 import org.json.JSONObject;
-import java.io.IOException;
 
 @NoArgsConstructor
 public class IngredientCollector {
 
     private final CollectorFitters collectorFitters = new CollectorFitters();
 
-    public Ingredient collect(GetRecipeInformation200ResponseExtendedIngredientsInner ingredientsInner)
-            throws IOException, InterruptedException {
+    public Ingredient collect(GetRecipeInformation200ResponseExtendedIngredientsInner ingredientsInner) {
 
         JSONObject ingredientNutrition = CalorieNinjasClient.getNutrition(ingredientsInner.getOriginal());
         if(ingredientNutrition.toString().equals("{}")
