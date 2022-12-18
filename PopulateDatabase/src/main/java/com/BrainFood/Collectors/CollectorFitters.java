@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.springframework.data.relational.core.sql.In;
 
 import java.math.BigDecimal;
 
@@ -21,7 +20,10 @@ public class CollectorFitters {
             if(!nutritionFacts.has(nutritionFact)){
                 throw new JSONException("Non-Compatible Keys");
             }
-            sum += ((BigDecimal)nutritionFacts.get(nutritionFact)).intValue();
+            if(nutritionFacts.get(nutritionFact) instanceof Double)
+                sum+= ((Double) nutritionFacts.get(nutritionFact)).intValue();
+            else
+                sum += ((BigDecimal)nutritionFacts.get(nutritionFact)).intValue();
         }
         return sum;
    
