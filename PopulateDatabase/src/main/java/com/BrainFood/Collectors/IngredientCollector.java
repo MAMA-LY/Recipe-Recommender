@@ -15,6 +15,7 @@ public class IngredientCollector {
 
         JSONObject ingredientNutrition = CalorieNinjasClient.getNutrition(ingredientsInner.getOriginal());
         if(ingredientNutrition.toString().equals("{}")
+                || !ingredientNutrition.has("items")
                 || ingredientNutrition.getJSONArray("items")==null
                 || ingredientNutrition.getJSONArray("items").length()==0) {
             return null;
