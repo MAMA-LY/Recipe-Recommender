@@ -21,8 +21,6 @@ import java.util.TreeSet;
 @RestController
 @RequestMapping("search")
 public class SearchController {
-    int requestSize = 100 ;
-
     @Autowired
     SpoonacularAPI spoonacularAPI;
 
@@ -49,13 +47,13 @@ public class SearchController {
         result.addAll(recipeDAO.findSimilarDishes(dishes));
         result.addAll(recipeDAO.findByIngredientsLike(ingredients));
 
-        return eliminateDuplicates(result);
+        return Utilities.eliminateDuplicates(result);
     }
 
     @GetMapping("/random")
     public ShortRecipe[] getRandom(@RequestParam int number){
         var result = recipeDAO.getRandomRecipes(number) ;
-        return this.castToArray(result);
+        return Utilities.castToArray(result);
     }
 
     @GetMapping("/withIngredientsAndTags")
@@ -64,29 +62,6 @@ public class SearchController {
         if (result.size() == 0 && Ingredients.length > 0)
                 return null;
         result = recipeDAO.filterWithTags(Tags , result);
-        return this.castToArray(result);
-    }
-
-    private ShortRecipe[] eliminateDuplicates(List<Recipe> list){
-        Set<String> ids = new TreeSet<>();
-        List<ShortRecipe> unique = new ArrayList<>() ;
-        for(Recipe recipe : list){
-            if(!ids.contains(recipe.id) && recipe.photo != null){
-                unique.add(new ShortRecipe(recipe));
-                ids.add(recipe.id);
-                if(ids.size() == requestSize)
-                    break;
-            }
-        }
-        return unique.toArray(new ShortRecipe[unique.size()]);
-    }
-
-    private ShortRecipe[] castToArray(List<Recipe> result){
-        List<ShortRecipe> toReturn = new ArrayList<>();
-        for(Recipe recipe : result){
-            if(recipe.photo != null)
-                toReturn.add(new ShortRecipe(recipe));
-        }
-        return toReturn.toArray(new ShortRecipe[toReturn.size()]);
+        return Utilities.castToArray(result);
     }
 }
