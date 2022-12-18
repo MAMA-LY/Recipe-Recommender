@@ -42,7 +42,7 @@ public class RecipesCollector implements ApplicationRunner {
 
             for (GetRandomRecipes200ResponseRecipesInner recipesInner: recipes200Response.getRecipes()) {
                 GetRecipeNutritionWidgetByID200Response nutritionWidgetByID200Response =spoonacularClient.getRecipeNutritionWidgetByID200Response(recipesInner.getId() );
-                if(dataAccessObject.existsRecipe(recipesInner.getTitle())|| recipesInner.getImage() ==null )
+                if(recipesInner.getImage() ==null || dataAccessObject.existsRecipe(recipesInner.getTitle()) )
                     continue;
 
                 String cuisine;
