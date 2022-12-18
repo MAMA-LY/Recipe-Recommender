@@ -25,13 +25,13 @@ public interface RecipeRepository extends JpaRepository<Recipe, String> {
     @Query("select r, i.id, i.name from Recipe r " +
             "JOIN RecipeIngredients ri on ri.compositeKey.recipeID = r.id " +
             "JOIN Ingredient i on ri.compositeKey.ingredientID = i.id " +
-            "where i.name like :name")
+            "where lower(i.name) like lower(:name)")
     List<Recipe> findByIngredientsLike(@Param("name") String name);
 
     @Query("select r from Recipe r " +
             "join RecipeIngredients ri on ri.compositeKey.recipeID = r.id " +
             "join Ingredient i on ri.compositeKey.ingredientID = i.id " +
-            "where i.name like :name and r in (:exist)")
+            "where lower(i.name) like lower(:name) and r in (:exist)")
     List<Recipe> findByRecipeIngredientsIsLikeAndIdInList(@Param("name") String ingredient , @Param("exist") List<Recipe> exist);
 
     @Query("select r from Recipe r " +
