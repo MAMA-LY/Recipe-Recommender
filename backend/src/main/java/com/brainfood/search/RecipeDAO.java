@@ -24,7 +24,6 @@ public class RecipeDAO {
         return result;
     }
 
-
     Recipe findRecipe(String id) {
         return recipeRepository.findByIdEquals(id);
     }

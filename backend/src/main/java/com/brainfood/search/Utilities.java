@@ -8,9 +8,18 @@ import java.util.Set;
 import java.util.TreeSet;
 
 public class Utilities {
-    private static int requestSize = 100 ;
+    private static final int requestSize = 100;
 
+    /**
+     * eliminate duplicates and null-image objects in a list of recipes and transform it to array
+     *
+     * @param list the desired list to be handled
+     * @return the inserted list after eliminating duplicates and null-image recipes and transform it to array of ShortRecipe
+     */
     public static ShortRecipe[] eliminateDuplicates(List<Recipe> list) {
+        if (list == null)
+            return new ShortRecipe[0];
+
         Set<String> ids = new TreeSet<>();
         List<ShortRecipe> unique = new ArrayList<>();
         for (Recipe recipe : list) {
@@ -24,7 +33,16 @@ public class Utilities {
         return unique.toArray(new ShortRecipe[unique.size()]);
     }
 
+    /**
+     * transform a list of recipes to array of ShortRecipe and remove null-image ones
+     *
+     * @param result the desired list to be handled
+     * @return the inserted list after removing null-image recipes and transform it to array of ShortRecipe
+     */
     public static ShortRecipe[] castToArray(List<Recipe> result) {
+        if (result == null)
+            return new ShortRecipe[0];
+
         List<ShortRecipe> toReturn = new ArrayList<>();
         for (Recipe recipe : result) {
             if (recipe.photo != null)
