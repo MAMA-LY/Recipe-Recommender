@@ -34,10 +34,10 @@ class BodyInfoTest {
     void getBirthdate() throws NoSuchFieldException, IllegalAccessException {
         final BodyInfo bodyInfo =new BodyInfo();
         Date expectedBirthdate =new GregorianCalendar(2014, Calendar.FEBRUARY, 11).getTime();
-        final Field field = bodyInfo.getClass().getDeclaredField("age");
+        final Field field = bodyInfo.getClass().getDeclaredField("birthdate");
         field.setAccessible(true);
         field.set(bodyInfo, expectedBirthdate);
-        assertEquals(expectedBirthdate, bodyInfo.getBirthdate(), "problem in getAge");
+        assertEquals(expectedBirthdate, bodyInfo.getBirthdate(), "problem in getBirthdate");
     }
 
     @Test
@@ -66,9 +66,9 @@ class BodyInfoTest {
         final BodyInfo bodyInfo =new BodyInfo();
         Date expectedBirthdate =new GregorianCalendar(2014, Calendar.FEBRUARY, 11).getTime();
         bodyInfo.setBirthdate(expectedBirthdate);
-        final Field feild=bodyInfo.getClass().getDeclaredField("age");
+        final Field feild=bodyInfo.getClass().getDeclaredField("birthdate");
         feild.setAccessible(true);
         Date value= (Date)feild.get(bodyInfo);
-        assertEquals(expectedBirthdate,value,"setAge problem");
+        assertEquals(expectedBirthdate,value,"setBirthdate problem");
     }
 }
