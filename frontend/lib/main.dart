@@ -30,7 +30,7 @@ Future<File> getLocalFile() async {
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   var url = Uri.http(
-      "${const String.fromEnvironment("BrainFoodBackendIP", defaultValue: "localhost:8080")}",
+      "${const String.fromEnvironment("BrainFoodBackendIP", defaultValue: "http://brainfood.azurewebsites.net")}",
       "/home");
   print(url.toString());
   getLocalFile()
@@ -49,7 +49,7 @@ void main() {
 Future<String?> getServerInitResponse() async {
   session.cookie = cookieStr;
   var url = Uri.http(
-      "${const String.fromEnvironment("BrainFoodBackendIP", defaultValue: "localhost:8080")}",
+      "${const String.fromEnvironment("BrainFoodBackendIP", defaultValue: "http://brainfood.azurewebsites.net")}",
       "/home");
   var serverResponse = await http.get(url, headers: {
     "cookie": session.cookie,

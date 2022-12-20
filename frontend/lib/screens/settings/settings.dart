@@ -17,7 +17,7 @@ class SettingsPage extends StatelessWidget {
     return ElevatedButton(
         onPressed: () async {
           var url = Uri.http(
-              "${const String.fromEnvironment("BrainFoodBackendIP", defaultValue: "localhost:8080")}",
+              "${const String.fromEnvironment("BrainFoodBackendIP", defaultValue: "http://brainfood.azurewebsites.net")}",
               "/signout");
           debugPrint(session.cookie);
           var response =
