@@ -6,10 +6,11 @@ import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
 import 'package:recipe_recommender_frontend/constants.dart';
 import 'package:recipe_recommender_frontend/screens/sign/signin.dart';
-import 'package:recipe_recommender_frontend/screens/splash_screen/splash_screen.dart';
+import 'package:recipe_recommender_frontend/screens/splash_screen.dart';
 
+import 'api/api_constants.dart';
 import 'api/session.dart';
-import 'screens/nav/bottom_nav_screen.dart';
+import 'screens/page_view_controller.dart';
 
 var session = Session("");
 
@@ -29,10 +30,8 @@ Future<File> getLocalFile() async {
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  var url = Uri.https(
-      "${const String.fromEnvironment("BrainFoodBackendIP", defaultValue: "brainfood.azurewebsites.net")}",
-      "/home");
-  print(url.toString());
+  var url = Uri.https(APIConstants.baseUrl, APIConstants.homeEndPoint);
+  debugPrint(url.toString());
   getLocalFile()
       .then((value) => {
             cacheFile = value,
@@ -46,18 +45,12 @@ void main() {
           });
 }
 
+
+
 Future<String?> getServerInitResponse() async {
   session.cookie = cookieStr;
-  var url = Uri.https(
-      "${const String.fromEnvironment("BrainFoodBackendIP", defaultValue: "brainfood.azurewebsites.net")}",
-      "/home");
-  var serverResponse = await http.get(url, headers: {
-    "cookie": session.cookie,
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "POST, OPTIONS, GET",
-    "Access-Control-Allow-Headers":
-        "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale",
-  });
+  var url = Uri.https(APIConstants.baseUrl, APIConstants.homeEndPoint);
+  var serverResponse = await http.get(url, headers: APIConstants.headerCORS(session.cookie));
   final bool hasData = serverResponse.body != null;
   if (hasData) {
     return serverResponse.body;
@@ -76,14 +69,15 @@ class MyApp extends StatelessWidget {
         future: getServerInitResponse(),
         initialData: "",
         builder: (builder, snapshot) {
-          if (snapshot.hasData) {
+          if (snapshot.connectionState == ConnectionState.done) {
             String response = snapshot.data!;
             if (response == "UserInfo") {
-              return const BottomNavView();
+              return const PageViewController();
             } else {
               debugPrint("IN");
               return const SignInPage();
             }
+
           } else {
             debugPrint("IN2");
             return const SplashScreenPage();
