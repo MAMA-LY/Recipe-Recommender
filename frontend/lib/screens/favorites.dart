@@ -3,6 +3,7 @@ import 'package:recipe_recommender_frontend/constants.dart';
 import 'package:recipe_recommender_frontend/models/recipe.dart';
 import 'package:recipe_recommender_frontend/screens/widgets/recipe_card.dart';
 
+<<<<<<<< HEAD:frontend/lib/screens/favorites.dart
 class FavoritesPage extends StatefulWidget {
   static String routeName = "/favorites";
 
@@ -13,6 +14,18 @@ class FavoritesPage extends StatefulWidget {
 }
 
 class _FavoritesPageState extends State<FavoritesPage> {
+========
+class HomePage extends StatefulWidget {
+  static String routeName = "/home";
+
+  const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+>>>>>>>> fd0b090 (Merge branch 'BF-37-Refactoring-Backend' of https://github.com/MAMA-LY/Recipe-Recommender into BF-37-Refactoring-Backend):frontend/lib/screens/home.dart
   final List<Recipe> _recipes = [
     Recipe(
         name: "name",
@@ -38,7 +51,10 @@ class _FavoritesPageState extends State<FavoritesPage> {
     return Scaffold(
         backgroundColor: Constants.secondaryColor,
         appBar: AppBar(
+<<<<<<<< HEAD:frontend/lib/screens/favorites.dart
           elevation: 0,
+========
+>>>>>>>> fd0b090 (Merge branch 'BF-37-Refactoring-Backend' of https://github.com/MAMA-LY/Recipe-Recommender into BF-37-Refactoring-Backend):frontend/lib/screens/home.dart
           backgroundColor: Constants.secondaryColor,
           title: Text(
             "ورقة وقلم",
