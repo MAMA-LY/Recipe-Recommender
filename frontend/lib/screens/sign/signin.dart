@@ -80,7 +80,7 @@ class _SignInPageState extends State<SignInPage> {
                         child: const Text('Sign in'),
                         onPressed: () async {
                           var url = Uri.http(
-                              "${const String.fromEnvironment("BrainFoodBackendIP", defaultValue: "localhost")}:8080",
+                              "${const String.fromEnvironment("BrainFoodBackendIP", defaultValue: "localhost:8080")}",
                               "/signin");
                           var response = await http.post(url, body: {
                             "username": usernameController.text,
@@ -100,15 +100,15 @@ class _SignInPageState extends State<SignInPage> {
                           debugPrint(cookie);
                           debugPrint(responseLocation);
                           debugPrint(
-                              "${const String.fromEnvironment("BrainFoodBackendIP", defaultValue: "localhost")}:8080/signin?error");
+                              "${const String.fromEnvironment("BrainFoodBackendIP", defaultValue: "localhost:8080")}/signin?error");
                           if (responseLocation ==
-                              "http://${const String.fromEnvironment("BrainFoodBackendIP", defaultValue: "localhost")}:8080/signin?error") {
+                              "http://${const String.fromEnvironment("BrainFoodBackendIP", defaultValue: "localhost:8080")}/signin?error") {
                             setState(() {
                               resp = "Wrong Credentials";
                             });
                           }
                           if (responseLocation ==
-                                  "http://${const String.fromEnvironment("BrainFoodBackendIP", defaultValue: "localhost")}:8080/home" &&
+                                  "http://${const String.fromEnvironment("BrainFoodBackendIP", defaultValue: "localhost:8080")}/home" &&
                               cookie != null) {
                             {
                               session.cookie = cookie;
@@ -118,7 +118,7 @@ class _SignInPageState extends State<SignInPage> {
                               }
 
                               var urlHome = Uri.http(
-                                  "${const String.fromEnvironment("BrainFoodBackendIP", defaultValue: "localhost")}:8080",
+                                  "${const String.fromEnvironment("BrainFoodBackendIP", defaultValue: "localhost:8080")}",
                                   "/home");
                               var responseHome = await http.post(url, headers: {
                                 "cookie": cookie,
