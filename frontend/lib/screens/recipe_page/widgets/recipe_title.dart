@@ -8,12 +8,7 @@ class RecipeTitle extends StatelessWidget {
   final Recipe recipe;
   final double padding;
 
-  const RecipeTitle({ 
-    super.key,
-    required this.recipe,
-    required this.padding
-    });
-
+  const RecipeTitle({super.key, required this.recipe, required this.padding});
 
   @override
   Widget build(BuildContext context) {
@@ -23,19 +18,17 @@ class RecipeTitle extends StatelessWidget {
         // Default value for crossAxisAlignment is CrossAxisAlignment.center.
         // We want to align title and description of recipes left:
         crossAxisAlignment: CrossAxisAlignment.start,
-        
+
         children: <Widget>[
-          Row(
-            children:[
-              const Icon(Icons.fastfood_outlined, size: 22.0),
-              const SizedBox(width: 5.0),
-              Text(
-                recipe.name,
-                style: Theme.of(context).textTheme.titleLarge,
-                selectionColor: const Color.fromARGB(174, 184, 178, 178),
-              ),
-            ]
-          ),
+          Row(children: [
+            const Icon(Icons.fastfood_outlined, size: 22.0),
+            const SizedBox(width: 5.0),
+            Text(
+              recipe.name,
+              style: Theme.of(context).textTheme.titleLarge,
+              selectionColor: const Color.fromARGB(174, 184, 178, 178),
+            ),
+          ]),
           // Empty space:
           const SizedBox(height: 10.0),
           Row(
@@ -51,7 +44,7 @@ class RecipeTitle extends StatelessWidget {
                     title: recipe.tags![index],
                     color: Constants.primaryColor,
                     activeColor: Constants.primaryColor,
-                    onPressed:null,
+                    onPressed: null,
                     highlightColor: const Color.fromARGB(174, 184, 178, 178),
                     splashColor: const Color.fromARGB(174, 184, 178, 178),
                     elevation: 0.0,
@@ -63,7 +56,6 @@ class RecipeTitle extends StatelessWidget {
                   );
                 },
               ),
-              
             ],
           ),
         ],

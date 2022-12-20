@@ -38,13 +38,13 @@ dependencies:
   splash_screen_view: ^3.0.0
   cupertino_icons: ^1.0.2
   persistent_bottom_nav_bar: ^5.0.2
-  flutter_native_splash: ^2.0.4
   flutter_tags: "^0.4.9+1"
   flutter_typeahead: 
   syncfusion_flutter_charts: ^20.3.61
-  flutter_native_splash: ^2.0.4
+
 
 dev_dependencies:
+  network_image_mock: ^2.0.1
   flutter_test:
     sdk: flutter
 
