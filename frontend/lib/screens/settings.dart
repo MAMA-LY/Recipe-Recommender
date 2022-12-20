@@ -15,13 +15,13 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
         onPressed: () async {
-          var url = Uri.https(APIConstants.baseUrl, APIConstants.signoutEndPoint);
+          var url = Uri.http(APIConstants.baseUrl, APIConstants.signoutEndPoint);
           debugPrint(session.cookie);
           var response =
           await http.post(url, headers: {"cookie": session.cookie});
           debugPrint(response.statusCode.toString());
           Navigator.of(context, rootNavigator: true).pushReplacement(
-              MaterialPageRoute(builder: (context) => const SignInPage()));
+              MaterialPageRoute(builder: (context) =>  const SignInPage(initResp: "",)));
           cacheFile!.delete();
         },
         child: const Text(
