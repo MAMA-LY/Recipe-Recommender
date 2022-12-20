@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class BodyInfoTest {
@@ -31,6 +32,7 @@ class BodyInfoTest {
     }
 
     @Test
+
     void getBirthdate() throws NoSuchFieldException, IllegalAccessException {
         final BodyInfo bodyInfo =new BodyInfo();
         Date expectedBirthdate =new GregorianCalendar(2014, Calendar.FEBRUARY, 11).getTime();
@@ -62,6 +64,7 @@ class BodyInfoTest {
     }
 
     @Test
+
     void setBirthdate() throws NoSuchFieldException, IllegalAccessException {
         final BodyInfo bodyInfo =new BodyInfo();
         Date expectedBirthdate =new GregorianCalendar(2014, Calendar.FEBRUARY, 11).getTime();

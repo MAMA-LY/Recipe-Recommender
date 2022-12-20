@@ -63,3 +63,8 @@ jobs:
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_96C0CCF7C5DA4C31B78250D7EE90832B }}
           package: 'backend-0.0.1-SNAPSHOT.jar'
+
+      - name: Artifact cleanup
+        uses: geekyeggo/delete-artifact@v2
+        with:
+            name: java-app
