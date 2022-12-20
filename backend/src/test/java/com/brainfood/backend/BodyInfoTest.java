@@ -2,6 +2,10 @@ package com.brainfood.backend;
 
 import org.junit.jupiter.api.*;
 import java.lang.reflect.Field;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class BodyInfoTest {
@@ -27,13 +31,13 @@ class BodyInfoTest {
     }
 
     @Test
-    void getAge() throws NoSuchFieldException, IllegalAccessException {
+    void getBirthdate() throws NoSuchFieldException, IllegalAccessException {
         final BodyInfo bodyInfo =new BodyInfo();
+        Date expectedBirthdate =new GregorianCalendar(2014, Calendar.FEBRUARY, 11).getTime();
         final Field field = bodyInfo.getClass().getDeclaredField("age");
         field.setAccessible(true);
-        int expectedValue = 12;
-        field.set(bodyInfo, expectedValue);
-        assertEquals(expectedValue, bodyInfo.getAge(), "problem in getAge");
+        field.set(bodyInfo, expectedBirthdate);
+        assertEquals(expectedBirthdate, bodyInfo.getBirthdate(), "problem in getAge");
     }
 
     @Test
@@ -58,12 +62,13 @@ class BodyInfoTest {
     }
 
     @Test
-    void setAge() throws NoSuchFieldException, IllegalAccessException {
+    void setBirthdate() throws NoSuchFieldException, IllegalAccessException {
         final BodyInfo bodyInfo =new BodyInfo();
-        bodyInfo.setAge(15);
+        Date expectedBirthdate =new GregorianCalendar(2014, Calendar.FEBRUARY, 11).getTime();
+        bodyInfo.setBirthdate(expectedBirthdate);
         final Field feild=bodyInfo.getClass().getDeclaredField("age");
         feild.setAccessible(true);
-        int value= (int)feild.get(bodyInfo);
-        assertEquals(15,value,"setAge problem");
+        Date value= (Date)feild.get(bodyInfo);
+        assertEquals(expectedBirthdate,value,"setAge problem");
     }
 }
