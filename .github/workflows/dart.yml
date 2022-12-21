@@ -7,7 +7,9 @@ name: Flutter
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - "main" 
+      - 'Milestone*'
   pull_request:
     branches: [ "main" ]
 
