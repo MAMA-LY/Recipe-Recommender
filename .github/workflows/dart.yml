@@ -11,7 +11,9 @@ on:
       - "main" 
       - 'Milestone*'
   pull_request:
-    branches: [ "main" ]
+   branches:
+      - "main" 
+      - 'Milestone*'
 
 jobs:
   test:
