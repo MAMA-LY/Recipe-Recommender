@@ -3,7 +3,6 @@ package com.brainfood.backend;
 import lombok.*;
 
 import java.util.List;
-import java.awt.Image;
 
 @Getter @Setter @Builder
 @AllArgsConstructor @NoArgsConstructor
@@ -19,7 +18,7 @@ public class Recipe {
 
     private List<Ingredient> ingredients;
 
-    private Image photo;
+    private String photo;
 
     private Nutrition nutrition;
     

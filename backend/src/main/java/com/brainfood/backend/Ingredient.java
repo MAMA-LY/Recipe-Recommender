@@ -16,7 +16,7 @@ public class Ingredient {
 
     private Image icon ;
 
-    private int weight;
+    private String amount;
 
     private Nutrition nutrition;
 
