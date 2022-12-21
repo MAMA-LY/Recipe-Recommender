@@ -12,9 +12,11 @@ import 'package:recipe_recommender_frontend/screens/sign/signin.dart';
 import 'package:recipe_recommender_frontend/screens/splash_screen.dart';
 import 'package:uni_links/uni_links.dart';
 import 'api/api_constants.dart';
+import 'api/recipes_api.dart';
 import 'api/session.dart';
 import 'models/recipe.dart';
 import 'screens/page_view_controller.dart';
+import 'screens/recipe_page/recipe_page.dart';
 
 var session = Session("");
 String cookieStr = "";
@@ -146,13 +148,10 @@ void main() {
 
 Future<String?> getServerInitResponse() async {
   session.cookie = cookieStr;
-<<<<<<< HEAD
-  var url = Uri.http("192.168.1.101:8080", "/home");
-=======
   var url = Uri.https(APIConstants.baseUrl, APIConstants.homeEndPoint);
->>>>>>> Milestone2
   var serverResponse =
       await http.get(url, headers: APIConstants.headerCORS(session.cookie));
+  debugPrint(serverResponse.body);
   final bool hasData = serverResponse.body != null;
   if (hasData) {
     return serverResponse.body;
@@ -174,11 +173,7 @@ class MyApp extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.done) {
             String response = snapshot.data!;
             if (response == "UserInfo") {
-<<<<<<< HEAD
               Session.login = true;
-=======
-              debugPrint("IN3");
->>>>>>> Milestone2
               return const PageViewController();
             } else {
               debugPrint("IN");

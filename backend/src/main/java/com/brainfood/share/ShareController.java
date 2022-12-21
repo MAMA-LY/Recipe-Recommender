@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.brainfood.models.RecipeModel;
+import com.brainfood.models.Recipe;
 import com.brainfood.search.RecipeDAO;
 
 @ComponentScan
@@ -19,7 +19,7 @@ public class ShareController {
     RecipeDAO recipeDAO;
 
     @GetMapping("recipe")
-    public RecipeModel getRecipeDetailsByName(@RequestParam(name = "id") String id) {
+    public Recipe getRecipeDetailsByName(@RequestParam(name = "id") String id) {
         return recipeDAO.findRecipe(id);
     }
 

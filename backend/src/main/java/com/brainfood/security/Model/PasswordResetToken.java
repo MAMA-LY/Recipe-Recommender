@@ -1,4 +1,4 @@
-package com.brainfood.security.model;
+package com.brainfood.security.Model;
 
 import java.io.Serializable;
 import java.util.UUID;
@@ -12,10 +12,10 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
-
 @Entity
 @Table(name = "\"PasswordResetToken\"")
-@Getter @Setter
+@Getter
+@Setter
 public class PasswordResetToken implements Serializable {
 
     @Id

@@ -9,43 +9,43 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 
 import com.brainfood.backend.Director;
-import com.brainfood.backend.db_entities.Ingredient;
-import com.brainfood.backend.db_entities.Recipe;
+import com.brainfood.backend.db_entities.IngredientDB;
+import com.brainfood.backend.db_entities.RecipeDB;
 import com.brainfood.backend.db_repositories.RecipeRepository;
-import com.brainfood.models.RecipeModel;
-import com.brainfood.models.ShortRecipeModel;
+import com.brainfood.models.Recipe;
+import com.brainfood.models.ShortRecipe;
 
 @Component
 public class RecipeDAO {
     @Autowired
     RecipeRepository recipeRepository;
 
-    List<Recipe> findSimilarDishes(List<ShortRecipeModel> dishes) {
-        List<Recipe> result = new ArrayList<>();
-        for (ShortRecipeModel current : dishes) {
+    List<RecipeDB> findSimilarDishes(List<ShortRecipe> dishes) {
+        List<RecipeDB> result = new ArrayList<>();
+        for (ShortRecipe current : dishes) {
             var similarDishes = recipeRepository.findByName("%" + current.name + "%");
             result.addAll(similarDishes);
         }
         return result;
     }
 
-    List<Recipe> getRandomRecipes(int quantity) {
+    List<RecipeDB> getRandomRecipes(int quantity) {
         return recipeRepository.randomRecipes(PageRequest.of(0, quantity));
     }
 
-    List<Recipe> findByIngredientsLike(List<ShortRecipeModel> ingredients) {
-        List<Recipe> result = new ArrayList<>();
-        for (ShortRecipeModel ingredient : ingredients) {
-            List<Recipe> dishWithIngredient = recipeRepository.findByIngredientsLike("%" + ingredient.name + "%");
+    List<RecipeDB> findByIngredientsLike(List<ShortRecipe> ingredients) {
+        List<RecipeDB> result = new ArrayList<>();
+        for (ShortRecipe ingredient : ingredients) {
+            List<RecipeDB> dishWithIngredient = recipeRepository.findByIngredientsLike("%" + ingredient.name + "%");
             result.addAll(dishWithIngredient);
         }
         return result;
     }
 
-    List<Recipe> recipesWithIngredients(String[] ingredients) {
+    List<RecipeDB> recipesWithIngredients(String[] ingredients) {
         if (ingredients.length == 0)
             return new ArrayList<>();
-        List<Recipe> recipes = recipeRepository.findByIngredientsLike("%" + ingredients[0] + "%");
+        List<RecipeDB> recipes = recipeRepository.findByIngredientsLike("%" + ingredients[0] + "%");
         for (int i = 1; i < ingredients.length; i++) {
             if (recipes.size() == 0)
                 return new ArrayList<>();
@@ -54,7 +54,7 @@ public class RecipeDAO {
         return recipes;
     }
 
-    List<Recipe> filterWithTags(String[] Tags, List<Recipe> currentRecipes) {
+    List<RecipeDB> filterWithTags(String[] Tags, List<RecipeDB> currentRecipes) {
         if (Tags.length == 0)
             return currentRecipes;
         if (currentRecipes.size() == 0) {
@@ -69,12 +69,12 @@ public class RecipeDAO {
         return currentRecipes;
     }
 
-    public RecipeModel findRecipe(String id) {
-        Recipe recipe = recipeRepository.findByIdEquals(id);
-        List<Ingredient> ingredients = recipeRepository.findIngredientsByIdEquals(id);
+    public Recipe findRecipe(String id) {
+        RecipeDB recipe = recipeRepository.findByIdEquals(id);
+        List<IngredientDB> ingredients = recipeRepository.findIngredientsByIdEquals(id);
         List<String> tags = recipeRepository.findTagsByIdEquals(id);
 
-        RecipeModel recipeModel = Director.buildRecipe(recipe, ingredients, tags);
+        Recipe recipeModel = Director.buildRecipe(recipe, ingredients, tags);
         return recipeModel;
     }
 

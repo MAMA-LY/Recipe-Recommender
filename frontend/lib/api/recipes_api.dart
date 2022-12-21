@@ -14,7 +14,7 @@ class RecipesAPI {
   RecipesAPI.fromCookie(var this.cookie);
 
   Future<Recipe> getRecipeByID(String id) async {
-    var url = Uri.http(APIConstants.baseUrl, APIConstants.recipeEndPoint, {"id": id});
+    var url = Uri.https(APIConstants.baseUrl, APIConstants.recipeEndPoint, {"id": id});
     var response = await http.get(url, headers: APIConstants.headerCORS(session.cookie));
     debugPrint(response.statusCode.toString());
     debugPrint(response.body);

@@ -53,7 +53,7 @@ public class SearchController {
 
     @GetMapping("/withIngredientsAndTags")
     public ShortRecipe[] getRecipeWithIngredientsAndTags(@RequestParam String[] Ingredients,
-                                                         @RequestParam String[] Tags) {
+            @RequestParam String[] Tags) {
         var result = DAO.recipesWithIngredients(Ingredients);
         if (result.size() == 0 && Ingredients.length > 0)
             return null;

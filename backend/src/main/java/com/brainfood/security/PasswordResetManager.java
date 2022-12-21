@@ -6,10 +6,6 @@ import org.springframework.stereotype.Service;
 import com.brainfood.security.Model.PasswordResetToken;
 import com.brainfood.security.Model.UserCredentials;
 import com.brainfood.security.Repository.PasswordResetTokenRepository;
-import com.brainfood.security.model.PasswordResetToken;
-import com.brainfood.security.model.UserCredentials;
-import com.brainfood.security.repository.PasswordResetTokenRepository;
->>>>>>> Milestone2
 
 @Service
 public class PasswordResetManager {
@@ -38,7 +34,7 @@ public class PasswordResetManager {
         token.setUser(user);
         passwordResetTokenRepository.save(token);
         // NEEDS TO BE CHANGED LATER
-        String emailBody = "Click here to Reset your Password : http://192.168.1.101:8080/resetPassword?tk="
+        String emailBody = "Click here to Reset your Password : https://brainfood.azurewebsites.net/resetPassword?tk="
                 + token.getToken();
         emailSender.sendEmail(user.getEmail(), "Brainfood Reset Password", emailBody);
         return Response.PasswordResetEmailSent;

@@ -1,25 +1,27 @@
 package com.brainfood.backend;
 
+import java.util.List;
+
 import com.brainfood.models.Recipe;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
-@Getter @Setter
-@AllArgsConstructor @NoArgsConstructor
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class RecipeRecommender {
 
     private Model model;
 
-    //                          Operations                                  
+    // Operations
 
     public List<Recipe> recommend() {
         //
         return null;
     }
-    
-    
+
 }
