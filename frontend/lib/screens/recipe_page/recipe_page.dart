@@ -9,24 +9,23 @@ import 'package:recipe_recommender_frontend/screens/recipe_page/widgets/recipe_t
 class RecipePage extends StatefulWidget {
   final Recipe recipe;
   final bool inFavorites;
-  const RecipePage({
-    super.key,
-    required this.recipe,
-    required this.inFavorites
-    });
+  const RecipePage(
+      {super.key, required this.recipe, required this.inFavorites});
 
-  List<String> getIngredientsNames(){
+  List<String> getIngredientsNames() {
     List<String> ingredientsNames = [];
     for (var ingredient in recipe.ingredients!) {
       ingredientsNames.add(ingredient.amount!);
     }
     return ingredientsNames;
   }
+
   @override
   State<RecipePage> createState() => _RecipePageState();
 }
 
-class _RecipePageState extends State<RecipePage> with SingleTickerProviderStateMixin  {
+class _RecipePageState extends State<RecipePage>
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
   late ScrollController _scrollController;
   late bool _inFavorites;
@@ -47,10 +46,8 @@ class _RecipePageState extends State<RecipePage> with SingleTickerProviderStateM
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: Constants.secondaryColor,
       body: NestedScrollView(
@@ -64,8 +61,8 @@ class _RecipePageState extends State<RecipePage> with SingleTickerProviderStateM
                 background: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    RecipeImage( imageURL: widget.recipe.image),
-                    RecipeTitle( padding: 25.0, recipe: widget.recipe),
+                    RecipeImage(imageURL: widget.recipe.image),
+                    RecipeTitle(padding: 25.0, recipe: widget.recipe),
                   ],
                 ),
               ),
@@ -82,7 +79,7 @@ class _RecipePageState extends State<RecipePage> with SingleTickerProviderStateM
                 ],
                 controller: _tabController,
               ),
-            )
+            ),
           ];
         },
         body: TabBarView(
@@ -94,6 +91,7 @@ class _RecipePageState extends State<RecipePage> with SingleTickerProviderStateM
         ),
       ),
       floatingActionButton: FloatingActionButton(
+
         onPressed: () {
           //TODO: update the user fav recipes
         },
@@ -104,6 +102,8 @@ class _RecipePageState extends State<RecipePage> with SingleTickerProviderStateM
           color: Theme.of(context).iconTheme.color,
         ),
       ),
+
+     
     );
   }
 }

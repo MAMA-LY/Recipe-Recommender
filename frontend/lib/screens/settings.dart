@@ -21,7 +21,7 @@ class SettingsPage extends StatelessWidget {
           await http.post(url, headers: {"cookie": session.cookie});
           debugPrint(response.statusCode.toString());
           Navigator.of(context, rootNavigator: true).pushReplacement(
-              MaterialPageRoute(builder: (context) => const SignInPage()));
+              MaterialPageRoute(builder: (context) =>  const SignInPage(initResp: "",)));
           cacheFile!.delete();
         },
         child: const Text(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_recommender_frontend/api/sign_api.dart';
+import 'package:recipe_recommender_frontend/screens/sign/forgetPassword.dart';
 import 'package:recipe_recommender_frontend/screens/sign/signup.dart';
 import 'package:recipe_recommender_frontend/screens/sign/widgets/custom_button.dart';
 import 'package:recipe_recommender_frontend/screens/sign/widgets/text_field.dart';
@@ -8,9 +9,9 @@ import '../page_view_controller.dart';
 
 class SignInPage extends StatefulWidget {
   static String routeName = "/signin";
-
-  const SignInPage({Key? key}) : super(key: key);
-
+  final String initResp;
+  const SignInPage({Key? key, required this.initResp}) : super(key: key); 
+  
   @override
   State<SignInPage> createState() => _SignInPageState();
 }
@@ -23,7 +24,7 @@ class _SignInPageState extends State<SignInPage> {
 
   Future<void> _signin() async {
     String? status =
-        await SignAPI.signin(usernameController.text, passwordController.text);
+        await SignAPI.signin(usernameController.text.trim(), passwordController.text.trim());
     debugPrint(status);
     if (status == "wrong credentials") {
       setState(() {
@@ -36,6 +37,11 @@ class _SignInPageState extends State<SignInPage> {
               builder: (BuildContext context) => const PageViewController()),
           (route) => false);
     }
+  }
+
+  @override
+  void initState() {
+    resp = widget.initResp;
   }
 
   @override
@@ -81,7 +87,7 @@ class _SignInPageState extends State<SignInPage> {
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                                  const PageViewController()));
+                                  const ForgetPasswordPage()));
                     },
                     child: Text(
                       'Forgot Password?',

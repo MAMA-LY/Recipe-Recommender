@@ -17,9 +17,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 public class BackendApplication {
 
+
     public static void main(String[] args) {
         SpringApplication.run(BackendApplication.class, args);
     }
+
 
     @Bean
     public WebMvcConfigurer corsConfigurer() {

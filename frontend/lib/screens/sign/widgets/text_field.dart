@@ -7,7 +7,6 @@ class CustomTextField extends StatelessWidget {
   final int bottomPadding;
   final TextEditingController controller;
   final bool obscureText;
-
   const CustomTextField({
     Key? key,
     required this.promptText,
