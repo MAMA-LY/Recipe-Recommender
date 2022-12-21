@@ -29,6 +29,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  uni_links: ^0.5.1
   path_provider: ^2.0.11
   flutter_pw_validator: ^1.4.2
   email_validator: '^2.1.16'
@@ -42,7 +43,6 @@ dependencies:
   flutter_tags: "^0.4.9+1"
   flutter_typeahead: 
   syncfusion_flutter_charts: ^20.3.61
-  flutter_native_splash: ^2.0.4
 
 dev_dependencies:
   flutter_test:
