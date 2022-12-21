@@ -31,7 +31,7 @@ jobs:
         run: flutter pub get
       
       - name: Run tests
-        run: flutter test
+        run: flutter test --no-sound-null-safety
 
   build_web:
     runs-on: ubuntu-latest
@@ -48,7 +48,7 @@ jobs:
         run: flutter pub get
 
       - name: Build App
-        run: flutter build web
+        run: flutter build web 
 
   build_android:
     runs-on: ubuntu-latest
