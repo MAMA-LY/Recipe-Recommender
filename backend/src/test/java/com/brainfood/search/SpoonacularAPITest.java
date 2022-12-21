@@ -10,11 +10,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import com.brainfood.models.ShortRecipe;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 
-import com.brainfood.models.ShortRecipe;
 
 class SpoonacularAPITest {
     SpoonacularAPI spoonacularAPI;
@@ -44,7 +44,7 @@ class SpoonacularAPITest {
         expected.put("garlic", false);
         expectedType.put("garlic", "ingredient");
 
-        assertShortRecipeModelLists(expected, expectedType, result);
+        assertShortRecipeLists(expected, expectedType, result);
     }
 
     @Test
@@ -60,7 +60,7 @@ class SpoonacularAPITest {
         expected.put("taco", false);
         expectedType.put("taco", "dish");
 
-        assertShortRecipeModelLists(expected, expectedType, result);
+        assertShortRecipeLists(expected, expectedType, result);
     }
 
     @Test
@@ -80,10 +80,10 @@ class SpoonacularAPITest {
         expected.put("taco", false);
         expectedType.put("taco", "dish");
 
-        assertShortRecipeModelLists(expected, expectedType, result);
+        assertShortRecipeLists(expected, expectedType, result);
     }
 
-    private void assertShortRecipeModelLists(Map<String, Boolean> expected, Map<String, String> expectedType,
+    private void assertShortRecipeLists(Map<String, Boolean> expected, Map<String, String> expectedType,
             List<ShortRecipe> result) {
         for (ShortRecipe ShortRecipe : result)
             if (!expected.containsKey(ShortRecipe.name))

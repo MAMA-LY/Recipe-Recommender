@@ -22,7 +22,7 @@ public class Profile {
 
     private List<Recipe> favoriteRecipes;
 
-    private Image image;
+    private String  image;
 
     private String name;
 

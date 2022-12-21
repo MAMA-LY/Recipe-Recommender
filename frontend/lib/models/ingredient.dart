@@ -20,7 +20,7 @@ class Ingredient {
   }
 
   static String ingredientNamesFromJson(dynamic json) {
-    return json['name'] as String;
+    return json as String;
   }
 
   static List<String> ingredientsFromSnapshot(List<dynamic> snapshot) {

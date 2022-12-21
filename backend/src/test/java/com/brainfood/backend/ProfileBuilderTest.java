@@ -9,12 +9,16 @@ import java.awt.image.ImageProducer;
 import java.lang.reflect.Field;
 import java.sql.Timestamp;
 
+
 import org.junit.jupiter.api.Test;
 
 import com.brainfood.models.BodyInfo;
 import com.brainfood.models.Calendar;
 import com.brainfood.models.Profile;
 import com.brainfood.security.Model.UserCredentials;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 public class ProfileBuilderTest {
 
@@ -34,7 +38,9 @@ public class ProfileBuilderTest {
     @Test
     void buildUserCredentials() throws NoSuchFieldException, IllegalAccessException {
 
+
         UserCredentials userCredentialsExpected = new UserCredentials();
+
         final Profile profile = Profile.builder().userCredentials(userCredentialsExpected).build();
 
         final Field field = profile.getClass().getDeclaredField("userCredentials");
@@ -45,39 +51,14 @@ public class ProfileBuilderTest {
     }
 
     @Test
-    void buildPhoto() throws NoSuchFieldException, IllegalAccessException {
+    void buildImage() throws NoSuchFieldException, IllegalAccessException {
 
-        Image photoExpected = new Image() {
-            @Override
-            public int getWidth(ImageObserver observer) {
-                return 0;
-            }
-
-            @Override
-            public int getHeight(ImageObserver observer) {
-                return 0;
-            }
-
-            @Override
-            public ImageProducer getSource() {
-                return null;
-            }
-
-            @Override
-            public Graphics getGraphics() {
-                return null;
-            }
-
-            @Override
-            public Object getProperty(String name, ImageObserver observer) {
-                return null;
-            }
-        };
+        String photoExpected = "https://spoonacular.com/recipeImages/715538-556x370.jpg";
         final Profile profile = Profile.builder().image(photoExpected).build();
 
         final Field field = profile.getClass().getDeclaredField("image");
         field.setAccessible(true);
-        Image photoActual = (Image) field.get(profile);
+        String photoActual = (String) field.get(profile);
 
         assertEquals(photoExpected, photoActual, "problem in buildPhoto");
     }
@@ -113,6 +94,7 @@ public class ProfileBuilderTest {
 
         Timestamp caloriesDateExpected = Timestamp.valueOf("2018-09-01 09:01:15");
         final Profile profile = Profile.builder().caloriesDate(caloriesDateExpected).build();
+
         final Field field = profile.getClass().getDeclaredField("caloriesDate");
         field.setAccessible(true);
         Timestamp caloriesDateActual = (Timestamp) field.get(profile);

@@ -7,13 +7,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.brainfood.backend.db_entities.RecipeDB;
+import com.brainfood.models.ShortRecipe;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
-import com.brainfood.backend.db_entities.RecipeDB;
-import com.brainfood.models.ShortRecipe;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class UtilitiesTest {
@@ -59,7 +59,7 @@ class UtilitiesTest {
         expected[2] = ShortRecipe.builder().id("222").name("fourth").image("11133111").build();
 
         ShortRecipe[] result = Utilities.eliminateDuplicates(Data);
-        this.assertShortRecipeModelArrays(result, expected);
+        this.assertShortRecipeArrays(result, expected);
     }
 
     @Test
@@ -77,7 +77,7 @@ class UtilitiesTest {
         expected[2] = ShortRecipe.builder().id("222").name("fourth").image("11133111").build();
 
         ShortRecipe[] result = Utilities.eliminateDuplicates(Data);
-        this.assertShortRecipeModelArrays(result, expected);
+        this.assertShortRecipeArrays(result, expected);
     }
 
     @Test
@@ -94,10 +94,10 @@ class UtilitiesTest {
         expected[2] = ShortRecipe.builder().id("222").name("fourth").image("11133111").build();
 
         ShortRecipe[] result = Utilities.castToArray(Data);
-        this.assertShortRecipeModelArrays(result, expected);
+        this.assertShortRecipeArrays(result, expected);
     }
 
-    private void assertShortRecipeModelArrays(ShortRecipe[] result, ShortRecipe[] expected) {
+    private void assertShortRecipeArrays(ShortRecipe[] result, ShortRecipe[] expected) {
         for (int i = 0; i < result.length; i++) {
             assertEquals(expected[i].id, result[i].id);
             assertEquals(expected[i].name, result[i].name);
