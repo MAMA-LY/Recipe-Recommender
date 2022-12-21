@@ -78,39 +78,13 @@ class RecipeTest {
 
     @Test
     void getPhoto()  throws NoSuchFieldException, IllegalAccessException {
-        Image image = new Image() {
-            @Override
-            public int getWidth(ImageObserver observer) {
-                return 0;
-            }
-
-            @Override
-            public int getHeight(ImageObserver observer) {
-                return 0;
-            }
-
-            @Override
-            public ImageProducer getSource() {
-                return null;
-            }
-
-            @Override
-            public Graphics getGraphics() {
-                return null;
-            }
-
-            @Override
-            public Object getProperty(String name, ImageObserver observer) {
-                return null;
-            }
-        };
-
+        String photo ="https://spoonacular.com/recipeImages/654835-556x370.jpg";
         final Recipe recipe =new Recipe();
         final Field field = recipe.getClass().getDeclaredField("photo");
         field.setAccessible(true);
-        field.set(recipe, image);
+        field.set(recipe, photo);
 
-        assertEquals(image,recipe.getPhoto(), "problem in getPhoto");
+        assertEquals(photo,recipe.getPhoto(), "problem in getPhoto");
     }
 
     @Test
@@ -194,39 +168,13 @@ class RecipeTest {
 
     @Test
     void setPhoto() throws NoSuchFieldException, IllegalAccessException {
-        Image photoExpected = new Image() {
-            @Override
-            public int getWidth(ImageObserver observer) {
-                return 0;
-            }
-
-            @Override
-            public int getHeight(ImageObserver observer) {
-                return 0;
-            }
-
-            @Override
-            public ImageProducer getSource() {
-                return null;
-            }
-
-            @Override
-            public Graphics getGraphics() {
-                return null;
-            }
-
-            @Override
-            public Object getProperty(String name, ImageObserver observer) {
-                return null;
-            }
-        };
-
+        String photoExpected ="https://spoonacular.com/recipeImages/649977-556x370.jpg";
         final Recipe recipe=new Recipe();
         final Field field = recipe.getClass().getDeclaredField("photo");
         field.setAccessible(true);
 
         recipe.setPhoto(photoExpected);
-        Image photoActual =(Image) field.get(recipe);
+        String photoActual =(String) field.get(recipe);
         assertEquals(photoExpected,photoActual, "problem in setPhoto");
     }
 

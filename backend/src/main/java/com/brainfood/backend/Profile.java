@@ -1,7 +1,6 @@
 package com.brainfood.backend;
 import java.util.List;
 import java.awt.Image;
-import java.sql.Timestamp;
 
 import com.brainfood.security.Model.UserCredentials;
 import lombok.*;
@@ -14,13 +13,13 @@ public class Profile {
 
     private List<Recipe> favoriteRecipes;
 
-    private Image photo ;
+    private String photo ;
 
     private String name;
 
     private int dailyCalories;
 
-    private Timestamp caloriesDate;
+    private int caloriesDate;
 
     private BodyInfo bodyInfo;
 

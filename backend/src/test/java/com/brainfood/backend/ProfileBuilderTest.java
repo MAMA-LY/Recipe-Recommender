@@ -7,8 +7,6 @@ import java.awt.*;
 import java.awt.image.ImageObserver;
 import java.awt.image.ImageProducer;
 import java.lang.reflect.Field;
-import java.sql.Timestamp;
-
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -43,37 +41,12 @@ public class ProfileBuilderTest {
     @Test
     void buildPhoto() throws NoSuchFieldException, IllegalAccessException {
 
-        Image photoExpected = new Image() {
-            @Override
-            public int getWidth(ImageObserver observer) {
-                return 0;
-            }
-
-            @Override
-            public int getHeight(ImageObserver observer) {
-                return 0;
-            }
-
-            @Override
-            public ImageProducer getSource() {
-                return null;
-            }
-
-            @Override
-            public Graphics getGraphics() {
-                return null;
-            }
-
-            @Override
-            public Object getProperty(String name, ImageObserver observer) {
-                return null;
-            }
-        };
+        String photoExpected = "https://spoonacular.com/recipeImages/715538-556x370.jpg";
         final Profile profile = Profile.builder().photo(photoExpected).build();
 
         final Field field = profile.getClass().getDeclaredField("photo");
         field.setAccessible(true);
-        Image photoActual = (Image) field.get(profile);
+        String photoActual = (String) field.get(profile);
 
         assertEquals(photoExpected,photoActual, "problem in buildPhoto");
     }
@@ -105,11 +78,12 @@ public class ProfileBuilderTest {
     @Test
     void buildCaloriesDate() throws NoSuchFieldException, IllegalAccessException {
 
-        Timestamp caloriesDateExpected=Timestamp.valueOf("2018-09-01 09:01:15");
+        int caloriesDateExpected = 3000 ;
         final Profile profile = Profile.builder().caloriesDate(caloriesDateExpected).build();
+
         final Field field = profile.getClass().getDeclaredField("caloriesDate");
         field.setAccessible(true);
-        Timestamp caloriesDateActual =(Timestamp) field.get(profile);
+        int caloriesDateActual =(int) field.get(profile);
 
         assertEquals(caloriesDateExpected,caloriesDateActual, "problem in buildCaloriesDate");
     }

@@ -3,12 +3,7 @@ package com.brainfood.backend;
 import com.brainfood.security.Model.UserCredentials;
 import org.junit.jupiter.api.Test;
 
-import java.awt.*;
-import java.awt.image.ImageObserver;
-import java.awt.image.ImageProducer;
 import java.lang.reflect.Field;
-import java.sql.Timestamp;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,32 +49,7 @@ class ProfileTest {
 
     @Test
     void getPhoto() throws IllegalAccessException, NoSuchFieldException {
-        Image image = new Image() {
-            @Override
-            public int getWidth(ImageObserver observer) {
-                return 0;
-            }
-
-            @Override
-            public int getHeight(ImageObserver observer) {
-                return 0;
-            }
-
-            @Override
-            public ImageProducer getSource() {
-                return null;
-            }
-
-            @Override
-            public Graphics getGraphics() {
-                return null;
-            }
-
-            @Override
-            public Object getProperty(String name, ImageObserver observer) {
-                return null;
-            }
-        };
+        String image = "https://spoonacular.com/recipeImages/649977-556x370.jpg";
 
         final Profile profile =new Profile();
         final Field field = profile.getClass().getDeclaredField("photo");
@@ -115,9 +85,7 @@ class ProfileTest {
 
     @Test
     void getCaloriesDate() throws NoSuchFieldException, IllegalAccessException {
-
-        Timestamp caloriesDate = Timestamp.valueOf("2022-09-01 09:01:15") ;
-
+        int caloriesDate = 80 ;
 
         final Profile profile =new Profile();
         final Field field = profile.getClass().getDeclaredField("caloriesDate");
@@ -184,38 +152,14 @@ class ProfileTest {
     @Test
     void setPhoto() throws IllegalAccessException, NoSuchFieldException {
 
-        Image photo = new Image() {
-            @Override
-            public int getWidth(ImageObserver observer) {
-                return 0;
-            }
+        String photo = "https://spoonacular.com/recipeImages/649977-556x370.jpg";
 
-            @Override
-            public int getHeight(ImageObserver observer) {
-                return 0;
-            }
-
-            @Override
-            public ImageProducer getSource() {
-                return null;
-            }
-
-            @Override
-            public Graphics getGraphics() {
-                return null;
-            }
-
-            @Override
-            public Object getProperty(String name, ImageObserver observer) {
-                return null;
-            }
-        };
         final Profile profile =new Profile();
         final Field field = profile.getClass().getDeclaredField("photo");
         field.setAccessible(true);
         profile.setPhoto(photo);
 
-        Image actual= (Image) field.get(profile);
+        String actual= (String) field.get(profile);
 
         assertEquals(photo,actual, "problem in setPhoto");
     }
@@ -253,15 +197,15 @@ class ProfileTest {
 
     @Test
     void setCaloriesDate() throws IllegalAccessException, NoSuchFieldException {
-        Timestamp caloriesDateExpected=Timestamp.valueOf("2020-09-01 09:01:15");
+        int caloriesDate =  1000;
         final Profile profile =new Profile();
         final Field field = profile.getClass().getDeclaredField("caloriesDate");
         field.setAccessible(true);
-        profile.setCaloriesDate(caloriesDateExpected);
+        profile.setCaloriesDate(caloriesDate);
 
-        Timestamp actual= (Timestamp) field.get(profile);
+        int actual= (int) field.get(profile);
 
-        assertEquals(caloriesDateExpected,actual, "problem in setCaloriesDate");
+        assertEquals(caloriesDate,actual, "problem in setCaloriesDate");
     }
 
 
