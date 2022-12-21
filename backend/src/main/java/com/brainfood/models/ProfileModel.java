@@ -1,20 +1,30 @@
 package com.brainfood.models;
-import java.util.List;
+
 import java.awt.Image;
 import java.sql.Timestamp;
+import java.util.List;
 
 import com.brainfood.security.Model.UserCredentials;
-import lombok.*;
+import com.fasterxml.jackson.annotation.JsonRootName;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Getter @Setter @Builder
-@AllArgsConstructor @NoArgsConstructor
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@JsonRootName("Profile")
 public class ProfileModel {
-    private UserCredentials userCredentials ;
+    private UserCredentials userCredentials;
 
     private List<RecipeModel> favoriteRecipeModels;
 
-    private Image photo ;
+    private Image photo;
 
     private String name;
 
@@ -26,8 +36,7 @@ public class ProfileModel {
 
     private Calendar calendar;
 
-
-    //                          Operations                                  
+    // Operations
 
     public void calculateCalories() {
         //
@@ -36,6 +45,5 @@ public class ProfileModel {
     public void addCalendar() {
         //
     }
-    
-    
+
 }

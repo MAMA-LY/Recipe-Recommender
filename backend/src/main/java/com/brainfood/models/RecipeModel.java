@@ -2,6 +2,8 @@ package com.brainfood.models;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonRootName;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,6 +15,7 @@ import lombok.Setter;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonRootName("Recipe")
 public class RecipeModel {
 
     private String ID;

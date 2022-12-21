@@ -3,6 +3,7 @@ package com.brainfood.models;
 import com.brainfood.backend.db_entities.Recipe;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,6 +14,7 @@ import lombok.Builder;
  **/
 @Builder
 @AllArgsConstructor
+@JsonRootName("ShortRecipe")
 public class ShortRecipeModel {
 
     @JsonProperty("id")
