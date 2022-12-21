@@ -1,17 +1,24 @@
-package com.brainfood.search.DBEntities;
-
-import jakarta.persistence.*;
-import lombok.*;
+package com.brainfood.backend.db_entities;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "\"Recipe\"")
-@Getter @Setter
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Recipe implements Serializable {
 
     @Id
@@ -19,7 +26,7 @@ public class Recipe implements Serializable {
     public String id;
 
     @Column(name = "cuisine")
-    public String cuisine ;
+    public String cuisine;
 
     @Column(name = "name")
     public String name;
@@ -33,9 +40,9 @@ public class Recipe implements Serializable {
     @Column(name = "fats")
     public int fats;
 
+    @Column(name = "carbs")
+    public int carbs;
+
     @Column(name = "photo")
     public String photo;
-
-    @OneToMany(mappedBy = "compositeKey.recipeID" , cascade = CascadeType.ALL , orphanRemoval = true)
-    public Set<RecipeIngredients> recipeIngredients = new HashSet<>() ;
 }
