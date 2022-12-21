@@ -15,7 +15,7 @@ class RecipePage extends StatefulWidget {
   List<String> getIngredientsNames() {
     List<String> ingredientsNames = [];
     for (var ingredient in recipe.ingredients!) {
-      ingredientsNames.add(ingredient.amount);
+      ingredientsNames.add(ingredient.amount!);
     }
     return ingredientsNames;
   }
@@ -49,6 +49,7 @@ class _RecipePageState extends State<RecipePage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Constants.secondaryColor,
       body: NestedScrollView(
         controller: _scrollController,
         headerSliverBuilder: (BuildContext context, bool innerViewIsScrolled) {

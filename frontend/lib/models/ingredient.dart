@@ -2,17 +2,17 @@ import 'nutrition.dart';
 
 class Ingredient {
   final String name;
-  final String id;
-  final String icon;
-  final String amount;
-  final Nutrition nutrition;
+  final String? id;
+  final String? icon;
+  final String? amount;
+  final Nutrition? nutrition;
 
   Ingredient(
       {required this.name,
-        required this.id,
-        required this.icon,
-        required this.amount,
-        required this.nutrition});
+        this.id,
+        this.icon,
+        this.amount,
+        this.nutrition});
 
   factory Ingredient.fromJson(dynamic json) {
     return Ingredient(
@@ -21,6 +21,18 @@ class Ingredient {
         icon: json['icon'] as String,
         amount: json['amount'] as String,
         nutrition: json['nutrition'] as Nutrition);
+  }
+
+  factory Ingredient.shortIngredientFromJson(dynamic json) {
+    return Ingredient(
+        name: json['name'] as String
+    );
+  }
+
+  static List<Ingredient> ingredientsFromSnapshot(List<dynamic> snapshot) {
+    return snapshot.map((data) {
+      return Ingredient.shortIngredientFromJson(data);
+    }).toList();
   }
 
   @override

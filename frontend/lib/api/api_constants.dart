@@ -4,11 +4,13 @@ class APIConstants {
   static String signinEndPoint = "/signin";
   static String signoutEndPoint = "/signout";
   static String homeEndPoint = "/home";
+  static String homeRecipesEndPoint = "/search/random";
   static String recipeEndPoint = "/home/recipe";
+  static String ingredientsEndPoint = "/home/ingredients";
+  static String recommendEndPoint = "/search/withIngredientsAndTags";
   static String forgetPasswordEndPoint = "/forgetPassword";
   static String resetPassword = "/resetPassword";
   static String changePassword = "/changePassword";
-
   static Map<String, String> headerCORS(String cookie) {
     if (cookie != "") {
       return {

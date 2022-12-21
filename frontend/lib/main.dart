@@ -146,6 +146,7 @@ class MyApp extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.done) {
             String response = snapshot.data!;
             if (response == "UserInfo") {
+              debugPrint("IN3");
               return const PageViewController();
             } else {
               debugPrint("IN");
