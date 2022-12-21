@@ -30,7 +30,7 @@ Future<File> getLocalFile() async {
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  var url = Uri.http(APIConstants.baseUrl, APIConstants.homeEndPoint);
+  var url = Uri.https(APIConstants.baseUrl, APIConstants.homeEndPoint);
   debugPrint(url.toString());
   getLocalFile()
       .then((value) => {
