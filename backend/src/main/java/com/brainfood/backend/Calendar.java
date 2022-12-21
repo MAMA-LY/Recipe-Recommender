@@ -9,16 +9,12 @@ import java.util.List;
 
 @Getter @Setter
 @AllArgsConstructor @NoArgsConstructor
-public class RecipeRecommender {
+public class Calendar {
 
-    private Model model;
+    private List<Ingredient> ingredients;
 
-    //                          Operations                                  
 
-    public List<Recipe> recommend() {
-        //
-        return null;
-    }
-    
+    private List<Recipe> recipes;
+
     
 }

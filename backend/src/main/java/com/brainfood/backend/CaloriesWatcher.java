@@ -1,13 +1,11 @@
 package com.brainfood.backend;
 
 
-import com.brainfood.models.RecipeModel;
-
 public class CaloriesWatcher {
 
     //                          Operations                                  
 
-    public RecipeModel eat() {
+    public Recipe eat() {
         return null;
     }
     
