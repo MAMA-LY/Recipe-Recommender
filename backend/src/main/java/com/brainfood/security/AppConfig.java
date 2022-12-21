@@ -12,9 +12,9 @@ public class AppConfig {
     public BCryptPasswordEncoder transferService() {
         return new BCryptPasswordEncoder();
     }
-   
+
     @Bean
-    SessionRegistry sessionRegistry() { 
-        return new SessionRegistryImpl(); 
+    SessionRegistry sessionRegistry() {
+        return new SessionRegistryImpl();
     }
 }

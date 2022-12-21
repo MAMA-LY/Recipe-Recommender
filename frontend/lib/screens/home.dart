@@ -49,7 +49,7 @@ class _HomePageState extends State<HomePage> {
       ),
       body: FutureBuilder<List<Recipe>>(
         future: api.getRecipesWithQuery(
-            APIConstants.homeRecipesEndPoint, {"number": "5"}),
+            APIConstants.homeRecipesEndPoint, {"number": "10"}),
         builder: (context, snapshot) {
           debugPrint("SNAPSHOT1: ${snapshot.data}");
           if (snapshot.connectionState == ConnectionState.done) {
