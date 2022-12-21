@@ -8,11 +8,7 @@ class Ingredient {
   final Nutrition? nutrition;
 
   Ingredient(
-      {required this.name,
-        this.id,
-        this.icon,
-        this.amount,
-        this.nutrition});
+      {required this.name, this.id, this.icon, this.amount, this.nutrition});
 
   factory Ingredient.fromJson(dynamic json) {
     return Ingredient(
@@ -20,18 +16,16 @@ class Ingredient {
         id: json['id'] as String,
         icon: json['icon'] as String,
         amount: json['amount'] as String,
-        nutrition: json['nutrition'] as Nutrition);
+        nutrition: Nutrition.fromJson(json['nutrition']));
   }
 
-  factory Ingredient.shortIngredientFromJson(dynamic json) {
-    return Ingredient(
-        name: json['name'] as String
-    );
+  static String ingredientNamesFromJson(dynamic json) {
+    return json['name'] as String;
   }
 
-  static List<Ingredient> ingredientsFromSnapshot(List<dynamic> snapshot) {
+  static List<String> ingredientsFromSnapshot(List<dynamic> snapshot) {
     return snapshot.map((data) {
-      return Ingredient.shortIngredientFromJson(data);
+      return Ingredient.ingredientNamesFromJson(data);
     }).toList();
   }
 

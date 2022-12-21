@@ -28,34 +28,24 @@ class _NutritionViewState extends State<NutritionView> {
           widget.nutrition.fats /
               (widget.nutrition.fats +
                   widget.nutrition.proteins +
-                  widget.nutrition.carbs +
-                  10) *
+                  widget.nutrition.carbs) *
               100),
       ChartData(
           'Proteins',
           widget.nutrition.proteins /
               (widget.nutrition.fats +
                   widget.nutrition.proteins +
-                  widget.nutrition.carbs +
-                  10) *
+                  widget.nutrition.carbs) *
               100),
       ChartData(
           'Carbs',
           widget.nutrition.carbs /
               (widget.nutrition.fats +
                   widget.nutrition.proteins +
-                  widget.nutrition.carbs +
-                  10) *
+                  widget.nutrition.carbs) *
               100),
     ];
-    widget.data.add(ChartData(
-        'Others',
-        (10 /
-            (widget.nutrition.fats +
-                widget.nutrition.proteins +
-                widget.nutrition.carbs +
-                10) *
-            100)));
+
     super.initState();
   }
 

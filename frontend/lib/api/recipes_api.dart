@@ -19,6 +19,7 @@ class RecipesAPI {
     var response =
         await http.get(url, headers: APIConstants.headerCORS(session.cookie));
     debugPrint(response.statusCode.toString());
+    debugPrint(response.body.toString());
 
     if (response.statusCode == 200) {
       return Recipe.recipeFromJson(jsonDecode(response.body));
@@ -35,6 +36,8 @@ class RecipesAPI {
     var url = Uri.https(APIConstants.baseUrl, path, query);
     var response =
         await http.get(url, headers: APIConstants.headerCORS(session.cookie));
+    debugPrint(response.statusCode.toString());
+    debugPrint(response.body.toString());
     if (response.statusCode == 200) {
       debugPrint(response.body.toString());
       return Recipe.shortRecipesFromSnapshot(
