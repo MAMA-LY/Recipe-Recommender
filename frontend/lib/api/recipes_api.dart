@@ -14,13 +14,10 @@ class RecipesAPI {
   RecipesAPI.fromCookie(var this.cookie);
 
   Future<Recipe> getRecipeByID(String id) async {
-    var url = Uri.https(
-        APIConstants.baseUrl, APIConstants.recipeEndPoint, {"id": id});
-    var response =
-        await http.get(url, headers: APIConstants.headerCORS(session.cookie));
+    var url = Uri.https(APIConstants.baseUrl, APIConstants.recipeEndPoint, {"id": id});
+    var response = await http.get(url, headers: APIConstants.headerCORS(session.cookie));
     debugPrint(response.statusCode.toString());
-    debugPrint(response.body.toString());
-
+    debugPrint(response.body);
     if (response.statusCode == 200) {
       return Recipe.recipeFromJson(jsonDecode(response.body));
     } else if (response.statusCode == 401) {

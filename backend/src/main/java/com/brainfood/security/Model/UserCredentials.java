@@ -1,9 +1,7 @@
-package com.brainfood.security.model;
+package com.brainfood.security.Model;
 
 import java.io.Serializable;
 
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.stereotype.Component;
 
 import jakarta.persistence.Column;
@@ -12,27 +10,29 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
-
 
 @Component
 @ToString
 @Entity
 @Table(name = "\"UserCredentials\"")
-@Getter @Setter
+@Getter
+@Setter
 public class UserCredentials implements Serializable {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String ID;
 
     @Column(name = "username")
     private String username;
-  
+
     @Column(name = "password")
     private String password;
- 
+
     @Column(name = "email")
     private String email;
-    
+
 }

@@ -12,11 +12,13 @@ import 'package:recipe_recommender_frontend/screens/sign/signin.dart';
 import 'package:recipe_recommender_frontend/screens/splash_screen.dart';
 import 'package:uni_links/uni_links.dart';
 import 'api/api_constants.dart';
+import 'api/recipes_api.dart';
 import 'api/session.dart';
+import 'models/recipe.dart';
 import 'screens/page_view_controller.dart';
+import 'screens/recipe_page/recipe_page.dart';
 
 var session = Session("");
-
 String cookieStr = "";
 File? cacheFile;
 
@@ -56,6 +58,18 @@ Future<void> initUniLinks() async {
           runApp(const BuildApp(
               widget: SignInPage(initResp: "Cannot reset password")));
         }
+      } else if (path[0] == "share") {
+        if (Session.login) {
+          String? id = initialUri.queryParameters['id'];
+          if (id != null) {
+            debugPrint(id);
+            RecipesAPI api = RecipesAPI.fromCookie(session.cookie);
+            Recipe response = await api.getRecipeByID(id.trim());
+            runApp(BuildApp(widget:RecipePage(recipe: response, inFavorites: false)));
+          }
+        } else {
+          runApp(const BuildApp(widget: SignInPage(initResp: "")));
+        }
       } else {
         runApp(const BuildApp(widget: SignInPage(initResp: "")));
       }
@@ -85,6 +99,18 @@ Future<void> initUniLinks() async {
           } else {
             runApp(const BuildApp(
                 widget: SignInPage(initResp: "Cannot reset password")));
+          }
+        } else if (path[0] == "share") {
+          if (Session.login) {
+            String? id = uri.queryParameters['id'];
+            if (id != null) {
+              debugPrint(id);
+              RecipesAPI api = RecipesAPI.fromCookie(session.cookie);
+              Recipe response = await api.getRecipeByID(id.trim());
+              runApp(BuildApp(widget:RecipePage(recipe: response, inFavorites: false)));
+            }
+          } else {
+            runApp(const BuildApp(widget: SignInPage(initResp: "")));
           }
         } else {
           runApp(const BuildApp(widget: SignInPage(initResp: "")));
@@ -125,6 +151,7 @@ Future<String?> getServerInitResponse() async {
   var url = Uri.https(APIConstants.baseUrl, APIConstants.homeEndPoint);
   var serverResponse =
       await http.get(url, headers: APIConstants.headerCORS(session.cookie));
+  debugPrint(serverResponse.body);
   final bool hasData = serverResponse.body != null;
   if (hasData) {
     return serverResponse.body;
@@ -146,7 +173,7 @@ class MyApp extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.done) {
             String response = snapshot.data!;
             if (response == "UserInfo") {
-              debugPrint("IN3");
+              Session.login = true;
               return const PageViewController();
             } else {
               debugPrint("IN");

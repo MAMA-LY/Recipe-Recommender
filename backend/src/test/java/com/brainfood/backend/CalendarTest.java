@@ -1,16 +1,16 @@
 package com.brainfood.backend;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.jupiter.api.Test;
+
 import com.brainfood.models.Calendar;
 import com.brainfood.models.Ingredient;
 import com.brainfood.models.Recipe;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class CalendarTest {
 
@@ -51,8 +51,8 @@ class CalendarTest {
 
         calendar.setIngredients(ingredientsExpected);
 
-        List<Ingredient> ingredientsActual= ( List<Ingredient>) field.get(calendar);
-        assertEquals(ingredientsActual,ingredientsExpected,"setIngredients problem");
+        List<Ingredient> ingredientsActual = (List<Ingredient>) field.get(calendar);
+        assertEquals(ingredientsActual, ingredientsExpected, "setIngredients problem");
     }
 
     @Test
@@ -64,8 +64,8 @@ class CalendarTest {
 
         calendar.setRecipes(recipesExpected);
 
-        List<Recipe> recipesActual= ( List<Recipe>) field.get(calendar);
-        assertEquals(recipesActual,recipesExpected,"setRecipes problem");
+        List<Recipe> recipesActual = (List<Recipe>) field.get(calendar);
+        assertEquals(recipesActual, recipesExpected, "setRecipes problem");
 
     }
 }

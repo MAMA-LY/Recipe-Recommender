@@ -4,7 +4,7 @@ import java.awt.Image;
 import java.sql.Timestamp;
 import java.util.List;
 
-import com.brainfood.security.model.UserCredentials;
+import com.brainfood.security.Model.UserCredentials;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

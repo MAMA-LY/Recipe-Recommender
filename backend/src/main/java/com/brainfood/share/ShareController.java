@@ -1,6 +1,4 @@
-package com.brainfood.search;
-
-import java.util.List;
+package com.brainfood.share;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -10,22 +8,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.brainfood.models.Recipe;
+import com.brainfood.search.RecipeDAO;
 
 @ComponentScan
 @RestController
-@RequestMapping("home")
-public class HomeController {
+@RequestMapping("share")
+public class ShareController {
+
     @Autowired
-    DAO DAO;
+    RecipeDAO recipeDAO;
 
     @GetMapping("recipe")
-    public Recipe getRecipeDetails(@RequestParam String id) {
-        return DAO.findRecipe(id);
-    }
-
-    @GetMapping("ingredients")
-    public List<String> getAllIngredients() {
-        return DAO.getAllIngredients();
+    public Recipe getRecipeDetailsByName(@RequestParam(name = "id") String id) {
+        return recipeDAO.findRecipe(id);
     }
 
 }

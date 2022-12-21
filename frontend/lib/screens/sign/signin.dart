@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_recommender_frontend/api/session.dart';
 import 'package:recipe_recommender_frontend/api/sign_api.dart';
 import 'package:recipe_recommender_frontend/screens/sign/forgetPassword.dart';
 import 'package:recipe_recommender_frontend/screens/sign/signup.dart';
@@ -31,6 +32,7 @@ class _SignInPageState extends State<SignInPage> {
         resp = "Wrong credentials";
       });
     } else if (status == "right credentials") {
+      Session.login = true;
       // ignore: use_build_context_synchronously
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(

@@ -17,7 +17,7 @@ public class Utilities {
      *
      * @param list the desired list to be handled
      * @return the inserted list after eliminating duplicates and null-image recipes
-     *         and transform it to array of ShortRecipeModel
+     *         and transform it to array of ShortRecipe
      */
     public static ShortRecipe[] eliminateDuplicates(List<RecipeDB> list) {
         if (list == null)
@@ -37,12 +37,12 @@ public class Utilities {
     }
 
     /**
-     * transform a list of recipes to array of ShortRecipeModel and remove
+     * transform a list of recipes to array of ShortRecipe and remove
      * null-image ones
      *
      * @param result the desired list to be handled
      * @return the inserted list after removing null-image recipes and transform it
-     *         to array of ShortRecipeModel
+     *         to array of ShortRecipe
      */
     public static ShortRecipe[] castToArray(List<RecipeDB> result) {
         if (result == null)

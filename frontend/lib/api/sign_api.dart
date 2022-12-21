@@ -26,6 +26,7 @@ class SignAPI {
     debugPrint(response.statusCode.toString());
     var cookie = response.headers['set-cookie'];
     var responseLocation = response.headers['location'];
+
     if (responseLocation ==
         "https://${APIConstants.baseUrl + APIConstants.signinEndPoint}?error") {
       return "wrong credentials";
@@ -42,6 +43,7 @@ class SignAPI {
 
       var responseHome =
           await http.post(urlHome, headers: APIConstants.headerCORS(cookie));
+      
       return "right credentials";
     }
     return null;
