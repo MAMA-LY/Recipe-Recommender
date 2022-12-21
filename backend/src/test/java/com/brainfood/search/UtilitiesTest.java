@@ -1,17 +1,19 @@
 package com.brainfood.search;
 
-import com.brainfood.search.DBEntities.Recipe;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import com.brainfood.backend.db_entities.Recipe;
+import com.brainfood.models.ShortRecipeModel;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class UtilitiesTest {
@@ -35,13 +37,13 @@ class UtilitiesTest {
     @Test
     void emptyListEliminateDuplicates() {
         var result = Utilities.eliminateDuplicates(Data);
-        assertArrayEquals(new ShortRecipe[0], result);
+        assertArrayEquals(new ShortRecipeModel[0], result);
     }
 
     @Test
     void emptyListCastToArray() {
         var result = Utilities.castToArray(Data);
-        assertArrayEquals(new ShortRecipe[0], result);
+        assertArrayEquals(new ShortRecipeModel[0], result);
     }
 
     @Test
@@ -51,13 +53,13 @@ class UtilitiesTest {
         Data.add(Recipe.builder().id("111").name("third").photo("11222111").build());
         Data.add(Recipe.builder().id("222").name("fourth").photo("11133111").build());
 
-        ShortRecipe[] expected = new ShortRecipe[3];
-        expected[0] = ShortRecipe.builder().id("123").name("first").image("11111").build();
-        expected[1] = ShortRecipe.builder().id("111").name("third").image("11222111").build();
-        expected[2] = ShortRecipe.builder().id("222").name("fourth").image("11133111").build();
+        ShortRecipeModel[] expected = new ShortRecipeModel[3];
+        expected[0] = ShortRecipeModel.builder().id("123").name("first").image("11111").build();
+        expected[1] = ShortRecipeModel.builder().id("111").name("third").image("11222111").build();
+        expected[2] = ShortRecipeModel.builder().id("222").name("fourth").image("11133111").build();
 
-        ShortRecipe[] result = Utilities.eliminateDuplicates(Data);
-        this.assertShortRecipeArrays(result, expected);
+        ShortRecipeModel[] result = Utilities.eliminateDuplicates(Data);
+        this.assertShortRecipeModelArrays(result, expected);
     }
 
     @Test
@@ -69,13 +71,13 @@ class UtilitiesTest {
         Data.add(Recipe.builder().id("222").name("fourth").photo("11133111").build());
         Data.add(Recipe.builder().id("222").name("fourth").photo("11133111").build());
 
-        ShortRecipe[] expected = new ShortRecipe[3];
-        expected[0] = ShortRecipe.builder().id("123").name("first").image("11111").build();
-        expected[1] = ShortRecipe.builder().id("111").name("third").image("11222111").build();
-        expected[2] = ShortRecipe.builder().id("222").name("fourth").image("11133111").build();
+        ShortRecipeModel[] expected = new ShortRecipeModel[3];
+        expected[0] = ShortRecipeModel.builder().id("123").name("first").image("11111").build();
+        expected[1] = ShortRecipeModel.builder().id("111").name("third").image("11222111").build();
+        expected[2] = ShortRecipeModel.builder().id("222").name("fourth").image("11133111").build();
 
-        ShortRecipe[] result = Utilities.eliminateDuplicates(Data);
-        this.assertShortRecipeArrays(result, expected);
+        ShortRecipeModel[] result = Utilities.eliminateDuplicates(Data);
+        this.assertShortRecipeModelArrays(result, expected);
     }
 
     @Test
@@ -86,16 +88,16 @@ class UtilitiesTest {
         Data.add(Recipe.builder().id("111").name("third").photo("11222111").build());
         Data.add(Recipe.builder().id("222").name("fourth").photo("11133111").build());
 
-        ShortRecipe[] expected = new ShortRecipe[3];
-        expected[0] = ShortRecipe.builder().id("123").name("first").image("11111").build();
-        expected[1] = ShortRecipe.builder().id("111").name("third").image("11222111").build();
-        expected[2] = ShortRecipe.builder().id("222").name("fourth").image("11133111").build();
+        ShortRecipeModel[] expected = new ShortRecipeModel[3];
+        expected[0] = ShortRecipeModel.builder().id("123").name("first").image("11111").build();
+        expected[1] = ShortRecipeModel.builder().id("111").name("third").image("11222111").build();
+        expected[2] = ShortRecipeModel.builder().id("222").name("fourth").image("11133111").build();
 
-        ShortRecipe[] result = Utilities.castToArray(Data);
-        this.assertShortRecipeArrays(result, expected);
+        ShortRecipeModel[] result = Utilities.castToArray(Data);
+        this.assertShortRecipeModelArrays(result, expected);
     }
 
-    private void assertShortRecipeArrays(ShortRecipe[] result, ShortRecipe[] expected) {
+    private void assertShortRecipeModelArrays(ShortRecipeModel[] result, ShortRecipeModel[] expected) {
         for (int i = 0; i < result.length; i++) {
             assertEquals(expected[i].id, result[i].id);
             assertEquals(expected[i].name, result[i].name);

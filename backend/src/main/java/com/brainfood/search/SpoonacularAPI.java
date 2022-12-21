@@ -1,11 +1,5 @@
 package com.brainfood.search;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.boot.configurationprocessor.json.JSONArray;
-import org.springframework.boot.configurationprocessor.json.JSONException;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
-import org.springframework.stereotype.Service;
-
 import java.io.IOException;
 import java.net.URI;
 import java.net.URLEncoder;
@@ -19,6 +13,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.springframework.boot.configurationprocessor.json.JSONArray;
+import org.springframework.boot.configurationprocessor.json.JSONException;
+import org.springframework.boot.configurationprocessor.json.JSONObject;
+import org.springframework.stereotype.Service;
+
+import com.brainfood.models.ShortRecipeModel;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 /**
  * a class to handle the requests to Spoonacular API and get its response
  */
@@ -26,11 +28,14 @@ import java.util.stream.Collectors;
 public class SpoonacularAPI {
 
     /**
-     * method that takes a plain text as an input and send it to spoonacular api to detect the food in it
+     * method that takes a plain text as an input and send it to spoonacular api to
+     * detect the food in it
+     * 
      * @param text the text which needed to detect food in
-     * @return  a list with the food that spoonacular detected and each element has a tag that specifies it is a dish or an ingredient
+     * @return a list with the food that spoonacular detected and each element has a
+     *         tag that specifies it is a dish or an ingredient
      */
-    public List<ShortRecipe> foodText(String text) throws JSONException, IOException, InterruptedException {
+    public List<ShortRecipeModel> foodText(String text) throws JSONException, IOException, InterruptedException {
         var params = new HashMap<String, String>();
         params.put("text", text);
 
@@ -43,10 +48,10 @@ public class SpoonacularAPI {
         HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
 
         JSONArray food = new JSONObject(response.body()).getJSONArray("annotations");
-        List<ShortRecipe> ans = new ArrayList<>();
+        List<ShortRecipeModel> ans = new ArrayList<>();
         ObjectMapper mapper = new ObjectMapper();
         for (int i = 0; !food.isNull(i); i++)
-            ans.add(mapper.readValue(food.getJSONObject(i).toString(), ShortRecipe.class));
+            ans.add(mapper.readValue(food.getJSONObject(i).toString(), ShortRecipeModel.class));
 
         return ans;
     }
@@ -59,5 +64,3 @@ public class SpoonacularAPI {
         return HttpRequest.BodyPublishers.ofString(urlEncoded);
     }
 }
-
-

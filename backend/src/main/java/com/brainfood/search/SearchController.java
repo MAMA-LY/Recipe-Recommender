@@ -1,6 +1,9 @@
 package com.brainfood.search;
 
-import com.brainfood.search.DBEntities.Recipe;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.context.annotation.ComponentScan;
@@ -9,9 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import com.brainfood.backend.db_entities.Recipe;
+import com.brainfood.models.ShortRecipeModel;
 
 @ComponentScan
 @RestController
@@ -27,12 +29,14 @@ public class SearchController {
     RecipeDAO recipeDAO;
 
     @GetMapping("/sentence")
-    public ShortRecipe[] searchSentence(@RequestParam String sentence) throws JSONException, IOException, InterruptedException {
-        List<ShortRecipe> food = spoonacularAPI.foodText(sentence);
+    public ShortRecipeModel[] searchSentence(@RequestParam String sentence)
+            throws JSONException, IOException, InterruptedException {
+        List<ShortRecipeModel> food = spoonacularAPI.foodText(sentence);
 
         dishIngredientClassifier.classify(food);
-        List<ShortRecipe> dishes = dishIngredientClassifier.getDish();
-        List<ShortRecipe> ingredients = dishIngredientClassifier.getIngredient();
+        List<ShortRecipeModel> dishes = dishIngredientClassifier.getDish();
+        List<ShortRecipeModel> ingredients = dishIngredientClassifier.getIngredient();
+        System.out.println(sentence + " " + ingredients.size());
 
         List<Recipe> result = new ArrayList<>();
         result.addAll(recipeDAO.findSimilarDishes(dishes));
@@ -42,13 +46,14 @@ public class SearchController {
     }
 
     @GetMapping("/random")
-    public ShortRecipe[] getRandom(@RequestParam int number) {
+    public ShortRecipeModel[] getRandom(@RequestParam int number) {
         var result = recipeDAO.getRandomRecipes(number);
         return Utilities.castToArray(result);
     }
 
     @GetMapping("/withIngredientsAndTags")
-    public ShortRecipe[] getRecipeWithIngredientsAndTags(@RequestParam String[] Ingredients, @RequestParam String[] Tags) {
+    public ShortRecipeModel[] getRecipeWithIngredientsAndTags(@RequestParam String[] Ingredients,
+            @RequestParam String[] Tags) {
         var result = recipeDAO.recipesWithIngredients(Ingredients);
         if (result.size() == 0 && Ingredients.length > 0)
             return null;

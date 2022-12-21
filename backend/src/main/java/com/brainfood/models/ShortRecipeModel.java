@@ -1,37 +1,41 @@
-package com.brainfood.search;
+package com.brainfood.models;
 
-import com.brainfood.search.DBEntities.Recipe;
+import com.brainfood.backend.db_entities.Recipe;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 
 /**
- * a class to parse the requested objects from spoonacular api and hold the data that is sent to the front
+ * a class to parse the requested objects from spoonacular api and hold the data
+ * that is sent to the front
  **/
 @Builder
 @AllArgsConstructor
-public class ShortRecipe {
+@JsonRootName("ShortRecipe")
+public class ShortRecipeModel {
 
     @JsonProperty("id")
-    String id;
+    public String id;
 
     @JsonProperty("name")
     @JsonAlias("annotation")
-    String name;
+    public String name;
 
     @JsonProperty(value = "tag", access = JsonProperty.Access.WRITE_ONLY)
-    String tag;
+    public String tag;
 
     @JsonProperty("image")
-    String image;
+    public String image;
 
-    public ShortRecipe(Recipe recipe) {
+    public ShortRecipeModel(Recipe recipe) {
         this.id = recipe.id;
         this.name = recipe.name;
         this.image = recipe.photo;
     }
 
-    public ShortRecipe() {
+    public ShortRecipeModel() {
     }
 }

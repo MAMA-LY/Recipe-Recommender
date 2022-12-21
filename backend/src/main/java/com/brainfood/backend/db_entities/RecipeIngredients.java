@@ -1,4 +1,7 @@
-package com.brainfood.search.DBEntities;
+
+package com.brainfood.backend.db_entities;
+
+import java.io.Serializable;
 
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -9,12 +12,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "\"RecipeTags\"")
+@Table(name = "\"RecipeIngredients\"")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class RecipeTags {
+public class RecipeIngredients implements Serializable {
     @EmbeddedId
-    private RecipeTagsCK compositeKey;
+    private RecipeIngredientsCK compositeKey;
 }
