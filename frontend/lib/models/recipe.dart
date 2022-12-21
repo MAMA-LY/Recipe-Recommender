@@ -43,7 +43,6 @@ class Recipe {
   }
 
   static List<Recipe> shortRecipesFromSnapshot(List<dynamic> snapshot) {
-    snapshot = snapshot.where((element) => element['image'] != null).toList();
     return snapshot.map((data) {
       return Recipe.shortRecipeFromJson(data);
     }).toList();

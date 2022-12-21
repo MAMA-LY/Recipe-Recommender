@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:recipe_recommender_frontend/models/nutrition.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
+import '../../../constants.dart';
+
 class NutritionView extends StatefulWidget {
   late List<ChartData> data;
   late Nutrition nutrition;
@@ -50,6 +52,7 @@ class _NutritionViewState extends State<NutritionView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Constants.secondaryColor,
         body: SfCircularChart(
             annotations: [
               CircularChartAnnotation(
@@ -82,6 +85,7 @@ class _NutritionViewState extends State<NutritionView> {
 
 class ChartData {
   ChartData(this.x, this.y);
+
   final String x;
   final double y;
 }

@@ -5,11 +5,17 @@ import 'package:recipe_recommender_frontend/screens/sign/widgets/custom_button.d
 
 void main() {
   testWidgets('Signin Page smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(const MaterialApp(home: SignInPage()));
+    await tester.pumpWidget(const MaterialApp(
+        home: SignInPage(
+      initResp: '',
+    )));
     await tester.pumpAndSettle();
   });
   testWidgets('Signin Page inner widgets test', (WidgetTester tester) async {
-    await tester.pumpWidget(const MaterialApp(home: SignInPage()));
+    await tester.pumpWidget(const MaterialApp(
+        home: SignInPage(
+      initResp: '',
+    )));
 
     var text = find.text('Don\'t have an account?');
     expect(text, findsOneWidget);

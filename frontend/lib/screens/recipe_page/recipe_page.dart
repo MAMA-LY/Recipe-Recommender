@@ -15,7 +15,7 @@ class RecipePage extends StatefulWidget {
   List<String> getIngredientsNames() {
     List<String> ingredientsNames = [];
     for (var ingredient in recipe.ingredients!) {
-      ingredientsNames.add(ingredient.amount);
+      ingredientsNames.add(ingredient.amount!);
     }
     return ingredientsNames;
   }
@@ -49,6 +49,7 @@ class _RecipePageState extends State<RecipePage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Constants.secondaryColor,
       body: NestedScrollView(
         controller: _scrollController,
         headerSliverBuilder: (BuildContext context, bool innerViewIsScrolled) {
@@ -78,7 +79,7 @@ class _RecipePageState extends State<RecipePage>
                 ],
                 controller: _tabController,
               ),
-            )
+            ),
           ];
         },
         body: TabBarView(
@@ -90,6 +91,7 @@ class _RecipePageState extends State<RecipePage>
         ),
       ),
       floatingActionButton: FloatingActionButton(
+
         onPressed: () {
           //TODO: update the user fav recipes
         },
@@ -100,6 +102,8 @@ class _RecipePageState extends State<RecipePage>
           color: Theme.of(context).iconTheme.color,
         ),
       ),
+
+     
     );
   }
 }

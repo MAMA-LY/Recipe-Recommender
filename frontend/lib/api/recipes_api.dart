@@ -9,27 +9,9 @@ import 'package:recipe_recommender_frontend/models/recipe.dart';
 import '../models/failure.dart';
 
 class RecipesAPI {
-  var cookie;
-
-  RecipesAPI();
+  String cookie;
 
   RecipesAPI.fromCookie(var this.cookie);
-
-  Future<List<Recipe>> getRecipes(String path) async {
-    var url = Uri.https(APIConstants.baseUrl, path);
-    var response =
-        await http.get(url, headers: APIConstants.headerCORS(session.cookie));
-    debugPrint(response.statusCode.toString());
-
-    if (response.statusCode == 200) {
-      return Recipe.shortRecipesFromSnapshot(jsonDecode(response.body));
-    } else if (response.statusCode == 401) {
-      throw Failure(code: 401, message: "fail");
-    } else {
-      throw Failure(
-          code: response.statusCode, message: response.headers.toString());
-    }
-  }
 
   Future<Recipe> getRecipeByID(String id) async {
     var url = Uri.https(
@@ -57,6 +39,7 @@ class RecipesAPI {
     debugPrint(response.statusCode.toString());
     debugPrint(response.body.toString());
     if (response.statusCode == 200) {
+      debugPrint(response.body.toString());
       return Recipe.shortRecipesFromSnapshot(
           jsonDecode(response.body.toString()));
     } else if (response.statusCode == 401) {

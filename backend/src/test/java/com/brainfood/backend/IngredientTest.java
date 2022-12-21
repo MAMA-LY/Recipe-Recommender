@@ -1,5 +1,7 @@
 package com.brainfood.backend;
 
+import com.brainfood.models.Ingredient;
+import com.brainfood.models.Nutrition;
 import org.junit.jupiter.api.Test;
 
 import java.awt.*;
@@ -32,56 +34,6 @@ class IngredientTest {
         field.set(ingredient, expectedValue);
 
         assertEquals(expectedValue,ingredient.getID(), "problem in getID");
-    }
-
-    @Test
-    void getIcon() throws IllegalAccessException, NoSuchFieldException{
-
-        final Ingredient ingredient =new Ingredient();
-        final Field field = ingredient.getClass().getDeclaredField("icon");
-        field.setAccessible(true);
-        Image expectedValue = new Image() {
-            @Override
-            public int getWidth(ImageObserver observer) {
-                return 0;
-            }
-
-            @Override
-            public int getHeight(ImageObserver observer) {
-                return 0;
-            }
-
-            @Override
-            public ImageProducer getSource() {
-                return null;
-            }
-
-            @Override
-            public Graphics getGraphics() {
-                return null;
-            }
-
-            @Override
-            public Object getProperty(String name, ImageObserver observer) {
-                return null;
-            }
-        };
-        field.set(ingredient, expectedValue);
-
-        assertEquals(expectedValue,ingredient.getIcon(), "problem in getIcon");
-    }
-
-    @Test
-    void getWeight() throws IllegalAccessException, NoSuchFieldException{
-
-
-        final Ingredient ingredient =new Ingredient();
-        final Field field = ingredient.getClass().getDeclaredField("weight");
-        field.setAccessible(true);
-        int expectedValue = 5;
-        field.set(ingredient, expectedValue);
-
-        assertEquals(expectedValue,ingredient.getWeight(), "problem in getWeight");
     }
 
     @Test
@@ -121,55 +73,6 @@ class IngredientTest {
         ingredient.setID(expectedValue);
         String actualValue= (String)field.get(ingredient);
         assertEquals(expectedValue,actualValue,"problem in setID");
-    }
-
-    @Test
-    void setIcon() throws IllegalAccessException, NoSuchFieldException{
-        final Ingredient ingredient =new Ingredient();
-        final Field field = ingredient.getClass().getDeclaredField("icon");
-        field.setAccessible(true);
-        Image expectedValue = new Image() {
-            @Override
-            public int getWidth(ImageObserver observer) {
-                return 0;
-            }
-
-            @Override
-            public int getHeight(ImageObserver observer) {
-                return 0;
-            }
-
-            @Override
-            public ImageProducer getSource() {
-                return null;
-            }
-
-            @Override
-            public Graphics getGraphics() {
-                return null;
-            }
-
-            @Override
-            public Object getProperty(String name, ImageObserver observer) {
-                return null;
-            }
-        };
-
-        ingredient.setIcon(expectedValue);
-        Image actualValue= (Image)field.get(ingredient);
-        assertEquals(expectedValue,actualValue,"problem in setIcon");
-    }
-
-    @Test
-    void setWeight() throws IllegalAccessException, NoSuchFieldException{
-        final Ingredient ingredient =new Ingredient();
-        final Field field = ingredient.getClass().getDeclaredField("weight");
-        field.setAccessible(true);
-        int expectedValue = 101;
-
-        ingredient.setWeight(expectedValue);
-        int actualValue= (int)field.get(ingredient);
-        assertEquals(expectedValue,actualValue,"problem in setWeight");
     }
 
     @Test
