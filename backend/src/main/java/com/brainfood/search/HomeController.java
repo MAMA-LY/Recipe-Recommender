@@ -7,17 +7,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.brainfood.models.RecipeModel;
+import com.brainfood.models.Recipe;
+
+import java.util.List;
 
 @ComponentScan
 @RestController
 @RequestMapping("home")
-public class RecipeController {
+public class HomeController {
     @Autowired
-    RecipeDAO recipeDAO;
+    DAO DAO;
 
     @GetMapping("recipe")
-    public RecipeModel getRecipeDetails(@RequestParam String id) {
-        return recipeDAO.findRecipe(id);
+    public Recipe getRecipeDetails(@RequestParam String id) {
+        return DAO.findRecipe(id);
+    }
+
+    @GetMapping("ingredients")
+    public List<String> getAllIngredients() {
+        return DAO.getAllIngredients();
     }
 }

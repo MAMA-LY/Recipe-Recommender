@@ -19,7 +19,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Recipe implements Serializable {
+public class RecipeDB implements Serializable {
 
     @Id
     @Column(name = "id")

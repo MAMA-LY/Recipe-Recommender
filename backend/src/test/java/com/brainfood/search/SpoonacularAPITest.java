@@ -14,7 +14,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 
-import com.brainfood.models.ShortRecipeModel;
+import com.brainfood.models.ShortRecipe;
 
 class SpoonacularAPITest {
     SpoonacularAPI spoonacularAPI;
@@ -84,18 +84,18 @@ class SpoonacularAPITest {
     }
 
     private void assertShortRecipeModelLists(Map<String, Boolean> expected, Map<String, String> expectedType,
-            List<ShortRecipeModel> result) {
-        for (ShortRecipeModel ShortRecipeModel : result)
-            if (!expected.containsKey(ShortRecipeModel.name))
+            List<ShortRecipe> result) {
+        for (ShortRecipe ShortRecipe : result)
+            if (!expected.containsKey(ShortRecipe.name))
                 fail();
             else
-                expected.put(ShortRecipeModel.name, true);
+                expected.put(ShortRecipe.name, true);
         for (String food : expected.keySet()) {
             if (!expected.get(food))
                 fail();
         }
 
-        for (ShortRecipeModel recipe : result) {
+        for (ShortRecipe recipe : result) {
             if (!Objects.equals(recipe.tag, expectedType.get(recipe.name)))
                 fail();
         }

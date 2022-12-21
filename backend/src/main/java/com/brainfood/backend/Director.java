@@ -3,53 +3,53 @@ package com.brainfood.backend;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.brainfood.backend.db_entities.Ingredient;
-import com.brainfood.backend.db_entities.Recipe;
-import com.brainfood.models.IngredientModel;
-import com.brainfood.models.NutritionModel;
-import com.brainfood.models.RecipeModel;
+import com.brainfood.backend.db_entities.IngredientDB;
+import com.brainfood.backend.db_entities.RecipeDB;
+import com.brainfood.models.Ingredient;
+import com.brainfood.models.Nutrition;
+import com.brainfood.models.Recipe;
 
 public class Director {
-    public static NutritionModel buildRecipeNutritionModel(Recipe recipe) {
-        return NutritionModel.builder()
-                .calories(recipe.calories)
-                .carbs(recipe.carbs)
-                .fats(recipe.fats)
-                .proteins(recipe.proteins)
+    public static Nutrition buildRecipeNutritionModel(RecipeDB recipeDB) {
+        return Nutrition.builder()
+                .calories(recipeDB.calories)
+                .carbs(recipeDB.carbs)
+                .fats(recipeDB.fats)
+                .proteins(recipeDB.proteins)
                 .build();
     }
 
-    public static NutritionModel buildIngredientNutritionModel(Ingredient ingredient) {
-        return NutritionModel.builder()
-                .calories(ingredient.calories)
-                .carbs(ingredient.carbs)
-                .fats(ingredient.fats)
-                .proteins(ingredient.proteins)
+    public static Nutrition buildIngredientNutritionModel(IngredientDB ingredientDB) {
+        return Nutrition.builder()
+                .calories(ingredientDB.calories)
+                .carbs(ingredientDB.carbs)
+                .fats(ingredientDB.fats)
+                .proteins(ingredientDB.proteins)
                 .build();
     }
 
-    public static IngredientModel buildIngredientModel(Ingredient ingredient) {
-        return IngredientModel.builder()
-                .icon(ingredient.getIcon())
-                .ID(ingredient.getId())
-                .amount(ingredient.getAmount())
-                .name(ingredient.getName())
-                .nutritionModel(buildIngredientNutritionModel(ingredient))
+    public static Ingredient buildIngredientModel(IngredientDB ingredientDB) {
+        return Ingredient.builder()
+                .icon(ingredientDB.getIcon())
+                .ID(ingredientDB.getId())
+                .amount(ingredientDB.getAmount())
+                .name(ingredientDB.getName())
+                .nutrition(buildIngredientNutritionModel(ingredientDB))
                 .build();
     }
 
-    public static RecipeModel buildRecipe(Recipe recipe, List<Ingredient> ingredients, List<String> tags) {
-        List<IngredientModel> ingredientModels = new ArrayList<>();
-        for (Ingredient ingredient : ingredients)
-            ingredientModels.add(buildIngredientModel(ingredient));
+    public static Recipe buildRecipe(RecipeDB recipeDB, List<IngredientDB> ingredientDBS, List<String> tags) {
+        List<Ingredient> ingredients = new ArrayList<>();
+        for (IngredientDB ingredientDB : ingredientDBS)
+            ingredients.add(buildIngredientModel(ingredientDB));
 
-        return RecipeModel.builder()
-                .ID(recipe.id)
-                .name(recipe.name)
-                .cuisine(recipe.cuisine)
-                .photo(recipe.photo)
-                .nutritionModel(buildRecipeNutritionModel(recipe))
-                .ingredientModels(ingredientModels)
+        return Recipe.builder()
+                .ID(recipeDB.id)
+                .name(recipeDB.name)
+                .cuisine(recipeDB.cuisine)
+                .image(recipeDB.photo)
+                .nutrition(buildRecipeNutritionModel(recipeDB))
+                .ingredients(ingredients)
                 .tags(tags)
                 .build();
     }

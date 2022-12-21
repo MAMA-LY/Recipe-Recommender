@@ -1,5 +1,6 @@
 package com.brainfood.backend;
 
+import com.brainfood.models.Recipe;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

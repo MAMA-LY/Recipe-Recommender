@@ -10,10 +10,10 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 
-@ComponentScan(basePackages = { "com.brainfood" })
+@ComponentScan(basePackages = {"com.brainfood"})
 @SpringBootApplication
-@EntityScan({ "com.brainfood" })
-@EnableJpaRepositories({ "com.brainfood" })
+@EntityScan({"com.brainfood"})
+@EnableJpaRepositories({"com.brainfood"})
 
 public class BackendApplication {
 

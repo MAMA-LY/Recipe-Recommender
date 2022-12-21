@@ -1,5 +1,8 @@
 package com.brainfood.backend;
 
+import com.brainfood.models.Ingredient;
+import com.brainfood.models.Nutrition;
+import com.brainfood.models.Recipe;
 import org.junit.jupiter.api.Test;
 
 import java.awt.*;
@@ -76,42 +79,6 @@ class RecipeTest {
         assertEquals(ingredients,recipe.getIngredients(), "problem in getIngredients");
     }
 
-    @Test
-    void getPhoto()  throws NoSuchFieldException, IllegalAccessException {
-        Image image = new Image() {
-            @Override
-            public int getWidth(ImageObserver observer) {
-                return 0;
-            }
-
-            @Override
-            public int getHeight(ImageObserver observer) {
-                return 0;
-            }
-
-            @Override
-            public ImageProducer getSource() {
-                return null;
-            }
-
-            @Override
-            public Graphics getGraphics() {
-                return null;
-            }
-
-            @Override
-            public Object getProperty(String name, ImageObserver observer) {
-                return null;
-            }
-        };
-
-        final Recipe recipe =new Recipe();
-        final Field field = recipe.getClass().getDeclaredField("photo");
-        field.setAccessible(true);
-        field.set(recipe, image);
-
-        assertEquals(image,recipe.getPhoto(), "problem in getPhoto");
-    }
 
     @Test
     void getNutrition() throws NoSuchFieldException, IllegalAccessException {
@@ -190,44 +157,6 @@ class RecipeTest {
         recipe.setIngredients(ingredientsExpected);
         List<Ingredient> ingredientsActual =(List<Ingredient>) field.get(recipe);
         assertEquals(ingredientsExpected,ingredientsActual, "problem in setIngredients");
-    }
-
-    @Test
-    void setPhoto() throws NoSuchFieldException, IllegalAccessException {
-        Image photoExpected = new Image() {
-            @Override
-            public int getWidth(ImageObserver observer) {
-                return 0;
-            }
-
-            @Override
-            public int getHeight(ImageObserver observer) {
-                return 0;
-            }
-
-            @Override
-            public ImageProducer getSource() {
-                return null;
-            }
-
-            @Override
-            public Graphics getGraphics() {
-                return null;
-            }
-
-            @Override
-            public Object getProperty(String name, ImageObserver observer) {
-                return null;
-            }
-        };
-
-        final Recipe recipe=new Recipe();
-        final Field field = recipe.getClass().getDeclaredField("photo");
-        field.setAccessible(true);
-
-        recipe.setPhoto(photoExpected);
-        Image photoActual =(Image) field.get(recipe);
-        assertEquals(photoExpected,photoActual, "problem in setPhoto");
     }
 
     @Test

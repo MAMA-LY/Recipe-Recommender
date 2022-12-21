@@ -1,25 +1,26 @@
-package com.brainfood.backend;
+package com.brainfood.models;
+
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.awt.Image;
-
-@Getter @Setter
-@AllArgsConstructor @NoArgsConstructor
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Ingredient {
 
     private String name;
 
     private String ID;
 
-    private Image icon ;
+    private String icon;
 
-    private int weight;
+    private String amount;
 
     private Nutrition nutrition;
 
-    
-    
 }
