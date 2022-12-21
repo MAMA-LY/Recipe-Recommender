@@ -1,33 +1,36 @@
 package com.brainfood.search;
 
-import com.brainfood.models.ShortRecipeModel;
-import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import org.springframework.stereotype.Service;
+
+import com.brainfood.models.ShortRecipeModel;
+
 @Service
 public class DishIngredientClassifier {
-    private List<ShortRecipeModel> dish ;
-    private List<ShortRecipeModel> ingredient ;
+    private List<ShortRecipeModel> dish = new ArrayList<>();
+    private List<ShortRecipeModel> ingredient = new ArrayList<>();
 
-    void classify(List<ShortRecipeModel> food){
-        dish = new ArrayList<>() ;
-        ingredient = new ArrayList<>() ;
-        for(ShortRecipeModel recipe : food){
-            if(Objects.equals(recipe.getTag(), "dish"))
+    void classify(List<ShortRecipeModel> food) {
+        dish = new ArrayList<>();
+        ingredient = new ArrayList<>();
+        if (food == null)
+            return;
+        for (ShortRecipeModel recipe : food) {
+            if (Objects.equals(recipe.tag, "dish"))
                 dish.add(recipe);
             else
                 ingredient.add(recipe);
         }
     }
 
-    List<ShortRecipeModel> getDish(){
-        return dish ;
+    List<ShortRecipeModel> getDish() {
+        return dish;
     }
 
-    List<ShortRecipeModel> getIngredient(){
-        return ingredient ;
+    List<ShortRecipeModel> getIngredient() {
+        return ingredient;
     }
 }
