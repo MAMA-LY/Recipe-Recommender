@@ -58,6 +58,7 @@ class RecipeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
+      onPressed: () => _getRecipeByID(context, id),
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         width: MediaQuery.of(context).size.width,
@@ -110,14 +111,6 @@ class RecipeCard extends StatelessWidget {
           ],
         ),
       ),
-      onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) =>
-                  RecipePage(recipe: _recipe, inFavorites: false)),
-        );
-      },
     );
   }
 }

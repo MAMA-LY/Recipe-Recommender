@@ -9,10 +9,10 @@ class Ingredient {
 
   Ingredient(
       {required this.name,
-        required this.id,
-        required this.icon,
-        required this.amount,
-        required this.nutrition});
+      required this.id,
+      required this.icon,
+      required this.amount,
+      required this.nutrition});
 
   factory Ingredient.fromJson(dynamic json) {
     return Ingredient(
@@ -20,7 +20,7 @@ class Ingredient {
         id: json['id'] as String,
         icon: json['icon'] as String,
         amount: json['amount'] as String,
-        nutrition: json['nutrition'] as Nutrition);
+        nutrition: Nutrition.fromJson(json['nutrition']));
   }
 
   @override
