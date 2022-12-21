@@ -15,8 +15,7 @@ class IngredientsAPI {
 
   Future<List<String>> getIngredients() async {
     var url = Uri.https(APIConstants.baseUrl, APIConstants.ingredientsEndPoint);
-    var response =
-        await http.get(url, headers: APIConstants.headerCORS(session.cookie));
+    var response = await http.get(url, headers: APIConstants.headerCORS(session.cookie));
     debugPrint(response.statusCode.toString());
 
     if (response.statusCode == 200) {
@@ -29,3 +28,4 @@ class IngredientsAPI {
     }
   }
 }
+

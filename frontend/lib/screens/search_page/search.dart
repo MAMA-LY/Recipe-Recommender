@@ -1,6 +1,8 @@
 import 'package:filter_list/filter_list.dart';
 import 'package:flutter/material.dart';
+import 'package:recipe_recommender_frontend/api/ingredients_api.dart';
 import 'package:recipe_recommender_frontend/constants.dart';
+import 'package:recipe_recommender_frontend/main.dart';
 import 'package:recipe_recommender_frontend/screens/search_page/widgets/extension_tile.dart';
 import 'package:recipe_recommender_frontend/screens/search_page/widgets/search_bar.dart';
 
@@ -98,11 +100,8 @@ final List<String> tags = [
 class SearchPage extends StatefulWidget {
   static String routeName = "/search";
 
-  //final List<String> ingredients;
-
   const SearchPage({
     super.key,
-    //required this.ingredients,
   });
 
   @override
@@ -111,19 +110,20 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> {
   late TextEditingController controller;
-  late List<String> ingredients = [
-    "egg",
-    "eggplants",
-    "whole wheat pastry flour",
-    "lemon pie filling",
-    "salt and pepper",
-    "corn meal",
-    "shrimp",
-    "egg replacement",
-    "red peppers"
-  ];
+  IngredientsAPI ingredientsAPI = IngredientsAPI.fromCookie(session.cookie);
+  late List<String> ingredients;
   late List<String> selectedIngredients = [];
   late List<String> selectedTags = [];
+
+  @override
+  void initState() {
+    super.initState();
+    asyncInitState();
+  }
+
+  void asyncInitState() async {
+    ingredients = await ingredientsAPI.getIngredients();
+  }
 
   Future<void> autoCompleteUpdate(String ingredient) async {
     setState(() {
@@ -207,14 +207,16 @@ class _SearchPageState extends State<SearchPage> {
         ),
         floatingActionButton: FloatingActionButton(
           heroTag: "recommend",
-          onPressed: () => setState(() {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => SearchResult(
-                        selectedIngredients: selectedIngredients,
-                        selectedTags: selectedTags)));
-          }),
+          onPressed: () =>
+              setState(() {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            SearchResult(
+                                selectedIngredients: selectedIngredients,
+                                selectedTags: selectedTags)));
+              }),
           tooltip: 'Recommend',
           child: const Icon(Icons.fastfood),
         ),
