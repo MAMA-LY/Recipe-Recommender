@@ -20,7 +20,7 @@ void main() {
                 Nutrition(calories: 26, proteins: 3, carbs: 6, fats: 8))));
 
     var text = find.byType(Text);
-    expect(text, findsNWidgets(4));
+    expect(text, findsNWidgets(3));
 
     var sfCircularChart = find.byType(SfCircularChart);
     expect(sfCircularChart, findsOneWidget);
