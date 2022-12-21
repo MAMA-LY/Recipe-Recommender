@@ -31,6 +31,7 @@ class _HomePageState extends State<HomePage> {
         image: "https://spoonacular.com/recipeImages/634237-556x370.jpg",
         id: "ID"),
   ];
+  
   final bool _isLoading = false;
 
   @override

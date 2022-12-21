@@ -5,14 +5,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
+import 'package:recipe_recommender_frontend/api/recipes_api.dart';
 import 'package:recipe_recommender_frontend/api/sign_api.dart';
 import 'package:recipe_recommender_frontend/constants.dart';
+import 'package:recipe_recommender_frontend/screens/recipe_page/recipe_page.dart';
 import 'package:recipe_recommender_frontend/screens/sign/changePassword.dart';
 import 'package:recipe_recommender_frontend/screens/sign/signin.dart';
 import 'package:recipe_recommender_frontend/screens/splash_screen.dart';
 import 'package:uni_links/uni_links.dart';
 import 'api/api_constants.dart';
 import 'api/session.dart';
+import 'models/recipe.dart';
 import 'screens/page_view_controller.dart';
 
 var session = Session("");
@@ -55,6 +58,18 @@ Future<void> initUniLinks() async {
           runApp(const BuildApp(
               widget: SignInPage(initResp: "Cannot reset password")));
         }
+      } else if (path[0] == "share") {
+        if (Session.login) {
+          String? id = initialUri.queryParameters['id'];
+          if (id != null) {
+            debugPrint(id);
+            RecipesAPI api = RecipesAPI.fromCookie(session.cookie);
+            Recipe response = await api.getRecipeByID(id.trim());
+            runApp(BuildApp(widget:RecipePage(recipe: response, inFavorites: false)));
+          }
+        } else {
+          runApp(const BuildApp(widget: SignInPage(initResp: "")));
+        }
       } else {
         runApp(const BuildApp(widget: SignInPage(initResp: "")));
       }
@@ -84,6 +99,18 @@ Future<void> initUniLinks() async {
           } else {
             runApp(const BuildApp(
                 widget: SignInPage(initResp: "Cannot reset password")));
+          }
+        } else if (path[0] == "share") {
+          if (Session.login) {
+            String? id = uri.queryParameters['id'];
+            if (id != null) {
+              debugPrint(id);
+              RecipesAPI api = RecipesAPI.fromCookie(session.cookie);
+              Recipe response = await api.getRecipeByID(id.trim());
+              runApp(BuildApp(widget:RecipePage(recipe: response, inFavorites: false)));
+            }
+          } else {
+            runApp(const BuildApp(widget: SignInPage(initResp: "")));
           }
         } else {
           runApp(const BuildApp(widget: SignInPage(initResp: "")));
@@ -145,6 +172,7 @@ class MyApp extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.done) {
             String response = snapshot.data!;
             if (response == "UserInfo") {
+              Session.login = true;
               return const PageViewController();
             } else {
               debugPrint("IN");
