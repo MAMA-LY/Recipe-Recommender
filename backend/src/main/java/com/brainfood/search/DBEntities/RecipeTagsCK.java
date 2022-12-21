@@ -10,10 +10,10 @@ import java.io.Serializable;
 @Embeddable
 @Getter
 @Setter
-public class RecipeIngredientsCK implements Serializable {
+public class RecipeTagsCK implements Serializable {
     @Column(name = "recipeid")
     public String recipeID;
 
-    @Column(name = "ingredientid")
-    public String ingredientID;
+    @Column(name = "tag")
+    public String tag;
 }
