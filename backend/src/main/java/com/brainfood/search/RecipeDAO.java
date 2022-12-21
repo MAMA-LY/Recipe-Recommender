@@ -1,5 +1,11 @@
 package com.brainfood.search;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import com.brainfood.backend.Director;
 import com.brainfood.backend.db_entities.Ingredient;
 import com.brainfood.backend.db_entities.Recipe;
@@ -10,14 +16,6 @@ import com.brainfood.backend.db_repositories.RecipeRepository;
 import com.brainfood.models.RecipeModel;
 import com.brainfood.models.ShortRecipeModel;
 import com.brainfood.security.Repository.PasswordResetTokenRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.relational.core.sql.In;
-import org.springframework.stereotype.Component;
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 @Component
 public class RecipeDAO {
@@ -49,12 +47,13 @@ public class RecipeDAO {
         for (ShortRecipeModel ingredient : ingredients) {
             List<Recipe> dishWithIngredient = new ArrayList<>();
             System.out.println("JPA");
-            List<RecipeIngredients> recipeIngredients = recipeIngredientsRepository.findByIngredientNameLike("%" + ingredient.getName() + "%");
+            List<RecipeIngredients> recipeIngredients = recipeIngredientsRepository
+                    .findByIngredientNameLike("%" + ingredient.getName() + "%");
             System.out.println(recipeIngredients.size());
-/*
-            recipeIngredients.forEach(ri -> dishWithIngredient.add(ri.getRecipe()));
-*/
-            for(int i = 0; i < recipeIngredients.size(); i++) {
+            /*
+             * recipeIngredients.forEach(ri -> dishWithIngredient.add(ri.getRecipe()));
+             */
+            for (int i = 0; i < recipeIngredients.size(); i++) {
                 dishWithIngredient.add(recipeIngredients.get(i).getRecipe());
                 System.out.println("adding");
             }
@@ -67,12 +66,11 @@ public class RecipeDAO {
 
     RecipeModel findRecipe(String id) {
 
-        System.out.println(recipeRepository.findByNameContaining("Almond"));
         Recipe recipe = recipeRepository.findRecipeById(id);
         List<RecipeIngredients> recipeIngredients = recipeIngredientsRepository.findByRecipe(recipe);
         List<Ingredient> ingredients = new ArrayList<>();
 
-        for(RecipeIngredients ri : recipeIngredients) {
+        for (RecipeIngredients ri : recipeIngredients) {
             ingredients.add(ri.getIngredient());
         }
 
