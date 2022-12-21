@@ -7,6 +7,8 @@ import java.awt.*;
 import java.awt.image.ImageObserver;
 import java.awt.image.ImageProducer;
 import java.lang.reflect.Field;
+import java.sql.Timestamp;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -113,7 +115,9 @@ class ProfileTest {
 
     @Test
     void getCaloriesDate() throws NoSuchFieldException, IllegalAccessException {
-        int caloriesDate = 80 ;
+
+        Timestamp caloriesDate = Timestamp.valueOf("2022-09-01 09:01:15") ;
+
 
         final Profile profile =new Profile();
         final Field field = profile.getClass().getDeclaredField("caloriesDate");
@@ -249,15 +253,15 @@ class ProfileTest {
 
     @Test
     void setCaloriesDate() throws IllegalAccessException, NoSuchFieldException {
-        int caloriesDate =  1000;
+        Timestamp caloriesDateExpected=Timestamp.valueOf("2020-09-01 09:01:15");
         final Profile profile =new Profile();
         final Field field = profile.getClass().getDeclaredField("caloriesDate");
         field.setAccessible(true);
-        profile.setCaloriesDate(caloriesDate);
+        profile.setCaloriesDate(caloriesDateExpected);
 
-        int actual= (int) field.get(profile);
+        Timestamp actual= (Timestamp) field.get(profile);
 
-        assertEquals(caloriesDate,actual, "problem in setCaloriesDate");
+        assertEquals(caloriesDateExpected,actual, "problem in setCaloriesDate");
     }
 
 
