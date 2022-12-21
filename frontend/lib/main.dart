@@ -122,7 +122,7 @@ void main() {
 
 Future<String?> getServerInitResponse() async {
   session.cookie = cookieStr;
-  var url = Uri.http("192.168.1.101:8080", "/home");
+  var url = Uri.https(APIConstants.baseUrl, APIConstants.homeEndPoint);
   var serverResponse =
       await http.get(url, headers: APIConstants.headerCORS(session.cookie));
   final bool hasData = serverResponse.body != null;

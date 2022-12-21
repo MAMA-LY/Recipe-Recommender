@@ -34,7 +34,7 @@ public class PasswordResetManager {
         token.setUser(user);
         passwordResetTokenRepository.save(token);
         // NEEDS TO BE CHANGED LATER
-        String emailBody = "Click here to Reset your Password : http://192.168.1.101:8080/resetPassword?tk="
+        String emailBody = "Click here to Reset your Password : https://brainfood.azurewebsites.net/resetPassword?tk="
                 + token.getToken();
         emailSender.sendEmail(user.getEmail(), "Brainfood Reset Password", emailBody);
         return Response.PasswordResetEmailSent;

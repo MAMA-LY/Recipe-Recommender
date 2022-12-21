@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class SignAPI {
   static Future<String?> signup(
       String username, String password, String email) async {
-    var url = Uri.http(APIConstants.baseUrl, APIConstants.signupEndPoint);
+    var url = Uri.https(APIConstants.baseUrl, APIConstants.signupEndPoint);
     var credentials = {
       "username": username,
       "password": password,
@@ -18,23 +18,23 @@ class SignAPI {
   }
 
   static Future<String?> signin(String username, String password) async {
-    var url = Uri.http(APIConstants.baseUrl, APIConstants.signinEndPoint);
+    var url = Uri.https(APIConstants.baseUrl, APIConstants.signinEndPoint);
     var response = await http.post(url,
         body: {"username": username, "password": password},
         headers: APIConstants.headerCORS(""));
     debugPrint(response.statusCode.toString());
     var cookie = response.headers['set-cookie'];
     var responseLocation = response.headers['location'];
-    if (responseLocation == "http://192.168.1.101:8080/signin?error") {
+    if (responseLocation == "https://${APIConstants.baseUrl}/signin?error") {
       return "wrong credentials";
     }
-    if (responseLocation == "http://192.168.1.101:8080/home" &&
+    if (responseLocation == "https://${APIConstants.baseUrl}/home" &&
         cookie != null) {
       session.cookie = cookie;
       if (cacheFile != null) {
         cacheFile = await cacheFile!.writeAsString(session.cookie);
       }
-      var urlHome = Uri.http(APIConstants.baseUrl, APIConstants.homeEndPoint);
+      var urlHome = Uri.https(APIConstants.baseUrl, APIConstants.homeEndPoint);
 
       var responseHome =
           await http.post(urlHome, headers: APIConstants.headerCORS(cookie));
@@ -44,21 +44,21 @@ class SignAPI {
   }
 
   static Future<String?> forgetPassword(String email) async {
-    var url = Uri.http(APIConstants.baseUrl, APIConstants.forgetPasswordEndPoint);
+    var url = Uri.https(APIConstants.baseUrl, APIConstants.forgetPasswordEndPoint);
     var response = await http.post(url,
         body: {"email": email}, headers: APIConstants.headerCORS(""));
     return response.body;
   }
 
   static Future<String?> resetPassword(String tk) async {
-    var url = Uri.http(APIConstants.baseUrl, APIConstants.resetPassword, {"tk" : tk});
+    var url = Uri.https(APIConstants.baseUrl, APIConstants.resetPassword, {"tk" : tk});
     var response = await http.get(url,
         headers: APIConstants.headerCORS(""));
     return response.body;
   }
 
   static Future<String?> changePassword(String password, String tk) async {
-    var url = Uri.http(APIConstants.baseUrl, APIConstants.changePassword);
+    var url = Uri.https(APIConstants.baseUrl, APIConstants.changePassword);
     var response = await http.post(url,
         body: {"password": password, "tk": tk},
         headers: APIConstants.headerCORS(""));
