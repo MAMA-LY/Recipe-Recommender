@@ -29,7 +29,8 @@ public class SearchController {
     RecipeDAO recipeDAO;
 
     @GetMapping("/sentence")
-    public ShortRecipeModel[] searchSentence(@RequestParam String sentence) throws JSONException, IOException, InterruptedException {
+    public ShortRecipeModel[] searchSentence(@RequestParam String sentence)
+            throws JSONException, IOException, InterruptedException {
         List<ShortRecipeModel> food = spoonacularAPI.foodText(sentence);
 
         dishIngredientClassifier.classify(food);
@@ -51,7 +52,8 @@ public class SearchController {
     }
 
     @GetMapping("/withIngredientsAndTags")
-    public ShortRecipeModel[] getRecipeWithIngredientsAndTags(@RequestParam String[] Ingredients, @RequestParam String[] Tags) {
+    public ShortRecipeModel[] getRecipeWithIngredientsAndTags(@RequestParam String[] Ingredients,
+            @RequestParam String[] Tags) {
         var result = recipeDAO.recipesWithIngredients(Ingredients);
         if (result.size() == 0 && Ingredients.length > 0)
             return null;

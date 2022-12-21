@@ -16,7 +16,7 @@ import lombok.Builder;
 public class ShortRecipeModel {
 
     @JsonProperty("id")
-    String id;
+    public String id;
 
     @JsonProperty("name")
     @JsonAlias("annotation")

@@ -12,10 +12,12 @@ public class Utilities {
     private static final int requestSize = 100;
 
     /**
-     * eliminate duplicates and null-image objects in a list of recipes and transform it to array
+     * eliminate duplicates and null-image objects in a list of recipes and
+     * transform it to array
      *
      * @param list the desired list to be handled
-     * @return the inserted list after eliminating duplicates and null-image recipes and transform it to array of ShortRecipe
+     * @return the inserted list after eliminating duplicates and null-image recipes
+     *         and transform it to array of ShortRecipeModel
      */
     public static ShortRecipeModel[] eliminateDuplicates(List<Recipe> list) {
         if (list == null)
@@ -35,10 +37,12 @@ public class Utilities {
     }
 
     /**
-     * transform a list of recipes to array of ShortRecipe and remove null-image ones
+     * transform a list of recipes to array of ShortRecipeModel and remove
+     * null-image ones
      *
      * @param result the desired list to be handled
-     * @return the inserted list after removing null-image recipes and transform it to array of ShortRecipe
+     * @return the inserted list after removing null-image recipes and transform it
+     *         to array of ShortRecipeModel
      */
     public static ShortRecipeModel[] castToArray(List<Recipe> result) {
         if (result == null)

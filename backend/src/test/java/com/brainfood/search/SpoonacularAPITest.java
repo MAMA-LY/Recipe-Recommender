@@ -1,14 +1,20 @@
 package com.brainfood.search;
 
+import static org.junit.jupiter.api.Assertions.assertIterableEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 
-import java.io.IOException;
-import java.util.*;
-
-import static org.junit.jupiter.api.Assertions.assertIterableEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import com.brainfood.models.ShortRecipeModel;
 
 class SpoonacularAPITest {
     SpoonacularAPI spoonacularAPI;
@@ -38,7 +44,7 @@ class SpoonacularAPITest {
         expected.put("garlic", false);
         expectedType.put("garlic", "ingredient");
 
-        assertShortRecipeLists(expected, expectedType, result);
+        assertShortRecipeModelLists(expected, expectedType, result);
     }
 
     @Test
@@ -54,8 +60,7 @@ class SpoonacularAPITest {
         expected.put("taco", false);
         expectedType.put("taco", "dish");
 
-
-        assertShortRecipeLists(expected, expectedType, result);
+        assertShortRecipeModelLists(expected, expectedType, result);
     }
 
     @Test
@@ -75,21 +80,22 @@ class SpoonacularAPITest {
         expected.put("taco", false);
         expectedType.put("taco", "dish");
 
-        assertShortRecipeLists(expected, expectedType, result);
+        assertShortRecipeModelLists(expected, expectedType, result);
     }
 
-    private void assertShortRecipeLists(Map<String, Boolean> expected, Map<String, String> expectedType, List<ShortRecipe> result) {
-        for (ShortRecipe shortRecipe : result)
-            if (!expected.containsKey(shortRecipe.name))
+    private void assertShortRecipeModelLists(Map<String, Boolean> expected, Map<String, String> expectedType,
+            List<ShortRecipeModel> result) {
+        for (ShortRecipeModel ShortRecipeModel : result)
+            if (!expected.containsKey(ShortRecipeModel.name))
                 fail();
             else
-                expected.put(shortRecipe.name, true);
+                expected.put(ShortRecipeModel.name, true);
         for (String food : expected.keySet()) {
             if (!expected.get(food))
                 fail();
         }
 
-        for (ShortRecipe recipe : result) {
+        for (ShortRecipeModel recipe : result) {
             if (!Objects.equals(recipe.tag, expectedType.get(recipe.name)))
                 fail();
         }
