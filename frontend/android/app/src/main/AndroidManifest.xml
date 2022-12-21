@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.recipe_recommender_frontend">
    <application
-        android:label="recipe_recommender_frontend"
+        android:label="ورقة و قلم"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

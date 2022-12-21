@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:recipe_recommender_frontend/api/api_constants.dart';
 import 'package:recipe_recommender_frontend/main.dart';
@@ -24,6 +25,7 @@ class SignAPI {
 
     var cookie = response.headers['set-cookie'];
     var responseLocation = response.headers['location'];
+    debugPrint(responseLocation);
     if (responseLocation ==
         "https://${APIConstants.baseUrl + APIConstants.signinEndPoint}?error") {
       return "wrong credentials";

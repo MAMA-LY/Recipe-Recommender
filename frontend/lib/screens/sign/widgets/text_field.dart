@@ -47,6 +47,7 @@ class CustomTextField extends StatelessWidget {
               style: BorderStyle.none,
             ),
           ),
+          hintText: promptText,
           labelText: promptText,
         ),
         obscureText: obscureText,
