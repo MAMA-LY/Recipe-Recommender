@@ -1,15 +1,16 @@
 package com.brainfood.backend;
 
-import com.brainfood.models.Ingredient;
-import com.brainfood.models.Nutrition;
-import com.brainfood.models.Recipe;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import com.brainfood.models.Ingredient;
+import com.brainfood.models.Nutrition;
+import com.brainfood.models.Recipe;
 
 public class RecipeBuilderTest {
 
@@ -21,9 +22,9 @@ public class RecipeBuilderTest {
 
         final Field field = recipe.getClass().getDeclaredField("ID");
         field.setAccessible(true);
-        String IDActual= (String) field.get(recipe);
+        String IDActual = (String) field.get(recipe);
 
-        assertEquals(IDExpected,IDActual, "problem in buildID");
+        assertEquals(IDExpected, IDActual, "problem in buildID");
     }
 
     @Test
@@ -34,9 +35,9 @@ public class RecipeBuilderTest {
 
         final Field field = recipe.getClass().getDeclaredField("tags");
         field.setAccessible(true);
-        List<String> tagsActual= (List<String>) field.get(recipe);
+        List<String> tagsActual = (List<String>) field.get(recipe);
 
-        assertEquals(tagsExpected,tagsActual, "problem in buildTags");
+        assertEquals(tagsExpected, tagsActual, "problem in buildTags");
     }
 
     @Test
@@ -47,9 +48,9 @@ public class RecipeBuilderTest {
 
         final Field field = recipe.getClass().getDeclaredField("cuisine");
         field.setAccessible(true);
-        String cuisineActual= (String) field.get(recipe);
+        String cuisineActual = (String) field.get(recipe);
 
-        assertEquals(cuisineExpected,cuisineActual, "problem in buildCuisine");
+        assertEquals(cuisineExpected, cuisineActual, "problem in buildCuisine");
     }
 
     @Test
@@ -60,34 +61,34 @@ public class RecipeBuilderTest {
 
         final Field field = recipe.getClass().getDeclaredField("name");
         field.setAccessible(true);
-        String nameActual= (String) field.get(recipe);
+        String nameActual = (String) field.get(recipe);
 
-        assertEquals(nameExpected,nameActual, "problem in buildName");
+        assertEquals(nameExpected, nameActual, "problem in buildName");
     }
+
     @Test
     void buildIngredients() throws NoSuchFieldException, IllegalAccessException {
 
-        List<Ingredient> ingredientsExpected=new ArrayList<>();
+        List<Ingredient> ingredientsExpected = new ArrayList<>();
         final Recipe recipe = Recipe.builder().ingredients(ingredientsExpected).build();
 
         final Field field = recipe.getClass().getDeclaredField("ingredients");
         field.setAccessible(true);
-        List<Ingredient> ingredientsActual= (List<Ingredient>) field.get(recipe);
+        List<Ingredient> ingredientsActual = (List<Ingredient>) field.get(recipe);
 
-        assertEquals(ingredientsExpected,ingredientsActual, "problem in buildIngredients");
+        assertEquals(ingredientsExpected, ingredientsActual, "problem in buildIngredients");
     }
 
     @Test
     void buildNutrition() throws NoSuchFieldException, IllegalAccessException {
-
 
         Nutrition nutritionExpected = new Nutrition();
         final Recipe recipe = Recipe.builder().nutrition(nutritionExpected).build();
 
         final Field field = recipe.getClass().getDeclaredField("nutrition");
         field.setAccessible(true);
-        Nutrition nutritionActual= (Nutrition) field.get(recipe);
+        Nutrition nutritionActual = (Nutrition) field.get(recipe);
 
-        assertEquals(nutritionExpected,nutritionActual, "problem in buildNutrition");
+        assertEquals(nutritionExpected, nutritionActual, "problem in buildNutrition");
     }
 }
