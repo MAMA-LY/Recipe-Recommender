@@ -4,8 +4,7 @@ import java.awt.Image;
 import java.sql.Timestamp;
 import java.util.List;
 
-import com.brainfood.security.Model.UserCredentials;
-import com.fasterxml.jackson.annotation.JsonRootName;
+import com.brainfood.security.model.UserCredentials;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,13 +17,12 @@ import lombok.Setter;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonRootName("Profile")
-public class ProfileModel {
+public class Profile {
     private UserCredentials userCredentials;
 
-    private List<RecipeModel> favoriteRecipeModels;
+    private List<Recipe> favoriteRecipes;
 
-    private Image photo;
+    private Image image;
 
     private String name;
 

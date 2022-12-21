@@ -1,5 +1,6 @@
 package com.brainfood.backend;
 
+import com.brainfood.models.BodyInfo;
 import org.junit.jupiter.api.*;
 import java.lang.reflect.Field;
 import java.util.Calendar;

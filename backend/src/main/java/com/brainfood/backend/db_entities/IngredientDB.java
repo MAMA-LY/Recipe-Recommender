@@ -17,7 +17,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Ingredient implements Serializable {
+public class IngredientDB implements Serializable {
     @Id
     @Column(name = "id")
     public String id;

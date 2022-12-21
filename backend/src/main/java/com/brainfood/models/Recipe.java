@@ -1,6 +1,6 @@
 package com.brainfood.models;
 
-import com.fasterxml.jackson.annotation.JsonRootName;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,17 +13,20 @@ import lombok.Setter;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonRootName("Ingredient")
-public class IngredientModel {
-
-    private String name;
+public class Recipe {
 
     private String ID;
 
-    private String icon;
+    private List<String> tags;
 
-    private String amount;
+    private String cuisine;
 
-    private NutritionModel nutritionModel;
+    private String name;
+
+    private List<Ingredient> ingredients;
+
+    private String image;
+
+    private Nutrition nutrition;
 
 }

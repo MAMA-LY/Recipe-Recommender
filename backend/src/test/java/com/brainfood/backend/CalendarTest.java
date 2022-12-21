@@ -5,6 +5,9 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.brainfood.models.Calendar;
+import com.brainfood.models.Ingredient;
+import com.brainfood.models.Recipe;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

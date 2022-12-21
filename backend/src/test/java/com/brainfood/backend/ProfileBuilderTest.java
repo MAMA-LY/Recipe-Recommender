@@ -1,6 +1,9 @@
 package com.brainfood.backend;
 
-import com.brainfood.security.Model.UserCredentials;
+import com.brainfood.models.BodyInfo;
+import com.brainfood.models.Calendar;
+import com.brainfood.models.Profile;
+import com.brainfood.security.model.UserCredentials;
 import org.junit.jupiter.api.Test;
 
 import java.awt.*;
@@ -69,7 +72,7 @@ public class ProfileBuilderTest {
                 return null;
             }
         };
-        final Profile profile = Profile.builder().photo(photoExpected).build();
+        final Profile profile = Profile.builder().image(photoExpected).build();
 
         final Field field = profile.getClass().getDeclaredField("photo");
         field.setAccessible(true);

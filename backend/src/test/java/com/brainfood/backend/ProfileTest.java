@@ -1,6 +1,10 @@
 package com.brainfood.backend;
 
-import com.brainfood.security.Model.UserCredentials;
+import com.brainfood.models.BodyInfo;
+import com.brainfood.models.Calendar;
+import com.brainfood.models.Profile;
+import com.brainfood.models.Recipe;
+import com.brainfood.security.model.UserCredentials;
 import org.junit.jupiter.api.Test;
 
 import java.awt.*;
@@ -41,7 +45,7 @@ class ProfileTest {
     @Test
     void getFavoriteRecipes() throws IllegalAccessException, NoSuchFieldException {
 
-        List<Recipe> favoriteRecipes= new ArrayList<Recipe>();
+        List<Recipe> favoriteRecipes= new ArrayList<>();
 
         final Profile profile =new Profile();
 
@@ -86,7 +90,7 @@ class ProfileTest {
         field.setAccessible(true);
         field.set(profile, image);
 
-        assertEquals(image,profile.getPhoto(), "problem in getPhoto");
+        assertEquals(image,profile.getImage(), "problem in getPhoto");
     }
 
     @Test
@@ -213,7 +217,7 @@ class ProfileTest {
         final Profile profile =new Profile();
         final Field field = profile.getClass().getDeclaredField("photo");
         field.setAccessible(true);
-        profile.setPhoto(photo);
+        profile.setImage(photo);
 
         Image actual= (Image) field.get(profile);
 
