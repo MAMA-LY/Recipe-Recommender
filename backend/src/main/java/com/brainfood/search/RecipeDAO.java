@@ -9,9 +9,7 @@ import org.springframework.stereotype.Component;
 import com.brainfood.backend.Director;
 import com.brainfood.backend.db_entities.Ingredient;
 import com.brainfood.backend.db_entities.Recipe;
-import com.brainfood.backend.db_entities.RecipeIngredients;
 import com.brainfood.backend.db_repositories.IngredientRepository;
-import com.brainfood.backend.db_repositories.RecipeIngredientsRepository;
 import com.brainfood.backend.db_repositories.RecipeRepository;
 import com.brainfood.models.RecipeModel;
 import com.brainfood.models.ShortRecipeModel;
@@ -26,18 +24,14 @@ public class RecipeDAO {
     IngredientRepository ingredientRepository;
 
     @Autowired
-    RecipeIngredientsRepository recipeIngredientsRepository;
-
-    @Autowired
     PasswordResetTokenRepository passwordResetTokenRepository;
 
     List<Recipe> findSimilarDishes(List<ShortRecipeModel> dishes) {
         List<Recipe> result = new ArrayList<>();
         for (ShortRecipeModel current : dishes) {
-            var similarDishes = recipeRepository.findByNameContaining(current.getName());
+            var similarDishes = recipeRepository.findByName("%" + current.getName() + "%");
             result.addAll(similarDishes);
         }
-        System.out.println(result.size());
         return result;
     }
 
@@ -45,38 +39,19 @@ public class RecipeDAO {
         List<Recipe> result = new ArrayList<>();
         System.out.println(" " + ingredients.get(0).getName());
         for (ShortRecipeModel ingredient : ingredients) {
-            List<Recipe> dishWithIngredient = new ArrayList<>();
-            System.out.println("JPA");
-            List<RecipeIngredients> recipeIngredients = recipeIngredientsRepository
-                    .findByIngredientNameLike("%" + ingredient.getName() + "%");
-            System.out.println(recipeIngredients.size());
-            /*
-             * recipeIngredients.forEach(ri -> dishWithIngredient.add(ri.getRecipe()));
-             */
-            for (int i = 0; i < recipeIngredients.size(); i++) {
-                dishWithIngredient.add(recipeIngredients.get(i).getRecipe());
-                System.out.println("adding");
-            }
+            List<Recipe> dishWithIngredient = recipeRepository.findByIngredientsLike("%" + ingredient.getName() + "%");
             System.out.println(dishWithIngredient.size());
             result.addAll(dishWithIngredient);
         }
-        System.out.println(result.size());
         return result;
     }
 
     RecipeModel findRecipe(String id) {
+        Recipe recipe = recipeRepository.findByIdEquals(id);
+        List<Ingredient> ingredients = recipeRepository.findIngredientsByIdEquals(id);
+        List<String> tags = recipeRepository.findTagsByIdEquals(id);
 
-        Recipe recipe = recipeRepository.findRecipeById(id);
-        List<RecipeIngredients> recipeIngredients = recipeIngredientsRepository.findByRecipe(recipe);
-        List<Ingredient> ingredients = new ArrayList<>();
-
-        for (RecipeIngredients ri : recipeIngredients) {
-            ingredients.add(ri.getIngredient());
-        }
-
-        List<String> tags = new ArrayList<>();
-
-        RecipeModel recipeModel = Director.buildRecipe(recipe, ingredients);
+        RecipeModel recipeModel = Director.buildRecipe(recipe, ingredients, tags);
         return recipeModel;
     }
 }

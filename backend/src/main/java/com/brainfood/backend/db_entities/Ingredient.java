@@ -1,15 +1,20 @@
 package com.brainfood.backend.db_entities;
 
-import jakarta.persistence.*;
-import lombok.*;
-
 import java.io.Serializable;
-import java.util.List;
-import java.util.Set;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "\"Ingredient\"")
-@Getter @Setter
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Ingredient implements Serializable {
@@ -37,9 +42,5 @@ public class Ingredient implements Serializable {
 
     @Column(name = "fats")
     public int fats;
-
-    @OneToMany(mappedBy = "ingredient")
-    public List<RecipeIngredients> recipeIngredient;
-
 
 }
