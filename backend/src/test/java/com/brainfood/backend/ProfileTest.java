@@ -86,7 +86,7 @@ class ProfileTest {
         };
 
         final Profile profile =new Profile();
-        final Field field = profile.getClass().getDeclaredField("photo");
+        final Field field = profile.getClass().getDeclaredField("image");
         field.setAccessible(true);
         field.set(profile, image);
 
@@ -215,7 +215,7 @@ class ProfileTest {
             }
         };
         final Profile profile =new Profile();
-        final Field field = profile.getClass().getDeclaredField("photo");
+        final Field field = profile.getClass().getDeclaredField("image");
         field.setAccessible(true);
         profile.setImage(photo);
 

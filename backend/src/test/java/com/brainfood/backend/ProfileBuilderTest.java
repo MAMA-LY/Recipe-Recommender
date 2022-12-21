@@ -74,7 +74,7 @@ public class ProfileBuilderTest {
         };
         final Profile profile = Profile.builder().image(photoExpected).build();
 
-        final Field field = profile.getClass().getDeclaredField("photo");
+        final Field field = profile.getClass().getDeclaredField("image");
         field.setAccessible(true);
         Image photoActual = (Image) field.get(profile);
 

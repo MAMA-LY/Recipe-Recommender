@@ -37,43 +37,6 @@ class IngredientTest {
     }
 
     @Test
-    void getIcon() throws IllegalAccessException, NoSuchFieldException{
-
-        final Ingredient ingredient =new Ingredient();
-        final Field field = ingredient.getClass().getDeclaredField("icon");
-        field.setAccessible(true);
-        Image expectedValue = new Image() {
-            @Override
-            public int getWidth(ImageObserver observer) {
-                return 0;
-            }
-
-            @Override
-            public int getHeight(ImageObserver observer) {
-                return 0;
-            }
-
-            @Override
-            public ImageProducer getSource() {
-                return null;
-            }
-
-            @Override
-            public Graphics getGraphics() {
-                return null;
-            }
-
-            @Override
-            public Object getProperty(String name, ImageObserver observer) {
-                return null;
-            }
-        };
-        field.set(ingredient, expectedValue);
-
-        assertEquals(expectedValue,ingredient.getIcon(), "problem in getIcon");
-    }
-
-    @Test
     void getNutrition() throws IllegalAccessException, NoSuchFieldException{
 
 
