@@ -16,7 +16,7 @@ class SignAPI {
   }
 
   static Future<String?> signin(String username, String password) async {
-    var url = Uri.http(APIConstants.baseUrl, APIConstants.signinEndPoint);
+    var url = Uri.https(APIConstants.baseUrl, APIConstants.signinEndPoint);
     var response = await http.post(url, body: {
       "username": username,
       "password": password
@@ -36,12 +36,8 @@ class SignAPI {
       if (cacheFile != null) {
         cacheFile = await cacheFile!.writeAsString(session.cookie);
       }
-<<<<<<< HEAD
-      var urlHome = Uri.http(APIConstants.baseUrl, APIConstants.homeEndPoint);
-=======
       var urlHome = Uri.https(APIConstants.baseUrl, APIConstants.homeEndPoint);
 
->>>>>>> Milestone2
       var responseHome = await http.post(urlHome, headers: APIConstants.headerCORS(cookie));
       return "right credentials";
     }

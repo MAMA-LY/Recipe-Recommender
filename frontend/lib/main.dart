@@ -49,7 +49,7 @@ void main() {
 
 Future<String?> getServerInitResponse() async {
   session.cookie = cookieStr;
-  var url = Uri.http(APIConstants.baseUrl, APIConstants.homeEndPoint);
+  var url = Uri.https(APIConstants.baseUrl, APIConstants.homeEndPoint);
   var serverResponse = await http.get(url, headers: APIConstants.headerCORS(session.cookie));
   final bool hasData = serverResponse.body != null;
   if (hasData) {
