@@ -68,7 +68,6 @@ public class RecipeDAO {
         }
         return currentRecipes;
     }
-
     public RecipeModel findRecipe(String id) {
         Recipe recipe = recipeRepository.findByIdEquals(id);
         List<Ingredient> ingredients = recipeRepository.findIngredientsByIdEquals(id);
