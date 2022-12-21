@@ -79,6 +79,16 @@ class RecipeTest {
         assertEquals(ingredients,recipe.getIngredients(), "problem in getIngredients");
     }
 
+    @Test
+    void getImage()  throws NoSuchFieldException, IllegalAccessException {
+        String photo ="https://spoonacular.com/recipeImages/654835-556x370.jpg";
+        final Recipe recipe =new Recipe();
+        final Field field = recipe.getClass().getDeclaredField("image");
+        field.setAccessible(true);
+        field.set(recipe, photo);
+
+        assertEquals(photo,recipe.getImage(), "problem in getPhoto");
+    }
 
     @Test
     void getNutrition() throws NoSuchFieldException, IllegalAccessException {
@@ -157,6 +167,18 @@ class RecipeTest {
         recipe.setIngredients(ingredientsExpected);
         List<Ingredient> ingredientsActual =(List<Ingredient>) field.get(recipe);
         assertEquals(ingredientsExpected,ingredientsActual, "problem in setIngredients");
+    }
+
+    @Test
+    void setImage() throws NoSuchFieldException, IllegalAccessException {
+        String photoExpected ="https://spoonacular.com/recipeImages/649977-556x370.jpg";
+        final Recipe recipe=new Recipe();
+        final Field field = recipe.getClass().getDeclaredField("image");
+        field.setAccessible(true);
+
+        recipe.setImage(photoExpected);
+        String photoActual =(String) field.get(recipe);
+        assertEquals(photoExpected,photoActual, "problem in setImage");
     }
 
     @Test
