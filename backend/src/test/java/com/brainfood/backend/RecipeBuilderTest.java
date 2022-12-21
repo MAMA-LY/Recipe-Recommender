@@ -5,6 +5,9 @@ import com.brainfood.models.Nutrition;
 import com.brainfood.models.Recipe;
 import org.junit.jupiter.api.Test;
 
+import java.awt.*;
+import java.awt.image.ImageObserver;
+import java.awt.image.ImageProducer;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
@@ -76,7 +79,18 @@ public class RecipeBuilderTest {
 
         assertEquals(ingredientsExpected,ingredientsActual, "problem in buildIngredients");
     }
+    @Test
+    void buildPhoto() throws NoSuchFieldException, IllegalAccessException {
 
+        String photoExpected = "https://spoonacular.com/recipeImages/640767-556x370.jpg";
+        final Recipe recipe = Recipe.builder().image(photoExpected).build();
+
+        final Field field = recipe.getClass().getDeclaredField("image");
+        field.setAccessible(true);
+        String photoActual= (String) field.get(recipe);
+
+        assertEquals(photoExpected,photoActual, "problem in buildPhoto");
+    }
     @Test
     void buildNutrition() throws NoSuchFieldException, IllegalAccessException {
 

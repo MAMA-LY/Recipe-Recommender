@@ -7,12 +7,8 @@ import com.brainfood.models.Recipe;
 import com.brainfood.security.model.UserCredentials;
 import org.junit.jupiter.api.Test;
 
-import java.awt.*;
-import java.awt.image.ImageObserver;
-import java.awt.image.ImageProducer;
 import java.lang.reflect.Field;
 import java.sql.Timestamp;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,7 +41,7 @@ class ProfileTest {
     @Test
     void getFavoriteRecipes() throws IllegalAccessException, NoSuchFieldException {
 
-        List<Recipe> favoriteRecipes= new ArrayList<>();
+        List<Recipe> favoriteRecipes= new ArrayList<Recipe>();
 
         final Profile profile =new Profile();
 
@@ -57,40 +53,15 @@ class ProfileTest {
     }
 
     @Test
-    void getPhoto() throws IllegalAccessException, NoSuchFieldException {
-        Image image = new Image() {
-            @Override
-            public int getWidth(ImageObserver observer) {
-                return 0;
-            }
-
-            @Override
-            public int getHeight(ImageObserver observer) {
-                return 0;
-            }
-
-            @Override
-            public ImageProducer getSource() {
-                return null;
-            }
-
-            @Override
-            public Graphics getGraphics() {
-                return null;
-            }
-
-            @Override
-            public Object getProperty(String name, ImageObserver observer) {
-                return null;
-            }
-        };
+    void getImage() throws IllegalAccessException, NoSuchFieldException {
+        String image = "https://spoonacular.com/recipeImages/649977-556x370.jpg";
 
         final Profile profile =new Profile();
         final Field field = profile.getClass().getDeclaredField("image");
         field.setAccessible(true);
         field.set(profile, image);
 
-        assertEquals(image,profile.getImage(), "problem in getPhoto");
+        assertEquals(image,profile.getImage(), "problem in getImage");
     }
 
     @Test
@@ -186,42 +157,18 @@ class ProfileTest {
     }
 
     @Test
-    void setPhoto() throws IllegalAccessException, NoSuchFieldException {
+    void setImage() throws IllegalAccessException, NoSuchFieldException {
 
-        Image photo = new Image() {
-            @Override
-            public int getWidth(ImageObserver observer) {
-                return 0;
-            }
+        String photo = "https://spoonacular.com/recipeImages/649977-556x370.jpg";
 
-            @Override
-            public int getHeight(ImageObserver observer) {
-                return 0;
-            }
-
-            @Override
-            public ImageProducer getSource() {
-                return null;
-            }
-
-            @Override
-            public Graphics getGraphics() {
-                return null;
-            }
-
-            @Override
-            public Object getProperty(String name, ImageObserver observer) {
-                return null;
-            }
-        };
         final Profile profile =new Profile();
         final Field field = profile.getClass().getDeclaredField("image");
         field.setAccessible(true);
         profile.setImage(photo);
 
-        Image actual= (Image) field.get(profile);
+        String actual= (String) field.get(profile);
 
-        assertEquals(photo,actual, "problem in setPhoto");
+        assertEquals(photo,actual, "problem in setImage");
     }
 
 
