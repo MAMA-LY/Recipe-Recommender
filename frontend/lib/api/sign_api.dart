@@ -27,11 +27,11 @@ class SignAPI {
     var cookie = response.headers['set-cookie'];
     var responseLocation = response.headers['location'];
     if (responseLocation ==
-        "http://${APIConstants.baseUrl + APIConstants.signinEndPoint}?error") {
+        "https://${APIConstants.baseUrl + APIConstants.signinEndPoint}?error") {
       return "wrong credentials";
     }
     if (responseLocation ==
-            "http://${APIConstants.baseUrl + APIConstants.homeEndPoint}" &&
+            "https://${APIConstants.baseUrl + APIConstants.homeEndPoint}" &&
 
         cookie != null) {
       session.cookie = cookie;
