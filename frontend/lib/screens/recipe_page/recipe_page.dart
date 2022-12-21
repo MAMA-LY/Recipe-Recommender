@@ -124,7 +124,8 @@ class _RecipePageState extends State<RecipePage>
                   onTap: () async {
                     final box = context.findRenderObject() as RenderBox?;
                     await Share.share(
-                      "http://${APIConstants.baseUrl}/share/recipe?id=${widget.recipe.id}",
+
+                      "https://${APIConstants.baseUrl}/share/recipe?id=${widget.recipe.id}",
                       subject: "Recipe Share",
                       sharePositionOrigin:
                           box!.localToGlobal(Offset.zero) & box.size,
