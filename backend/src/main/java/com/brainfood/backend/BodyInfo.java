@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Getter @Setter
 @AllArgsConstructor @NoArgsConstructor
 public class BodyInfo {
@@ -14,6 +16,6 @@ public class BodyInfo {
 
     private float weight;
 
-    private int age;
+    private Date birthdate;
 
 }
