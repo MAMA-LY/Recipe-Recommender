@@ -16,7 +16,6 @@ import 'api/session.dart';
 import 'screens/page_view_controller.dart';
 
 var session = Session("");
-
 String cookieStr = "";
 File? cacheFile;
 

@@ -43,7 +43,7 @@ dependencies:
   flutter_tags: "^0.4.9+1"
   flutter_typeahead: 
   syncfusion_flutter_charts: ^20.3.61
-
+  share_plus: ^6.3.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
