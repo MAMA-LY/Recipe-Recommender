@@ -76,12 +76,12 @@ class IngredientTest {
 
 
         final Ingredient ingredient =new Ingredient();
-        final Field field = ingredient.getClass().getDeclaredField("weight");
+        final Field field = ingredient.getClass().getDeclaredField("amount");
         field.setAccessible(true);
-        int expectedValue = 5;
+        String expectedValue ="1 egg";
         field.set(ingredient, expectedValue);
 
-        assertEquals(expectedValue,ingredient.getWeight(), "problem in getWeight");
+        assertEquals(expectedValue,ingredient.getAmount(), "problem in getWeight");
     }
 
     @Test
@@ -161,15 +161,15 @@ class IngredientTest {
     }
 
     @Test
-    void setWeight() throws IllegalAccessException, NoSuchFieldException{
+    void setAmount() throws IllegalAccessException, NoSuchFieldException{
         final Ingredient ingredient =new Ingredient();
-        final Field field = ingredient.getClass().getDeclaredField("weight");
+        final Field field = ingredient.getClass().getDeclaredField("amount");
         field.setAccessible(true);
-        int expectedValue = 101;
+        String expectedValue = "1/2 tps";
 
-        ingredient.setWeight(expectedValue);
-        int actualValue= (int)field.get(ingredient);
-        assertEquals(expectedValue,actualValue,"problem in setWeight");
+        ingredient.setAmount(expectedValue);
+        String actualValue= (String)field.get(ingredient);
+        assertEquals(expectedValue,actualValue,"problem in setAmount");
     }
 
     @Test

@@ -41,37 +41,12 @@ public class ProfileBuilderTest {
     @Test
     void buildPhoto() throws NoSuchFieldException, IllegalAccessException {
 
-        Image photoExpected = new Image() {
-            @Override
-            public int getWidth(ImageObserver observer) {
-                return 0;
-            }
-
-            @Override
-            public int getHeight(ImageObserver observer) {
-                return 0;
-            }
-
-            @Override
-            public ImageProducer getSource() {
-                return null;
-            }
-
-            @Override
-            public Graphics getGraphics() {
-                return null;
-            }
-
-            @Override
-            public Object getProperty(String name, ImageObserver observer) {
-                return null;
-            }
-        };
+        String photoExpected = "https://spoonacular.com/recipeImages/715538-556x370.jpg";
         final Profile profile = Profile.builder().photo(photoExpected).build();
 
         final Field field = profile.getClass().getDeclaredField("photo");
         field.setAccessible(true);
-        Image photoActual = (Image) field.get(profile);
+        String photoActual = (String) field.get(profile);
 
         assertEquals(photoExpected,photoActual, "problem in buildPhoto");
     }

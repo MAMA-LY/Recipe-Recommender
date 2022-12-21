@@ -79,37 +79,12 @@ public class RecipeBuilderTest {
     @Test
     void buildPhoto() throws NoSuchFieldException, IllegalAccessException {
 
-        Image photoExpected = new Image() {
-            @Override
-            public int getWidth(ImageObserver observer) {
-                return 0;
-            }
-
-            @Override
-            public int getHeight(ImageObserver observer) {
-                return 0;
-            }
-
-            @Override
-            public ImageProducer getSource() {
-                return null;
-            }
-
-            @Override
-            public Graphics getGraphics() {
-                return null;
-            }
-
-            @Override
-            public Object getProperty(String name, ImageObserver observer) {
-                return null;
-            }
-        };
+        String photoExpected = "https://spoonacular.com/recipeImages/640767-556x370.jpg";
         final Recipe recipe = Recipe.builder().photo(photoExpected).build();
 
         final Field field = recipe.getClass().getDeclaredField("photo");
         field.setAccessible(true);
-        Image photoActual= (Image) field.get(recipe);
+        String photoActual= (String) field.get(recipe);
 
         assertEquals(photoExpected,photoActual, "problem in buildPhoto");
     }
