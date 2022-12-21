@@ -12,7 +12,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @ComponentScan(basePackages = { "com.brainfood" })
 @SpringBootApplication
 @EntityScan({ "com.brainfood.backend", "com.brainfood.security", "com.brainfood.search" })
-@EnableJpaRepositories({ "com.brainfood.security", "com.brainfood.search" })
+@EnableJpaRepositories({ "com.brainfood" })
 
 public class BackendApplication {
 

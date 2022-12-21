@@ -78,7 +78,4 @@ public class RecipeDAO {
         return recipeModel;
     }
 
-    public Recipe findRecipeByName(String name) {
-        return recipeRepository.findByNameEquals(name);
-    }
 }
