@@ -34,8 +34,10 @@ class _SignInPageState extends State<SignInPage> {
     } else if (status == "right credentials") {
       Session.login = true;
       // ignore: use_build_context_synchronously
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) => const PageViewController()));
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(
+              builder: (BuildContext context) => const PageViewController()),
+          (route) => false);
     }
   }
 

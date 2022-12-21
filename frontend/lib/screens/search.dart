@@ -18,24 +18,24 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Constants.secondaryColor,
-          title: Text(
-            "ورقة وقلم",
-            style: TextStyle(
-                fontFamily: "Arslan",
-                fontSize: 30,
-                foreground: Paint()
-                  ..color = Constants.primaryColor
-                  ..strokeWidth = 10),
-          ),
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.search),
-              onPressed: _showSearch,
-            ),
-          ],
+      appBar: AppBar(
+        backgroundColor: Constants.secondaryColor,
+        title: Text(
+          "ورقة وقلم",
+          style: TextStyle(
+              fontFamily: "Arslan",
+              fontSize: 30,
+              foreground: Paint()
+                ..color = Constants.primaryColor
+                ..strokeWidth = 10),
         ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.search),
+            onPressed: _showSearch,
+          ),
+        ],
+      ),
     );
   }
 
@@ -84,8 +84,7 @@ class TheSearch extends SearchDelegate<String> {
     RecipesAPI api = RecipesAPI.fromCookie(session.cookie);
     debugPrint("I'm here");
     return FutureBuilder<List<Recipe>>(
-      future: api.getRecipesWithQuery(
-          "search/sentence", {"sentence": query}),
+      future: api.getRecipesWithQuery("search/sentence", {"sentence": query}),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           debugPrint("SNAPSHOT: ${snapshot.data}");
@@ -93,21 +92,20 @@ class TheSearch extends SearchDelegate<String> {
           return Column(children: <Widget>[
             Expanded(
                 child: ListView.builder(
-                  itemCount: snapshot.data?.length,
-                  itemBuilder: (context, index) {
-                    return RecipeCard(
-                        id: snapshot.data![index].id,
-                        name: snapshot.data![index].name,
-                        thumbnailUrl: snapshot.data![index].image);
-                  },
-                ))
+              itemCount: snapshot.data?.length,
+              itemBuilder: (context, index) {
+                return RecipeCard(
+                    id: snapshot.data![index].id,
+                    name: snapshot.data![index].name,
+                    thumbnailUrl: snapshot.data![index].image);
+              },
+            ))
           ]);
         } else {
           return const Center(
               child: CircularProgressIndicator(
-                color: Constants.primaryColor,
-              )
-          );
+            color: Constants.primaryColor,
+          ));
         }
       },
     );

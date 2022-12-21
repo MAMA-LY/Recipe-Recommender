@@ -1,6 +1,8 @@
 package com.brainfood.backend;
 
 
+import com.brainfood.models.Recipe;
+
 public class CaloriesWatcher {
 
     //                          Operations                                  

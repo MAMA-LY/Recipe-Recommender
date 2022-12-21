@@ -5,10 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
-import 'package:recipe_recommender_frontend/api/recipes_api.dart';
 import 'package:recipe_recommender_frontend/api/sign_api.dart';
 import 'package:recipe_recommender_frontend/constants.dart';
-import 'package:recipe_recommender_frontend/screens/recipe_page/recipe_page.dart';
 import 'package:recipe_recommender_frontend/screens/sign/changePassword.dart';
 import 'package:recipe_recommender_frontend/screens/sign/signin.dart';
 import 'package:recipe_recommender_frontend/screens/splash_screen.dart';
@@ -148,7 +146,11 @@ void main() {
 
 Future<String?> getServerInitResponse() async {
   session.cookie = cookieStr;
+<<<<<<< HEAD
   var url = Uri.http("192.168.1.101:8080", "/home");
+=======
+  var url = Uri.https(APIConstants.baseUrl, APIConstants.homeEndPoint);
+>>>>>>> Milestone2
   var serverResponse =
       await http.get(url, headers: APIConstants.headerCORS(session.cookie));
   final bool hasData = serverResponse.body != null;
@@ -172,7 +174,11 @@ class MyApp extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.done) {
             String response = snapshot.data!;
             if (response == "UserInfo") {
+<<<<<<< HEAD
               Session.login = true;
+=======
+              debugPrint("IN3");
+>>>>>>> Milestone2
               return const PageViewController();
             } else {
               debugPrint("IN");

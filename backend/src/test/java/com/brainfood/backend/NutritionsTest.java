@@ -1,5 +1,6 @@
 package com.brainfood.backend;
 
+import com.brainfood.models.Nutrition;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Field;

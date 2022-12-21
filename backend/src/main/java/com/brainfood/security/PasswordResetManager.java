@@ -6,6 +6,10 @@ import org.springframework.stereotype.Service;
 import com.brainfood.security.Model.PasswordResetToken;
 import com.brainfood.security.Model.UserCredentials;
 import com.brainfood.security.Repository.PasswordResetTokenRepository;
+import com.brainfood.security.model.PasswordResetToken;
+import com.brainfood.security.model.UserCredentials;
+import com.brainfood.security.repository.PasswordResetTokenRepository;
+>>>>>>> Milestone2
 
 @Service
 public class PasswordResetManager {

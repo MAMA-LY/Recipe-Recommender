@@ -1,13 +1,17 @@
-package com.brainfood.backend;
+package com.brainfood.models;
 
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Setter @Getter
-@AllArgsConstructor @NoArgsConstructor
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Nutrition {
 
     private int calories;
@@ -17,5 +21,5 @@ public class Nutrition {
     private int carbs;
 
     private int fats;
-    
+
 }

@@ -1,12 +1,13 @@
 package com.brainfood.models;
 
-import com.brainfood.backend.db_entities.Recipe;
+import com.brainfood.backend.db_entities.RecipeDB;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 /**
  * a class to parse the requested objects from spoonacular api and hold the data
@@ -14,8 +15,8 @@ import lombok.Builder;
  **/
 @Builder
 @AllArgsConstructor
-@JsonRootName("ShortRecipe")
-public class ShortRecipeModel {
+@NoArgsConstructor
+public class ShortRecipe {
 
     @JsonProperty("id")
     public String id;
@@ -30,12 +31,9 @@ public class ShortRecipeModel {
     @JsonProperty("image")
     public String image;
 
-    public ShortRecipeModel(Recipe recipe) {
-        this.id = recipe.id;
-        this.name = recipe.name;
-        this.image = recipe.photo;
-    }
-
-    public ShortRecipeModel() {
+    public ShortRecipe(RecipeDB recipeDB) {
+        this.id = recipeDB.id;
+        this.name = recipeDB.name;
+        this.image = recipeDB.photo;
     }
 }

@@ -18,7 +18,7 @@ import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Service;
 
-import com.brainfood.models.ShortRecipeModel;
+import com.brainfood.models.ShortRecipe;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
@@ -35,7 +35,7 @@ public class SpoonacularAPI {
      * @return a list with the food that spoonacular detected and each element has a
      *         tag that specifies it is a dish or an ingredient
      */
-    public List<ShortRecipeModel> foodText(String text) throws JSONException, IOException, InterruptedException {
+    public List<ShortRecipe> foodText(String text) throws JSONException, IOException, InterruptedException {
         var params = new HashMap<String, String>();
         params.put("text", text);
 
@@ -48,10 +48,10 @@ public class SpoonacularAPI {
         HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
 
         JSONArray food = new JSONObject(response.body()).getJSONArray("annotations");
-        List<ShortRecipeModel> ans = new ArrayList<>();
+        List<ShortRecipe> ans = new ArrayList<>();
         ObjectMapper mapper = new ObjectMapper();
         for (int i = 0; !food.isNull(i); i++)
-            ans.add(mapper.readValue(food.getJSONObject(i).toString(), ShortRecipeModel.class));
+            ans.add(mapper.readValue(food.getJSONObject(i).toString(), ShortRecipe.class));
 
         return ans;
     }

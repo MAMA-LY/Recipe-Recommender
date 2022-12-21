@@ -13,7 +13,6 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonRootName("BodyInfo")
 public class BodyInfo {
 
     private float height;

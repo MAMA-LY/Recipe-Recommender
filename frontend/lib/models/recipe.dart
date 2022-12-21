@@ -28,24 +28,21 @@ class Recipe {
   }
 
   factory Recipe.recipeFromJson(dynamic json) {
-    var jsonIngredients = List.from(json['ingredientModels']); 
+    var jsonIngredients = json['ingredients'] as List;
+    var jsonTags = json["tags"] as List;
     return Recipe(
         name: json['name'] as String,
         image: json['image'] as String,
-        tags: List.from(json['tags']).cast<String>(),
+        tags: jsonTags.map<String>((json) => json.toString()).toList(),
         id: json['id'] as String,
         cuisine: json['cuisine'] as String,
-        nutrition: Nutrition.fromJson(json['nutritionModel']),
+        nutrition: Nutrition.fromJson(json['nutrition']),
         ingredients: jsonIngredients
             .map<Ingredient>((json) => Ingredient.fromJson(json))
             .toList());
   }
 
   static List<Recipe> shortRecipesFromSnapshot(List<dynamic> snapshot) {
-    snapshot = snapshot
-        .sublist(0, 20)
-        .where((element) => element['image'] != null)
-        .toList();
     return snapshot.map((data) {
       return Recipe.shortRecipeFromJson(data);
     }).toList();

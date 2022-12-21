@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.brainfood.backend.db_entities.Recipe;
-import com.brainfood.models.ShortRecipeModel;
+import com.brainfood.backend.db_entities.RecipeDB;
+import com.brainfood.models.ShortRecipe;
 
 @ComponentScan
 @RestController
@@ -26,38 +26,38 @@ public class SearchController {
     DishIngredientClassifier dishIngredientClassifier;
 
     @Autowired
-    RecipeDAO recipeDAO;
+    DAO DAO;
 
     @GetMapping("/sentence")
-    public ShortRecipeModel[] searchSentence(@RequestParam String sentence)
+    public ShortRecipe[] searchSentence(@RequestParam String sentence)
             throws JSONException, IOException, InterruptedException {
-        List<ShortRecipeModel> food = spoonacularAPI.foodText(sentence);
+        List<ShortRecipe> food = spoonacularAPI.foodText(sentence);
 
         dishIngredientClassifier.classify(food);
-        List<ShortRecipeModel> dishes = dishIngredientClassifier.getDish();
-        List<ShortRecipeModel> ingredients = dishIngredientClassifier.getIngredient();
+        List<ShortRecipe> dishes = dishIngredientClassifier.getDish();
+        List<ShortRecipe> ingredients = dishIngredientClassifier.getIngredient();
         System.out.println(sentence + " " + ingredients.size());
 
-        List<Recipe> result = new ArrayList<>();
-        result.addAll(recipeDAO.findSimilarDishes(dishes));
-        result.addAll(recipeDAO.findByIngredientsLike(ingredients));
+        List<RecipeDB> result = new ArrayList<>();
+        result.addAll(DAO.findSimilarDishes(dishes));
+        result.addAll(DAO.findByIngredientsLike(ingredients));
 
         return Utilities.eliminateDuplicates(result);
     }
 
     @GetMapping("/random")
-    public ShortRecipeModel[] getRandom(@RequestParam int number) {
-        var result = recipeDAO.getRandomRecipes(number);
+    public ShortRecipe[] getRandom(@RequestParam int number) {
+        var result = DAO.getRandomRecipes(number);
         return Utilities.castToArray(result);
     }
 
     @GetMapping("/withIngredientsAndTags")
-    public ShortRecipeModel[] getRecipeWithIngredientsAndTags(@RequestParam String[] Ingredients,
-            @RequestParam String[] Tags) {
-        var result = recipeDAO.recipesWithIngredients(Ingredients);
+    public ShortRecipe[] getRecipeWithIngredientsAndTags(@RequestParam String[] Ingredients,
+                                                         @RequestParam String[] Tags) {
+        var result = DAO.recipesWithIngredients(Ingredients);
         if (result.size() == 0 && Ingredients.length > 0)
             return null;
-        result = recipeDAO.filterWithTags(Tags, result);
+        result = DAO.filterWithTags(Tags, result);
         return Utilities.castToArray(result);
     }
 }

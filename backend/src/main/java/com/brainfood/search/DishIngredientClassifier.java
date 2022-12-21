@@ -6,19 +6,19 @@ import java.util.Objects;
 
 import org.springframework.stereotype.Service;
 
-import com.brainfood.models.ShortRecipeModel;
+import com.brainfood.models.ShortRecipe;
 
 @Service
 public class DishIngredientClassifier {
-    private List<ShortRecipeModel> dish = new ArrayList<>();
-    private List<ShortRecipeModel> ingredient = new ArrayList<>();
+    private List<ShortRecipe> dish = new ArrayList<>();
+    private List<ShortRecipe> ingredient = new ArrayList<>();
 
-    void classify(List<ShortRecipeModel> food) {
+    void classify(List<ShortRecipe> food) {
         dish = new ArrayList<>();
         ingredient = new ArrayList<>();
         if (food == null)
             return;
-        for (ShortRecipeModel recipe : food) {
+        for (ShortRecipe recipe : food) {
             if (Objects.equals(recipe.tag, "dish"))
                 dish.add(recipe);
             else
@@ -26,11 +26,11 @@ public class DishIngredientClassifier {
         }
     }
 
-    List<ShortRecipeModel> getDish() {
+    List<ShortRecipe> getDish() {
         return dish;
     }
 
-    List<ShortRecipeModel> getIngredient() {
+    List<ShortRecipe> getIngredient() {
         return ingredient;
     }
 }

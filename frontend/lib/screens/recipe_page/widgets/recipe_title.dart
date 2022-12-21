@@ -8,34 +8,32 @@ class RecipeTitle extends StatelessWidget {
   final Recipe recipe;
   final double padding;
 
-  const RecipeTitle({ 
-    super.key,
-    required this.recipe,
-    required this.padding
-    });
-
+  const RecipeTitle({super.key, required this.recipe, required this.padding});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return SingleChildScrollView(
+        child: Padding(
       padding: EdgeInsets.all(padding),
       child: Column(
         // Default value for crossAxisAlignment is CrossAxisAlignment.center.
         // We want to align title and description of recipes left:
         crossAxisAlignment: CrossAxisAlignment.start,
-        
+
         children: <Widget>[
-          Row(
-            children:[
-              const Icon(Icons.fastfood_outlined, size: 22.0),
-              const SizedBox(width: 5.0),
-              Text(
-                recipe.name,
-                style: Theme.of(context).textTheme.titleLarge,
-                selectionColor: const Color.fromARGB(174, 184, 178, 178),
-              ),
-            ]
-          ),
+          Row(children: [
+            const Icon(Icons.fastfood_outlined, size: 22.0),
+            const SizedBox(width: 5.0),
+            Flexible(
+                child: Text(
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
+              softWrap: false,
+              recipe.name,
+              style: Theme.of(context).textTheme.titleLarge,
+              selectionColor: const Color.fromARGB(174, 184, 178, 178),
+            )),
+          ]),
           // Empty space:
           const SizedBox(height: 10.0),
           Row(
@@ -44,14 +42,14 @@ class RecipeTitle extends StatelessWidget {
               const SizedBox(width: 5.0),
               Tags(
                 alignment: WrapAlignment.center,
-                itemCount: recipe.tags!.length,
+                itemCount: recipe.tags!.length > 3 ? 3 : recipe.tags!.length,
                 itemBuilder: (index) {
                   return ItemTags(
                     index: index,
                     title: recipe.tags![index],
                     color: Constants.primaryColor,
                     activeColor: Constants.primaryColor,
-                    onPressed:null,
+                    onPressed: null,
                     highlightColor: const Color.fromARGB(174, 184, 178, 178),
                     splashColor: const Color.fromARGB(174, 184, 178, 178),
                     elevation: 0.0,
@@ -63,11 +61,10 @@ class RecipeTitle extends StatelessWidget {
                   );
                 },
               ),
-              
             ],
           ),
         ],
       ),
-    );
+    ));
   }
 }

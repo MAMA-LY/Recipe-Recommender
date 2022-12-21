@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:recipe_recommender_frontend/api/api_constants.dart';
 import 'package:recipe_recommender_frontend/main.dart';

@@ -13,11 +13,10 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonRootName("Calender")
 public class Calendar {
 
-    private List<IngredientModel> ingredientModels;
+    private List<Ingredient> ingredients;
 
-    private List<RecipeModel> recipeModels;
+    private List<Recipe> recipes;
 
 }
