@@ -5,11 +5,7 @@ import 'package:recipe_recommender_frontend/constants.dart';
 import 'package:recipe_recommender_frontend/screens/favorites.dart';
 import 'package:recipe_recommender_frontend/screens/home.dart';
 import 'package:recipe_recommender_frontend/screens/meal_calendar.dart';
-<<<<<<< HEAD
-import 'package:recipe_recommender_frontend/screens/search.dart';
-=======
 import 'package:recipe_recommender_frontend/screens/search_page/search.dart';
->>>>>>> main
 import 'package:recipe_recommender_frontend/screens/settings.dart';
 
 class PageViewController extends StatefulWidget {

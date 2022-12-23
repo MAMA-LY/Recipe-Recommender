@@ -21,17 +21,10 @@ class _SignUpPageState extends State<SignUpPage> {
   String resp = "";
 
   Future<void> _signup() async {
-<<<<<<< HEAD
-    bool emailValid = EmailValidator.validate(emailController.text);
-    if (emailValid) {
-      String? body = await SignAPI.signup(usernameController.text,
-          passwordController.text, emailController.text);
-=======
     bool emailValid = EmailValidator.validate(emailController.text.trim());
     if (emailValid) {
       String? body = await SignAPI.signup(usernameController.text.trim(),
           passwordController.text.trim(), emailController.text.trim());
->>>>>>> main
       setState(() {
         responseTextController.text = body!;
         switch (body) {

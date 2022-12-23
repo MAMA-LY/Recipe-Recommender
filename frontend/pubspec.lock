@@ -181,13 +181,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_keyboard_visibility:
-    dependency: transitive
-    description:
-      name: flutter_keyboard_visibility
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "3.3.0"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -195,16 +188,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.1"
-<<<<<<< HEAD
-  flutter_native_splash:
-    dependency: "direct main"
-    description:
-      name: flutter_native_splash
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.4"
-=======
->>>>>>> main
   flutter_pw_validator:
     dependency: "direct main"
     description:
@@ -212,8 +195,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.5.0"
-<<<<<<< HEAD
-=======
   flutter_staggered_grid_view:
     dependency: "direct main"
     description:
@@ -221,7 +202,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.6.2"
->>>>>>> main
   flutter_tags:
     dependency: "direct main"
     description:
@@ -229,24 +209,11 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.4.9+1"
-<<<<<<< HEAD
-
-=======
->>>>>>> main
   flutter_test:
     dependency: "direct dev"
     description: flutter
     source: sdk
     version: "0.0.0"
-<<<<<<< HEAD
-  flutter_typeahead:
-    dependency: "direct main"
-    description:
-      name: flutter_typeahead
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.8.8"
-=======
   flutter_web_plugins:
     dependency: transitive
     description: flutter
@@ -259,7 +226,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.1"
->>>>>>> main
   http:
     dependency: "direct main"
     description:
@@ -294,7 +260,7 @@ packages:
       name: js
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.6.5"
+    version: "0.6.4"
   lints:
     dependency: transitive
     description:
@@ -530,22 +496,14 @@ packages:
       name: syncfusion_flutter_charts
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
-    version: "20.3.61"
-=======
     version: "20.4.38"
->>>>>>> main
   syncfusion_flutter_core:
     dependency: transitive
     description:
       name: syncfusion_flutter_core
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
-    version: "20.3.61"
-=======
     version: "20.4.38"
->>>>>>> main
   term_glyph:
     dependency: transitive
     description:

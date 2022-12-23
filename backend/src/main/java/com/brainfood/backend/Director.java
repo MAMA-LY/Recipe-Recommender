@@ -1,13 +1,13 @@
 package com.brainfood.backend;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.brainfood.backend.db_entities.IngredientDB;
 import com.brainfood.backend.db_entities.RecipeDB;
-import com.brainfood.models.Ingredient;
-import com.brainfood.models.Nutrition;
-import com.brainfood.models.Recipe;
+import com.brainfood.backend.models.Ingredient;
+import com.brainfood.backend.models.Nutrition;
+import com.brainfood.backend.models.Recipe;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Director {
     public static Nutrition buildRecipeNutritionModel(RecipeDB recipeDB) {

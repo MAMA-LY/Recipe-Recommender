@@ -1,15 +1,11 @@
 package com.brainfood.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
-<<<<<<< HEAD
-
-=======
->>>>>>> main
 import org.springframework.stereotype.Service;
 
-import com.brainfood.security.Model.PasswordResetToken;
-import com.brainfood.security.Model.UserCredentials;
-import com.brainfood.security.Repository.PasswordResetTokenRepository;
+import com.brainfood.security.model.PasswordResetToken;
+import com.brainfood.security.model.UserCredentials;
+import com.brainfood.security.repository.PasswordResetTokenRepository;
 
 @Service
 public class PasswordResetManager {
@@ -53,19 +49,12 @@ public class PasswordResetManager {
 
     public Response changePassword(String tokenStr, String password) {
         PasswordResetToken token = passwordResetTokenRepository.findByToken(tokenStr);
-<<<<<<< HEAD
-        if(token == null) return Response.InvalidToken;
-        token =passwordResetTokenRepository.findById(tokenStr).orElse(null);
-        UserCredentials user =token!=null? token.getUser():null;
-        if(user == null) return Response.InvalidToken;
-=======
         if (token == null)
             return Response.InvalidToken;
         token = passwordResetTokenRepository.findById(tokenStr).orElse(null);
         UserCredentials user = token != null ? token.getUser() : null;
         if (user == null)
             return Response.InvalidToken;
->>>>>>> main
         user.setPassword(userAuthenticator.bCryptPasswordEncoder.encode(password));
         passwordResetTokenRepository.deleteById(tokenStr);
         return Response.PasswordChanged;

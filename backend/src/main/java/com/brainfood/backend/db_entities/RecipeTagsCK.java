@@ -1,17 +1,17 @@
 package com.brainfood.backend.db_entities;
 
-import java.io.Serializable;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 @Embeddable
 @Getter
 @Setter
 public class RecipeTagsCK implements Serializable {
-    @Column(name = "recipeid")
+    @Column(name = "recipeID")
     public String recipeID;
 
     @Column(name = "tag")

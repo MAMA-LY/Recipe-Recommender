@@ -9,11 +9,7 @@ import 'screens/sign/signup.dart';
 // We use name route
 // All our routes will be available here
 final Map<String, WidgetBuilder> routes = {
-<<<<<<< HEAD
-  SignInPage.routeName: (context) => const SignInPage(),
-=======
   SignInPage.routeName: (context) => const SignInPage(initResp: ""),
->>>>>>> main
   //ForgotPasswordScreen.routeName: (context) => ForgotPasswordScreen(),
   SignUpPage.routeName: (context) => const SignUpPage(),
   AccountSettingsPage.routeName: (context) => const AccountSettingsPage(),

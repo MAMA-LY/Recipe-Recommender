@@ -1,14 +1,8 @@
-<<<<<<< HEAD
-import 'package:http/http.dart' as http;
-import 'package:recipe_recommender_frontend/api/api_constants.dart';
-import 'package:recipe_recommender_frontend/main.dart';
-=======
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:recipe_recommender_frontend/api/api_constants.dart';
 import 'package:recipe_recommender_frontend/main.dart';
 import 'package:flutter/material.dart';
->>>>>>> main
 
 class SignAPI {
   static Future<String?> signup(
@@ -19,26 +13,13 @@ class SignAPI {
       "password": password,
       "email": email
     };
-<<<<<<< HEAD
-    var response = await http.post(url, body: credentials, headers: APIConstants.headerCORS(""));
-=======
     var response = await http.post(url,
         body: credentials, headers: APIConstants.headerCORS(""));
->>>>>>> main
     return response.body;
   }
 
   static Future<String?> signin(String username, String password) async {
     var url = Uri.https(APIConstants.baseUrl, APIConstants.signinEndPoint);
-<<<<<<< HEAD
-    var response = await http.post(url, body: {
-      "username": username,
-      "password": password
-    }, headers: APIConstants.headerCORS(""));
-
-    var cookie = response.headers['set-cookie'];
-    var responseLocation = response.headers['location'];
-=======
     var response = await http.post(url,
         body: {"username": username, "password": password},
         headers: APIConstants.headerCORS(""));
@@ -46,17 +27,13 @@ class SignAPI {
     var cookie = response.headers['set-cookie'];
     var responseLocation = response.headers['location'];
 
->>>>>>> main
     if (responseLocation ==
         "https://${APIConstants.baseUrl + APIConstants.signinEndPoint}?error") {
       return "wrong credentials";
     }
     if (responseLocation ==
             "https://${APIConstants.baseUrl + APIConstants.homeEndPoint}" &&
-<<<<<<< HEAD
-=======
 
->>>>>>> main
         cookie != null) {
       session.cookie = cookie;
       if (cacheFile != null) {
@@ -64,19 +41,13 @@ class SignAPI {
       }
       var urlHome = Uri.https(APIConstants.baseUrl, APIConstants.homeEndPoint);
 
-<<<<<<< HEAD
-      var responseHome = await http.post(urlHome, headers: APIConstants.headerCORS(cookie));
-=======
       var responseHome =
           await http.post(urlHome, headers: APIConstants.headerCORS(cookie));
       
->>>>>>> main
       return "right credentials";
     }
     return null;
   }
-<<<<<<< HEAD
-=======
 
   static Future<String?> forgetPassword(String email) async {
     var url = Uri.https(APIConstants.baseUrl, APIConstants.forgetPasswordEndPoint);
@@ -99,5 +70,4 @@ class SignAPI {
         headers: APIConstants.headerCORS(""));
     return response.body;
   }
->>>>>>> main
 }

@@ -1,36 +1,17 @@
-<<<<<<< HEAD:backend/src/main/java/com/brainfood/search/DBEntities/Recipe.java
-package com.brainfood.search.DBEntities;
-
-import jakarta.persistence.*;
-import lombok.*;
-
-import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
-
-@Entity
-@Table(name = "\"Recipe\"")
-@Getter @Setter
-=======
 package com.brainfood.backend.db_entities;
-
-import java.io.Serializable;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
+import java.io.Serializable;
 
 @Entity
 @Table(name = "\"Recipe\"")
 @Getter
 @Setter
->>>>>>> main:backend/src/main/java/com/brainfood/backend/db_entities/RecipeDB.java
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
