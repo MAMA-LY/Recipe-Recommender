@@ -1,39 +1,21 @@
-
 package com.brainfood.backend;
 
-/**
-* @generated
-*/
+import com.brainfood.models.Recipe;
+
 public class CaloriesWatcher {
-    
-    
-    
 
-    
-    
+    // Operations
 
-    //                          Operations                                  
-    
-    /**
-    * @generated
-    */
     public Recipe eat() {
         return null;
     }
-    
-    /**
-    * @generated
-    */
+
     private int unboxRecipeCalories() {
         return 0;
     }
-    
-    /**
-    * @generated
-    */
+
     private int unboxIngredientCalories() {
         return 0;
     }
-    
-    
+
 }
