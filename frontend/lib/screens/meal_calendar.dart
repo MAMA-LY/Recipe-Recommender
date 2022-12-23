@@ -24,7 +24,13 @@ class _MealCalendarState extends State<MealCalendar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+<<<<<<< HEAD
         appBar: AppBar(
+=======
+        backgroundColor: Constants.secondaryColor,
+        appBar: AppBar(
+          elevation: 0,
+>>>>>>> main
           backgroundColor: Constants.secondaryColor,
           title: Text(
             "ورقة وقلم",

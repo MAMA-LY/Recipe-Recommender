@@ -1,4 +1,11 @@
 package com.brainfood.backend;
+<<<<<<< HEAD
+=======
+import com.brainfood.models.Ingredient;
+import com.brainfood.models.Profile;
+import com.brainfood.models.Recipe;
+
+>>>>>>> main
 import java.util.List;
 
 

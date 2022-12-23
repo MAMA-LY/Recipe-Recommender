@@ -1,5 +1,6 @@
 package com.brainfood.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -8,11 +9,14 @@ import org.springframework.stereotype.Service;
 import com.brainfood.security.Model.UserCredentials;
 import com.brainfood.security.Repository.UserRepository;
 
+<<<<<<< HEAD
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 
 
+=======
+>>>>>>> main
 @Service
 public class UserInfoProvider implements UserDetailsService {
 
@@ -22,8 +26,9 @@ public class UserInfoProvider implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserCredentials userCredentials = userRepository.findByUsername(username);
-        if(userCredentials == null) throw new UsernameNotFoundException("Username Not Found : " + username );
+        if (userCredentials == null)
+            throw new UsernameNotFoundException("Username Not Found : " + username);
         return new UserInfo(userCredentials);
     }
-    
+
 }

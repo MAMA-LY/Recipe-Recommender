@@ -18,10 +18,17 @@ class SettingsPage extends StatelessWidget {
           var url = Uri.https(APIConstants.baseUrl, APIConstants.signoutEndPoint);
           debugPrint(session.cookie);
           var response =
+<<<<<<< HEAD
           await http.post(url, headers: {"cookie": session.cookie});
           debugPrint(response.statusCode.toString());
           Navigator.of(context, rootNavigator: true).pushReplacement(
               MaterialPageRoute(builder: (context) => const SignInPage()));
+=======
+              await http.post(url, headers: {"cookie": session.cookie});
+          debugPrint(response.statusCode.toString());
+          Navigator.of(context, rootNavigator: true).pushReplacement(
+              MaterialPageRoute(builder: (context) =>  const SignInPage(initResp: "",)));
+>>>>>>> main
           cacheFile!.delete();
         },
         child: const Text(

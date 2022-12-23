@@ -11,11 +11,19 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+<<<<<<< HEAD
 
 
 @Entity
 @Table(name = "\"PasswordResetToken\"")
 @Getter @Setter
+=======
+
+@Entity
+@Table(name = "\"PasswordResetToken\"")
+@Getter
+@Setter
+>>>>>>> main
 public class PasswordResetToken implements Serializable {
 
     @Id

@@ -1,5 +1,10 @@
 package com.brainfood.backend;
 
+<<<<<<< HEAD
+=======
+import com.brainfood.models.Ingredient;
+import com.brainfood.models.Nutrition;
+>>>>>>> main
 import org.junit.jupiter.api.Test;
 
 import java.awt.*;
@@ -40,6 +45,7 @@ class IngredientTest {
         final Ingredient ingredient =new Ingredient();
         final Field field = ingredient.getClass().getDeclaredField("icon");
         field.setAccessible(true);
+<<<<<<< HEAD
         Image expectedValue = new Image() {
             @Override
             public int getWidth(ImageObserver observer) {
@@ -66,6 +72,9 @@ class IngredientTest {
                 return null;
             }
         };
+=======
+        String expectedValue = "icon";
+>>>>>>> main
         field.set(ingredient, expectedValue);
 
         assertEquals(expectedValue,ingredient.getIcon(), "problem in getIcon");
@@ -76,12 +85,21 @@ class IngredientTest {
 
 
         final Ingredient ingredient =new Ingredient();
+<<<<<<< HEAD
         final Field field = ingredient.getClass().getDeclaredField("weight");
         field.setAccessible(true);
         int expectedValue = 5;
         field.set(ingredient, expectedValue);
 
         assertEquals(expectedValue,ingredient.getWeight(), "problem in getWeight");
+=======
+        final Field field = ingredient.getClass().getDeclaredField("amount");
+        field.setAccessible(true);
+        String expectedValue ="1 egg";
+        field.set(ingredient, expectedValue);
+
+        assertEquals(expectedValue,ingredient.getAmount(), "problem in getWeight");
+>>>>>>> main
     }
 
     @Test
@@ -128,6 +146,7 @@ class IngredientTest {
         final Ingredient ingredient =new Ingredient();
         final Field field = ingredient.getClass().getDeclaredField("icon");
         field.setAccessible(true);
+<<<<<<< HEAD
         Image expectedValue = new Image() {
             @Override
             public int getWidth(ImageObserver observer) {
@@ -157,10 +176,16 @@ class IngredientTest {
 
         ingredient.setIcon(expectedValue);
         Image actualValue= (Image)field.get(ingredient);
+=======
+        String expectedValue = "https://spoonacular.com/recipeImages/654835-556x370.jpg";
+        ingredient.setIcon(expectedValue);
+        String actualValue= (String)field.get(ingredient);
+>>>>>>> main
         assertEquals(expectedValue,actualValue,"problem in setIcon");
     }
 
     @Test
+<<<<<<< HEAD
     void setWeight() throws IllegalAccessException, NoSuchFieldException{
         final Ingredient ingredient =new Ingredient();
         final Field field = ingredient.getClass().getDeclaredField("weight");
@@ -170,6 +195,17 @@ class IngredientTest {
         ingredient.setWeight(expectedValue);
         int actualValue= (int)field.get(ingredient);
         assertEquals(expectedValue,actualValue,"problem in setWeight");
+=======
+    void setAmount() throws IllegalAccessException, NoSuchFieldException{
+        final Ingredient ingredient =new Ingredient();
+        final Field field = ingredient.getClass().getDeclaredField("amount");
+        field.setAccessible(true);
+        String expectedValue = "1/2 tps";
+
+        ingredient.setAmount(expectedValue);
+        String actualValue= (String)field.get(ingredient);
+        assertEquals(expectedValue,actualValue,"problem in setAmount");
+>>>>>>> main
     }
 
     @Test

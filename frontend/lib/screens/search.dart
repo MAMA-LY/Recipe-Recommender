@@ -18,6 +18,7 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+<<<<<<< HEAD
         appBar: AppBar(
           backgroundColor: Constants.secondaryColor,
           title: Text(
@@ -36,6 +37,26 @@ class _SearchPageState extends State<SearchPage> {
             ),
           ],
         ),
+=======
+      appBar: AppBar(
+        backgroundColor: Constants.secondaryColor,
+        title: Text(
+          "ورقة وقلم",
+          style: TextStyle(
+              fontFamily: "Arslan",
+              fontSize: 30,
+              foreground: Paint()
+                ..color = Constants.primaryColor
+                ..strokeWidth = 10),
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.search),
+            onPressed: _showSearch,
+          ),
+        ],
+      ),
+>>>>>>> main
     );
   }
 
@@ -84,8 +105,12 @@ class TheSearch extends SearchDelegate<String> {
     RecipesAPI api = RecipesAPI.fromCookie(session.cookie);
     debugPrint("I'm here");
     return FutureBuilder<List<Recipe>>(
+<<<<<<< HEAD
       future: api.getRecipesWithQuery(
           "search/sentence", {"sentence": query}),
+=======
+      future: api.getRecipesWithQuery("search/sentence", {"sentence": query}),
+>>>>>>> main
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           debugPrint("SNAPSHOT: ${snapshot.data}");
@@ -93,6 +118,7 @@ class TheSearch extends SearchDelegate<String> {
           return Column(children: <Widget>[
             Expanded(
                 child: ListView.builder(
+<<<<<<< HEAD
                   itemCount: snapshot.data?.length,
                   itemBuilder: (context, index) {
                     return RecipeCard(
@@ -101,13 +127,28 @@ class TheSearch extends SearchDelegate<String> {
                         thumbnailUrl: snapshot.data![index].image);
                   },
                 ))
+=======
+              itemCount: snapshot.data?.length,
+              itemBuilder: (context, index) {
+                return RecipeCard(
+                    id: snapshot.data![index].id,
+                    name: snapshot.data![index].name,
+                    thumbnailUrl: snapshot.data![index].image);
+              },
+            ))
+>>>>>>> main
           ]);
         } else {
           return const Center(
               child: CircularProgressIndicator(
+<<<<<<< HEAD
                 color: Constants.primaryColor,
               )
           );
+=======
+            color: Constants.primaryColor,
+          ));
+>>>>>>> main
         }
       },
     );
@@ -123,4 +164,8 @@ class TheSearch extends SearchDelegate<String> {
           title: Text(suggestions[index])),
     );
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> main

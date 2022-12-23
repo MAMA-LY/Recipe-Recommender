@@ -1,7 +1,7 @@
 package com.brainfood.security;
 
 public enum Response {
-    
+
     PleaseSignIn,
     TokenVerified,
     InvalidToken,

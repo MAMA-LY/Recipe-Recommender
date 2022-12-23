@@ -1,19 +1,31 @@
-
 import 'dart:io';
+import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
+import 'package:recipe_recommender_frontend/api/sign_api.dart';
 import 'package:recipe_recommender_frontend/constants.dart';
+import 'package:recipe_recommender_frontend/screens/sign/changePassword.dart';
 import 'package:recipe_recommender_frontend/screens/sign/signin.dart';
 import 'package:recipe_recommender_frontend/screens/splash_screen.dart';
+<<<<<<< HEAD
 
 import 'api/api_constants.dart';
 import 'api/session.dart';
 import 'screens/page_view_controller.dart';
+=======
+import 'package:uni_links/uni_links.dart';
+import 'api/api_constants.dart';
+import 'api/recipes_api.dart';
+import 'api/session.dart';
+import 'models/recipe.dart';
+import 'screens/page_view_controller.dart';
+import 'screens/recipe_page/recipe_page.dart';
+>>>>>>> main
 
 var session = Session("");
-
 String cookieStr = "";
 File? cacheFile;
 
@@ -28,6 +40,101 @@ Future<File> getLocalFile() async {
   return File('$path/cookie.txt').create();
 }
 
+Widget startWidget = const MyApp();
+StreamSubscription? _sub;
+
+Future<void> initUniLinks() async {
+  try {
+    final initialUri = await getInitialUri();
+    debugPrint("init link");
+    if (initialUri != null) {
+      List<String?> path = initialUri.pathSegments;
+      debugPrint(path.toString());
+      if (path[0] == "resetPassword") {
+        String? tk = initialUri.queryParameters['tk'];
+        if (tk != null) {
+          var response = await SignAPI.resetPassword(tk);
+          debugPrint(response);
+          if (response == "InvalidToken") {
+            runApp(const BuildApp(
+                widget: SignInPage(initResp: "Cannot reset password")));
+          } else if (response == "TokenVerified") {
+            runApp(BuildApp(widget: changePasswordPage(tk: tk)));
+          }
+        } else {
+          runApp(const BuildApp(
+              widget: SignInPage(initResp: "Cannot reset password")));
+        }
+      } else if (path[0] == "share") {
+        if (Session.login) {
+          String? id = initialUri.queryParameters['id'];
+          if (id != null) {
+            debugPrint(id);
+            RecipesAPI api = RecipesAPI.fromCookie(session.cookie);
+            Recipe response = await api.getRecipeByID(id.trim());
+            runApp(BuildApp(widget:RecipePage(recipe: response, inFavorites: false)));
+          }
+        } else {
+          runApp(const BuildApp(widget: SignInPage(initResp: "")));
+        }
+      } else {
+        runApp(const BuildApp(widget: SignInPage(initResp: "")));
+      }
+    }
+    debugPrint(initialUri.toString());
+    debugPrint("bodnod2");
+    _sub = uriLinkStream.listen((Uri? uri) async {
+      debugPrint("bodnod2");
+      if (uri != null) {
+        List<String?> path = uri.pathSegments;
+        debugPrint(path.toString());
+        debugPrint(uri.toString());
+
+        if (path[0] == "resetPassword") {
+          String? tk = uri.queryParameters['tk'];
+          if (tk != null) {
+            var response = await SignAPI.resetPassword(tk);
+            debugPrint("reso");
+            debugPrint(response);
+            if (response == "InvalidToken") {
+              runApp(const BuildApp(
+                  widget: SignInPage(initResp: "Cannot reset password")));
+            } else if (response == "TokenVerified") {
+              debugPrint("lolxd");
+              runApp(BuildApp(widget: changePasswordPage(tk: tk)));
+            }
+          } else {
+            runApp(const BuildApp(
+                widget: SignInPage(initResp: "Cannot reset password")));
+          }
+        } else if (path[0] == "share") {
+          if (Session.login) {
+            String? id = uri.queryParameters['id'];
+            if (id != null) {
+              debugPrint(id);
+              RecipesAPI api = RecipesAPI.fromCookie(session.cookie);
+              Recipe response = await api.getRecipeByID(id.trim());
+              runApp(BuildApp(widget:RecipePage(recipe: response, inFavorites: false)));
+            }
+          } else {
+            runApp(const BuildApp(widget: SignInPage(initResp: "")));
+          }
+        } else {
+          runApp(const BuildApp(widget: SignInPage(initResp: "")));
+        }
+      }
+      debugPrint("run");
+    }, onError: (err) {
+      debugPrint(err);
+    });
+  } on PlatformException {
+    debugPrint("eror");
+  }
+}
+// Use the uri and warn the user, if it is not correct,
+// but keep in mind it could be `null`.
+// ... other exception handling like PlatformException
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   var url = Uri.https(APIConstants.baseUrl, APIConstants.homeEndPoint);
@@ -36,13 +143,14 @@ void main() {
       .then((value) => {
             cacheFile = value,
             cookieStr = cacheFile!.readAsStringSync(),
-            runApp(const BuildApp())
+            runApp(const BuildApp(widget: MyApp()))
           })
       .onError((error, stackTrace) => {
             debugPrint(error.toString()),
             debugPrint("Can't get cache file"),
-            runApp(const BuildApp())
+            runApp(const BuildApp(widget: MyApp()))
           });
+  initUniLinks();
 }
 
 
@@ -50,7 +158,13 @@ void main() {
 Future<String?> getServerInitResponse() async {
   session.cookie = cookieStr;
   var url = Uri.https(APIConstants.baseUrl, APIConstants.homeEndPoint);
+<<<<<<< HEAD
   var serverResponse = await http.get(url, headers: APIConstants.headerCORS(session.cookie));
+=======
+  var serverResponse =
+      await http.get(url, headers: APIConstants.headerCORS(session.cookie));
+  debugPrint(serverResponse.body);
+>>>>>>> main
   final bool hasData = serverResponse.body != null;
   if (hasData) {
     return serverResponse.body;
@@ -72,10 +186,16 @@ class MyApp extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.done) {
             String response = snapshot.data!;
             if (response == "UserInfo") {
+<<<<<<< HEAD
+=======
+              Session.login = true;
+>>>>>>> main
               return const PageViewController();
             } else {
               debugPrint("IN");
-              return const SignInPage();
+              return const SignInPage(
+                initResp: "",
+              );
             }
 
           } else {
@@ -89,8 +209,8 @@ class MyApp extends StatelessWidget {
 }
 
 class BuildApp extends StatelessWidget {
-  const BuildApp({Key? key}) : super(key: key);
-
+  final Widget widget;
+  const BuildApp({Key? key, required this.widget}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -108,8 +228,7 @@ class BuildApp extends StatelessWidget {
           ),
         ),
       ),
-      home: const MyApp(),
+      home: widget,
     );
   }
 }
-

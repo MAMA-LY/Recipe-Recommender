@@ -1,16 +1,17 @@
 package com.brainfood.security;
 
-
 import java.util.Collection;
 import java.util.Collections;
+<<<<<<< HEAD
+=======
+
+>>>>>>> main
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import com.brainfood.security.Model.UserCredentials;
-
-
 
 @Component
 public class UserInfo implements UserDetails {
@@ -36,7 +37,6 @@ public class UserInfo implements UserDetails {
         return this.userCredentials.getUsername();
     }
 
-
     @Override
     public boolean isAccountNonExpired() {
         return true;
@@ -56,5 +56,5 @@ public class UserInfo implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-    
+
 }
