@@ -1,16 +1,29 @@
-package com.brainfood.security.model;
-
-import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+package com.brainfood.security.Model;
 
 import java.io.Serializable;
 import java.util.UUID;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
+<<<<<<< HEAD
+
+
+@Entity
+@Table(name = "\"PasswordResetToken\"")
+@Getter @Setter
+=======
 
 @Entity
 @Table(name = "\"PasswordResetToken\"")
 @Getter
 @Setter
+>>>>>>> main
 public class PasswordResetToken implements Serializable {
 
     @Id

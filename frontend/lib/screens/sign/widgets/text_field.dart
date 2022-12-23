@@ -7,6 +7,10 @@ class CustomTextField extends StatelessWidget {
   final int bottomPadding;
   final TextEditingController controller;
   final bool obscureText;
+<<<<<<< HEAD
+
+=======
+>>>>>>> main
   const CustomTextField({
     Key? key,
     required this.promptText,
@@ -46,7 +50,10 @@ class CustomTextField extends StatelessWidget {
               style: BorderStyle.none,
             ),
           ),
+<<<<<<< HEAD
+=======
           hintText: promptText,
+>>>>>>> main
           labelText: promptText,
         ),
         obscureText: obscureText,

@@ -10,6 +10,12 @@ import 'package:recipe_recommender_frontend/constants.dart';
 import 'package:recipe_recommender_frontend/screens/sign/changePassword.dart';
 import 'package:recipe_recommender_frontend/screens/sign/signin.dart';
 import 'package:recipe_recommender_frontend/screens/splash_screen.dart';
+<<<<<<< HEAD
+
+import 'api/api_constants.dart';
+import 'api/session.dart';
+import 'screens/page_view_controller.dart';
+=======
 import 'package:uni_links/uni_links.dart';
 import 'api/api_constants.dart';
 import 'api/recipes_api.dart';
@@ -17,6 +23,7 @@ import 'api/session.dart';
 import 'models/recipe.dart';
 import 'screens/page_view_controller.dart';
 import 'screens/recipe_page/recipe_page.dart';
+>>>>>>> main
 
 var session = Session("");
 String cookieStr = "";
@@ -146,12 +153,18 @@ void main() {
   initUniLinks();
 }
 
+
+
 Future<String?> getServerInitResponse() async {
   session.cookie = cookieStr;
   var url = Uri.https(APIConstants.baseUrl, APIConstants.homeEndPoint);
+<<<<<<< HEAD
+  var serverResponse = await http.get(url, headers: APIConstants.headerCORS(session.cookie));
+=======
   var serverResponse =
       await http.get(url, headers: APIConstants.headerCORS(session.cookie));
   debugPrint(serverResponse.body);
+>>>>>>> main
   final bool hasData = serverResponse.body != null;
   if (hasData) {
     return serverResponse.body;
@@ -173,7 +186,10 @@ class MyApp extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.done) {
             String response = snapshot.data!;
             if (response == "UserInfo") {
+<<<<<<< HEAD
+=======
               Session.login = true;
+>>>>>>> main
               return const PageViewController();
             } else {
               debugPrint("IN");
@@ -181,6 +197,7 @@ class MyApp extends StatelessWidget {
                 initResp: "",
               );
             }
+
           } else {
             debugPrint("IN2");
             return const SplashScreenPage();

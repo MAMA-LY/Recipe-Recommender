@@ -1,19 +1,34 @@
-package com.brainfood.security.model;
-
-import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-import org.springframework.stereotype.Component;
+package com.brainfood.security.Model;
 
 import java.io.Serializable;
+
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.stereotype.Component;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+<<<<<<< HEAD
+=======
+import lombok.Getter;
+import lombok.Setter;
+>>>>>>> main
+import lombok.ToString;
 
 @Component
 @ToString
 @Entity
 @Table(name = "\"UserCredentials\"")
+<<<<<<< HEAD
+@Getter @Setter
+=======
 @Getter
 @Setter
+>>>>>>> main
 public class UserCredentials implements Serializable {
 
     @Id

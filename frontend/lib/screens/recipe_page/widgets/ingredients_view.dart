@@ -3,7 +3,11 @@ import 'package:flutter/material.dart';
 class IngredientsView extends StatelessWidget {
   final List<String> ingredients;
 
+<<<<<<< HEAD
+  const IngredientsView( {super.key, required this.ingredients});
+=======
   const IngredientsView({super.key, required this.ingredients});
+>>>>>>> main
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +18,11 @@ class IngredientsView extends StatelessWidget {
           children: <Widget>[
             const Icon(Icons.done),
             const SizedBox(width: 5.0),
+<<<<<<< HEAD
+            Text(item),
+=======
             Flexible(child: Text(item, softWrap: true)),
+>>>>>>> main
           ],
         ),
       );
@@ -31,3 +39,7 @@ class IngredientsView extends StatelessWidget {
     );
   }
 }
+<<<<<<< HEAD
+
+=======
+>>>>>>> main

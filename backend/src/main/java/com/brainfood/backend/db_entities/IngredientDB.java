@@ -1,4 +1,18 @@
+<<<<<<< HEAD:backend/src/main/java/com/brainfood/search/DBEntities/Ingredient.java
+package com.brainfood.search.DBEntities;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.io.Serializable;
+
+@Entity
+@Table(name = "\"Ingredient\"")
+@Getter @Setter
+=======
 package com.brainfood.backend.db_entities;
+
+import java.io.Serializable;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,12 +23,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.io.Serializable;
-
 @Entity
 @Table(name = "\"Ingredient\"")
 @Getter
 @Setter
+>>>>>>> main:backend/src/main/java/com/brainfood/backend/db_entities/IngredientDB.java
 @AllArgsConstructor
 @NoArgsConstructor
 public class IngredientDB implements Serializable {

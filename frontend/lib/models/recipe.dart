@@ -10,6 +10,41 @@ class Recipe {
   final String image;
   Nutrition? nutrition;
 
+<<<<<<< HEAD
+  Recipe({
+    required this.name,
+    required this.image,
+    required this.id,
+    this.tags,
+    this.ingredients,
+    this.nutrition,
+    this.cuisine
+  });
+
+  factory Recipe.shortRecipeFromJson(dynamic json) {
+    return Recipe(
+        name: json['name'] as String,
+        image: json['image'] as String,
+        id: json['id'] as String,
+    );
+  }
+
+  factory Recipe.recipeFromJson(dynamic json) {
+    var jsonIngredients = json['ingredients'] as List;
+    return Recipe(
+        name: json['name'] as String,
+        image: json['image'] as String,
+        tags: json['tags'] as List<String>,
+        id: json['id'] as String,
+        cuisine: json['cuisine'] as String,
+        nutrition: Nutrition.fromJson(['nutrition']),
+        ingredients: jsonIngredients.map<Ingredient>((json) => Ingredient.fromJson(json)).toList()
+    );
+  }
+
+  static List<Recipe> shortRecipesFromSnapshot(List<dynamic> snapshot) {
+    snapshot = snapshot.sublist(0, 20).where((element) => element['image'] != null).toList();
+=======
   Recipe(
       {required this.name,
       required this.image,
@@ -43,6 +78,7 @@ class Recipe {
   }
 
   static List<Recipe> shortRecipesFromSnapshot(List<dynamic> snapshot) {
+>>>>>>> main
     return snapshot.map((data) {
       return Recipe.shortRecipeFromJson(data);
     }).toList();
@@ -53,15 +89,22 @@ class Recipe {
       return Recipe.recipeFromJson(data);
     }).toList();
   }
+<<<<<<< HEAD
+  String getTags(){
+=======
 
   String getTags() {
+>>>>>>> main
     String tagsList = "";
     for (var tag in tags!) {
       tagsList += ", $tag";
     }
     return tagsList.substring(1);
   }
+<<<<<<< HEAD
+=======
 
+>>>>>>> main
   @override
   String toString() {
     return 'Recipe {name: $name, image: $image, tags: $tags, ID: $id, cuisine: $cuisine, nutrition: $nutrition, ingredients: $ingredients}';

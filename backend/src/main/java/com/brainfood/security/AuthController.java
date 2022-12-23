@@ -1,14 +1,24 @@
 package com.brainfood.security;
 
-import com.brainfood.security.repository.UserRepository;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
+<<<<<<< HEAD
+
+import org.springframework.stereotype.Component;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
+=======
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+>>>>>>> main
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Map;
+import com.brainfood.security.Repository.UserRepository;
 
 @Component
 @RestController
@@ -24,7 +34,7 @@ public class AuthController {
     PasswordResetManager passwordResetManager;
 
     @PostMapping("/forgetPassword")
-    public String forgetPassword(@RequestParam Map<String, String> body) {
+    public String forgestPassword(@RequestParam Map<String, String> body) {
         return passwordResetManager.sendResetPassword(body.get("email")).name();
     }
 

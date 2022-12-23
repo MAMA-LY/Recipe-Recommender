@@ -1,13 +1,17 @@
 package com.brainfood.security;
 
-import com.brainfood.security.model.UserCredentials;
+import java.util.Collection;
+import java.util.Collections;
+<<<<<<< HEAD
+=======
+
+>>>>>>> main
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
-import java.util.Collection;
-import java.util.Collections;
+import com.brainfood.security.Model.UserCredentials;
 
 @Component
 public class UserInfo implements UserDetails {
