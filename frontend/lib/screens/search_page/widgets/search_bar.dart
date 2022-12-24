@@ -21,6 +21,8 @@ class SearchBar extends StatefulWidget {
 class _SearchBarState extends State<SearchBar> {
   late String selectedIngredient;
   late String userInput;
+  final TextEditingController _textEditingController =
+      TextEditingController(text: "");
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +34,7 @@ class _SearchBarState extends State<SearchBar> {
       ),
       debounceDuration: const Duration(microseconds: 500),
       textFieldConfiguration: TextFieldConfiguration(
+        controller: _textEditingController,
         decoration: InputDecoration(
           labelText: "Ingredient",
           prefixIcon: const Icon(Icons.search),
@@ -74,6 +77,7 @@ class _SearchBarState extends State<SearchBar> {
         );
       },
       onSuggestionSelected: (String selectedIngredient) {
+        _textEditingController.text = "";
         widget.update(selectedIngredient);
       },
       noItemsFoundBuilder: (context) => const SizedBox(
