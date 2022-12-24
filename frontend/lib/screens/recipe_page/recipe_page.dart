@@ -68,7 +68,7 @@ class _RecipePageState extends State<RecipePage>
                   ],
                 ),
               ),
-              expandedHeight: 340.0,
+              expandedHeight: 400.0,
               pinned: true,
               floating: true,
               elevation: 2.0,

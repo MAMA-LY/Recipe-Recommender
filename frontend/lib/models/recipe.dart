@@ -30,16 +30,28 @@ class Recipe {
   factory Recipe.recipeFromJson(dynamic json) {
     var jsonIngredients = json['ingredients'] as List;
     var jsonTags = json["tags"] as List;
-    return Recipe(
-        name: json['name'] as String,
-        image: json['image'] as String,
-        tags: jsonTags.map<String>((json) => json.toString()).toList(),
-        id: json['id'] as String,
-        cuisine: json['cuisine'] as String,
-        nutrition: Nutrition.fromJson(json['nutrition']),
-        ingredients: jsonIngredients
-            .map<Ingredient>((json) => Ingredient.fromJson(json))
-            .toList());
+    if (json['cuisine'] != null) {
+      return Recipe(
+          name: json['name'] as String,
+          image: json['image'] as String,
+          tags: jsonTags.map<String>((json) => json.toString()).toList(),
+          id: json['id'] as String,
+          cuisine: json['cuisine'] as String,
+          nutrition: Nutrition.fromJson(json['nutrition']),
+          ingredients: jsonIngredients
+              .map<Ingredient>((json) => Ingredient.fromJson(json))
+              .toList());
+    } else {
+      return Recipe(
+          name: json['name'] as String,
+          image: json['image'] as String,
+          tags: jsonTags.map<String>((json) => json.toString()).toList(),
+          id: json['id'] as String,
+          nutrition: Nutrition.fromJson(json['nutrition']),
+          ingredients: jsonIngredients
+              .map<Ingredient>((json) => Ingredient.fromJson(json))
+              .toList());
+    }
   }
 
   static List<Recipe> shortRecipesFromSnapshot(List<dynamic> snapshot) {

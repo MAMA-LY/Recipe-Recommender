@@ -14,7 +14,6 @@ class Ingredient {
     return Ingredient(
         name: json['name'] as String,
         id: json['id'] as String,
-        icon: json['icon'] as String,
         amount: json['amount'] as String,
         nutrition: Nutrition.fromJson(json['nutrition']));
   }
