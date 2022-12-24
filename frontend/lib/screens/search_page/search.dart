@@ -111,19 +111,11 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   late TextEditingController controller;
   IngredientsAPI ingredientsAPI = IngredientsAPI.fromCookie(session.cookie);
-  late List<String> ingredients;
+  List<String> ingredients = [];
   late List<String> selectedIngredients = [];
   late List<String> selectedTags = [];
 
-  @override
-  void initState() {
-    super.initState();
-    asyncInitState();
-  }
-
-  void asyncInitState() async {
-    ingredients = await ingredientsAPI.getIngredients();
-  }
+  void asyncInitState() async {}
 
   Future<void> autoCompleteUpdate(String ingredient) async {
     setState(() {
@@ -132,16 +124,20 @@ class _SearchPageState extends State<SearchPage> {
     });
   }
 
-  Future<void> expansionTileUpdate(String ingredient) async {
+  void expansionTileUpdate(String ingredient) async {
     setState(() {
       selectedIngredients.remove(ingredient);
       ingredients.add(ingredient);
     });
   }
 
-  Iterable<String> autoCompleteSuggest(String text) {
-    return ingredients
-        .where((element) => element.toLowerCase().contains(text.toLowerCase()));
+  Future<Iterable<String>> autoCompleteSuggest(String text) async {
+    if (ingredients.isEmpty) {
+      ingredients = await ingredientsAPI.getIngredients();
+    }
+    ingredients.sort();
+    return ingredients.where(
+        (element) => element.toLowerCase().startsWith(text.toLowerCase()));
   }
 
   void openFilterDialog() async {
@@ -169,11 +165,14 @@ class _SearchPageState extends State<SearchPage> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Constants.secondaryColor,
-        body: Padding(
-          padding: const EdgeInsets.fromLTRB(15.0, 10.0, 15.0, 15.0),
-          child: Column(
-            children: [
-              Stack(
+        appBar: AppBar(
+          elevation: 0.0,
+          backgroundColor: Constants.secondaryColor,
+          bottom: PreferredSize(
+            preferredSize: const Size.fromHeight(12),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(15.0, 0.0, 15.0, 0.0),
+              child: Stack(
                 alignment: AlignmentDirectional.centerEnd,
                 children: [
                   SearchBar(
@@ -186,7 +185,6 @@ class _SearchPageState extends State<SearchPage> {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30.0),
                         ),
-                        backgroundColor: Constants.thirdColor,
                       ),
                       child: const Icon(
                         Icons.filter_alt_outlined,
@@ -196,29 +194,39 @@ class _SearchPageState extends State<SearchPage> {
                   )
                 ],
               ),
-              const SizedBox(
-                height: 10,
-              ),
-              CustomExpansionTile(
-                  selectedIngredients: selectedIngredients,
-                  remove: expansionTileUpdate),
-            ],
+            ),
+          ),
+        ),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 10,
+                ),
+                CustomExpansionTile(
+                    selectedIngredients: selectedIngredients,
+                    remove: expansionTileUpdate),
+              ],
+            ),
           ),
         ),
         floatingActionButton: FloatingActionButton(
           heroTag: "recommend",
-          onPressed: () =>
-              setState(() {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            SearchResult(
-                                selectedIngredients: selectedIngredients,
-                                selectedTags: selectedTags)));
-              }),
+          onPressed: () => setState(() {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => SearchResult(
+                        selectedIngredients: selectedIngredients,
+                        selectedTags: selectedTags)));
+          }),
           tooltip: 'Recommend',
-          child: const Icon(Icons.fastfood),
+          child: const Icon(
+            Icons.fastfood,
+            color: Constants.secondaryColor,
+          ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       ),

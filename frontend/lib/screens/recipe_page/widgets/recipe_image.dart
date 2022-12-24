@@ -10,12 +10,18 @@ class RecipeImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AspectRatio(
-      aspectRatio: 16.0 / 9.0,
+    return ShaderMask(
+      blendMode: BlendMode.multiply,
+      shaderCallback: (bounds) =>
+          LinearGradient(
+              begin: Alignment.bottomCenter,
+              end: Alignment.topCenter,
+              colors: [Colors.black54, Colors.white.withOpacity(0.0)])
+              .createShader(bounds),
       child: Image.network(
         imageURL,
-        fit: BoxFit.cover,
-        opacity: const AlwaysStoppedAnimation(.75),
+        fit: BoxFit.fitHeight,
+        height: MediaQuery.of(context).size.height * 0.35,
       ),
     );
   }

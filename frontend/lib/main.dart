@@ -52,7 +52,7 @@ Future<void> initUniLinks() async {
             runApp(const BuildApp(
                 widget: SignInPage(initResp: "Cannot reset password")));
           } else if (response == "TokenVerified") {
-            runApp(BuildApp(widget: changePasswordPage(tk: tk)));
+            runApp(BuildApp(widget: ChangePasswordPage(tk: tk)));
           }
         } else {
           runApp(const BuildApp(
@@ -94,7 +94,7 @@ Future<void> initUniLinks() async {
                   widget: SignInPage(initResp: "Cannot reset password")));
             } else if (response == "TokenVerified") {
               debugPrint("lolxd");
-              runApp(BuildApp(widget: changePasswordPage(tk: tk)));
+              runApp(BuildApp(widget: ChangePasswordPage(tk: tk)));
             }
           } else {
             runApp(const BuildApp(
@@ -199,6 +199,7 @@ class BuildApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        dividerColor: Colors.transparent,
         fontFamily: 'Satoshi',
         primarySwatch: Colors.orange,
         primaryColor: Constants.primaryColor,
