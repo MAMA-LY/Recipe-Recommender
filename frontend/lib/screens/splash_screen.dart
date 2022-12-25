@@ -10,7 +10,7 @@ class SplashScreenPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Constants.secondaryColor,
+      backgroundColor: Theme.of(context).secondaryHeaderColor,
       body: Center(
         child: SizedBox(
           height: MediaQuery.of(context).size.height / 2,
