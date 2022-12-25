@@ -1,5 +1,6 @@
 import 'package:filter_list/filter_list.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:recipe_recommender_frontend/api/ingredients_api.dart';
 import 'package:recipe_recommender_frontend/constants.dart';
 import 'package:recipe_recommender_frontend/main.dart';
@@ -213,21 +214,31 @@ class _SearchPageState extends State<SearchPage> {
             ),
           ),
         ),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: 10,
-                ),
-                CustomExpansionTile(
-                    selectedIngredients: selectedIngredients,
-                    remove: expansionTileUpdate),
-              ],
+        body: Stack(fit: StackFit.expand,children: [
+          Positioned(
+            top: MediaQuery.of(context).size.height * 0.55,
+            left: MediaQuery.of(context).size.width * 0.079,
+            child: SvgPicture.asset(
+              "assets/images/bottom.svg",
+              color: Colors.orange,
             ),
           ),
-        ),
+          SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  CustomExpansionTile(
+                      selectedIngredients: selectedIngredients,
+                      remove: expansionTileUpdate),
+                ],
+              ),
+            ),
+          )
+        ]),
         floatingActionButton: FloatingActionButton(
           backgroundColor: Theme.of(context).primaryColor,
           heroTag: "recommend",
@@ -240,9 +251,10 @@ class _SearchPageState extends State<SearchPage> {
                         selectedTags: selectedTags)));
           }),
           tooltip: 'Recommend',
-          child: Icon(
-            Icons.fastfood,
-            color: Theme.of(context).secondaryHeaderColor,
+          child: const Icon(
+            Icons.receipt_outlined,
+            size: 30,
+            color: Constants.secondaryColor,
           ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,

@@ -116,16 +116,19 @@ class _RecipePageState extends State<RecipePage>
             if (choice == "Fav") {
               return PopupMenuItem<String>(
                   value: choice,
-                  child: Icon(
-                    _inFavorites ? Icons.favorite : Icons.favorite_border,
-                    color: Theme.of(context).iconTheme.color,
-                  ));
+                  child: Row(children: [
+                    Icon(
+                      _inFavorites ? Icons.favorite : Icons.favorite_border,
+                      color: Theme.of(context).iconTheme.color,
+                    ),
+                    const SizedBox(width: 5.0),
+                    const Text("Save")
+                  ]));
             } else {
               return PopupMenuItem<String>(
                   onTap: () async {
                     final box = context.findRenderObject() as RenderBox?;
                     await Share.share(
-
                       "https://${APIConstants.baseUrl}/share/recipe?id=${widget.recipe.id}",
                       subject: "Recipe Share",
                       sharePositionOrigin:
@@ -133,14 +136,19 @@ class _RecipePageState extends State<RecipePage>
                     );
                   },
                   value: choice,
-                  child: const Text("Share"));
+                  child: Row(children: [
+                    Icon(
+                      Icons.share,
+                      color: Theme.of(context).iconTheme.color,
+                    ),
+                    const SizedBox(width: 5.0),
+                    const Text("Share")
+                  ]));
             }
           }).toList();
         },
         color: Constants.primaryColor,
       ),
-
-     
     );
   }
 }
