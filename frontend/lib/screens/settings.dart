@@ -72,15 +72,16 @@ class SettingsPage extends StatelessWidget {
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
                 leading: const Icon(Icons.phone_android),
+                activeSwitchColor: Theme.of(context).primaryColor,
                 onToggle: (value) {
-                  // if (value) {
-                  //   BuildApp.of(context).changeTheme(ThemeMode.light);
-                  // } else {
-                  //   MyApp.of(context).changeTheme(ThemeMode.dark);
-                  // }
-                  // MyApp.of(context).changeTheme(ThemeMode.light);
+                  if (BuildApp.of(context)!.getTheme() == ThemeMode.light) {
+                    BuildApp.of(context)!.changeTheme(ThemeMode.dark);
+                  } else {
+                    BuildApp.of(context)!.changeTheme(ThemeMode.light);
+                  }
                 },
-                initialValue: false,
+                initialValue:
+                    BuildApp.of(context)!.getTheme() == ThemeMode.dark,
               ),
             ],
           ),

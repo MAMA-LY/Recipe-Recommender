@@ -190,11 +190,24 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+class BuildApp extends StatefulWidget {
+    final Widget widget;
+    const BuildApp({super.key, required this.widget});
 
-class BuildApp extends StatelessWidget {
-  final ThemeMode _themeMode = ThemeMode.system;
-  final Widget widget;
-  const BuildApp({Key? key, required this.widget}) : super(key: key);
+  @override
+  BuildAppState createState() => BuildAppState();
+  static BuildAppState? of(BuildContext context) => context.findAncestorStateOfType<BuildAppState>();
+}
+class BuildAppState extends State<BuildApp> {
+  late ThemeMode _themeMode = ThemeMode.system;
+  ThemeMode getTheme(){
+    return _themeMode;
+  }
+  void changeTheme(ThemeMode themeMode) {
+    setState(() {
+      _themeMode = themeMode;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -234,7 +247,7 @@ class BuildApp extends StatelessWidget {
           ),
         ),
       ),
-      home: widget,
+      home: widget.widget,
     );
   }
 }
