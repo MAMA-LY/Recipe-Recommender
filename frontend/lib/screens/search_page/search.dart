@@ -140,8 +140,24 @@ class _SearchPageState extends State<SearchPage> {
         (element) => element.toLowerCase().startsWith(text.toLowerCase()));
   }
 
-  void openFilterDialog() async {
+  void openFilterDialog(BuildContext context) async {
     await FilterListDialog.display<String>(
+      themeData: FilterListThemeData(context,
+          backgroundColor: Theme.of(context).secondaryHeaderColor,
+          choiceChipTheme: ChoiceChipThemeData(
+              textStyle:
+                  TextStyle(color: Theme.of(context).secondaryHeaderColor),
+              selectedBackgroundColor: Theme.of(context).primaryColor,
+              backgroundColor: Theme.of(context).focusColor),
+          headerTheme: HeaderThemeData(
+              searchFieldIconColor: Theme.of(context).focusColor,
+              closeIconColor: Theme.of(context).focusColor,
+              backgroundColor: Theme.of(context).secondaryHeaderColor,
+              searchFieldBackgroundColor:
+                  Theme.of(context).secondaryHeaderColor),
+          controlButtonBarTheme: ControlButtonBarThemeData(context,
+              backgroundColor: Theme.of(context).secondaryHeaderColor)),
+      backgroundColor: Theme.of(context).secondaryHeaderColor,
       context,
       listData: tags,
       selectedListData: selectedTags,
@@ -164,10 +180,10 @@ class _SearchPageState extends State<SearchPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Constants.secondaryColor,
+        backgroundColor: Theme.of(context).secondaryHeaderColor,
         appBar: AppBar(
           elevation: 0.0,
-          backgroundColor: Constants.secondaryColor,
+          backgroundColor: Theme.of(context).secondaryHeaderColor,
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(12),
             child: Padding(
@@ -180,15 +196,15 @@ class _SearchPageState extends State<SearchPage> {
                   Padding(
                     padding: const EdgeInsets.only(right: 10),
                     child: ElevatedButton(
-                      onPressed: openFilterDialog,
+                      onPressed: () => openFilterDialog(context),
                       style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30.0),
                         ),
                       ),
-                      child: const Icon(
+                      child: Icon(
                         Icons.filter_alt_outlined,
-                        color: Constants.secondaryColor,
+                        color: Theme.of(context).secondaryHeaderColor,
                       ),
                     ),
                   )
@@ -213,6 +229,7 @@ class _SearchPageState extends State<SearchPage> {
           ),
         ),
         floatingActionButton: FloatingActionButton(
+          backgroundColor: Theme.of(context).primaryColor,
           heroTag: "recommend",
           onPressed: () => setState(() {
             Navigator.push(
@@ -223,9 +240,9 @@ class _SearchPageState extends State<SearchPage> {
                         selectedTags: selectedTags)));
           }),
           tooltip: 'Recommend',
-          child: const Icon(
+          child: Icon(
             Icons.fastfood,
-            color: Constants.secondaryColor,
+            color: Theme.of(context).secondaryHeaderColor,
           ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,

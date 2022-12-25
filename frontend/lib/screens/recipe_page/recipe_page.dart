@@ -51,13 +51,13 @@ class _RecipePageState extends State<RecipePage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Constants.secondaryColor,
+      backgroundColor: Theme.of(context).secondaryHeaderColor,
       body: NestedScrollView(
         controller: _scrollController,
         headerSliverBuilder: (BuildContext context, bool innerViewIsScrolled) {
           return <Widget>[
             SliverAppBar(
-              backgroundColor: Colors.white,
+              backgroundColor: Theme.of(context).secondaryHeaderColor,
               flexibleSpace: FlexibleSpaceBar(
                 collapseMode: CollapseMode.pin,
                 background: Column(
@@ -74,6 +74,7 @@ class _RecipePageState extends State<RecipePage>
               elevation: 2.0,
               forceElevated: innerViewIsScrolled,
               bottom: TabBar(
+                indicatorColor: Theme.of(context).primaryColor,
                 labelColor: Constants.primaryColor,
                 tabs: const <Widget>[
                   Tab(text: "Ingredients"),

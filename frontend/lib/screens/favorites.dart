@@ -36,10 +36,10 @@ class _FavoritesPageState extends State<FavoritesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Constants.secondaryColor,
+        backgroundColor: Theme.of(context).secondaryHeaderColor,
         appBar: AppBar(
           elevation: 0,
-          backgroundColor: Constants.secondaryColor,
+          backgroundColor: Theme.of(context).secondaryHeaderColor,
           title: Text(
             "ورقة وقلم",
             style: TextStyle(

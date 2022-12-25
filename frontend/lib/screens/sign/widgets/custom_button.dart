@@ -16,6 +16,7 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Flexible(
       child: Container(
+        
         constraints: BoxConstraints(
           minWidth: MediaQuery.of(context).size.width * 0.5,
           minHeight: MediaQuery.of(context).size.height * 0.11,
@@ -31,8 +32,8 @@ class CustomButton extends StatelessWidget {
           onPressed: onPressFn,
           child: Text(
             text,
-            style: const TextStyle(
-              color: Constants.secondaryColor,
+            style:  TextStyle(
+              color:  Theme.of(context).secondaryHeaderColor,
               fontStyle: FontStyle.italic,
               fontFamily: "Roboto",
               fontWeight: FontWeight.bold,
