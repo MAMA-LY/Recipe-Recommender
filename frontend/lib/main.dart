@@ -199,7 +199,7 @@ class BuildApp extends StatefulWidget {
   static BuildAppState? of(BuildContext context) => context.findAncestorStateOfType<BuildAppState>();
 }
 class BuildAppState extends State<BuildApp> {
-  late ThemeMode _themeMode = ThemeMode.system;
+  late ThemeMode _themeMode = ThemeMode.light;
   ThemeMode getTheme(){
     return _themeMode;
   }

@@ -68,21 +68,40 @@ class SettingsPage extends StatelessWidget {
               ),
               SettingsTile.switchTile(
                 title: Text(
-                  'Dark Mode',
+                  'Use System Theme',
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
                 leading: const Icon(Icons.phone_android),
                 activeSwitchColor: Theme.of(context).primaryColor,
                 onToggle: (value) {
-                  if (BuildApp.of(context)!.getTheme() == ThemeMode.light) {
-                    BuildApp.of(context)!.changeTheme(ThemeMode.dark);
+                  if (BuildApp.of(context)!.getTheme() != ThemeMode.system) {
+                    BuildApp.of(context)!.changeTheme(ThemeMode.system);
                   } else {
                     BuildApp.of(context)!.changeTheme(ThemeMode.light);
                   }
                 },
                 initialValue:
-                    BuildApp.of(context)!.getTheme() == ThemeMode.dark,
+                    BuildApp.of(context)!.getTheme() == ThemeMode.system,
               ),
+              SettingsTile.switchTile(
+                title: Text(
+                  'Dark Mode',
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+                leading: const Icon(Icons.dark_mode_outlined),
+                activeSwitchColor: Theme.of(context).primaryColor,
+                onToggle: (value) {
+                  if (BuildApp.of(context)!.getTheme() == ThemeMode.light &&
+                      BuildApp.of(context)!.getTheme() != ThemeMode.system) {
+                    BuildApp.of(context)!.changeTheme(ThemeMode.dark);
+                  } else if (BuildApp.of(context)!.getTheme() !=
+                      ThemeMode.system) {
+                    BuildApp.of(context)!.changeTheme(ThemeMode.light);
+                  }
+                },
+                initialValue:
+                    BuildApp.of(context)!.getTheme() == ThemeMode.dark,
+              )
             ],
           ),
           SettingsSection(
