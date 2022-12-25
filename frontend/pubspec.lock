@@ -29,13 +29,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.9.0"
-  babstrap_settings_screen:
-    dependency: "direct main"
-    description:
-      name: babstrap_settings_screen
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.3"
   boolean_selector:
     dependency: transitive
     description:
