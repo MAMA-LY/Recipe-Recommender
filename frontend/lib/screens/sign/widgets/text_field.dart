@@ -23,21 +23,26 @@ class CustomTextField extends StatelessWidget {
     return Container(
       margin: EdgeInsets.fromLTRB(0, 0, 0, bottomMargin),
       width: MediaQuery.of(context).size.width * 0.9,
-      decoration: BoxDecoration(boxShadow: [
-        BoxShadow(
-          color: Colors.black.withOpacity(0.2),
-          offset: const Offset(
-            0.0,
-            10.0,
+      decoration: BoxDecoration(
+        color: Theme.of(context).secondaryHeaderColor,
+        boxShadow: [
+          BoxShadow(
+            color: Theme.of(context).focusColor.withOpacity(0.3),
+            offset: const Offset(
+              0.0,
+              10.0,
+            ),
+            blurRadius: 10.0,
+            spreadRadius: -10.0,
           ),
-          blurRadius: 10.0,
-          spreadRadius: -10.0,
-        ),
-      ],),
+        ],
+      ),
       child: TextField(
         controller: controller,
         decoration: InputDecoration(
-          fillColor: Constants.secondaryColor,
+          labelStyle: TextStyle(color: Theme.of(context).primaryColor),
+          hintStyle: TextStyle(color: Theme.of(context).focusColor.withOpacity(0.3)),
+          fillColor: Theme.of(context).secondaryHeaderColor,
           filled: true,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(30.0),
@@ -47,12 +52,11 @@ class CustomTextField extends StatelessWidget {
             ),
           ),
           focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(15.0),
-            borderSide: BorderSide(
-              width: 2,
-              color: Colors.grey.shade800,
-            )
-          ),
+              borderRadius: BorderRadius.circular(15.0),
+              borderSide: BorderSide(
+                width: 2,
+                color: Theme.of(context).focusColor.withOpacity(0.01),
+              )),
           hintText: hintText,
           labelText: labelText,
         ),

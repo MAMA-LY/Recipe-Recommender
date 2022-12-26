@@ -26,9 +26,9 @@ class _SearchResultState extends State<SearchResult> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Constants.secondaryColor,
+      backgroundColor: Theme.of(context).secondaryHeaderColor,
       appBar: AppBar(
-        backgroundColor: Constants.secondaryColor,
+        backgroundColor: Theme.of(context).secondaryHeaderColor,
         elevation: 0,
         title: Text(
           "ورقة وقلم",

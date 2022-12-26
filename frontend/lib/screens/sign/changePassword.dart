@@ -49,19 +49,20 @@ class _ResetPasswordPageState extends State<ChangePasswordPage> {
   Widget build(BuildContext context) {
     responseTextController.text = "";
     return Scaffold(
-            body: Stack(
-              children: [
-                Positioned(
-                  top: MediaQuery.of(context).size.height * 0.8,
-                  left: MediaQuery.of(context).size.width * 0.06,
-                  child: SvgPicture.asset(
-                    "assets/images/bottom.svg",
-                    color: Colors.orange,
-                  ),
-                ),
-                Center(
-                    child: SingleChildScrollView(
-          child: Column(
+        backgroundColor: Theme.of(context).secondaryHeaderColor,
+        body: Stack(
+          children: [
+            Positioned(
+              top: MediaQuery.of(context).size.height * 0.8,
+              left: MediaQuery.of(context).size.width * 0.06,
+              child: SvgPicture.asset(
+                "assets/images/bottom.svg",
+                color: Colors.orange,
+              ),
+            ),
+            Center(
+                child: SingleChildScrollView(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
@@ -136,9 +137,9 @@ class _ResetPasswordPageState extends State<ChangePasswordPage> {
                           ? const TextStyle(color: Colors.green, fontSize: 20)
                           : const TextStyle(color: Colors.red, fontSize: 20))
                 ],
-          ),
-        )),
-              ],
-            ));
+              ),
+            )),
+          ],
+        ));
   }
 }

@@ -87,6 +87,7 @@ class _PageViewControllerState extends State<PageViewController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).secondaryHeaderColor,
       body: PageView(
         controller: _controller,
         onPageChanged: (newIndex) {
@@ -97,12 +98,14 @@ class _PageViewControllerState extends State<PageViewController> {
         children: _buildScreens,
       ),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor:  Theme.of(context).secondaryHeaderColor,
+        
         iconSize: 18,
         selectedFontSize: 10,
         selectedIconTheme: const IconThemeData(color: Constants.primaryColor, size: 25),
         selectedItemColor: Constants.primaryColor,
         selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
-        unselectedItemColor: Colors.black45,
+        unselectedItemColor: Theme.of(context).focusColor,
         currentIndex: _currentIndex,
         items: _navBarsItems(),
         onTap: (index) {

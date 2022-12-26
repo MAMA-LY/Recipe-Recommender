@@ -49,6 +49,11 @@ class SignAPI {
     return null;
   }
 
+  static Future<void> signout() async {
+    var url = Uri.https(APIConstants.baseUrl, APIConstants.signoutEndPoint);
+    var response = await http.post(url, headers: {"cookie": session.cookie});
+  }
+
   static Future<String?> forgetPassword(String email) async {
     var url = Uri.https(APIConstants.baseUrl, APIConstants.forgetPasswordEndPoint);
     var response = await http.post(url,

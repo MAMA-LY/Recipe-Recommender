@@ -52,7 +52,7 @@ class _NutritionViewState extends State<NutritionView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Constants.secondaryColor,
+        backgroundColor: Theme.of(context).secondaryHeaderColor,
         body: SfCircularChart(
             annotations: [
               CircularChartAnnotation(

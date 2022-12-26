@@ -19,7 +19,7 @@ class _CustomExpansionTileState extends State<CustomExpansionTile> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Constants.secondaryColor,
+      color: Theme.of(context).secondaryHeaderColor,
       elevation: 1,
       child: ExpansionTile(
         leading: const Icon(Icons.fastfood_outlined),

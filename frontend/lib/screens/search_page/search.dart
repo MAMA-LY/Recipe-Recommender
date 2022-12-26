@@ -1,5 +1,6 @@
 import 'package:filter_list/filter_list.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:recipe_recommender_frontend/api/ingredients_api.dart';
 import 'package:recipe_recommender_frontend/constants.dart';
 import 'package:recipe_recommender_frontend/main.dart';
@@ -140,8 +141,24 @@ class _SearchPageState extends State<SearchPage> {
         (element) => element.toLowerCase().startsWith(text.toLowerCase()));
   }
 
-  void openFilterDialog() async {
+  void openFilterDialog(BuildContext context) async {
     await FilterListDialog.display<String>(
+      themeData: FilterListThemeData(context,
+          backgroundColor: Theme.of(context).secondaryHeaderColor,
+          choiceChipTheme: ChoiceChipThemeData(
+              textStyle:
+                  TextStyle(color: Theme.of(context).secondaryHeaderColor),
+              selectedBackgroundColor: Theme.of(context).primaryColor,
+              backgroundColor: Theme.of(context).focusColor),
+          headerTheme: HeaderThemeData(
+              searchFieldIconColor: Theme.of(context).focusColor,
+              closeIconColor: Theme.of(context).focusColor,
+              backgroundColor: Theme.of(context).secondaryHeaderColor,
+              searchFieldBackgroundColor:
+                  Theme.of(context).secondaryHeaderColor),
+          controlButtonBarTheme: ControlButtonBarThemeData(context,
+              backgroundColor: Theme.of(context).secondaryHeaderColor)),
+      backgroundColor: Theme.of(context).secondaryHeaderColor,
       context,
       listData: tags,
       selectedListData: selectedTags,
@@ -164,10 +181,10 @@ class _SearchPageState extends State<SearchPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Constants.secondaryColor,
+        backgroundColor: Theme.of(context).secondaryHeaderColor,
         appBar: AppBar(
           elevation: 0.0,
-          backgroundColor: Constants.secondaryColor,
+          backgroundColor: Theme.of(context).secondaryHeaderColor,
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(12),
             child: Padding(
@@ -180,15 +197,15 @@ class _SearchPageState extends State<SearchPage> {
                   Padding(
                     padding: const EdgeInsets.only(right: 10),
                     child: ElevatedButton(
-                      onPressed: openFilterDialog,
+                      onPressed: () => openFilterDialog(context),
                       style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30.0),
                         ),
                       ),
-                      child: const Icon(
+                      child: Icon(
                         Icons.filter_alt_outlined,
-                        color: Constants.secondaryColor,
+                        color: Theme.of(context).secondaryHeaderColor,
                       ),
                     ),
                   )
@@ -197,22 +214,33 @@ class _SearchPageState extends State<SearchPage> {
             ),
           ),
         ),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: 10,
-                ),
-                CustomExpansionTile(
-                    selectedIngredients: selectedIngredients,
-                    remove: expansionTileUpdate),
-              ],
+        body: Stack(fit: StackFit.expand,children: [
+          Positioned(
+            top: MediaQuery.of(context).size.height * 0.55,
+            left: MediaQuery.of(context).size.width * 0.079,
+            child: SvgPicture.asset(
+              "assets/images/bottom.svg",
+              color: Colors.orange,
             ),
           ),
-        ),
+          SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  CustomExpansionTile(
+                      selectedIngredients: selectedIngredients,
+                      remove: expansionTileUpdate),
+                ],
+              ),
+            ),
+          )
+        ]),
         floatingActionButton: FloatingActionButton(
+          backgroundColor: Theme.of(context).primaryColor,
           heroTag: "recommend",
           onPressed: () => setState(() {
             Navigator.push(
@@ -224,7 +252,8 @@ class _SearchPageState extends State<SearchPage> {
           }),
           tooltip: 'Recommend',
           child: const Icon(
-            Icons.fastfood,
+            Icons.receipt_outlined,
+            size: 30,
             color: Constants.secondaryColor,
           ),
         ),
