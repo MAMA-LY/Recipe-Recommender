@@ -34,7 +34,6 @@ class BodyInfoTest {
     }
 
     @Test
-
     void getBirthdate() throws NoSuchFieldException, IllegalAccessException {
         final BodyInfo bodyInfo = new BodyInfo();
         Date expectedBirthdate = new GregorianCalendar(2014, Calendar.FEBRUARY, 11).getTime();
@@ -52,7 +51,6 @@ class BodyInfoTest {
         feild.setAccessible(true);
         float value = (float) feild.get(bodyInfo);
         assertEquals(120.5, value, "setHeight problem");
-
     }
 
     @Test
