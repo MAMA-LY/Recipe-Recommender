@@ -39,7 +39,7 @@ StreamSubscription? _sub;
 Future<void> initUniLinks() async {
   try {
     final initialUri = await getInitialUri();
-    debugPrint("init link");
+    debugPrint("init link");  
     if (initialUri != null) {
       List<String?> path = initialUri.pathSegments;
       debugPrint(path.toString());
@@ -59,17 +59,17 @@ Future<void> initUniLinks() async {
               widget: SignInPage(initResp: "Cannot reset password")));
         }
       } else if (path[0] == "share") {
-        if (Session.login) {
+        debugPrint("ssssssssssssssssssssssssssssssssssssss");
           String? id = initialUri.queryParameters['id'];
           if (id != null) {
             debugPrint(id);
             RecipesAPI api = RecipesAPI.fromCookie(session.cookie);
             Recipe response = await api.getRecipeByID(id.trim());
+            debugPrint("xxxxxxxxxxxxxxxxxxxx");
+            debugPrint(response.getTags());
             runApp(BuildApp(widget:RecipePage(recipe: response, inFavorites: false)));
           }
-        } else {
-          runApp(const BuildApp(widget: SignInPage(initResp: "")));
-        }
+        
       } else {
         runApp(const BuildApp(widget: SignInPage(initResp: "")));
       }
@@ -101,7 +101,6 @@ Future<void> initUniLinks() async {
                 widget: SignInPage(initResp: "Cannot reset password")));
           }
         } else if (path[0] == "share") {
-          if (Session.login) {
             String? id = uri.queryParameters['id'];
             if (id != null) {
               debugPrint(id);
@@ -109,9 +108,6 @@ Future<void> initUniLinks() async {
               Recipe response = await api.getRecipeByID(id.trim());
               runApp(BuildApp(widget:RecipePage(recipe: response, inFavorites: false)));
             }
-          } else {
-            runApp(const BuildApp(widget: SignInPage(initResp: "")));
-          }
         } else {
           runApp(const BuildApp(widget: SignInPage(initResp: "")));
         }
