@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:settings_ui/settings_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:recipe_recommender_frontend/screens/sign/signin.dart';
+import 'package:recipe_recommender_frontend/screens/account_settings.dart';
 
 import '../api/sign_api.dart';
 import '../constants.dart';
@@ -116,7 +117,10 @@ class SettingsPage extends StatelessWidget {
                 ),
                 leading: const Icon(Icons.person),
                 onPressed: (BuildContext context) {
-                  //TODO: CALL THE ACCOUNT PAGE
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => AccountSettingsPage()),
+                    );
                 },
               ),
               SettingsTile.navigation(
