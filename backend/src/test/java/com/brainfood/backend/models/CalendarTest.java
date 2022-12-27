@@ -1,4 +1,4 @@
-package com.brainfood.backend;
+package com.brainfood.backend.models;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -7,10 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
-
-import com.brainfood.models.Calendar;
-import com.brainfood.models.Ingredient;
-import com.brainfood.models.Recipe;
 
 class CalendarTest {
 

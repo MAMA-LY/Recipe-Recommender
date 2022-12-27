@@ -1,23 +1,13 @@
-package com.brainfood.backend;
+package com.brainfood.backend.models;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.image.ImageObserver;
-import java.awt.image.ImageProducer;
 import java.lang.reflect.Field;
 import java.sql.Timestamp;
 
-
 import org.junit.jupiter.api.Test;
 
-import com.brainfood.models.BodyInfo;
-import com.brainfood.models.Calendar;
-import com.brainfood.models.Profile;
 import com.brainfood.security.Model.UserCredentials;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class ProfileBuilderTest {

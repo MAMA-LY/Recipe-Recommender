@@ -25,7 +25,7 @@ public class AuthController {
     PasswordResetManager passwordResetManager;
 
     @PostMapping("/forgetPassword")
-    public String forgestPassword(@RequestParam Map<String, String> body) {
+    public String forgetPassword(@RequestParam Map<String, String> body) {
         return passwordResetManager.sendResetPassword(body.get("email")).name();
     }
 

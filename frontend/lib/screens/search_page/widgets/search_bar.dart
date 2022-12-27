@@ -1,13 +1,12 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
+import 'package:substring_highlight/substring_highlight.dart';
 
 import '../../../constants.dart';
 
 class SearchBar extends StatefulWidget {
-  final Function(String) update;
-  final Function(String) suggest;
+  final Future<void> Function(String) update;
+  final Future<Iterable<String>> Function(String) suggest;
 
   const SearchBar({
     Key? key,
@@ -20,97 +19,76 @@ class SearchBar extends StatefulWidget {
 }
 
 class _SearchBarState extends State<SearchBar> {
-  late TextEditingController controller;
   late String selectedIngredient;
-
-  Widget buildGrid(
-      context, Function(String) onSelected, Iterable<String> options) {
-    return MasonryGridView.count(
-      itemBuilder: (context, index) {
-        return ElevatedButton(
-          child: FittedBox(
-            child: RichText(
-              textAlign: TextAlign.center,
-              text: TextSpan(
-                  text: '${options.elementAt(index)}  ',
-                  children: const [
-                    WidgetSpan(
-                        child: Icon(
-                          Icons.add_circle_outline_outlined,
-                          color: Constants.secondaryColor,
-                        ),
-                        alignment: PlaceholderAlignment.middle),
-                  ]),
-            ),
-          ),
-          onPressed: () {
-            setState(() {
-              onSelected(options.elementAt(index).toString());
-            });
-          },
-        );
-      },
-      itemCount: min(options.length, 9),
-      scrollDirection: Axis.vertical,
-      crossAxisCount: 3,
-      mainAxisSpacing: 5,
-      crossAxisSpacing: 5,
-    );
-  }
+  late String userInput;
+  final TextEditingController _textEditingController =
+      TextEditingController(text: "");
 
   @override
   Widget build(BuildContext context) {
-    return Autocomplete<String>(
-      fieldViewBuilder: (context, controller, focusNode, onEditingComplete) {
-        this.controller = controller;
-        return TextField(
-          controller: controller,
-          focusNode: focusNode,
-          onEditingComplete: onEditingComplete,
-          decoration: InputDecoration(
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(30),
-              borderSide: const BorderSide(color: Constants.primaryColor),
+    return TypeAheadField<String>(
+      suggestionsBoxDecoration: SuggestionsBoxDecoration(
+        elevation: 1,
+        borderRadius: BorderRadius.circular(10.0),
+        color: Colors.orange[50],
+      ),
+      debounceDuration: const Duration(microseconds: 500),
+      textFieldConfiguration: TextFieldConfiguration(
+        controller: _textEditingController,
+        decoration: InputDecoration(
+          labelText: "Ingredient",
+          prefixIcon: const Icon(Icons.search),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(30.0),
+            borderSide: BorderSide(color: Colors.grey.shade300, width: 3),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(15.0),
+            borderSide:
+                const BorderSide(color: Constants.primaryColor, width: 2),
+          ),
+          hintText: "Search Ingredients",
+        ),
+      ),
+      suggestionsCallback: (pattern) {
+        userInput = pattern;
+        return widget.suggest(pattern);
+      },
+      itemBuilder: (context, String suggestion) {
+        return ListTile(
+          leading: const Icon(
+            Icons.add_circle,
+            color: Constants.primaryColor,
+          ),
+          title: SubstringHighlight(
+            text: suggestion,
+            term: userInput,
+            textStyle: const TextStyle(
+              color: Colors.black87,
+              fontWeight: FontWeight.normal,
+              fontSize: 16,
+              fontFamily: "Roboto",
             ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(30),
-              borderSide: const BorderSide(color: Constants.primaryColor),
+            textStyleHighlight: const TextStyle(
+              color: Constants.primaryColor,
+              fontWeight: FontWeight.bold,
             ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(30),
-              borderSide: const BorderSide(color: Constants.primaryColor),
-            ),
-            hintText: "Search Ingredients",
-            prefixIcon: const Icon(Icons.search),
           ),
         );
       },
-      optionsBuilder: (TextEditingValue textEditingValue) {
-        if (textEditingValue.text.isEmpty) {
-          return const Iterable<String>.empty();
-        } else {
-          return widget.suggest(textEditingValue.text);
-        }
-      },
-      optionsViewBuilder: (context, Function(String) onSelected, options) {
-        return Align(
-          alignment: Alignment.topLeft,
-          child: Material(
-            borderRadius: BorderRadius.circular(30),
-            elevation: 4,
-            child: Container(
-              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-              width: MediaQuery.of(context).size.width * 0.93,
-              height: 100.0 * (min(options.length, 9) / 3).ceil(),
-              child: buildGrid(context, onSelected, options),
-            ),
-          ),
-        );
-      },
-      onSelected: (selectedIngredient) {
+      onSuggestionSelected: (String selectedIngredient) {
+        _textEditingController.text = "";
         widget.update(selectedIngredient);
-        controller.text = "";
       },
+      noItemsFoundBuilder: (context) => const SizedBox(
+        height: 80,
+        child: Center(
+          child: Text(
+            'No Ingredients Found.',
+            style: TextStyle(fontSize: 20),
+          ),
+        ),
+      ),
     );
   }
 }

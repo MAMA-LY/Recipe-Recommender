@@ -1,4 +1,4 @@
-package com.brainfood.security.Repository;
+package com.brainfood.security.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

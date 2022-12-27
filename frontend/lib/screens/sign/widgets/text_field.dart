@@ -3,14 +3,16 @@ import 'package:flutter/material.dart';
 import '../../../constants.dart';
 
 class CustomTextField extends StatelessWidget {
-  final String promptText;
-  final int bottomPadding;
+  final String labelText;
+  final String hintText;
+  final double bottomMargin;
   final TextEditingController controller;
   final bool obscureText;
   const CustomTextField({
     Key? key,
-    required this.promptText,
-    required this.bottomPadding,
+    required this.labelText,
+    required this.hintText,
+    required this.bottomMargin,
     required this.controller,
     required this.obscureText,
   }) : super(key: key);
@@ -18,36 +20,44 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.fromLTRB(0, 0, 0, 25),
-      width: MediaQuery
-          .of(context)
-          .size
-          .width * 0.8,
-      decoration: BoxDecoration(boxShadow: [
-        BoxShadow(
-          color: Colors.black.withOpacity(0.2),
-          offset: const Offset(
-            0.0,
-            12.0,
+      margin: EdgeInsets.fromLTRB(0, 0, 0, bottomMargin),
+      width: MediaQuery.of(context).size.width * 0.9,
+      decoration: BoxDecoration(
+        color: Theme.of(context).secondaryHeaderColor,
+        boxShadow: [
+          BoxShadow(
+            color: Theme.of(context).focusColor.withOpacity(0.3),
+            offset: const Offset(
+              0.0,
+              10.0,
+            ),
+            blurRadius: 10.0,
+            spreadRadius: -10.0,
           ),
-          blurRadius: 10.0,
-          spreadRadius: -10.0,
-        ),
-      ]),
+        ],
+      ),
       child: TextField(
         controller: controller,
         decoration: InputDecoration(
-          fillColor: Constants.secondaryColor,
+          labelStyle: TextStyle(color: Theme.of(context).primaryColor),
+          hintStyle: TextStyle(color: Theme.of(context).focusColor.withOpacity(0.3)),
+          fillColor: Theme.of(context).secondaryHeaderColor,
           filled: true,
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20.0),
+            borderRadius: BorderRadius.circular(30.0),
             borderSide: const BorderSide(
               width: 0,
               style: BorderStyle.none,
             ),
           ),
-          hintText: promptText,
-          labelText: promptText,
+          focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(15.0),
+              borderSide: BorderSide(
+                width: 2,
+                color: Theme.of(context).focusColor.withOpacity(0.01),
+              )),
+          hintText: hintText,
+          labelText: labelText,
         ),
         obscureText: obscureText,
       ),

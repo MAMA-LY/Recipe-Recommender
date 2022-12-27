@@ -11,9 +11,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class RecipeIngredientsCK implements Serializable {
-    @Column(name = "recipeid")
+    @Column(name = "recipeID")
     public String recipeID;
 
-    @Column(name = "ingredientid")
+    @Column(name = "ingredientID")
     public String ingredientID;
 }

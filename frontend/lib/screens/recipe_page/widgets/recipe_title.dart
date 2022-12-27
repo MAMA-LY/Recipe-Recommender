@@ -1,7 +1,8 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
-// ignore: import_of_legacy_library_into_null_safe
-import 'package:flutter_tags/flutter_tags.dart';
 import 'package:recipe_recommender_frontend/constants.dart';
+
 import '../../../models/recipe.dart';
 
 class RecipeTitle extends StatelessWidget {
@@ -40,27 +41,22 @@ class RecipeTitle extends StatelessWidget {
             children: [
               const Icon(Icons.tag_outlined, size: 20.0),
               const SizedBox(width: 5.0),
-              Tags(
-                alignment: WrapAlignment.center,
-                itemCount: recipe.tags!.length > 3 ? 3 : recipe.tags!.length,
-                itemBuilder: (index) {
-                  return ItemTags(
-                    index: index,
-                    title: recipe.tags![index],
-                    color: Constants.primaryColor,
-                    activeColor: Constants.primaryColor,
-                    onPressed: null,
-                    highlightColor: const Color.fromARGB(174, 184, 178, 178),
-                    splashColor: const Color.fromARGB(174, 184, 178, 178),
-                    elevation: 0.0,
-                    borderRadius: const BorderRadius.all(Radius.circular(7.0)),
-                    textColor: Constants.secondaryColor,
-                    textActiveColor: Constants.secondaryColor,
-                    removeButton: null,
-                    textOverflow: TextOverflow.ellipsis,
-                  );
-                },
-              ),
+              Wrap(spacing: 5, children: [
+                for (int i = 0; i < min(2, recipe.tags!.length); i++)
+                  Chip(
+                    backgroundColor: Constants.primaryColor,
+                    label: Text(
+                      recipe.tags![i],
+                      style: const TextStyle(
+                        fontFamily: "Roboto",
+                        fontWeight: FontWeight.bold,
+                        fontStyle: FontStyle.italic,
+                        fontSize: 14,
+                        color: Constants.secondaryColor,
+                      ),
+                    ),
+                  ),
+              ]),
             ],
           ),
         ],

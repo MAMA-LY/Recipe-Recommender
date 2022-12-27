@@ -1,10 +1,7 @@
-package com.brainfood.backend;
+package com.brainfood.backend.models;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.awt.*;
-import java.awt.image.ImageObserver;
-import java.awt.image.ImageProducer;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
@@ -81,6 +78,7 @@ public class RecipeBuilderTest {
 
         assertEquals(ingredientsExpected, ingredientsActual, "problem in buildIngredients");
     }
+
     @Test
     void buildPhoto() throws NoSuchFieldException, IllegalAccessException {
 
@@ -89,10 +87,15 @@ public class RecipeBuilderTest {
 
         final Field field = recipe.getClass().getDeclaredField("image");
         field.setAccessible(true);
+<<<<<<< HEAD:backend/src/test/java/com/brainfood/backend/RecipeBuilderTest.java
         String photoActual= (String) field.get(recipe);
+=======
+        String photoActual = (String) field.get(recipe);
+>>>>>>> 48bf27863a2486d300402f525820a56e9208b3a3:backend/src/test/java/com/brainfood/backend/models/RecipeBuilderTest.java
 
-        assertEquals(photoExpected,photoActual, "problem in buildPhoto");
+        assertEquals(photoExpected, photoActual, "problem in buildPhoto");
     }
+
     @Test
     void buildNutrition() throws NoSuchFieldException, IllegalAccessException {
 

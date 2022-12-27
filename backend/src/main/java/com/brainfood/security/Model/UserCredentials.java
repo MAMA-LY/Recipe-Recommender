@@ -1,4 +1,4 @@
-package com.brainfood.security.Model;
+package com.brainfood.security.model;
 
 import java.io.Serializable;
 

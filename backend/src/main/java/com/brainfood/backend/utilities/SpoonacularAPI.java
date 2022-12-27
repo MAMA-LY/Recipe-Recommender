@@ -1,4 +1,4 @@
-package com.brainfood.search;
+package com.brainfood.backend.utilities;
 
 import java.io.IOException;
 import java.net.URI;
@@ -18,7 +18,7 @@ import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Service;
 
-import com.brainfood.models.ShortRecipe;
+import com.brainfood.backend.models.ShortRecipe;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
@@ -30,10 +30,10 @@ public class SpoonacularAPI {
     /**
      * method that takes a plain text as an input and send it to spoonacular api to
      * detect the food in it
-     * 
+     *
      * @param text the text which needed to detect food in
      * @return a list with the food that spoonacular detected and each element has a
-     *         tag that specifies it is a dish or an ingredient
+     * tag that specifies it is a dish or an ingredient
      */
     public List<ShortRecipe> foodText(String text) throws JSONException, IOException, InterruptedException {
         var params = new HashMap<String, String>();
