@@ -119,10 +119,12 @@ class _RecipePageState extends State<RecipePage>
                   child: Row(children: [
                     Icon(
                       _inFavorites ? Icons.favorite : Icons.favorite_border,
-                      color: Theme.of(context).iconTheme.color,
+                      color: Theme.of(context).secondaryHeaderColor,
                     ),
                     const SizedBox(width: 5.0),
-                    const Text("Save")
+                    Text("Save",
+                        style: TextStyle(
+                            color: Theme.of(context).secondaryHeaderColor))
                   ]));
             } else {
               return PopupMenuItem<String>(
@@ -139,10 +141,12 @@ class _RecipePageState extends State<RecipePage>
                   child: Row(children: [
                     Icon(
                       Icons.share,
-                      color: Theme.of(context).iconTheme.color,
+                      color: Theme.of(context).secondaryHeaderColor,
                     ),
                     const SizedBox(width: 5.0),
-                    const Text("Share")
+                    Text("Share",
+                        style: TextStyle(
+                            color: Theme.of(context).secondaryHeaderColor))
                   ]));
             }
           }).toList();

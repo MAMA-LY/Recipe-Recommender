@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:recipe_recommender_frontend/api/sign_api.dart';
 import 'package:recipe_recommender_frontend/constants.dart';
 import 'package:recipe_recommender_frontend/screens/sign/widgets/custom_button.dart';
+import 'package:recipe_recommender_frontend/screens/sign/widgets/date_field.dart';
 import 'package:recipe_recommender_frontend/screens/sign/widgets/text_field.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -19,14 +20,22 @@ class _SignUpPageState extends State<SignUpPage> {
   var usernameController = TextEditingController();
   var passwordController = TextEditingController();
   var emailController = TextEditingController();
+  var dateController = TextEditingController();
+  var heightController = TextEditingController();
+  var weightController = TextEditingController();
   var responseTextController = TextEditingController();
   String resp = "";
 
   Future<void> _signup() async {
     bool emailValid = EmailValidator.validate(emailController.text.trim());
     if (emailValid) {
-      String? body = await SignAPI.signup(usernameController.text.trim(),
-          passwordController.text.trim(), emailController.text.trim());
+      String? body = await SignAPI.signup(
+          usernameController.text.trim(),
+          passwordController.text.trim(),
+          emailController.text.trim(),
+          heightController.text.trim(),
+          weightController.text.trim(),
+          dateController.text.trim());
       setState(() {
         responseTextController.text = body!;
         switch (body) {
@@ -58,7 +67,7 @@ class _SignUpPageState extends State<SignUpPage> {
         body: Stack(
           children: [
             Positioned(
-              top: MediaQuery.of(context).size.height * 0.85,
+              top: MediaQuery.of(context).size.height * 0.8,
               left: MediaQuery.of(context).size.width * 0.06,
               child: SvgPicture.asset(
                 "assets/images/bottom.svg",
@@ -76,7 +85,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   children: <Widget>[
                     Container(
                         width: MediaQuery.of(context).size.width / 2,
-                        padding: const EdgeInsets.fromLTRB(20, 20, 20, 40),
+                        padding: const EdgeInsets.fromLTRB(20, 35, 20, 25),
                         child: const Image(
                             image: AssetImage("assets/images/Logo.png"),
                             fit: BoxFit.fill)),
@@ -86,13 +95,15 @@ class _SignUpPageState extends State<SignUpPage> {
                       bottomMargin: 20,
                       controller: usernameController,
                       obscureText: false,
+                      icon: Icons.person,
                     ),
                     CustomTextField(
                       hintText: "Enter your email here..",
                       labelText: "Email",
                       bottomMargin: 20,
                       controller: emailController,
-                      obscureText: true,
+                      obscureText: false,
+                      icon: Icons.email_outlined,
                     ),
                     CustomTextField(
                       hintText: "Enter your password here..",
@@ -100,6 +111,29 @@ class _SignUpPageState extends State<SignUpPage> {
                       bottomMargin: 15,
                       controller: passwordController,
                       obscureText: true,
+                      icon: Icons.password,
+                    ),
+                    CustomTextField(
+                      hintText: "Enter your height here..",
+                      labelText: "Height",
+                      bottomMargin: 15,
+                      controller: heightController,
+                      obscureText: false,
+                      icon: Icons.height,
+                    ),
+                    CustomTextField(
+                      hintText: "Enter your weight here..",
+                      labelText: "Weight",
+                      bottomMargin: 15,
+                      controller: weightController,
+                      obscureText: false,
+                      icon: Icons.monitor_weight_outlined,
+                    ),
+                    CustomDateField(
+                      hintText: "Choose your birthdate",
+                      labelText: "Birthdate",
+                      bottomMargin: 15,
+                      controller: dateController,
                     ),
                     Row(
                       mainAxisSize: MainAxisSize.min,

@@ -78,6 +78,7 @@ class _ResetPasswordPageState extends State<ChangePasswordPage> {
                     bottomMargin: 20,
                     controller: passwordController,
                     obscureText: true,
+                    icon: Icons.password,
                   ),
                   CustomTextField(
                     hintText: "Enter your password here..",
@@ -85,6 +86,8 @@ class _ResetPasswordPageState extends State<ChangePasswordPage> {
                     bottomMargin: 15,
                     controller: confirmPasswordController,
                     obscureText: true,
+                    icon: Icons.password,
+
                   ),
                   Row(
                     mainAxisSize: MainAxisSize.min,
