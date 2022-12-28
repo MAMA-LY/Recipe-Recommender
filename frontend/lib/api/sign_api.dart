@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 class SignAPI {
   static Future<String?> signup(
-      String username, String password, String email, String height, String weight, String birthdate) async {
+      String username, String password, String email, String height, String weight, String gender, String birthdate) async {
     var url = Uri.https(APIConstants.baseUrl, APIConstants.signupEndPoint);
     var userData = {
       "username": username,
@@ -14,8 +14,10 @@ class SignAPI {
       "email": email,
       "height": height,
       "weight": weight,
+      "gender": gender,
       "birthdate": birthdate
     };
+    debugPrint(userData.toString());
     var response = await http.post(url,
         body: userData, headers: APIConstants.headerCORS(""));
     return response.body;

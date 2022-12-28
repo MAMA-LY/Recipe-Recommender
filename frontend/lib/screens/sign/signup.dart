@@ -7,6 +7,9 @@ import 'package:recipe_recommender_frontend/screens/sign/widgets/custom_button.d
 import 'package:recipe_recommender_frontend/screens/sign/widgets/date_field.dart';
 import 'package:recipe_recommender_frontend/screens/sign/widgets/text_field.dart';
 
+import 'widgets/gender_field.dart';
+import 'widgets/genders.dart';
+
 class SignUpPage extends StatefulWidget {
   static String routeName = "/signup";
 
@@ -23,6 +26,7 @@ class _SignUpPageState extends State<SignUpPage> {
   var dateController = TextEditingController();
   var heightController = TextEditingController();
   var weightController = TextEditingController();
+  String gender = Gender.others.toString().split('.').last;
   var responseTextController = TextEditingController();
   String resp = "";
 
@@ -30,12 +34,14 @@ class _SignUpPageState extends State<SignUpPage> {
     bool emailValid = EmailValidator.validate(emailController.text.trim());
     if (emailValid) {
       String? body = await SignAPI.signup(
-          usernameController.text.trim(),
-          passwordController.text.trim(),
-          emailController.text.trim(),
-          heightController.text.trim(),
-          weightController.text.trim(),
-          dateController.text.trim());
+        usernameController.text.trim(),
+        passwordController.text.trim(),
+        emailController.text.trim(),
+        heightController.text.trim(),
+        weightController.text.trim(),
+        gender,
+        dateController.text.trim(),
+      );
       setState(() {
         responseTextController.text = body!;
         switch (body) {
@@ -67,7 +73,7 @@ class _SignUpPageState extends State<SignUpPage> {
         body: Stack(
           children: [
             Positioned(
-              top: MediaQuery.of(context).size.height * 0.8,
+              top: MediaQuery.of(context).size.height * 0.882,
               left: MediaQuery.of(context).size.width * 0.06,
               child: SvgPicture.asset(
                 "assets/images/bottom.svg",
@@ -89,6 +95,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         child: const Image(
                             image: AssetImage("assets/images/Logo.png"),
                             fit: BoxFit.fill)),
+                    const SizedBox(height: 2),
                     CustomTextField(
                       hintText: "Enter your username here..",
                       labelText: "Username",
@@ -97,6 +104,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       obscureText: false,
                       icon: Icons.person,
                     ),
+                    const SizedBox(height: 2),
                     CustomTextField(
                       hintText: "Enter your email here..",
                       labelText: "Email",
@@ -105,6 +113,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       obscureText: false,
                       icon: Icons.email_outlined,
                     ),
+                    const SizedBox(height: 2),
                     CustomTextField(
                       hintText: "Enter your password here..",
                       labelText: "Password",
@@ -113,6 +122,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       obscureText: true,
                       icon: Icons.password,
                     ),
+                    const SizedBox(height: 2),
                     CustomTextField(
                       hintText: "Enter your height here..",
                       labelText: "Height",
@@ -121,6 +131,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       obscureText: false,
                       icon: Icons.height,
                     ),
+                    const SizedBox(height: 2),
                     CustomTextField(
                       hintText: "Enter your weight here..",
                       labelText: "Weight",
@@ -129,6 +140,32 @@ class _SignUpPageState extends State<SignUpPage> {
                       obscureText: false,
                       icon: Icons.monitor_weight_outlined,
                     ),
+                    const SizedBox(height: 2),
+                    Row(
+                      children: [
+                        Expanded(
+                            child: GenderWidget(
+                          onclick: () {
+                            gender = Gender.male.toString().split('.').last;
+                            setState(() {});
+                          },
+                          isSelected: Gender.male.toString().split('.').last == gender,
+                          title: 'Male',
+                          icon: Icons.man_outlined,
+                        )),
+                        Expanded(
+                            child: GenderWidget(
+                          onclick: () {
+                            gender = Gender.female.toString().split('.').last;
+                            setState(() {});
+                          },
+                          isSelected: Gender.female.toString().split('.').last == gender,
+                          title: 'Female',
+                          icon: Icons.woman_outlined,
+                        )),
+                      ],
+                    ),
+                    const SizedBox(height: 2),
                     CustomDateField(
                       hintText: "Choose your birthdate",
                       labelText: "Birthdate",
