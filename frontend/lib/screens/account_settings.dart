@@ -71,157 +71,178 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
           ),
           Column(
             children: [
-              SizedBox(
-                height: 50,
-              ),
-              Align(
-                alignment: Alignment.center,
-                child: FutureBuilder<UserProfile>(
-                  future: futureuserProfile,
-                  builder: (context,snapshot){
-                    if(snapshot.hasData){
-                      return Text (
-                        'Username : '+snapshot.data!.username,
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: "Roboto",
-                          color: Theme
-                              .of(context)
-                              .focusColor,
-                        ),
-                      );
-                    }else if (snapshot.hasError) {
-                      return Text('${snapshot.error}');
-                    }else {
-                      return const Center(
-                          child: CircularProgressIndicator(
+              Row(
+                children: [
+                  Icon(Icons.person),
+                  SizedBox(
+                    height: 50,
+                  ),
+                  Align(
+                    alignment: Alignment.center,
+                    child: FutureBuilder<UserProfile>(
+                      future: futureuserProfile,
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          return Text(
+                            snapshot.data!.username,
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: "Roboto",
+                              color: Theme.of(context).focusColor,
+                            ),
+                          );
+                        } else if (snapshot.hasError) {
+                          return Text('${snapshot.error}');
+                        } else {
+                          return const Center(
+                              child: CircularProgressIndicator(
                             color: Constants.primaryColor,
                           ));
-                    }
-                  },
-                ),
+                        }
+                      },
+                    ),
+                  ),
+                ],
               ),
-              SizedBox(
-                height: 50,
-              ),
-              Align(
-                alignment: Alignment.center,
-                child: FutureBuilder<UserProfile>(
-                  future: futureuserProfile,
-                  builder: (context,snapshot){
-                    if(snapshot.hasData){
-                      return Text (
-                        'Email : '+snapshot.data!.email,
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: "Roboto",
-                          color: Theme
-                              .of(context)
-                              .focusColor,
-                        ),
-                      );
-                    }else if (snapshot.hasError) {
-                      return Text('${snapshot.error}');
-                    }else {
-                      return const Center(
-                          child: CircularProgressIndicator(
+              Row(
+                children: [
+                  Icon(Icons.email_outlined),
+                  SizedBox(
+                    height: 50,
+                  ),
+                  Align(
+                    alignment: Alignment.center,
+                    child: FutureBuilder<UserProfile>(
+                      future: futureuserProfile,
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          return Text(
+                            snapshot.data!.email,
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: "Roboto",
+                              color: Theme.of(context).focusColor,
+                            ),
+                          );
+                        } else if (snapshot.hasError) {
+                          return Text('${snapshot.error}');
+                        } else {
+                          return const Center(
+                              child: CircularProgressIndicator(
                             color: Constants.primaryColor,
                           ));
-                    }
-                  },
-                ),
-              ),SizedBox(
-                height: 50,
+                        }
+                      },
+                    ),
+                  ),
+                ],
               ),
-              Align(
-                alignment: Alignment.center,
-                child: FutureBuilder<UserProfile>(
-                  future: futureuserProfile,
-                  builder: (context,snapshot){
-                    if(snapshot.hasData){
-                      return Text (
-                        'height : '+(snapshot.data!.height).toString(),
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: "Roboto",
-                          color: Theme
-                              .of(context)
-                              .focusColor,
-                        ),
-                      );
-                    }else if (snapshot.hasError) {
-                      return Text('${snapshot.error}');
-                    }else {
-                      return const Center(
-                          child: CircularProgressIndicator(
+              Row(
+                children: [
+                  Icon(Icons.height),
+                  SizedBox(
+                    height: 50,
+                  ),
+                  Align(
+                    alignment: Alignment.center,
+                    child: FutureBuilder<UserProfile>(
+                      future: futureuserProfile,
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          return Text(
+                            (snapshot.data!.height).toString(),
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: "Roboto",
+                              color: Theme.of(context).focusColor,
+                            ),
+                          );
+                        } else if (snapshot.hasError) {
+                          return Text('${snapshot.error}');
+                        } else {
+                          return const Center(
+                              child: CircularProgressIndicator(
                             color: Constants.primaryColor,
                           ));
-                    }
-                  },
-                ),
-              ),SizedBox(
-                height: 50,
+                        }
+                      },
+                    ),
+                  ),
+                ],
               ),
-              Align(
-                alignment: Alignment.center,
-                child: FutureBuilder<UserProfile>(
-                  future: futureuserProfile,
-                  builder: (context,snapshot){
-                    if(snapshot.hasData){
-                      return Text (
-                        'weight : '+(snapshot.data!.weight).toString(),
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: "Roboto",
-                          color: Theme
-                              .of(context)
-                              .focusColor,
-                        ),
-                      );
-                    }else if (snapshot.hasError) {
-                      return Text('${snapshot.error}');
-                    }else {
-                      return const Center(
-                          child: CircularProgressIndicator(
+              Row(
+                children: [
+                  Icon(Icons.monitor_weight_outlined),
+                  SizedBox(
+                    height: 50,
+                  ),
+                  Align(
+                    alignment: Alignment.center,
+                    child: FutureBuilder<UserProfile>(
+                      future: futureuserProfile,
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          return Text(
+                            'weight : ' + (snapshot.data!.weight).toString(),
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: "Roboto",
+                              color: Theme.of(context).focusColor,
+                            ),
+                          );
+                        } else if (snapshot.hasError) {
+                          return Text('${snapshot.error}');
+                        } else {
+                          return const Center(
+                              child: CircularProgressIndicator(
                             color: Constants.primaryColor,
                           ));
-                    }
-                  },
-                ),
-              ),SizedBox(
-                height: 50,
+                        }
+                      },
+                    ),
+                  ),
+                ],
               ),
-              Align(
-                alignment: Alignment.center,
-                child: FutureBuilder<UserProfile>(
-                  future: futureuserProfile,
-                  builder: (context,snapshot){
-                    if(snapshot.hasData){
-                      return Text (
-                        'birthdate : '+snapshot.data!.birthdate,
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: "Roboto",
-                          color: Theme
-                              .of(context)
-                              .focusColor,
-                        ),
-                      );
-                    }else if (snapshot.hasError) {
-                      return Text('${snapshot.error}');
-                    }else {
-                      return const Center(
-                          child: CircularProgressIndicator(
+              Row(
+                children: [
+                  Icon(Icons.calendar_today),
+                  SizedBox(
+                    height: 50,
+                  ),
+                  SizedBox(
+                    height: 50,
+                  ),
+                  Align(
+                    alignment: Alignment.center,
+                    child: FutureBuilder<UserProfile>(
+                      future: futureuserProfile,
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          return Text(
+                            snapshot.data!.birthdate,
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: "Roboto",
+                              color: Theme.of(context).focusColor,
+                            ),
+                          );
+                        } else if (snapshot.hasError) {
+                          return Text('${snapshot.error}');
+                        } else {
+                          return const Center(
+                              child: CircularProgressIndicator(
                             color: Constants.primaryColor,
                           ));
-                    }
-                  },
-                ),
+                        }
+                      },
+                    ),
+                  ),
+                ],
               ),
             ],
           ),

@@ -18,6 +18,8 @@ class UserProfileAPI {
         url, headers: APIConstants.headerCORS(session.cookie));
     debugPrint(response.statusCode.toString());
 
+    debugPrint(response.statusCode.toString());
+    debugPrint(response.body);
     if (response.statusCode == 200) {
       return UserProfile.fromJson(jsonDecode(response.body));
     } else if (response.statusCode == 401) {
