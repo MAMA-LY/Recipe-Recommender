@@ -46,17 +46,6 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
                 ..strokeWidth = 10
           ),
         ),
-        actions: [
-            IconButton(
-            icon: Image.asset('assets/images/logo.png'),
-            onPressed: (){
-              Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(
-              builder: (BuildContext context) => const PageViewController()),
-              (route) => false);
-            },
-        ),
-      ],
       ),
       body:
       Stack(

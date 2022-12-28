@@ -16,8 +16,7 @@ class UserProfileAPI {
     var url = Uri.https(APIConstants.baseUrl, APIConstants.userProfileEndPoint);
     var response = await http.get(
         url, headers: APIConstants.headerCORS(session.cookie));
-    debugPrint(response.statusCode.toString());
-
+    debugPrint(url.toString());
     debugPrint(response.statusCode.toString());
     debugPrint(response.body);
     if (response.statusCode == 200) {
