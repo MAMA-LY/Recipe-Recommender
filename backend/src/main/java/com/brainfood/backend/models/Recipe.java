@@ -1,5 +1,6 @@
 package com.brainfood.backend.models;
 
+import jakarta.persistence.Column;
 import lombok.*;
 
 import java.util.List;
@@ -25,4 +26,9 @@ public class Recipe {
 
     private Nutrition nutrition;
 
+    public float rate;
+
+    public int rates_count;
+
+    public float currentUserCount;
 }

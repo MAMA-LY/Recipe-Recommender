@@ -38,7 +38,7 @@ public class Director {
                 .build();
     }
 
-    public static Recipe buildRecipe(RecipeDB recipeDB, List<IngredientDB> ingredientDBS, List<String> tags) {
+    public static Recipe buildRecipe(RecipeDB recipeDB, List<IngredientDB> ingredientDBS, List<String> tags, float userRate) {
         List<Ingredient> ingredients = new ArrayList<>();
         for (IngredientDB ingredientDB : ingredientDBS)
             ingredients.add(buildIngredientModel(ingredientDB));
@@ -51,6 +51,9 @@ public class Director {
                 .nutrition(buildRecipeNutritionModel(recipeDB))
                 .ingredients(ingredients)
                 .tags(tags)
+                .rate((float)(Math.round(recipeDB.rate * 2) / 2.0))
+                .rates_count(recipeDB.rates_count)
+                .currentUserCount(userRate)
                 .build();
     }
 }

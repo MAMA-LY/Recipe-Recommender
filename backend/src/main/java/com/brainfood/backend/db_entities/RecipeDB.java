@@ -41,4 +41,10 @@ public class RecipeDB implements Serializable {
 
     @Column(name = "photo")
     public String photo;
+
+    @Column(name = "rate")
+    public float rate;
+
+    @Column(name = "rates_count")
+    public int rates_count;
 }

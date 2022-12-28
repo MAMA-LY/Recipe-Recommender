@@ -2,10 +2,14 @@ package com.brainfood.backend;
 
 import com.brainfood.backend.db_entities.IngredientDB;
 import com.brainfood.backend.db_entities.RecipeDB;
+import com.brainfood.backend.db_entities.RecipeRatesCK;
+import com.brainfood.backend.db_entities.RecipeRatesDB;
 import com.brainfood.backend.db_repositories.IngredientRepository;
+import com.brainfood.backend.db_repositories.RecipeRatesRepository;
 import com.brainfood.backend.db_repositories.RecipeRepository;
 import com.brainfood.backend.models.Recipe;
 import com.brainfood.backend.models.ShortRecipe;
+import com.brainfood.security.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
@@ -20,6 +24,10 @@ public class DAO {
     RecipeRepository recipeRepository;
     @Autowired
     IngredientRepository ingredientRepository;
+    @Autowired
+    UserRepository userRepository;
+    @Autowired
+    RecipeRatesRepository recipeRatesRepository;
 
     public List<RecipeDB> findSimilarDishes(List<ShortRecipe> dishes) {
         List<RecipeDB> result = new ArrayList<>();
@@ -70,16 +78,46 @@ public class DAO {
         return currentRecipeDBS;
     }
 
-    public Recipe findRecipe(String id) {
+    public Recipe findRecipe(String id, String userName) {
         System.out.println(id);
         RecipeDB recipeDB = recipeRepository.findByIdEquals(id);
         List<IngredientDB> ingredientDBS = recipeRepository.findIngredientsByIdEquals(id);
         List<String> tags = recipeRepository.findTagsByIdEquals(id);
 
-        return Director.buildRecipe(recipeDB, ingredientDBS, tags);
+        String userID = userRepository.findByUsername(userName).getID();
+        RecipeRatesDB returned = recipeRatesRepository.findRateForUser(id, userID);
+        float userRate = 0;
+        if (returned != null)
+            userRate = returned.rate;
+
+        return Director.buildRecipe(recipeDB, ingredientDBS, tags, userRate);
     }
 
     public List<String> getAllIngredients() {
         return ingredientRepository.getDistinctByName();
+    }
+
+    public void rateRecipe(String recipeID, String userName, float rate) {
+        float oldRate = 0, totalRates;
+
+        String userID = userRepository.findByUsername(userName).getID();
+        RecipeRatesDB returned = recipeRatesRepository.findRateForUser(recipeID, userID);
+
+        RecipeDB recipeDB = recipeRepository.findByIdEquals(recipeID);
+        totalRates = recipeDB.rates_count * recipeDB.rate;
+        recipeDB.rates_count ++ ;
+
+        if (returned != null) {
+            recipeDB.rates_count -- ;
+            oldRate = returned.rate;
+            recipeRatesRepository.delete(returned);
+        }
+
+        RecipeRatesDB recipeRatesDB = RecipeRatesDB.builder().rate(rate).
+                compositeKey(new RecipeRatesCK(recipeID, userID)).build();
+        recipeRatesRepository.save(recipeRatesDB);
+
+        recipeDB.rate = (totalRates - oldRate + rate) / recipeDB.rates_count ;
+        recipeRepository.save(recipeDB);
     }
 }

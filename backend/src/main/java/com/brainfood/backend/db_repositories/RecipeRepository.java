@@ -55,5 +55,4 @@ public interface RecipeRepository extends JpaRepository<RecipeDB, String> {
             "join RecipeDB r on r.id = rt.compositeKey.recipeID " +
             "where r.id = :id")
     List<String> findTagsByIdEquals(@Param("id") String id);
-
 }
