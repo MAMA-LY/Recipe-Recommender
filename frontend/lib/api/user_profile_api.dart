@@ -7,18 +7,19 @@ import 'package:recipe_recommender_frontend/main.dart';
 import 'package:recipe_recommender_frontend/models/user_profile.dart';
 
 import '../models/failure.dart';
-class UserProfileAPI{
+class UserProfileAPI {
   String cookie;
 
   UserProfileAPI.fromCookie(var this.cookie);
 
   Future<UserProfile> getUserProfile() async {
     var url = Uri.https(APIConstants.baseUrl, APIConstants.userProfileEndPoint);
-    var response = await http.get(url, headers: APIConstants.headerCORS(session.cookie));
+    var response = await http.get(
+        url, headers: APIConstants.headerCORS(session.cookie));
     debugPrint(response.statusCode.toString());
 
     if (response.statusCode == 200) {
-      return UserProfile.fromJson(jsonDecode(response.body))
+      return UserProfile.fromJson(jsonDecode(response.body));
     } else if (response.statusCode == 401) {
       throw Failure(code: 401, message: "fail");
     } else {
@@ -26,3 +27,4 @@ class UserProfileAPI{
           code: response.statusCode, message: response.headers.toString());
     }
   }
+}

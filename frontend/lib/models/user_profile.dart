@@ -1,13 +1,15 @@
+import 'dart:ffi';
+
 class UserProfile {
   final String username;
 
   final String email;
 
-  final float height;
+  final Double height;
 
-  final float weight;
+  final Double weight;
 
-  final Date birthdate;
+  final String birthdate;
 
   UserProfile(
       {required this.username,
@@ -20,9 +22,9 @@ class UserProfile {
     return UserProfile(
         username: json['username'] as String,
         email: json['email'] as String,
-        height: json['height'] as float,
-        weight: json['weight'] as float,
-        birthdate: json['birthdate'] as Date);
+        height: json['height'] as Double,
+        weight: json['weight'] as Double,
+        birthdate: json['birthdate'] as String);
   }
 
   @override

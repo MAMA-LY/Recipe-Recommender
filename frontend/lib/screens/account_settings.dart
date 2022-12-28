@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:recipe_recommender_frontend/screens/page_view_controller.dart';
+import 'package:recipe_recommender_frontend/models/user_profile.dart';
 
-
+import '../api/user_profile_api.dart';
+import '../main.dart';
 import '../constants.dart';
 
 class AccountSettingsPage extends StatefulWidget {
@@ -10,12 +12,19 @@ class AccountSettingsPage extends StatefulWidget {
 
   const AccountSettingsPage({Key? key}) : super(key: key);
 
+
   @override
   State<AccountSettingsPage> createState() => _AccountSettingsPageState();
 }
 
-
 class _AccountSettingsPageState extends State<AccountSettingsPage> {
+
+  late Future<UserProfile> futureuserProfile;
+  @override
+  void initState() {
+    super.initState();
+    futureuserProfile = UserProfileAPI.fromCookie(session.cookie).getUserProfile();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +58,8 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
         ),
       ],
       ),
-      body: Stack(
+      body:
+      Stack(
         children: [
           Positioned(
             top: MediaQuery.of(context).size.height * 0.6,
@@ -66,16 +76,30 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
               ),
               Align(
                 alignment: Alignment.center,
-                child: Text(
-                  'Username : ',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: "Roboto",
-                    color: Theme
-                        .of(context)
-                        .focusColor,
-                  ),
+                child: FutureBuilder<UserProfile>(
+                  future: futureuserProfile,
+                  builder: (context,snapshot){
+                    if(snapshot.hasData){
+                      return Text (
+                        'Username : '+snapshot.data!.username,
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: "Roboto",
+                          color: Theme
+                              .of(context)
+                              .focusColor,
+                        ),
+                      );
+                    }else if (snapshot.hasError) {
+                      return Text('${snapshot.error}');
+                    }else {
+                      return const Center(
+                          child: CircularProgressIndicator(
+                            color: Constants.primaryColor,
+                          ));
+                    }
+                  },
                 ),
               ),
               SizedBox(
@@ -83,16 +107,120 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
               ),
               Align(
                 alignment: Alignment.center,
-                child: Text(
-                  'Email : ',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: "Roboto",
-                    color: Theme
-                        .of(context)
-                        .focusColor,
-                  ),
+                child: FutureBuilder<UserProfile>(
+                  future: futureuserProfile,
+                  builder: (context,snapshot){
+                    if(snapshot.hasData){
+                      return Text (
+                        'Email : '+snapshot.data!.email,
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: "Roboto",
+                          color: Theme
+                              .of(context)
+                              .focusColor,
+                        ),
+                      );
+                    }else if (snapshot.hasError) {
+                      return Text('${snapshot.error}');
+                    }else {
+                      return const Center(
+                          child: CircularProgressIndicator(
+                            color: Constants.primaryColor,
+                          ));
+                    }
+                  },
+                ),
+              ),SizedBox(
+                height: 50,
+              ),
+              Align(
+                alignment: Alignment.center,
+                child: FutureBuilder<UserProfile>(
+                  future: futureuserProfile,
+                  builder: (context,snapshot){
+                    if(snapshot.hasData){
+                      return Text (
+                        'height : '+(snapshot.data!.height).toString(),
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: "Roboto",
+                          color: Theme
+                              .of(context)
+                              .focusColor,
+                        ),
+                      );
+                    }else if (snapshot.hasError) {
+                      return Text('${snapshot.error}');
+                    }else {
+                      return const Center(
+                          child: CircularProgressIndicator(
+                            color: Constants.primaryColor,
+                          ));
+                    }
+                  },
+                ),
+              ),SizedBox(
+                height: 50,
+              ),
+              Align(
+                alignment: Alignment.center,
+                child: FutureBuilder<UserProfile>(
+                  future: futureuserProfile,
+                  builder: (context,snapshot){
+                    if(snapshot.hasData){
+                      return Text (
+                        'weight : '+(snapshot.data!.weight).toString(),
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: "Roboto",
+                          color: Theme
+                              .of(context)
+                              .focusColor,
+                        ),
+                      );
+                    }else if (snapshot.hasError) {
+                      return Text('${snapshot.error}');
+                    }else {
+                      return const Center(
+                          child: CircularProgressIndicator(
+                            color: Constants.primaryColor,
+                          ));
+                    }
+                  },
+                ),
+              ),SizedBox(
+                height: 50,
+              ),
+              Align(
+                alignment: Alignment.center,
+                child: FutureBuilder<UserProfile>(
+                  future: futureuserProfile,
+                  builder: (context,snapshot){
+                    if(snapshot.hasData){
+                      return Text (
+                        'birthdate : '+snapshot.data!.birthdate,
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: "Roboto",
+                          color: Theme
+                              .of(context)
+                              .focusColor,
+                        ),
+                      );
+                    }else if (snapshot.hasError) {
+                      return Text('${snapshot.error}');
+                    }else {
+                      return const Center(
+                          child: CircularProgressIndicator(
+                            color: Constants.primaryColor,
+                          ));
+                    }
+                  },
                 ),
               ),
             ],
