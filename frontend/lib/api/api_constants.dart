@@ -11,6 +11,7 @@ class APIConstants {
   static String forgetPasswordEndPoint = "/forgetPassword";
   static String resetPassword = "/resetPassword";
   static String changePassword = "/changePassword";
+  static String userProfileEndPoint ="/account_settings/userProfile";
   static Map<String, String> headerCORS(String cookie) {
     if (cookie != "") {
       return {
