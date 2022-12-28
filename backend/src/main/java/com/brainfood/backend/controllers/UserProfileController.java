@@ -12,7 +12,7 @@ public class UserProfileController {
 
     @Autowired
     DAO DAO;
-    @GetMapping("/userProfile")
+    @GetMapping("userProfile")
     public UserProfile getUserProfile(){
         return DAO.getUserProfile();
     }
