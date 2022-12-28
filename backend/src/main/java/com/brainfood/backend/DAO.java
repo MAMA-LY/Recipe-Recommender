@@ -6,8 +6,15 @@ import com.brainfood.backend.db_repositories.IngredientRepository;
 import com.brainfood.backend.db_repositories.RecipeRepository;
 import com.brainfood.backend.models.Recipe;
 import com.brainfood.backend.models.ShortRecipe;
+import com.brainfood.backend.models.UserProfile;
+import com.brainfood.security.UserAuthenticator;
+import com.brainfood.security.model.User;
+import com.brainfood.security.model.UserCredentials;
+import com.brainfood.security.repository.UserCredentialsRepository;
+import com.brainfood.security.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -20,6 +27,10 @@ public class DAO {
     RecipeRepository recipeRepository;
     @Autowired
     IngredientRepository ingredientRepository;
+    @Autowired
+    UserRepository userRepository;
+    @Autowired
+    UserCredentialsRepository userCredentialsRepository;
 
     public List<RecipeDB> findSimilarDishes(List<ShortRecipe> dishes) {
         List<RecipeDB> result = new ArrayList<>();
@@ -81,5 +92,18 @@ public class DAO {
 
     public List<String> getAllIngredients() {
         return ingredientRepository.getDistinctByName();
+    }
+
+    public UserProfile getUserProfile(){
+        String username= SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userRepository.findByUsername(username);
+        String email= userCredentialsRepository.findByUsername(username).getEmail();
+        UserProfile userProfile = UserProfile.builder().username(username)
+                .birthdate(user.getBirthdate())
+                .height(user.getHeight())
+                .weight(user.getWeight())
+                .email(email).build();
+
+        return userProfile;
     }
 }
