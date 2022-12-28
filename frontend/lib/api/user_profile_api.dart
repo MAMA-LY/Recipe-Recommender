@@ -12,7 +12,7 @@ class UserProfileAPI{
 
   UserProfileAPI.fromCookie(var this.cookie);
 
-  Future<List<String>> getUserProfile() async {
+  Future<UserProfile> getUserProfile() async {
     var url = Uri.https(APIConstants.baseUrl, APIConstants.userProfileEndPoint);
     var response = await http.get(url, headers: APIConstants.headerCORS(session.cookie));
     debugPrint(response.statusCode.toString());
