@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
@@ -44,7 +45,7 @@ public class UserAuthenticator {
         user.setHeight(Integer.parseInt(height));
         user.setWeight(Integer.parseInt(weight));
         user.setGender(gender);
-        user.setBirthdate(formatter.parse(birthdate));
+        user.setBirthdate((Date) formatter.parse(birthdate));
         userRepository.save(user);
         System.out.println(encryptedPD.length());
         return Response.UserCreated;

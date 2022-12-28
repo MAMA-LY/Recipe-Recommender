@@ -7,7 +7,7 @@ import lombok.ToString;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 
 @Component
 @ToString
