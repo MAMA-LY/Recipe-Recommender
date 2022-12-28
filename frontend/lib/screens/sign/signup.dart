@@ -4,7 +4,11 @@ import 'package:flutter_svg/svg.dart';
 import 'package:recipe_recommender_frontend/api/sign_api.dart';
 import 'package:recipe_recommender_frontend/constants.dart';
 import 'package:recipe_recommender_frontend/screens/sign/widgets/custom_button.dart';
+import 'package:recipe_recommender_frontend/screens/sign/widgets/date_field.dart';
 import 'package:recipe_recommender_frontend/screens/sign/widgets/text_field.dart';
+
+import 'widgets/gender_field.dart';
+import 'widgets/genders.dart';
 
 class SignUpPage extends StatefulWidget {
   static String routeName = "/signup";
@@ -19,14 +23,25 @@ class _SignUpPageState extends State<SignUpPage> {
   var usernameController = TextEditingController();
   var passwordController = TextEditingController();
   var emailController = TextEditingController();
+  var dateController = TextEditingController();
+  var heightController = TextEditingController();
+  var weightController = TextEditingController();
+  String gender = Gender.others.toString().split('.').last;
   var responseTextController = TextEditingController();
   String resp = "";
 
   Future<void> _signup() async {
     bool emailValid = EmailValidator.validate(emailController.text.trim());
     if (emailValid) {
-      String? body = await SignAPI.signup(usernameController.text.trim(),
-          passwordController.text.trim(), emailController.text.trim());
+      String? body = await SignAPI.signup(
+        usernameController.text.trim(),
+        passwordController.text.trim(),
+        emailController.text.trim(),
+        heightController.text.trim(),
+        weightController.text.trim(),
+        gender,
+        dateController.text.trim(),
+      );
       setState(() {
         responseTextController.text = body!;
         switch (body) {
@@ -57,14 +72,6 @@ class _SignUpPageState extends State<SignUpPage> {
         resizeToAvoidBottomInset: false,
         body: Stack(
           children: [
-            Positioned(
-              top: MediaQuery.of(context).size.height * 0.85,
-              left: MediaQuery.of(context).size.width * 0.06,
-              child: SvgPicture.asset(
-                "assets/images/bottom.svg",
-                color: Colors.orange,
-              ),
-            ),
             Center(
                 child: SingleChildScrollView(
               child: Padding(
@@ -74,33 +81,90 @@ class _SignUpPageState extends State<SignUpPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
+                    
                     Container(
                         width: MediaQuery.of(context).size.width / 2,
-                        padding: const EdgeInsets.fromLTRB(20, 20, 20, 40),
+                        padding: const EdgeInsets.fromLTRB(20, 35, 20, 25),
                         child: const Image(
                             image: AssetImage("assets/images/Logo.png"),
                             fit: BoxFit.fill)),
+                    const SizedBox(height: 2),
                     CustomTextField(
                       hintText: "Enter your username here..",
                       labelText: "Username",
                       bottomMargin: 20,
                       controller: usernameController,
                       obscureText: false,
+                      icon: Icons.person,
                     ),
+                    const SizedBox(height: 2),
                     CustomTextField(
                       hintText: "Enter your email here..",
                       labelText: "Email",
                       bottomMargin: 20,
                       controller: emailController,
-                      obscureText: true,
+                      obscureText: false,
+                      icon: Icons.email_outlined,
                     ),
+                    const SizedBox(height: 2),
                     CustomTextField(
                       hintText: "Enter your password here..",
                       labelText: "Password",
                       bottomMargin: 15,
                       controller: passwordController,
                       obscureText: true,
+                      icon: Icons.password,
                     ),
+                    const SizedBox(height: 2),
+                    CustomTextField(
+                      hintText: "Enter your height here..",
+                      labelText: "Height",
+                      bottomMargin: 15,
+                      controller: heightController,
+                      obscureText: false,
+                      icon: Icons.height,
+                    ),
+                    const SizedBox(height: 2),
+                    CustomTextField(
+                      hintText: "Enter your weight here..",
+                      labelText: "Weight",
+                      bottomMargin: 15,
+                      controller: weightController,
+                      obscureText: false,
+                      icon: Icons.monitor_weight_outlined,
+                    ),
+                    const SizedBox(height: 2),
+                    CustomDateField(
+                      hintText: "Choose your birthdate",
+                      labelText: "Birthdate",
+                      bottomMargin: 15,
+                      controller: dateController,
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                            child: GenderWidget(
+                          onclick: () {
+                            gender = Gender.male.toString().split('.').last;
+                            setState(() {});
+                          },
+                          isSelected: Gender.male.toString().split('.').last == gender,
+                          title: 'Male',
+                          icon: Icons.man_outlined,
+                        )),
+                        Expanded(
+                            child: GenderWidget(
+                          onclick: () {
+                            gender = Gender.female.toString().split('.').last;
+                            setState(() {});
+                          },
+                          isSelected: Gender.female.toString().split('.').last == gender,
+                          title: 'Female',
+                          icon: Icons.woman_outlined,
+                        )),
+                      ],
+                    ),
+                    const SizedBox(height: 3),
                     Row(
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.center,

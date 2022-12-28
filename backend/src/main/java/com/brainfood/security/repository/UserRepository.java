@@ -1,11 +1,10 @@
 package com.brainfood.security.repository;
 
+
+import com.brainfood.security.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.brainfood.security.model.UserCredentials;
-
-public interface UserRepository extends JpaRepository<UserCredentials, String> {
-    UserCredentials findByUsername(String username);
-
-    UserCredentials findByEmail(String email);
+public interface UserRepository extends JpaRepository<User, String> {
+    User findByUsername(String username);
+    User findByID(String id);
 }

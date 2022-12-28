@@ -1,7 +1,6 @@
 package com.brainfood.security;
 
-import java.util.Map;
-
+import com.brainfood.security.repository.UserCredentialsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -10,7 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.brainfood.security.repository.UserRepository;
+import java.text.ParseException;
+import java.util.Map;
 
 @Component
 @RestController
@@ -20,7 +20,7 @@ public class AuthController {
     UserAuthenticator userAuthenticator;
 
     @Autowired
-    UserRepository userRepository;
+    UserCredentialsRepository userCredentialsRepository;
 
     @Autowired
     PasswordResetManager passwordResetManager;
@@ -41,9 +41,9 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public String createAuthentications(@RequestParam Map<String, String> auths) {
-        return userAuthenticator.createAuthentications(auths.get("username"), auths.get("password"), auths.get("email"))
-                .name();
+    public String createAuthentications(@RequestParam Map<String, String> auths) throws ParseException {
+        return userAuthenticator.createAuthentications(auths.get("username"), auths.get("password"), auths.get("email"),
+                auths.get("height"), auths.get("weight"), auths.get("gender"), auths.get("birthdate")).name();
     }
 
     @GetMapping("/home")

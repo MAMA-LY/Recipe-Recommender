@@ -1,7 +1,7 @@
 package com.brainfood.backend;
 
-import com.brainfood.models.Ingredient;
-import com.brainfood.models.Nutrition;
+import com.brainfood.backend.models.Ingredient;
+import com.brainfood.backend.models.Nutrition;
 import org.junit.jupiter.api.Test;
 
 import java.awt.*;

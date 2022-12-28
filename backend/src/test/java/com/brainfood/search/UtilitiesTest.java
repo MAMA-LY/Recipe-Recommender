@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.brainfood.backend.db_entities.RecipeDB;
-import com.brainfood.models.ShortRecipe;
+import com.brainfood.backend.models.ShortRecipe;
+import com.brainfood.backend.utilities.Utilities;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;

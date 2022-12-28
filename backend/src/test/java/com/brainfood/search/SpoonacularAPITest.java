@@ -10,7 +10,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import com.brainfood.models.ShortRecipe;
+import com.brainfood.backend.utilities.SpoonacularAPI;
+import com.brainfood.backend.models.ShortRecipe;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.configurationprocessor.json.JSONException;

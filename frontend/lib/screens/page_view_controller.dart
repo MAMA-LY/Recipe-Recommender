@@ -98,6 +98,7 @@ class _PageViewControllerState extends State<PageViewController> {
         children: _buildScreens,
       ),
       bottomNavigationBar: BottomNavigationBar(
+        landscapeLayout: BottomNavigationBarLandscapeLayout.centered,
         backgroundColor:  Theme.of(context).secondaryHeaderColor,
         
         iconSize: 18,

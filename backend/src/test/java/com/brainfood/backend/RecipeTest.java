@@ -8,9 +8,9 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import com.brainfood.models.Ingredient;
-import com.brainfood.models.Nutrition;
-import com.brainfood.models.Recipe;
+import com.brainfood.backend.models.Ingredient;
+import com.brainfood.backend.models.Nutrition;
+import com.brainfood.backend.models.Recipe;
 
 class RecipeTest {
 

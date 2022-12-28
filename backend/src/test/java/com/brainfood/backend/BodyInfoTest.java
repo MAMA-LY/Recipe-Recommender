@@ -9,7 +9,8 @@ import java.util.GregorianCalendar;
 
 import org.junit.jupiter.api.Test;
 
-import com.brainfood.models.BodyInfo;
+import com.brainfood.backend.models.BodyInfo;
+
 
 class BodyInfoTest {
 

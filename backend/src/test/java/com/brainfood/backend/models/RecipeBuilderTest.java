@@ -8,9 +8,9 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import com.brainfood.models.Ingredient;
-import com.brainfood.models.Nutrition;
-import com.brainfood.models.Recipe;
+import com.brainfood.backend.models.Ingredient;
+import com.brainfood.backend.models.Nutrition;
+import com.brainfood.backend.models.Recipe;
 
 public class RecipeBuilderTest {
 
@@ -87,11 +87,7 @@ public class RecipeBuilderTest {
 
         final Field field = recipe.getClass().getDeclaredField("image");
         field.setAccessible(true);
-<<<<<<< HEAD:backend/src/test/java/com/brainfood/backend/RecipeBuilderTest.java
-        String photoActual= (String) field.get(recipe);
-=======
         String photoActual = (String) field.get(recipe);
->>>>>>> 48bf27863a2486d300402f525820a56e9208b3a3:backend/src/test/java/com/brainfood/backend/models/RecipeBuilderTest.java
 
         assertEquals(photoExpected, photoActual, "problem in buildPhoto");
     }

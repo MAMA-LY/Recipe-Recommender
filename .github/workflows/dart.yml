@@ -9,7 +9,8 @@ on:
   push:
     branches: [ "main" ]
   pull_request:
-    branches: [ "main" ]
+    branches:
+      - '**'
 
 jobs:
   test:
@@ -25,9 +26,12 @@ jobs:
 
       - name: Install dependencies
         run: flutter pub get
+<<<<<<< HEAD
       
       - name: Run tests
         run: flutter test --no-sound-null-safety
+=======
+>>>>>>> 85454ec4ab4e9c039726b8d4a1db0805cff138c4
 
   build_web:
     runs-on: ubuntu-latest

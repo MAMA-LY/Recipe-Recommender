@@ -146,6 +146,7 @@ class _SearchPageState extends State<SearchPage> {
       themeData: FilterListThemeData(context,
           backgroundColor: Theme.of(context).secondaryHeaderColor,
           choiceChipTheme: ChoiceChipThemeData(
+            selectedTextStyle: TextStyle(color: Theme.of(context).secondaryHeaderColor),
               textStyle:
                   TextStyle(color: Theme.of(context).secondaryHeaderColor),
               selectedBackgroundColor: Theme.of(context).primaryColor,
@@ -157,6 +158,11 @@ class _SearchPageState extends State<SearchPage> {
               searchFieldBackgroundColor:
                   Theme.of(context).secondaryHeaderColor),
           controlButtonBarTheme: ControlButtonBarThemeData(context,
+              controlButtonTheme: ControlButtonThemeData(
+                textStyle: TextStyle(color: Theme.of(context).primaryColor),
+                  primaryButtonBackgroundColor: Theme.of(context).primaryColor,
+                  primaryButtonTextStyle:
+                      TextStyle(color: Theme.of(context).secondaryHeaderColor)),
               backgroundColor: Theme.of(context).secondaryHeaderColor)),
       backgroundColor: Theme.of(context).secondaryHeaderColor,
       context,
@@ -214,7 +220,7 @@ class _SearchPageState extends State<SearchPage> {
             ),
           ),
         ),
-        body: Stack(fit: StackFit.expand,children: [
+        body: Stack(fit: StackFit.expand, children: [
           Positioned(
             top: MediaQuery.of(context).size.height * 0.55,
             left: MediaQuery.of(context).size.width * 0.079,
@@ -251,10 +257,10 @@ class _SearchPageState extends State<SearchPage> {
                         selectedTags: selectedTags)));
           }),
           tooltip: 'Recommend',
-          child: const Icon(
+          child: Icon(
             Icons.receipt_outlined,
             size: 30,
-            color: Constants.secondaryColor,
+            color: Theme.of(context).secondaryHeaderColor,
           ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
