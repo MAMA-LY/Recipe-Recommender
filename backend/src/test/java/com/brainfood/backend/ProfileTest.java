@@ -19,7 +19,7 @@ import com.brainfood.models.BodyInfo;
 import com.brainfood.models.Calendar;
 import com.brainfood.models.Profile;
 import com.brainfood.models.Recipe;
-import com.brainfood.security.Model.UserCredentials;
+import com.brainfood.security.model.UserCredentials;
 
 class ProfileTest {
 

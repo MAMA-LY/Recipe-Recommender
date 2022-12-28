@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import com.brainfood.security.Model.UserCredentials;
-import com.brainfood.security.Repository.UserRepository;
+import com.brainfood.security.model.UserCredentials;
+import com.brainfood.security.repository.UserRepository;
 
 import lombok.Getter;
 import lombok.Setter;

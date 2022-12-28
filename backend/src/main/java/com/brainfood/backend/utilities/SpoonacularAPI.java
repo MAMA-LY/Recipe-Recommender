@@ -33,7 +33,7 @@ public class SpoonacularAPI {
      *
      * @param text the text which needed to detect food in
      * @return a list with the food that spoonacular detected and each element has a
-     * tag that specifies it is a dish or an ingredient
+     *         tag that specifies it is a dish or an ingredient
      */
     public List<ShortRecipe> foodText(String text) throws JSONException, IOException, InterruptedException {
         var params = new HashMap<String, String>();
