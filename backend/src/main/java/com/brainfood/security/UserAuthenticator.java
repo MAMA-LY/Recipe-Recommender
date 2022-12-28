@@ -22,11 +22,13 @@ public class UserAuthenticator {
     UserCredentialsRepository userCredentialsRepository;
     @Autowired
     UserRepository userRepository;
-    private final SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
     @Getter
     @Setter
     @Autowired
     public BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    private final SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+
     public Response createAuthentications(String username, String password, String email, String height, String weight, String gender, String birthdate) throws ParseException {
         if (userExistsByUsername(username))
             return Response.UsernameAlreadyExists;

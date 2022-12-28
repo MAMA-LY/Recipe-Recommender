@@ -72,14 +72,6 @@ class _SignUpPageState extends State<SignUpPage> {
         resizeToAvoidBottomInset: false,
         body: Stack(
           children: [
-            Positioned(
-              top: MediaQuery.of(context).size.height * 0.882,
-              left: MediaQuery.of(context).size.width * 0.06,
-              child: SvgPicture.asset(
-                "assets/images/bottom.svg",
-                color: Colors.orange,
-              ),
-            ),
             Center(
                 child: SingleChildScrollView(
               child: Padding(
@@ -89,6 +81,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
+                    
                     Container(
                         width: MediaQuery.of(context).size.width / 2,
                         padding: const EdgeInsets.fromLTRB(20, 35, 20, 25),
@@ -141,6 +134,12 @@ class _SignUpPageState extends State<SignUpPage> {
                       icon: Icons.monitor_weight_outlined,
                     ),
                     const SizedBox(height: 2),
+                    CustomDateField(
+                      hintText: "Choose your birthdate",
+                      labelText: "Birthdate",
+                      bottomMargin: 15,
+                      controller: dateController,
+                    ),
                     Row(
                       children: [
                         Expanded(
@@ -165,13 +164,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         )),
                       ],
                     ),
-                    const SizedBox(height: 2),
-                    CustomDateField(
-                      hintText: "Choose your birthdate",
-                      labelText: "Birthdate",
-                      bottomMargin: 15,
-                      controller: dateController,
-                    ),
+                    const SizedBox(height: 3),
                     Row(
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.center,

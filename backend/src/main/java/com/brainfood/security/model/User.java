@@ -22,7 +22,7 @@ public class User implements Serializable {
     private String ID;
 
     @Column(name = "photo")
-    private String photo;
+    private String photo = null;
 
     @Column(name = "username")
     private String username;
@@ -34,7 +34,7 @@ public class User implements Serializable {
     private int weight;
 
     @Column(name = "dailyCalories")
-    private int dailyCalories;
+    private int dailyCalories = 0;
 
     @Column(name = "birthdate")
     private Date birthdate;
