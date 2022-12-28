@@ -2,23 +2,6 @@
 # See https://dart.dev/tools/pub/glossary#lockfile
 packages:
   _fe_analyzer_shared:
-<<<<<<< HEAD
-    dependency: transitive
-    description:
-      name: _fe_analyzer_shared
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "50.0.0"
-  analyzer:
-    dependency: transitive
-    description:
-      name: analyzer
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "5.2.0"
-  archive:
-=======
->>>>>>> 48bf27863a2486d300402f525820a56e9208b3a3
     dependency: transitive
     description:
       name: _fe_analyzer_shared
@@ -191,8 +174,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-<<<<<<< HEAD
-=======
   flutter_keyboard_visibility:
     dependency: transitive
     description:
@@ -235,7 +216,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0"
->>>>>>> 48bf27863a2486d300402f525820a56e9208b3a3
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -251,24 +231,11 @@ packages:
     source: hosted
     version: "1.5.0"
   flutter_staggered_grid_view:
-<<<<<<< HEAD
     dependency: "direct main"
     description:
       name: flutter_staggered_grid_view
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.6.2"
-  flutter_tags:
-=======
->>>>>>> 48bf27863a2486d300402f525820a56e9208b3a3
-    dependency: "direct main"
-    description:
-      name: flutter_staggered_grid_view
-      url: "https://pub.dartlang.org"
-    source: hosted
-<<<<<<< HEAD
-    version: "0.4.9+1"
-=======
     version: "0.6.2"
   flutter_svg:
     dependency: "direct main"
@@ -277,25 +244,17 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.6"
->>>>>>> 48bf27863a2486d300402f525820a56e9208b3a3
   flutter_test:
     dependency: "direct dev"
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_web_plugins:
-    dependency: transitive
-    description: flutter
-    source: sdk
-    version: "0.0.0"
-  glob:
-    dependency: transitive
+  flutter_typeahead:
+    dependency: "direct main"
     description:
-      name: glob
+      name: flutter_typeahead
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
-=======
     version: "4.1.1"
   flutter_web_plugins:
     dependency: transitive
@@ -308,7 +267,6 @@ packages:
       name: glob
       url: "https://pub.dartlang.org"
     source: hosted
->>>>>>> 48bf27863a2486d300402f525820a56e9208b3a3
     version: "2.1.1"
   http:
     dependency: "direct main"
@@ -513,8 +471,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.3"
-<<<<<<< HEAD
-=======
   settings_ui:
     dependency: "direct main"
     description:
@@ -522,7 +478,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.2"
->>>>>>> 48bf27863a2486d300402f525820a56e9208b3a3
   share_plus:
     dependency: "direct main"
     description:
@@ -619,7 +574,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.3.1"
-<<<<<<< HEAD
   uni_links:
     dependency: "direct main"
     description:
@@ -641,25 +595,12 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.0"
-  universal_io:
-=======
-  url_launcher_linux:
->>>>>>> 48bf27863a2486d300402f525820a56e9208b3a3
-    dependency: transitive
-    description:
-      name: url_launcher_linux
-      url: "https://pub.dartlang.org"
-    source: hosted
-<<<<<<< HEAD
-    version: "2.0.4"
   url_launcher_linux:
     dependency: transitive
     description:
       name: url_launcher_linux
       url: "https://pub.dartlang.org"
     source: hosted
-=======
->>>>>>> 48bf27863a2486d300402f525820a56e9208b3a3
     version: "3.0.1"
   url_launcher_platform_interface:
     dependency: transitive
