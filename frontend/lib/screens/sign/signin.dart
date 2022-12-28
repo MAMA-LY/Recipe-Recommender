@@ -86,6 +86,7 @@ class _SignInPageState extends State<SignInPage> {
                       bottomMargin: 20,
                       controller: usernameController,
                       obscureText: false,
+                      icon: Icons.person,
                     ),
                     CustomTextField(
                       hintText: "Enter your password here..",
@@ -93,6 +94,7 @@ class _SignInPageState extends State<SignInPage> {
                       bottomMargin: 15,
                       controller: passwordController,
                       obscureText: true,
+                      icon: Icons.password,
                     ),
                     Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,

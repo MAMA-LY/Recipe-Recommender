@@ -34,17 +34,17 @@ class _CustomExpansionTileState extends State<CustomExpansionTile> {
                         backgroundColor: Constants.primaryColor,
                         label: Text(
                           e,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontFamily: "Roboto",
                             fontWeight: FontWeight.bold,
                             fontStyle: FontStyle.italic,
                             fontSize: 16,
-                            color: Constants.secondaryColor,
+                            color: Theme.of(context).secondaryHeaderColor,
                           ),
                         ),
-                        deleteIcon: const Icon(
+                        deleteIcon: Icon(
                           Icons.remove_circle,
-                          color: Constants.secondaryColor,
+                          color: Theme.of(context).secondaryHeaderColor,
                         ),
                         onDeleted: () {
                           widget.remove(e);
