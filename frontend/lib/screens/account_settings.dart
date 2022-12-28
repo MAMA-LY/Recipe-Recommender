@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:recipe_recommender_frontend/screens/page_view_controller.dart';
 import 'package:recipe_recommender_frontend/models/user_profile.dart';
 
 import '../api/user_profile_api.dart';
@@ -61,10 +60,14 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
           Column(
             children: [
               Row(
-                children: [
-                  Icon(Icons.person),
-                  SizedBox(
-                    height: 50,
+                children: [const SizedBox(
+                  height: 75,
+                  width: 15,
+                ),
+                  const Icon(Icons.person),
+                  const SizedBox(
+                    height: 75,
+                    width: 5,
                   ),
                   Align(
                     alignment: Alignment.center,
@@ -73,7 +76,45 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
                           return Text(
-                            snapshot.data!.username,
+                            ": ${snapshot.data!.username}",
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: "Roboto",
+                              color: Theme.of(context).focusColor,
+                            ),
+                          );
+                        } else if (snapshot.hasError) {
+                          return Text('${snapshot.error}');
+                        } else {
+                          return const Center(
+                              child: CircularProgressIndicator(
+                            color: Constants.primaryColor,
+                          ));
+                        }
+                      },
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                children: [const SizedBox(
+                  height: 75,
+                  width: 15,
+                ),
+                  const Icon(Icons.email_outlined),
+                  const SizedBox(
+                    height: 75,
+                    width: 5,
+                  ),
+                  Align(
+                    alignment: Alignment.center,
+                    child: FutureBuilder<UserProfile>(
+                      future: futureuserProfile,
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          return Text(
+                            ": ${snapshot.data!.email}",
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
@@ -96,9 +137,14 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
               ),
               Row(
                 children: [
-                  Icon(Icons.email_outlined),
-                  SizedBox(
-                    height: 50,
+                  const SizedBox(
+                  height: 75,
+                  width: 15,
+                ),
+                  const Icon(Icons.height),
+                  const SizedBox(
+                    height: 75,
+                    width: 5,
                   ),
                   Align(
                     alignment: Alignment.center,
@@ -107,7 +153,7 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
                           return Text(
-                            snapshot.data!.email,
+                            ": ${snapshot.data!.height}",
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
@@ -130,9 +176,14 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
               ),
               Row(
                 children: [
-                  Icon(Icons.height),
-                  SizedBox(
-                    height: 50,
+                  const SizedBox(
+                    height: 75,
+                    width: 15,
+                  ),
+                  const Icon(Icons.monitor_weight_outlined),
+                  const SizedBox(
+                    height: 75,
+                    width: 5,
                   ),
                   Align(
                     alignment: Alignment.center,
@@ -140,8 +191,8 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
                       future: futureuserProfile,
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
-                          return Text(
-                            (snapshot.data!.height).toString(),
+                          return  Text(
+                            ": ${snapshot.data!.weight}",
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
@@ -163,10 +214,14 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
                 ],
               ),
               Row(
-                children: [
-                  Icon(Icons.monitor_weight_outlined),
-                  SizedBox(
-                    height: 50,
+                children: [const SizedBox(
+                  height: 75,
+                  width: 15,
+                ),
+                  const Icon(Icons.calendar_today),
+                  const SizedBox(
+                    height: 75,
+                    width: 5,
                   ),
                   Align(
                     alignment: Alignment.center,
@@ -175,44 +230,7 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
                           return Text(
-                            'weight : ' + (snapshot.data!.weight).toString(),
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: "Roboto",
-                              color: Theme.of(context).focusColor,
-                            ),
-                          );
-                        } else if (snapshot.hasError) {
-                          return Text('${snapshot.error}');
-                        } else {
-                          return const Center(
-                              child: CircularProgressIndicator(
-                            color: Constants.primaryColor,
-                          ));
-                        }
-                      },
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-                  Icon(Icons.calendar_today),
-                  SizedBox(
-                    height: 50,
-                  ),
-                  SizedBox(
-                    height: 50,
-                  ),
-                  Align(
-                    alignment: Alignment.center,
-                    child: FutureBuilder<UserProfile>(
-                      future: futureuserProfile,
-                      builder: (context, snapshot) {
-                        if (snapshot.hasData) {
-                          return Text(
-                            snapshot.data!.birthdate,
+                            ": ${snapshot.data!.birthdate}",
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
