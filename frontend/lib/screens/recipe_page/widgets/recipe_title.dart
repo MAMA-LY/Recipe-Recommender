@@ -47,12 +47,12 @@ class RecipeTitle extends StatelessWidget {
                     backgroundColor: Constants.primaryColor,
                     label: Text(
                       recipe.tags![i],
-                      style: const TextStyle(
+                      style:  TextStyle(
                         fontFamily: "Roboto",
                         fontWeight: FontWeight.bold,
                         fontStyle: FontStyle.italic,
                         fontSize: 14,
-                        color: Constants.secondaryColor,
+                        color: Theme.of(context).secondaryHeaderColor,
                       ),
                     ),
                   ),
