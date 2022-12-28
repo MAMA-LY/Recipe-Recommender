@@ -5,9 +5,9 @@ class UserProfile {
 
   final String email;
 
-  final double height;
+  final Double height;
 
-  final double weight;
+  final Double weight;
 
   final String birthdate;
 
@@ -22,8 +22,8 @@ class UserProfile {
     return UserProfile(
         username: json['username'] as String,
         email: json['email'] as String,
-        height: json['height'],
-        weight: json['weight'],
+        height: json['height'] as Double,
+        weight: json['weight'] as Double,
         birthdate: json['birthdate'] as String);
   }
 
