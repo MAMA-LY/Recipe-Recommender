@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Locale;
 
 @Component
@@ -27,7 +28,6 @@ public class UserAuthenticator {
     @Autowired
     public BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    private final SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
 
     public Response createAuthentications(String username, String password, String email, String height, String weight, String gender, String birthdate) throws ParseException {
         if (userExistsByUsername(username))
@@ -47,7 +47,7 @@ public class UserAuthenticator {
         user.setHeight(Integer.parseInt(height));
         user.setWeight(Integer.parseInt(weight));
         user.setGender(gender);
-        user.setBirthdate((Date) formatter.parse(birthdate));
+        user.setBirthdate(Date.valueOf(LocalDate.parse(birthdate)));
         userRepository.save(user);
         System.out.println(encryptedPD.length());
         return Response.UserCreated;
