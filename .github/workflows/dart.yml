@@ -26,9 +26,6 @@ jobs:
 
       - name: Install dependencies
         run: flutter pub get
-      
-      - name: Run tests
-        run: flutter test
 
   build_web:
     runs-on: ubuntu-latest
