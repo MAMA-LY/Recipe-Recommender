@@ -1,5 +1,4 @@
-package com.brainfood.security.Model;
-import com.brainfood.security.model.UserCredentials;
+package com.brainfood.security.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
