@@ -9,6 +9,9 @@ class Recipe {
   List<Ingredient>? ingredients;
   final String image;
   Nutrition? nutrition;
+  double rate;
+  int rates_count;
+  double currentUserCount;
 
   Recipe(
       {required this.name,
@@ -17,7 +20,10 @@ class Recipe {
       this.tags,
       this.ingredients,
       this.nutrition,
-      this.cuisine});
+      this.cuisine,
+      this.rate = 0,
+      this.rates_count = 0,
+      this.currentUserCount = 0});
 
   factory Recipe.shortRecipeFromJson(dynamic json) {
     return Recipe(
@@ -40,7 +46,10 @@ class Recipe {
           nutrition: Nutrition.fromJson(json['nutrition']),
           ingredients: jsonIngredients
               .map<Ingredient>((json) => Ingredient.fromJson(json))
-              .toList());
+              .toList(),
+          rate: json['rate'] as double,
+          rates_count: json['rates_count'] as int,
+          currentUserCount: json['currentUserCount'] as double);
     } else {
       return Recipe(
           name: json['name'] as String,
@@ -50,7 +59,10 @@ class Recipe {
           nutrition: Nutrition.fromJson(json['nutrition']),
           ingredients: jsonIngredients
               .map<Ingredient>((json) => Ingredient.fromJson(json))
-              .toList());
+              .toList(),
+          rate: json['rate'] as double,
+          rates_count: json['rates_count'] as int,
+          currentUserCount: json['currentUserCount'] as double);
     }
   }
 

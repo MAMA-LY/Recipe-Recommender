@@ -30,6 +30,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests().requestMatchers("/home/**").authenticated().and()
                 .authorizeHttpRequests().requestMatchers(HttpMethod.GET, "/share/recipe/**").permitAll().and()
                 .authorizeHttpRequests().requestMatchers("/search/**").authenticated().and()
+                .authorizeHttpRequests().requestMatchers(HttpMethod.POST,"/home/rateRecipe/**").authenticated().and()
                 .authorizeHttpRequests().requestMatchers(HttpMethod.POST, "/signup/**").permitAll().and()
                 .formLogin().loginPage("/signin").defaultSuccessUrl("/home").loginProcessingUrl("/signin").and()
                 .logout().logoutUrl("/signout").logoutRequestMatcher(new AntPathRequestMatcher("/signout"))

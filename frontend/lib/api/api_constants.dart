@@ -1,5 +1,5 @@
 class APIConstants {
-  static const baseUrl = String.fromEnvironment("BrainFoodBackendIP", defaultValue: "brainfood.azurewebsites.net");
+  static const baseUrl = String.fromEnvironment("BrainFoodBackendIP", defaultValue: "brainfood-test.azurewebsites.net");
   static String signupEndPoint = "/signup";
   static String signinEndPoint = "/signin";
   static String signoutEndPoint = "/signout";
@@ -11,6 +11,7 @@ class APIConstants {
   static String forgetPasswordEndPoint = "/forgetPassword";
   static String resetPassword = "/resetPassword";
   static String changePassword = "/changePassword";
+  static String rateRecipe = "/home/rateRecipe";
   static Map<String, String> headerCORS(String cookie) {
     if (cookie != "") {
       return {
