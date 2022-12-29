@@ -198,6 +198,9 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
               ),
               Row(
                 children: [
+                  const SizedBox(
+                      width: 15,
+                      height: 50),
                   Align(
                     alignment: Alignment.center,
                     child: FutureBuilder<UserProfile>(
