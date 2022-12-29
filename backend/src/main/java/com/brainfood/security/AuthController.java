@@ -47,7 +47,7 @@ public class AuthController {
     }
 
     @GetMapping("/home")
-    public String test() {
+    public String home() {
         return "UserInfo";
     }
 

@@ -7,11 +7,8 @@ class CustomTextField extends StatelessWidget {
   final double bottomMargin;
   final TextEditingController controller;
   final bool obscureText;
-<<<<<<< HEAD
-=======
   final IconData icon;
 
->>>>>>> 85454ec4ab4e9c039726b8d4a1db0805cff138c4
   const CustomTextField({
     Key? key,
     required this.labelText,

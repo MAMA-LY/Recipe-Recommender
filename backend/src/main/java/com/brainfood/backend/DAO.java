@@ -2,7 +2,9 @@ package com.brainfood.backend;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -14,13 +16,26 @@ import com.brainfood.backend.db_repositories.IngredientRepository;
 import com.brainfood.backend.db_repositories.RecipeRepository;
 import com.brainfood.backend.models.Recipe;
 import com.brainfood.backend.models.ShortRecipe;
+import com.brainfood.security.Response;
+import com.brainfood.security.model.User;
+import com.brainfood.security.model.UserFavRecipes;
+import com.brainfood.security.model.UserFavRecipesCK;
+import com.brainfood.security.repository.UserFavRecipesRepository;
+import com.brainfood.security.repository.UserRepository;
 
 @Component
 public class DAO {
     @Autowired
     RecipeRepository recipeRepository;
+
     @Autowired
     IngredientRepository ingredientRepository;
+
+    @Autowired
+    UserRepository userRepository;
+
+    @Autowired
+    UserFavRecipesRepository userFavRecipesRepository;
 
     public List<RecipeDB> findSimilarDishes(List<ShortRecipe> dishes) {
         List<RecipeDB> result = new ArrayList<>();
@@ -71,16 +86,54 @@ public class DAO {
         return currentRecipeDBS;
     }
 
-    public Recipe findRecipe(String id) {
+    public Recipe findRecipe(String id, String username) {
         System.out.println(id);
         RecipeDB recipeDB = recipeRepository.findByIdEquals(id);
         List<IngredientDB> ingredientDBS = recipeRepository.findIngredientsByIdEquals(id);
         List<String> tags = recipeRepository.findTagsByIdEquals(id);
-
-        return Director.buildRecipe(recipeDB, ingredientDBS, tags);
+        List<RecipeDB> favRecipes = this.getFavRecipesByUsername(username);
+        return Director.buildRecipe(recipeDB, ingredientDBS, tags, favRecipes.contains(recipeDB));
     }
 
     public List<String> getAllIngredients() {
         return ingredientRepository.getDistinctByName();
     }
+
+    public Response addFavRecipeByUsername(String username, String recipeid) {
+        RecipeDB recipe = recipeRepository.findByIdEquals(recipeid);
+        if(recipe == null) return Response.CannotAddFavRecipe;
+        User user = userRepository.findByUsername(username);
+        if(user == null) return Response.CannotAddFavRecipe;
+        String userid = user.getID();
+        Set<RecipeDB> recipesFav = userRepository.findFavRecipesById(userid);
+        System.out.println(recipesFav);
+        if(recipesFav.contains(recipe)) return Response.RecipeAlreadyFav;
+        UserFavRecipes userFavRecipes = new UserFavRecipes();
+        userFavRecipes.setCompositeKey(new UserFavRecipesCK(userid, recipeid));
+        userFavRecipesRepository.save(userFavRecipes);
+        return Response.AddedFavRecipe;
+    } 
+
+    public List<RecipeDB> getFavRecipesByUsername(String username) {
+        User user = userRepository.findByUsername(username);
+        if(user == null) return null;
+        String userid = user.getID();
+        Set<RecipeDB> recipesFav = userRepository.findFavRecipesById(userid);
+        return new ArrayList<RecipeDB>(recipesFav);
+    }
+
+    public Response removeFavRecipeByUsername(String username, String recipeid) {
+        RecipeDB recipe = recipeRepository.findByIdEquals(recipeid);
+        if(recipe == null) return Response.CannotRemoveFavRecipe;
+        User user = userRepository.findByUsername(username);
+        if(user == null) return Response.CannotRemoveFavRecipe;
+        String userid = user.getID();
+        Set<RecipeDB> recipesFav = userRepository.findFavRecipesById(userid);
+        if(!recipesFav.contains(recipe)) return Response.RecipeAlreadyNotAFav;
+        UserFavRecipes userFavRecipes = new UserFavRecipes();
+        userFavRecipes.setCompositeKey(new UserFavRecipesCK(userid, recipeid));
+        userFavRecipesRepository.delete(userFavRecipes);
+        return Response.RemovedFavRecipe;
+    }
+
 }

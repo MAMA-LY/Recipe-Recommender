@@ -38,7 +38,7 @@ public class Director {
                 .build();
     }
 
-    public static Recipe buildRecipe(RecipeDB recipeDB, List<IngredientDB> ingredientDBS, List<String> tags) {
+    public static Recipe buildRecipe(RecipeDB recipeDB, List<IngredientDB> ingredientDBS, List<String> tags, boolean fav) {
         List<Ingredient> ingredients = new ArrayList<>();
         for (IngredientDB ingredientDB : ingredientDBS)
             ingredients.add(buildIngredientModel(ingredientDB));
@@ -51,6 +51,7 @@ public class Director {
                 .nutrition(buildRecipeNutritionModel(recipeDB))
                 .ingredients(ingredients)
                 .tags(tags)
+                .favourite(fav)
                 .build();
     }
 }

@@ -4,6 +4,7 @@ import com.brainfood.backend.models.Recipe;
 import com.brainfood.backend.DAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,7 +20,8 @@ public class ShareController {
 
     @GetMapping("recipe")
     public Recipe getRecipeDetailsByName(@RequestParam(name = "id") String id) {
-        return dao.findRecipe(id);
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        return dao.findRecipe(id, username);
     }
 
 }
