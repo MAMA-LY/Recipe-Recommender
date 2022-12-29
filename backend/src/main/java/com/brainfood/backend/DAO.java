@@ -101,7 +101,6 @@ public class DAO {
 
     public Response addFavRecipeByUsername(String username, String recipeid) {
         User user = userRepository.findByUsername(username);
-        if(user == null) return Response.CannotAddFavRecipe;
         String userid = user.getID();
         UserFavRecipes userFavRecipes = new UserFavRecipes();
         userFavRecipes.setCompositeKey(new UserFavRecipesCK(userid, recipeid));
@@ -111,7 +110,6 @@ public class DAO {
 
     public List<RecipeDB> getFavRecipesByUsername(String username) {
         User user = userRepository.findByUsername(username);
-        if(user == null) return null;
         String userid = user.getID();
         List<RecipeDB> recipesFav = userRepository.findFavRecipesById(userid);
         return recipesFav;
@@ -119,7 +117,6 @@ public class DAO {
 
     public Response removeFavRecipeByUsername(String username, String recipeid) {
         User user = userRepository.findByUsername(username);
-        if(user == null) return Response.CannotRemoveFavRecipe;
         String userid = user.getID();
         UserFavRecipes userFavRecipes = new UserFavRecipes();
         userFavRecipes.setCompositeKey(new UserFavRecipesCK(userid, recipeid));
