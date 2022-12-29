@@ -1,7 +1,7 @@
 package com.brainfood.security.repository;
 
-import com.brainfood.backend.db_entities.UserCredentials;
 import com.brainfood.security.model.PasswordResetToken;
+import com.brainfood.security.model.UserCredentials;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

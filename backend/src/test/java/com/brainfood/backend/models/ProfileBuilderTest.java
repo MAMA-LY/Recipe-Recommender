@@ -7,7 +7,7 @@ import java.sql.Timestamp;
 
 import org.junit.jupiter.api.Test;
 
-import com.brainfood.backend.db_entities.UserCredentials;
+import com.brainfood.security.model.UserCredentials;
 
 
 public class ProfileBuilderTest {

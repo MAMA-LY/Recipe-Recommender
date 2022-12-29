@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import com.brainfood.backend.db_entities.IngredientDB;
 import com.brainfood.backend.db_entities.RecipeDB;
+import com.brainfood.backend.db_entities.User;
 import com.brainfood.backend.db_entities.UserFavRecipes;
 import com.brainfood.backend.db_entities.UserFavRecipesCK;
 import com.brainfood.backend.db_repositories.IngredientRepository;
@@ -21,7 +22,6 @@ import com.brainfood.backend.db_repositories.UserRepository;
 import com.brainfood.backend.models.Recipe;
 import com.brainfood.backend.models.ShortRecipe;
 import com.brainfood.security.Response;
-import com.brainfood.security.model.User;
 
 @Component
 public class DAO {
@@ -100,14 +100,9 @@ public class DAO {
     }
 
     public Response addFavRecipeByUsername(String username, String recipeid) {
-        RecipeDB recipe = recipeRepository.findByIdEquals(recipeid);
-        if(recipe == null) return Response.CannotAddFavRecipe;
         User user = userRepository.findByUsername(username);
         if(user == null) return Response.CannotAddFavRecipe;
         String userid = user.getID();
-        Set<RecipeDB> recipesFav = userRepository.findFavRecipesById(userid);
-        System.out.println(recipesFav);
-        if(recipesFav.contains(recipe)) return Response.RecipeAlreadyFav;
         UserFavRecipes userFavRecipes = new UserFavRecipes();
         userFavRecipes.setCompositeKey(new UserFavRecipesCK(userid, recipeid));
         userFavRecipesRepository.save(userFavRecipes);
@@ -118,18 +113,14 @@ public class DAO {
         User user = userRepository.findByUsername(username);
         if(user == null) return null;
         String userid = user.getID();
-        Set<RecipeDB> recipesFav = userRepository.findFavRecipesById(userid);
-        return new ArrayList<RecipeDB>(recipesFav);
+        List<RecipeDB> recipesFav = userRepository.findFavRecipesById(userid);
+        return recipesFav;
     }
 
     public Response removeFavRecipeByUsername(String username, String recipeid) {
-        RecipeDB recipe = recipeRepository.findByIdEquals(recipeid);
-        if(recipe == null) return Response.CannotRemoveFavRecipe;
         User user = userRepository.findByUsername(username);
         if(user == null) return Response.CannotRemoveFavRecipe;
         String userid = user.getID();
-        Set<RecipeDB> recipesFav = userRepository.findFavRecipesById(userid);
-        if(!recipesFav.contains(recipe)) return Response.RecipeAlreadyNotAFav;
         UserFavRecipes userFavRecipes = new UserFavRecipes();
         userFavRecipes.setCompositeKey(new UserFavRecipesCK(userid, recipeid));
         userFavRecipesRepository.delete(userFavRecipes);

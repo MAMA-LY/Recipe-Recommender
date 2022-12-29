@@ -2,7 +2,7 @@ package com.brainfood.backend.models;
 
 import org.junit.jupiter.api.Test;
 
-import com.brainfood.backend.db_entities.UserCredentials;
+import com.brainfood.security.model.UserCredentials;
 
 import java.lang.reflect.Field;
 import java.sql.Timestamp;

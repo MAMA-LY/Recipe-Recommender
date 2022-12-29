@@ -1,4 +1,4 @@
-package com.brainfood.backend.db_entities;
+package com.brainfood.security.model;
 
 import java.io.Serializable;
 

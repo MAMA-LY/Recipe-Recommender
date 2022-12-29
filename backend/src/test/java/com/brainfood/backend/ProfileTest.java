@@ -15,11 +15,11 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import com.brainfood.backend.db_entities.UserCredentials;
 import com.brainfood.backend.models.BodyInfo;
 import com.brainfood.backend.models.Calendar;
 import com.brainfood.backend.models.Profile;
 import com.brainfood.backend.models.Recipe;
+import com.brainfood.security.model.UserCredentials;
 
 class ProfileTest {
 

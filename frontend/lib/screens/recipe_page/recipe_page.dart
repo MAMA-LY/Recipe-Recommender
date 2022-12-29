@@ -36,9 +36,8 @@ class _RecipePageState extends State<RecipePage>
 
   late TabController _tabController;
   late ScrollController _scrollController;
-  late bool _inFavorites;
+  late bool _inFavorites = false;
   Color favColor = Constants.secondaryColor;
-  bool fav = false;
   @override
   void initState() {
     super.initState();
@@ -48,8 +47,7 @@ class _RecipePageState extends State<RecipePage>
     if (widget.recipe.favourite != null) {
       if (widget.recipe.favourite == true) {
         setState(() {
-          favColor = Constants.thirdColor;
-          fav = true;
+          _inFavorites = true;
         });
       }
     }
@@ -63,15 +61,6 @@ class _RecipePageState extends State<RecipePage>
     super.dispose();
   }
 
-  Color getFavColor() {
-    debugPrint(widget.recipe.favourite.toString());
-    if (widget.recipe.favourite == null)
-      return Theme.of(context).secondaryHeaderColor;
-    if (widget.recipe.favourite == false)
-      return Theme.of(context).secondaryHeaderColor;
-    if (widget.recipe.favourite == true) return Constants.thirdColor;
-    return Constants.primaryColor;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -122,7 +111,7 @@ class _RecipePageState extends State<RecipePage>
 
       //   onPressed: () {
       //     //TODO: update the user fav recipes
-      //   },
+      //   }, 
       //   elevation: 2.0,
       //   backgroundColor: Constants.primaryColor,
       //   child: Icon(
@@ -141,13 +130,12 @@ class _RecipePageState extends State<RecipePage>
             if (choice == "Save") {
               return PopupMenuItem<String>(
                   onTap: () async {
-                    if (fav) {
+                    if (_inFavorites) {
                       String response =
                           await api.removeFavRecipe(widget.recipe.id);
                       if (response == Response.RemovedFavRecipe.name) {
                         setState(() {
-                          fav = false;
-                          favColor = Constants.secondaryColor;
+                          _inFavorites = false;
                         });
                       }
                     } else {
@@ -155,8 +143,7 @@ class _RecipePageState extends State<RecipePage>
                           await api.addFavRecipe(widget.recipe.id);
                       if (response == Response.AddedFavRecipe.name) {
                         setState(() {
-                          fav = true;
-                          favColor = Constants.thirdColor;
+                          _inFavorites = true;
                         });
                       }
                     }
@@ -164,7 +151,7 @@ class _RecipePageState extends State<RecipePage>
                   value: choice,
                   child: Row(children: [
                     Icon(_inFavorites ? Icons.favorite : Icons.favorite_border,
-                        color: favColor),
+                        color: Constants.secondaryColor),
                     const SizedBox(width: 5.0),
                     Text("Save",
                         style: TextStyle(

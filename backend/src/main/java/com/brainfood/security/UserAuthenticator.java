@@ -1,8 +1,8 @@
 package com.brainfood.security;
 
-import com.brainfood.backend.db_entities.UserCredentials;
+import com.brainfood.backend.db_entities.User;
 import com.brainfood.backend.db_repositories.UserRepository;
-import com.brainfood.security.model.User;
+import com.brainfood.security.model.UserCredentials;
 import com.brainfood.security.repository.UserCredentialsRepository;
 
 import lombok.Getter;

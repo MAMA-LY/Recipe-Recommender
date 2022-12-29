@@ -5,7 +5,7 @@ import lombok.*;
 import java.sql.Timestamp;
 import java.util.List;
 
-import com.brainfood.backend.db_entities.UserCredentials;
+import com.brainfood.security.model.UserCredentials;
 
 @Getter
 @Setter
