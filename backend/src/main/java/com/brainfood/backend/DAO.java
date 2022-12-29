@@ -7,16 +7,10 @@ import com.brainfood.backend.db_repositories.RecipeRepository;
 import com.brainfood.backend.models.Recipe;
 import com.brainfood.backend.models.ShortRecipe;
 import com.brainfood.backend.models.UserProfile;
-import com.brainfood.security.UserAuthenticator;
-import com.brainfood.security.model.User;
-import com.brainfood.security.model.UserCredentials;
 import com.brainfood.security.repository.UserCredentialsRepository;
-import com.brainfood.security.repository.UserRepository;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,17 +18,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
-import com.brainfood.backend.db_entities.IngredientDB;
-import com.brainfood.backend.db_entities.RecipeDB;
 import com.brainfood.backend.db_entities.User;
 import com.brainfood.backend.db_entities.UserFavRecipes;
 import com.brainfood.backend.db_entities.UserFavRecipesCK;
-import com.brainfood.backend.db_repositories.IngredientRepository;
-import com.brainfood.backend.db_repositories.RecipeRepository;
 import com.brainfood.backend.db_repositories.UserFavRecipesRepository;
 import com.brainfood.backend.db_repositories.UserRepository;
-import com.brainfood.backend.models.Recipe;
-import com.brainfood.backend.models.ShortRecipe;
 import com.brainfood.security.Response;
 
 @Component
@@ -119,13 +107,12 @@ public class DAO {
         String username= SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userRepository.findByUsername(username);
         String email= userCredentialsRepository.findByUsername(username).getEmail();
-        UserProfile userProfile = UserProfile.builder().username(username)
+
+        return UserProfile.builder().username(username)
                 .birthdate(user.getBirthdate())
                 .height(user.getHeight())
                 .weight(user.getWeight())
                 .email(email).build();
-
-        return userProfile;
     }
     public Response addFavRecipeByUsername(String username, String recipeID) {
         User user = userRepository.findByUsername(username);
@@ -139,8 +126,7 @@ public class DAO {
     public List<RecipeDB> getFavRecipesByUsername(String username) {
         User user = userRepository.findByUsername(username);
         String userID = user.getID();
-        List<RecipeDB> recipesFav = userRepository.findFavRecipesById(userID);
-        return recipesFav;
+        return userRepository.findFavRecipesById(userID);
     }
 
     public Response removeFavRecipeByUsername(String username, String recipeID) {
