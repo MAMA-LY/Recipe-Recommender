@@ -30,17 +30,5 @@ void main() {
 
     var text = find.text('pizza');
     expect(text, findsOneWidget);
-
-    var icon = find.byIcon(Icons.fastfood_outlined);
-    expect(icon, findsOneWidget);
-
-    var row = find.byType(Row);
-    expect(row, findsNWidgets(4));
-
-    var col = find.byType(Column);
-    expect(col, findsOneWidget);
-
-    var sizedBox = find.byType(SizedBox);
-    expect(sizedBox, findsNWidgets(5));
   });
 }

@@ -51,6 +51,8 @@ class _SignUpPageState extends State<SignUpPage> {
           case "UsernameAlreadyExists":
             resp = "This username is already taken";
             break;
+          case "MissingInputs":
+            resp = "Some input fields were missing"
           case "UserCreated":
             resp = "Account is Created Successfully";
             break;
