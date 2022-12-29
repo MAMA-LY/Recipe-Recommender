@@ -15,7 +15,7 @@ class RecipesAPI {
 
   Future<Recipe> getRecipeByID(String id) async {
     var url =
-        Uri.http(APIConstants.baseUrl, APIConstants.recipeEndPoint, {"id": id});
+        Uri.https(APIConstants.baseUrl, APIConstants.recipeEndPoint, {"id": id});
     var response =
         await http.get(url, headers: APIConstants.headerCORS(session.cookie));
     debugPrint(response.statusCode.toString());
@@ -32,7 +32,7 @@ class RecipesAPI {
 
   Future<List<Recipe>> getRecipesWithQuery(
       String path, Map<String, String> query) async {
-    var url = Uri.http(APIConstants.baseUrl, path, query);
+    var url = Uri.https(APIConstants.baseUrl, path, query);
     var response =
         await http.get(url, headers: APIConstants.headerCORS(session.cookie));
     debugPrint(response.statusCode.toString());
@@ -50,7 +50,7 @@ class RecipesAPI {
   }
 
   Future<List<Recipe>> getFavRecipes() async {
-    var url = Uri.http(APIConstants.baseUrl, APIConstants.getFavRecipeEndPoint);
+    var url = Uri.https(APIConstants.baseUrl, APIConstants.getFavRecipeEndPoint);
     var response =
         await http.get(url, headers: APIConstants.headerCORS(session.cookie));
 
@@ -67,7 +67,7 @@ class RecipesAPI {
   }
 
   Future<String> addFavRecipe(String id) async {
-    var url = Uri.http(
+    var url = Uri.https(
         APIConstants.baseUrl, APIConstants.addFavRecipeEndPoint, {"id": id});
     var response =
         await http.post(url, headers: APIConstants.headerCORS(session.cookie));
@@ -83,7 +83,7 @@ class RecipesAPI {
   }
 
   Future<String> removeFavRecipe(String id) async {
-    var url = Uri.http(
+    var url = Uri.https(
         APIConstants.baseUrl, APIConstants.removeFavRecipeEndPoint, {"id": id});
     var response =
         await http.post(url, headers: APIConstants.headerCORS(session.cookie));
