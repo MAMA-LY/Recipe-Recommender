@@ -99,27 +99,27 @@ public class DAO {
         return ingredientRepository.getDistinctByName();
     }
 
-    public Response addFavRecipeByUsername(String username, String recipeid) {
+    public Response addFavRecipeByUsername(String username, String recipeId) {
         User user = userRepository.findByUsername(username);
-        String userid = user.getID();
+        String userId = user.getID();
         UserFavRecipes userFavRecipes = new UserFavRecipes();
-        userFavRecipes.setCompositeKey(new UserFavRecipesCK(userid, recipeid));
+        userFavRecipes.setCompositeKey(new UserFavRecipesCK(userId, recipeId));
         userFavRecipesRepository.save(userFavRecipes);
         return Response.AddedFavRecipe;
     } 
 
     public List<RecipeDB> getFavRecipesByUsername(String username) {
         User user = userRepository.findByUsername(username);
-        String userid = user.getID();
-        List<RecipeDB> recipesFav = userRepository.findFavRecipesById(userid);
+        String userId = user.getID();
+        List<RecipeDB> recipesFav = userRepository.findFavRecipesById(userId);
         return recipesFav;
     }
 
-    public Response removeFavRecipeByUsername(String username, String recipeid) {
+    public Response removeFavRecipeByUsername(String username, String recipeId) {
         User user = userRepository.findByUsername(username);
-        String userid = user.getID();
+        String userId = user.getID();
         UserFavRecipes userFavRecipes = new UserFavRecipes();
-        userFavRecipes.setCompositeKey(new UserFavRecipesCK(userid, recipeid));
+        userFavRecipes.setCompositeKey(new UserFavRecipesCK(userId, recipeId));
         userFavRecipesRepository.delete(userFavRecipes);
         return Response.RemovedFavRecipe;
     }
