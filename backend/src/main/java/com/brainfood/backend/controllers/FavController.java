@@ -3,10 +3,6 @@ package com.brainfood.backend.controllers;
 import com.brainfood.backend.models.Recipe;
 import com.brainfood.backend.models.ShortRecipe;
 import com.brainfood.backend.utilities.Utilities;
-import com.brainfood.security.model.UserFavRecipes;
-import com.brainfood.security.model.UserFavRecipesCK;
-import com.brainfood.security.repository.UserFavRecipesRepository;
-import com.brainfood.security.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -18,6 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.brainfood.backend.DAO;
 import com.brainfood.backend.db_entities.RecipeDB;
+import com.brainfood.backend.db_entities.UserFavRecipes;
+import com.brainfood.backend.db_entities.UserFavRecipesCK;
+import com.brainfood.backend.db_repositories.UserFavRecipesRepository;
+import com.brainfood.backend.db_repositories.UserRepository;
 
 import java.util.List;
 

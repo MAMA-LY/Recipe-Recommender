@@ -12,16 +12,16 @@ import org.springframework.stereotype.Component;
 
 import com.brainfood.backend.db_entities.IngredientDB;
 import com.brainfood.backend.db_entities.RecipeDB;
+import com.brainfood.backend.db_entities.UserFavRecipes;
+import com.brainfood.backend.db_entities.UserFavRecipesCK;
 import com.brainfood.backend.db_repositories.IngredientRepository;
 import com.brainfood.backend.db_repositories.RecipeRepository;
+import com.brainfood.backend.db_repositories.UserFavRecipesRepository;
+import com.brainfood.backend.db_repositories.UserRepository;
 import com.brainfood.backend.models.Recipe;
 import com.brainfood.backend.models.ShortRecipe;
 import com.brainfood.security.Response;
 import com.brainfood.security.model.User;
-import com.brainfood.security.model.UserFavRecipes;
-import com.brainfood.security.model.UserFavRecipesCK;
-import com.brainfood.security.repository.UserFavRecipesRepository;
-import com.brainfood.security.repository.UserRepository;
 
 @Component
 public class DAO {

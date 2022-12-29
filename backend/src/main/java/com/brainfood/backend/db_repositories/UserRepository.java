@@ -1,9 +1,9 @@
-package com.brainfood.security.repository;
+package com.brainfood.backend.db_repositories;
 
 
 import com.brainfood.backend.db_entities.RecipeDB;
+import com.brainfood.backend.db_entities.UserFavRecipes;
 import com.brainfood.security.model.User;
-import com.brainfood.security.model.UserFavRecipes;
 
 import java.util.List;
 import java.util.Set;

@@ -1,10 +1,11 @@
 package com.brainfood.security;
 
-import com.brainfood.security.model.UserCredentials;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
+
+import com.brainfood.backend.db_entities.UserCredentials;
 
 import java.util.Collection;
 import java.util.Collections;

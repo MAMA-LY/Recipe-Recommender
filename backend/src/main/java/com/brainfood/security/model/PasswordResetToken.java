@@ -3,6 +3,8 @@ package com.brainfood.security.model;
 import java.io.Serializable;
 import java.util.UUID;
 
+import com.brainfood.backend.db_entities.UserCredentials;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
