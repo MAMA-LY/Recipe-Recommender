@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:recipe_recommender_frontend/models/user_profile.dart';
+import 'package:recipe_recommender_frontend/screens/sign/widgets/text_field.dart';
 
 import '../api/user_profile_api.dart';
 import '../main.dart';
@@ -60,30 +61,27 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
           Column(
             children: [
               Row(
-                children: [const SizedBox(
-                  height: 75,
-                  width: 15,
-                ),
-                  const Icon(Icons.person),
-                  const SizedBox(
-                    height: 75,
-                    width: 5,
-                  ),
+
+                children: [
+
+                  const SizedBox(height: 2),
+
                   Align(
                     alignment: Alignment.center,
                     child: FutureBuilder<UserProfile>(
                       future: futureuserProfile,
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
-                          return Text(
-                            ": ${snapshot.data!.username}",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: "Roboto",
-                              color: Theme.of(context).focusColor,
-                            ),
+                          return CustomTextField(
+                            enabled: false,
+                            hintText: "Enter your username here..",
+                            labelText: snapshot.data!.username,
+                            bottomMargin: 20,
+                            controller: TextEditingController(),
+                            obscureText: false,
+                            icon: Icons.person,
                           );
+
                         } else if (snapshot.hasError) {
                           return Text('${snapshot.error}');
                         } else {
