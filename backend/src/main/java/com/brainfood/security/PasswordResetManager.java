@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.brainfood.security.model.PasswordResetToken;
 import com.brainfood.security.repository.PasswordResetTokenRepository;
+import com.brainfood.security.model.UserCredentials;
 
 @Service
 public class PasswordResetManager {
