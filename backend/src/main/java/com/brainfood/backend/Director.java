@@ -1,13 +1,13 @@
 package com.brainfood.backend;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.brainfood.backend.db_entities.IngredientDB;
 import com.brainfood.backend.db_entities.RecipeDB;
 import com.brainfood.backend.models.Ingredient;
 import com.brainfood.backend.models.Nutrition;
 import com.brainfood.backend.models.Recipe;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Director {
     public static Nutrition buildRecipeNutritionModel(RecipeDB recipeDB) {
@@ -38,7 +38,7 @@ public class Director {
                 .build();
     }
 
-    public static Recipe buildRecipe(RecipeDB recipeDB, List<IngredientDB> ingredientDBS, List<String> tags) {
+    public static Recipe buildRecipe(RecipeDB recipeDB, List<IngredientDB> ingredientDBS, List<String> tags, boolean fav) {
         List<Ingredient> ingredients = new ArrayList<>();
         for (IngredientDB ingredientDB : ingredientDBS)
             ingredients.add(buildIngredientModel(ingredientDB));
@@ -51,6 +51,7 @@ public class Director {
                 .nutrition(buildRecipeNutritionModel(recipeDB))
                 .ingredients(ingredients)
                 .tags(tags)
+                .favourite(fav)
                 .build();
     }
 }

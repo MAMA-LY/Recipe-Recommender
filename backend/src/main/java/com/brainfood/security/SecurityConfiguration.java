@@ -27,6 +27,8 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests().requestMatchers(HttpMethod.POST, "/forgetPassword/**").permitAll().and()
                 .authorizeHttpRequests().requestMatchers(HttpMethod.GET, "/resetPassword/**").permitAll().and()
                 .authorizeHttpRequests().requestMatchers(HttpMethod.POST, "/changePassword/**").permitAll().and()
+                .authorizeHttpRequests().requestMatchers(HttpMethod.POST, "/fav/**").authenticated().and()
+                .authorizeHttpRequests().requestMatchers(HttpMethod.GET, "/fav/**").authenticated().and()
                 .authorizeHttpRequests().requestMatchers("/home/**").authenticated().and()
                 .authorizeHttpRequests().requestMatchers(HttpMethod.GET, "/share/recipe/**").permitAll().and()
                 .authorizeHttpRequests().requestMatchers("/search/**").authenticated().and()

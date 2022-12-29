@@ -34,8 +34,8 @@ class RecipeCard extends StatelessWidget {
             id: "12222",
             icon: "icon",
             amount: "3 eggs",
-            nutrition: Nutrition(calories: 18, fats: 20, carbs: 9, proteins: 6))
-      ]);
+            nutrition: Nutrition(calories: 18, fats: 20, carbs: 9, proteins: 6)),
+      ], favourite: false);
 
   RecipeCard({
     super.key,
@@ -46,6 +46,7 @@ class RecipeCard extends StatelessWidget {
 
   Future<void> _getRecipeByID(BuildContext context, String id) async {
     RecipesAPI api = RecipesAPI.fromCookie(session.cookie);
+    
     Recipe apiRecipe = await api.getRecipeByID(id);
     // ignore: use_build_context_synchronously
     Navigator.push(

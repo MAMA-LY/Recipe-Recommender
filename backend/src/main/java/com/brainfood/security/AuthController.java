@@ -1,12 +1,14 @@
 package com.brainfood.security;
 
-import com.brainfood.security.repository.UserCredentialsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.brainfood.security.repository.UserCredentialsRepository;
 
 import java.text.ParseException;
 import java.util.Map;
@@ -46,7 +48,7 @@ public class AuthController {
     }
 
     @GetMapping("/home")
-    public String test() {
+    public String home() {
         return "UserInfo";
     }
 

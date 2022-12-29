@@ -1,15 +1,25 @@
-package com.brainfood.backend.models;
+package com.brainfood.backend;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import com.brainfood.security.model.UserCredentials;
+
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.image.ImageObserver;
+import java.awt.image.ImageProducer;
 
 import java.lang.reflect.Field;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import com.brainfood.backend.models.BodyInfo;
+import com.brainfood.backend.models.Calendar;
+import com.brainfood.backend.models.Profile;
+import com.brainfood.backend.models.Recipe;
+import com.brainfood.security.model.UserCredentials;
 
 class ProfileTest {
 
@@ -40,6 +50,7 @@ class ProfileTest {
 
         List<Recipe> favoriteRecipes = new ArrayList<>();
 
+       
 
         final Profile profile = new Profile();
 
@@ -60,7 +71,7 @@ class ProfileTest {
         field.set(profile, image);
 
 
-        assertEquals(image, profile.getImage(), "problem in getImage");
+        assertEquals(image,profile.getImage(), "problem in getImage");
 
     }
 
@@ -156,20 +167,21 @@ class ProfileTest {
     }
 
     @Test
+
     void setImage() throws IllegalAccessException, NoSuchFieldException {
 
         String photo = "https://spoonacular.com/recipeImages/649977-556x370.jpg";
 
-        final Profile profile = new Profile();
+        final Profile profile =new Profile();
 
         final Field field = profile.getClass().getDeclaredField("image");
         field.setAccessible(true);
         profile.setImage(photo);
 
 
-        String actual = (String) field.get(profile);
+        String actual= (String) field.get(profile);
 
-        assertEquals(photo, actual, "problem in setImage");
+        assertEquals(photo,actual, "problem in setImage");
 
     }
 
