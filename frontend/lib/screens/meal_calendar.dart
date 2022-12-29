@@ -14,10 +14,10 @@ class MealCalendar extends StatefulWidget {
 
 class _MealCalendarState extends State<MealCalendar> {
   final List<Recipe> _recipes = [
-    Recipe(name: "name", image: "https://spoonacular.com/recipeImages/634237-556x370.jpg", id: "ID"),
-    Recipe(name: "name", image: "https://spoonacular.com/recipeImages/634237-556x370.jpg", id: "ID"),
-    Recipe(name: "name", image: "https://spoonacular.com/recipeImages/634237-556x370.jpg", id: "ID"),
-    Recipe(name: "name", image: "https://spoonacular.com/recipeImages/634237-556x370.jpg", id: "ID"),
+    Recipe(name: "name", image: "https://spoonacular.com/recipeImages/634237-556x370.jpg", id: "ID", favourite: false),
+    Recipe(name: "name", image: "https://spoonacular.com/recipeImages/634237-556x370.jpg", id: "ID", favourite: false),
+    Recipe(name: "name", image: "https://spoonacular.com/recipeImages/634237-556x370.jpg", id: "ID", favourite: false),
+    Recipe(name: "name", image: "https://spoonacular.com/recipeImages/634237-556x370.jpg", id: "ID", favourite: false),
   ];
   final bool _isLoading = false;
 

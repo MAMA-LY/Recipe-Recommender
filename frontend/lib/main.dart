@@ -129,6 +129,8 @@ StreamSubscription? _sub;
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  debugPrint(APIConstants.baseUrl);
+
   var url = Uri.https(APIConstants.baseUrl, APIConstants.homeEndPoint);
   debugPrint(url.toString());
   getLocalFile()
@@ -148,8 +150,10 @@ void main() {
 Future<String?> getServerInitResponse() async {
   session.cookie = cookieStr;
   var url = Uri.https(APIConstants.baseUrl, APIConstants.homeEndPoint);
+  debugPrint(url.toString());
   var serverResponse =
       await http.get(url, headers: APIConstants.headerCORS(session.cookie));
+  debugPrint("xxxx");
   debugPrint(serverResponse.body);
   final bool hasData = serverResponse.body != null;
   if (hasData) {
@@ -170,6 +174,7 @@ class MyApp extends StatelessWidget {
         future: getServerInitResponse(),
         initialData: "",
         builder: (builder, snapshot) {
+          debugPrint(APIConstants.baseUrl);
           if (snapshot.connectionState == ConnectionState.done) {
             String response = snapshot.data!;
             if (response == "UserInfo") {

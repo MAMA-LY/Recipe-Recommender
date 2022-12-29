@@ -25,4 +25,6 @@ public class Recipe {
 
     private Nutrition nutrition;
 
+    private boolean favourite;
+
 }

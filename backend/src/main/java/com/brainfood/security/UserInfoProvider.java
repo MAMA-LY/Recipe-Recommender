@@ -1,7 +1,9 @@
 package com.brainfood.security;
 
+import com.brainfood.backend.db_repositories.UserRepository;
 import com.brainfood.security.model.UserCredentials;
 import com.brainfood.security.repository.UserCredentialsRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
