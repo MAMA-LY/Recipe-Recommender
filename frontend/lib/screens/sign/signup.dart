@@ -224,7 +224,7 @@ class _SignUpPageState extends State<SignUpPage> {
                               ? const TextStyle(
                                   color: Colors.green, fontSize: 20)
                               : const TextStyle(
-                                  color: Colors.red, fontSize: 20))
+                                  color: Colors.red, fontSize: 20)),
                     ],
                   ),
                 ),

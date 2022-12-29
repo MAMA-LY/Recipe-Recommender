@@ -18,17 +18,24 @@ class ForgetPasswordPage extends StatefulWidget {
 class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
   var emailController = TextEditingController();
   var responseTextController = TextEditingController();
+  bool loading = false;
   String resp = "";
 
   Future<void> _forgetPassword() async {
+    setState(() {
+      loading = true;
+    });
     bool emailValid = EmailValidator.validate(emailController.text.trim());
     if (emailValid) {
-      String? body = await SignAPI.forgetPassword(emailController.text.trim());
+      String? body = await SignAPI.forgetPassword(emailController.text.trim())
+      .whenComplete(() => setState(() {
+        loading = false;
+      }));
       setState(() {
         responseTextController.text = body!;
         switch (body) {
           case "NoUserFoundByThisEmail":
-            resp = "No Account is associated with this email";
+            resp = "No Account associated with this email";
             break;
           case "PasswordResetEmailSent":
             resp = "Reset password email is sent";
@@ -46,7 +53,8 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
   @override
   Widget build(BuildContext context) {
     responseTextController.text = "";
-    return Scaffold(
+    if(!loading) {
+return Scaffold(
         backgroundColor: Theme.of(context).secondaryHeaderColor,
         body: Stack(
           children: [
@@ -75,7 +83,7 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
                     labelText: "Email",
                     bottomMargin: 20,
                     controller: emailController,
-                    obscureText: true,
+                    obscureText: false,
                     icon: Icons.email_outlined,
                   ),
                   Row(
@@ -130,5 +138,10 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
             )),
           ],
         ));
+    }
+    else {
+      return const Scaffold(body: Center(child: CircularProgressIndicator(color: Constants.primaryColor)));
+    }
+    
   }
 }
