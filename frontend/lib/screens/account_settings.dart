@@ -60,11 +60,14 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
           ),
           Column(
             children: [
+              const SizedBox(height: 20),
               Row(
 
                 children: [
 
-                  const SizedBox(height: 2),
+                  const SizedBox(
+                      width: 15,
+                      height: 50),
 
                   Align(
                     alignment: Alignment.center,
@@ -96,29 +99,24 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
                 ],
               ),
               Row(
-                children: [const SizedBox(
-                  height: 75,
-                  width: 15,
-                ),
-                  const Icon(Icons.email_outlined),
+                children: [
                   const SizedBox(
-                    height: 75,
-                    width: 5,
-                  ),
+                  width: 15,
+                  height: 50),
                   Align(
                     alignment: Alignment.center,
                     child: FutureBuilder<UserProfile>(
                       future: futureuserProfile,
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
-                          return Text(
-                            ": ${snapshot.data!.email}",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: "Roboto",
-                              color: Theme.of(context).focusColor,
-                            ),
+                          return  CustomTextField(
+                              enabled: false,
+                              hintText: "Enter your username here..",
+                              labelText: snapshot.data!.email,
+                              bottomMargin: 20,
+                              controller: TextEditingController(),
+                              obscureText: false,
+                              icon: Icons.email_outlined,
                           );
                         } else if (snapshot.hasError) {
                           return Text('${snapshot.error}');
@@ -136,29 +134,22 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
               Row(
                 children: [
                   const SizedBox(
-                  height: 75,
-                  width: 15,
-                ),
-                  const Icon(Icons.height),
-                  const SizedBox(
-                    height: 75,
-                    width: 5,
-                  ),
+                      width: 15,
+                      height: 50),
                   Align(
                     alignment: Alignment.center,
                     child: FutureBuilder<UserProfile>(
                       future: futureuserProfile,
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
-                          return Text(
-                            ": ${snapshot.data!.height}",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: "Roboto",
-                              color: Theme.of(context).focusColor,
-                            ),
-                          );
+                          return CustomTextField(
+                            hintText: "Enter your height here..",
+                            labelText: snapshot.data!.height.toString(),
+                            bottomMargin: 15,
+                            controller: TextEditingController(),
+                            obscureText: false,
+                            icon: Icons.height,
+                            );
                         } else if (snapshot.hasError) {
                           return Text('${snapshot.error}');
                         } else {
@@ -175,13 +166,8 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
               Row(
                 children: [
                   const SizedBox(
-                    height: 75,
-                    width: 15,
-                  ),
-                  const Icon(Icons.monitor_weight_outlined),
-                  const SizedBox(
-                    height: 75,
-                    width: 5,
+                      width: 15,
+                      height: 50
                   ),
                   Align(
                     alignment: Alignment.center,
@@ -189,15 +175,14 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
                       future: futureuserProfile,
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
-                          return  Text(
-                            ": ${snapshot.data!.weight}",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: "Roboto",
-                              color: Theme.of(context).focusColor,
-                            ),
-                          );
+                          return  CustomTextField(
+                          hintText: "Enter your weight here..",
+                          labelText: snapshot.data!.weight.toString(),
+                          bottomMargin: 15,
+                          controller: TextEditingController(),
+                          obscureText: false,
+                          icon: Icons.monitor_weight_outlined,
+                        );
                         } else if (snapshot.hasError) {
                           return Text('${snapshot.error}');
                         } else {
@@ -212,29 +197,20 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
                 ],
               ),
               Row(
-                children: [const SizedBox(
-                  height: 75,
-                  width: 15,
-                ),
-                  const Icon(Icons.calendar_today),
-                  const SizedBox(
-                    height: 75,
-                    width: 5,
-                  ),
+                children: [
                   Align(
                     alignment: Alignment.center,
                     child: FutureBuilder<UserProfile>(
                       future: futureuserProfile,
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
-                          return Text(
-                            ": ${snapshot.data!.birthdate}",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: "Roboto",
-                              color: Theme.of(context).focusColor,
-                            ),
+                          return CustomTextField(
+                              hintText: "Enter your birthdate here..",
+                              labelText: snapshot.data!.birthdate,
+                              bottomMargin: 15,
+                              controller: TextEditingController(),
+                              obscureText: false,
+                              icon: Icons.calendar_today,
                           );
                         } else if (snapshot.hasError) {
                           return Text('${snapshot.error}');
