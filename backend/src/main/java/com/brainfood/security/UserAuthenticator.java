@@ -16,6 +16,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Locale;
+import java.util.Objects;
 
 @Component
 public class UserAuthenticator {
@@ -35,6 +36,10 @@ public class UserAuthenticator {
             return Response.UsernameAlreadyExists;
         if (userExistsByEmail(email))
             return Response.EmailAlreadyExists;
+        if (Objects.equals(height, "") || Objects.equals(weight, "") || Objects.equals(birthdate, "") ||
+                Objects.equals(username, "") || Objects.equals(email, "") || Objects.equals(password, "")) {
+            return Response.MissingInputs;
+        }
         String encryptedPD = this.bCryptPasswordEncoder.encode(password);
         UserCredentials userCredentials = new UserCredentials();
         userCredentials.setPassword(encryptedPD);
