@@ -7,13 +7,12 @@ class CustomTextField extends StatelessWidget {
   final double bottomMargin;
   final TextEditingController controller;
   final bool obscureText;
-<<<<<<< HEAD
-=======
+  final bool numeric;
+  final bool email;
   final IconData icon;
   final bool enabled;
 
 
->>>>>>> 85454ec4ab4e9c039726b8d4a1db0805cff138c4
   const CustomTextField({
     Key? key,
     required this.labelText,
@@ -21,6 +20,8 @@ class CustomTextField extends StatelessWidget {
     required this.bottomMargin,
     required this.controller,
     required this.obscureText,
+    this.numeric = false,
+    this.email = false,
     required this.icon,
     this.enabled = true,
   }) : super(key: key);
@@ -47,6 +48,7 @@ class CustomTextField extends StatelessWidget {
       child: TextField(
         enabled:enabled,
         controller: controller,
+        keyboardType: numeric?TextInputType.number: email?TextInputType.emailAddress: TextInputType.text,
         decoration: InputDecoration(
           labelStyle: TextStyle(color: Theme.of(context).primaryColor),
           hintStyle:
