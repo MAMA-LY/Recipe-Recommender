@@ -26,11 +26,11 @@ public class Recipe {
 
     private Nutrition nutrition;
 
-    public float rate;
+    private float rate;
 
-    public int rates_count;
+    private int rates_count;
 
-    public float currentUserCount;
+    private float currentUserCount;
+    
     private boolean favourite;
-
 }

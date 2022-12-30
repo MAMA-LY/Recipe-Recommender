@@ -54,14 +54,13 @@ class RecipesAPI {
     var response = await http.post(url, headers: APIConstants.headerCORS(session.cookie));
     if (response.statusCode == 200) {
       return Recipe.recipeFromJson(jsonDecode(response.body));
-    } else if (response.statusCode == 401) {
+       } else if (response.statusCode == 401) {
       throw Failure(code: 401, message: "fail");
     } else {
       throw Failure(
           code: response.statusCode, message: response.headers.toString());
     }
   }
-
   Future<List<Recipe>> getFavRecipes() async {
     var url = Uri.https(APIConstants.baseUrl, APIConstants.getFavRecipeEndPoint);
     var response =
