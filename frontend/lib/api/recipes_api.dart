@@ -61,7 +61,6 @@ class RecipesAPI {
           code: response.statusCode, message: response.headers.toString());
     }
   }
-      
   Future<List<Recipe>> getFavRecipes() async {
     var url = Uri.https(APIConstants.baseUrl, APIConstants.getFavRecipeEndPoint);
     var response =

@@ -83,7 +83,7 @@ class _RecipeTitleState extends State<RecipeTitle> {
                     backgroundColor: Constants.primaryColor,
                     label: Text(
                       widget.recipe.tags![i],
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontFamily: "Roboto",
                         fontWeight: FontWeight.bold,
                         fontStyle: FontStyle.italic,

@@ -39,5 +39,4 @@ public class HomeController {
         DAO.rateRecipe(recipeID, userName , rate);
         return DAO.findRecipe(recipeID , userName);
     }
-
 }
