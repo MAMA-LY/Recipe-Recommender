@@ -10,7 +10,7 @@ import 'package:recipe_recommender_frontend/screens/recipe_page/widgets/recipe_i
 import 'package:recipe_recommender_frontend/screens/recipe_page/widgets/recipe_title.dart';
 import 'package:recipe_recommender_frontend/screens/sign/ResponseEnum.dart';
 import 'package:share_plus/share_plus.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../api/recipes_api.dart';
 import '../../main.dart';
 
@@ -133,11 +133,13 @@ class _RecipePageState extends State<RecipePage>
             if (choice == "Eat"){
               return PopupMenuItem<String>(
                   onTap: () async {
-                    var remainingCalories = const int.fromEnvironment("remainingCalories", defaultValue: 0);
-                    var lastTrackedDate = const String.fromEnvironment("lastTrackedDate", defaultValue: "Untracked");
+                    SharedPreferences prefs = await SharedPreferences.getInstance();
+                    int estimatedCalories = prefs.getInt("estimatedCalories") ?? 0;
+                    int consumedCalories = prefs.getInt("consumedCalories") ?? 0;
+                    String lastTrackedDate = prefs.getString("lastTrackedDate") ?? "Untracked";
                     
-                    if(lastTrackedDate == "Untracked"){
-                      UserProfileAPI profileAPI = new UserProfileAPI.fromCookie(session.cookie);
+                    if(lastTrackedDate == "Untracked" || DateTime.now().difference(DateTime.parse(lastTrackedDate)).inDays >= 1){
+                      UserProfileAPI profileAPI = UserProfileAPI.fromCookie(session.cookie);
                       UserProfile profile = await profileAPI.getUserProfile();
                       debugPrint(profile.toString());
                       debugPrint(DateTime.parse(profile.birthdate).toString());
@@ -149,7 +151,32 @@ class _RecipePageState extends State<RecipePage>
                       double TDEE = BMR * 1.2;
                       int consumableCalories = TDEE.round();
                       debugPrint(consumableCalories.toString());
+                      prefs.setInt("estimatedCalories", consumableCalories);
+                      prefs.setInt("consumedCalories", 0);
+                      prefs.setInt("consumedCarbs", 0);
+                      prefs.setInt("consumedProteins", 0);
+                      prefs.setInt("consumedFats", 0);
+                      prefs.setString("lastTrackedDate", DateTime.now().toString());
+                      prefs.reload();
                     }
+
+                    int recipeCalories = widget.recipe.nutrition!.calories;
+                    int recipeCarbs = widget.recipe.nutrition!.carbs;
+                    int recipeProteins = widget.recipe.nutrition!.proteins;
+                    int recipeFats = widget.recipe.nutrition!.fats;
+
+                    consumedCalories = prefs.getInt("consumedCalories") ?? 0;
+                    int consumedCarbs = prefs.getInt("consumedCarbs") ?? 0;
+                    int consumedProteins= prefs.getInt("consumedProteins") ?? 0;
+                    int consumedFats = prefs.getInt("consumedFats") ?? 0;
+
+                    debugPrint("Recipe Calories: " + recipeCalories.toString());
+
+                    prefs.setInt("consumedCalories", consumedCalories + recipeCalories);
+                    prefs.setInt("consumedCarbs", consumedCarbs + recipeCarbs);
+                    prefs.setInt("consumedProteins", consumedProteins + recipeProteins);
+                    prefs.setInt("consumedFats", consumedFats + recipeFats);
+                    prefs.reload();
                   },
                   value: choice,
                   child: Row(children: [
