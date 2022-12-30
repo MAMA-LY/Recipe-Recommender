@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 @ComponentScan
 @RestController
@@ -31,4 +32,11 @@ public class HomeController {
         return DAO.getAllIngredients();
     }
 
+    @PostMapping("/rateRecipe")
+    public Recipe rateRecipe(@RequestParam String recipeID,
+                             @RequestParam float rate) {
+        String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+        DAO.rateRecipe(recipeID, userName , rate);
+        return DAO.findRecipe(recipeID , userName);
+    }
 }
