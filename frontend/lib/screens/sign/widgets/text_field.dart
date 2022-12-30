@@ -10,6 +10,8 @@ class CustomTextField extends StatelessWidget {
 <<<<<<< HEAD
 =======
   final IconData icon;
+  final bool enabled;
+
 
 >>>>>>> 85454ec4ab4e9c039726b8d4a1db0805cff138c4
   const CustomTextField({
@@ -20,6 +22,7 @@ class CustomTextField extends StatelessWidget {
     required this.controller,
     required this.obscureText,
     required this.icon,
+    this.enabled = true,
   }) : super(key: key);
 
   @override
@@ -42,6 +45,7 @@ class CustomTextField extends StatelessWidget {
         ],
       ),
       child: TextField(
+        enabled:enabled,
         controller: controller,
         decoration: InputDecoration(
           labelStyle: TextStyle(color: Theme.of(context).primaryColor),

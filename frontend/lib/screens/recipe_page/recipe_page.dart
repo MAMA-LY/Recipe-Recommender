@@ -15,6 +15,7 @@ import '../../main.dart';
 class RecipePage extends StatefulWidget {
   final Recipe recipe;
   final bool inFavorites;
+
   const RecipePage(
       {super.key, required this.recipe, required this.inFavorites});
 
@@ -82,7 +83,7 @@ class _RecipePageState extends State<RecipePage>
                   ],
                 ),
               ),
-              expandedHeight: 400.0,
+              expandedHeight: 450.0,
               pinned: true,
               floating: true,
               elevation: 2.0,
