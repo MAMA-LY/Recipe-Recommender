@@ -19,4 +19,6 @@ public class UserProfile {
     private float weight;
 
     private Date birthdate;
+
+    private String gender;
 }

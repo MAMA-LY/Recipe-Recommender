@@ -129,11 +129,14 @@ public class DAO {
         User user = userRepository.findByUsername(username);
         String email = userCredentialsRepository.findByUsername(username).getEmail();
 
-        return UserProfile.builder().username(username)
+        return UserProfile.builder()
+                .username(username)
                 .birthdate(user.getBirthdate())
                 .height(user.getHeight())
                 .weight(user.getWeight())
-                .email(email).build();
+                .email(email)
+                .gender(user.getGender())
+                .build();
     }
 
     public Response addFavRecipeByUsername(String username, String recipeID) {

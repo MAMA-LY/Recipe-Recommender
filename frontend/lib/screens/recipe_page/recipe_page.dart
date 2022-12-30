@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_recommender_frontend/api/api_constants.dart';
+import 'package:recipe_recommender_frontend/api/user_profile_api.dart';
 import 'package:recipe_recommender_frontend/constants.dart';
 import 'package:recipe_recommender_frontend/models/recipe.dart';
+import 'package:recipe_recommender_frontend/models/user_profile.dart';
 import 'package:recipe_recommender_frontend/screens/recipe_page/widgets/ingredients_view.dart';
 import 'package:recipe_recommender_frontend/screens/recipe_page/widgets/nutrition_view.dart';
 import 'package:recipe_recommender_frontend/screens/recipe_page/widgets/recipe_image.dart';
@@ -127,8 +129,38 @@ class _RecipePageState extends State<RecipePage>
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(15.0))),
         itemBuilder: (BuildContext context) {
-          return {"Share", "Save"}.map((String choice) {
-            if (choice == "Save") {
+          return {"Eat", "Share", "Save"}.map((String choice) {
+            if (choice == "Eat"){
+              return PopupMenuItem<String>(
+                  onTap: () async {
+                    var remainingCalories = const int.fromEnvironment("remainingCalories", defaultValue: 0);
+                    var lastTrackedDate = const String.fromEnvironment("lastTrackedDate", defaultValue: "Untracked");
+                    
+                    if(lastTrackedDate == "Untracked"){
+                      UserProfileAPI profileAPI = new UserProfileAPI.fromCookie(session.cookie);
+                      UserProfile profile = await profileAPI.getUserProfile();
+                      debugPrint(profile.toString());
+                      debugPrint(DateTime.parse(profile.birthdate).toString());
+                      double age = DateTime.now().difference(DateTime.parse(profile.birthdate)).inDays/365.25;
+                      double weight = profile.weight;
+                      double height = profile.height;
+                      int genderBias = (profile.birthdate == "male"? 5: -161);
+                      double BMR = 10 * weight + 6.25 * height + genderBias;
+                      double TDEE = BMR * 1.2;
+                      int consumableCalories = TDEE.round();
+                      debugPrint(consumableCalories.toString());
+                    }
+                  },
+                  value: choice,
+                  child: Row(children: [
+                    const Icon(Icons.add,
+                        color: Constants.secondaryColor),
+                    const SizedBox(width: 5.0),
+                    Text("Eat",
+                        style: TextStyle(
+                            color: Theme.of(context).secondaryHeaderColor))
+                  ]));
+            } else if (choice == "Save") {
               return PopupMenuItem<String>(
                   onTap: () async {
                     if (_inFavorites) {
