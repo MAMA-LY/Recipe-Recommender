@@ -4,7 +4,7 @@ import com.brainfood.backend.db_entities.*;
 import com.brainfood.backend.db_repositories.*;
 import com.brainfood.backend.models.Recipe;
 import com.brainfood.backend.models.ShortRecipe;
-import com.brainfood.security.repository.UserRepository;
+import com.brainfood.backend.db_repositories.UserRepository;
 import com.brainfood.backend.models.UserProfile;
 import com.brainfood.security.Response;
 import com.brainfood.security.repository.UserCredentialsRepository;
