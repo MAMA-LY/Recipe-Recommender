@@ -49,7 +49,6 @@ class _RecipeTitleState extends State<RecipeTitle> {
                   Recipe apiRecipe =  await api.rateRecipe(widget.recipe.id, rating);
                   setState(() {
                     widget.recipe = apiRecipe;
-                    debugPrint("--------------------------------------------------");
                     debugPrint(widget.recipe.rate.toString());
                   });
                 },

@@ -48,7 +48,7 @@ class RecipesAPI {
   }
 
   Future<Recipe> rateRecipe(String id,double rate) async {
-    var url = Uri.https(APIConstants.baseUrl, APIConstants.rateRecipe, {"recipeID": id , "rate":rate});
+    var url = Uri.https(APIConstants.baseUrl, APIConstants.rateRecipe, {"recipeID": id , "rate":rate.toString()});
     var response = await http.post(url, headers: APIConstants.headerCORS(session.cookie));
     if (response.statusCode == 200) {
       return Recipe.recipeFromJson(jsonDecode(response.body));
