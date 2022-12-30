@@ -1,12 +1,13 @@
 package com.brainfood.backend.models;
 
-import com.brainfood.security.model.UserCredentials;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.lang.reflect.Field;
 import java.sql.Timestamp;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import com.brainfood.security.model.UserCredentials;
 
 
 public class ProfileBuilderTest {

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../constants.dart';
 
 class CustomTextField extends StatelessWidget {
   final String labelText;
@@ -8,6 +7,9 @@ class CustomTextField extends StatelessWidget {
   final double bottomMargin;
   final TextEditingController controller;
   final bool obscureText;
+  final IconData icon;
+  final bool enabled;
+
 
   const CustomTextField({
     Key? key,
@@ -16,6 +18,8 @@ class CustomTextField extends StatelessWidget {
     required this.bottomMargin,
     required this.controller,
     required this.obscureText,
+    required this.icon,
+    this.enabled = true,
   }) : super(key: key);
 
   @override
@@ -38,10 +42,12 @@ class CustomTextField extends StatelessWidget {
         ],
       ),
       child: TextField(
+        enabled:enabled,
         controller: controller,
         decoration: InputDecoration(
           labelStyle: TextStyle(color: Theme.of(context).primaryColor),
-          hintStyle: TextStyle(color: Theme.of(context).focusColor.withOpacity(0.3)),
+          hintStyle:
+              TextStyle(color: Theme.of(context).focusColor.withOpacity(0.3)),
           fillColor: Theme.of(context).secondaryHeaderColor,
           filled: true,
           border: OutlineInputBorder(
@@ -55,8 +61,9 @@ class CustomTextField extends StatelessWidget {
               borderRadius: BorderRadius.circular(15.0),
               borderSide: BorderSide(
                 width: 2,
-                color: Theme.of(context).focusColor.withOpacity(0.01),
+                color: Theme.of(context).focusColor.withOpacity(0.1),
               )),
+          icon:  Icon(icon),
           hintText: hintText,
           labelText: labelText,
         ),

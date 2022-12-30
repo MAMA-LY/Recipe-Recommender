@@ -1,10 +1,10 @@
 package com.brainfood.backend.models;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.lang.reflect.Field;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
 
 class NutritionTest {
 
@@ -15,7 +15,6 @@ class NutritionTest {
         field.setAccessible(true);
         int expectedValue = 10;
         field.set(nutrition, expectedValue);
-
         assertEquals(expectedValue, nutrition.getCalories(), "problem in getCalories");
     }
 
@@ -36,8 +35,6 @@ class NutritionTest {
         field.setAccessible(true);
         int expectedValue = 123;
         field.set(nutrition, expectedValue);
-
-
         assertEquals(expectedValue, nutrition.getCarbs(), "problem in getCarbs");
     }
 

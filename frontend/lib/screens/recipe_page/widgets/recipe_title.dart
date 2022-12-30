@@ -88,7 +88,7 @@ class _RecipeTitleState extends State<RecipeTitle> {
                         fontWeight: FontWeight.bold,
                         fontStyle: FontStyle.italic,
                         fontSize: 14,
-                        color: Constants.secondaryColor,
+                        color: Theme.of(context).secondaryHeaderColor,
                       ),
                     ),
                   ),

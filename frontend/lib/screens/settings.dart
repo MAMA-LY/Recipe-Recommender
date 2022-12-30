@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:settings_ui/settings_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:recipe_recommender_frontend/screens/sign/signin.dart';
+import 'package:recipe_recommender_frontend/screens/account_settings.dart';
 
 import '../api/sign_api.dart';
 import '../constants.dart';
@@ -10,10 +11,12 @@ import '../main.dart';
 class SettingsPage extends StatelessWidget {
   static String routeName = "/settings";
 
+
   const SettingsPage({Key? key}) : super(key: key);
 
   Future<void> _signout(BuildContext context) async {
     await SignAPI.signout();
+    
     // ignore: use_build_context_synchronously
     Navigator.of(context, rootNavigator: true)
         .pushReplacement(MaterialPageRoute(
@@ -116,7 +119,10 @@ class SettingsPage extends StatelessWidget {
                 ),
                 leading: const Icon(Icons.person),
                 onPressed: (BuildContext context) {
-                  //TODO: CALL THE ACCOUNT PAGE
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => AccountSettingsPage()),
+                    );
                 },
               ),
               SettingsTile.navigation(
