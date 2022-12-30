@@ -38,7 +38,6 @@ public class Director {
                 .build();
     }
 
-    public static Recipe buildRecipe(RecipeDB recipeDB, List<IngredientDB> ingredientDBS, List<String> tags, boolean fav,float userRate) {
     public static Recipe buildRecipe(RecipeDB recipeDB, List<IngredientDB> ingredientDBS, List<String> tags, boolean fav, float userRate) {
         List<Ingredient> ingredients = new ArrayList<>();
         for (IngredientDB ingredientDB : ingredientDBS)
