@@ -11,6 +11,7 @@ class APIConstants {
   static String forgetPasswordEndPoint = "/forgetPassword";
   static String resetPassword = "/resetPassword";
   static String changePassword = "/changePassword";
+  static String userProfileEndPoint ="/account_settings/userProfile";
   static String addFavRecipeEndPoint = "/fav/recipe/add";
   static String removeFavRecipeEndPoint = "/fav/recipe/remove";
   static String getFavRecipeEndPoint = "/fav/recipe/fetch";
