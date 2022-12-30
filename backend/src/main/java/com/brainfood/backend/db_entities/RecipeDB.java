@@ -45,4 +45,6 @@ public class RecipeDB implements Serializable {
 
     @Column(name = "photo")
     public String photo;
+
+   
 }

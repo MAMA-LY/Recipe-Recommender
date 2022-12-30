@@ -1,9 +1,10 @@
 package com.brainfood.security;
 
-import com.brainfood.security.model.User;
+import com.brainfood.backend.db_entities.User;
+import com.brainfood.backend.db_repositories.UserRepository;
 import com.brainfood.security.model.UserCredentials;
 import com.brainfood.security.repository.UserCredentialsRepository;
-import com.brainfood.security.repository.UserRepository;
+
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -6,7 +6,6 @@ class CustomDateField extends StatelessWidget {
   final String hintText;
   final double bottomMargin;
   final TextEditingController controller;
-
   const CustomDateField({
     Key? key,
     required this.labelText,
