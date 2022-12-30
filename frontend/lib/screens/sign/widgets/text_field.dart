@@ -7,6 +7,8 @@ class CustomTextField extends StatelessWidget {
   final double bottomMargin;
   final TextEditingController controller;
   final bool obscureText;
+  final bool numeric;
+  final bool email;
   final IconData icon;
 
   const CustomTextField({
@@ -16,6 +18,8 @@ class CustomTextField extends StatelessWidget {
     required this.bottomMargin,
     required this.controller,
     required this.obscureText,
+    this.numeric = false,
+    this.email = false,
     required this.icon,
   }) : super(key: key);
 
@@ -40,6 +44,7 @@ class CustomTextField extends StatelessWidget {
       ),
       child: TextField(
         controller: controller,
+        keyboardType: numeric?TextInputType.number: email?TextInputType.emailAddress: TextInputType.text,
         decoration: InputDecoration(
           labelStyle: TextStyle(color: Theme.of(context).primaryColor),
           hintStyle:
