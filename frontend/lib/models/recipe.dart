@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import 'ingredient.dart';
 import 'nutrition.dart';
 
@@ -12,6 +14,7 @@ class Recipe {
   double rate;
   int rates_count;
   double currentUserCount;
+  bool? favourite;
 
   Recipe(
       {required this.name,
@@ -23,7 +26,8 @@ class Recipe {
       this.cuisine,
       this.rate = 0,
       this.rates_count = 0,
-      this.currentUserCount = 0});
+      this.currentUserCount = 0,
+      this.favourite});
 
   factory Recipe.shortRecipeFromJson(dynamic json) {
     return Recipe(
@@ -34,6 +38,10 @@ class Recipe {
   }
 
   factory Recipe.recipeFromJson(dynamic json) {
+    debugPrint("JSON\n");
+    debugPrint("JSON\n");
+    debugPrint(json.toString());
+    debugPrint(json['id'] as String);
     var jsonIngredients = json['ingredients'] as List;
     var jsonTags = json["tags"] as List;
     if (json['cuisine'] != null) {
@@ -42,6 +50,7 @@ class Recipe {
           image: json['image'] as String,
           tags: jsonTags.map<String>((json) => json.toString()).toList(),
           id: json['id'] as String,
+          favourite: json['favourite'] as bool,
           cuisine: json['cuisine'] as String,
           nutrition: Nutrition.fromJson(json['nutrition']),
           ingredients: jsonIngredients
@@ -56,6 +65,7 @@ class Recipe {
           image: json['image'] as String,
           tags: jsonTags.map<String>((json) => json.toString()).toList(),
           id: json['id'] as String,
+          favourite: json['favourite'] as bool,
           nutrition: Nutrition.fromJson(json['nutrition']),
           ingredients: jsonIngredients
               .map<Ingredient>((json) => Ingredient.fromJson(json))
@@ -88,6 +98,6 @@ class Recipe {
 
   @override
   String toString() {
-    return 'Recipe {name: $name, image: $image, tags: $tags, ID: $id, cuisine: $cuisine, nutrition: $nutrition, ingredients: $ingredients}';
+    return 'Recipe {name: $name, image: $image, tags: $tags, ID: $id, cuisine: $cuisine, nutrition: $nutrition, ingredients: $ingredients, favourite : $favourite}';
   }
 }

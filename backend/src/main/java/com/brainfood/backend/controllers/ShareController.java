@@ -3,9 +3,10 @@ package com.brainfood.backend.controllers;
 import com.brainfood.backend.db_entities.RecipeRatesCK;
 import com.brainfood.backend.db_entities.RecipeRatesDB;
 import com.brainfood.backend.db_repositories.RecipeRatesRepository;
+import com.brainfood.backend.db_repositories.UserRepository;
 import com.brainfood.backend.models.Recipe;
 import com.brainfood.backend.DAO;
-import com.brainfood.security.repository.UserRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -29,7 +30,7 @@ public class ShareController {
 
     @GetMapping("recipe")
     public Recipe getRecipeDetailsByName(@RequestParam(name = "id") String id) {
-        String userName = SecurityContextHolder.getContext().getAuthentication().getName();
-        return dao.findRecipe(id, userName);
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        return dao.findRecipe(id, username);
     }
 }

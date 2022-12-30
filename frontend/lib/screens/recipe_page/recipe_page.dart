@@ -6,7 +6,11 @@ import 'package:recipe_recommender_frontend/screens/recipe_page/widgets/ingredie
 import 'package:recipe_recommender_frontend/screens/recipe_page/widgets/nutrition_view.dart';
 import 'package:recipe_recommender_frontend/screens/recipe_page/widgets/recipe_image.dart';
 import 'package:recipe_recommender_frontend/screens/recipe_page/widgets/recipe_title.dart';
+import 'package:recipe_recommender_frontend/screens/sign/ResponseEnum.dart';
 import 'package:share_plus/share_plus.dart';
+
+import '../../api/recipes_api.dart';
+import '../../main.dart';
 
 class RecipePage extends StatefulWidget {
   final Recipe recipe;
@@ -29,16 +33,25 @@ class RecipePage extends StatefulWidget {
 
 class _RecipePageState extends State<RecipePage>
     with SingleTickerProviderStateMixin {
+  RecipesAPI api = RecipesAPI.fromCookie(session.cookie);
+
   late TabController _tabController;
   late ScrollController _scrollController;
-  late bool _inFavorites;
-
+  late bool _inFavorites = false;
+  Color favColor = Constants.secondaryColor;
   @override
   void initState() {
     super.initState();
     _tabController = TabController(vsync: this, length: 2);
     _scrollController = ScrollController();
     _inFavorites = widget.inFavorites;
+    if (widget.recipe.favourite != null) {
+      if (widget.recipe.favourite == true) {
+        setState(() {
+          _inFavorites = true;
+        });
+      }
+    }
   }
 
   @override
@@ -48,6 +61,7 @@ class _RecipePageState extends State<RecipePage>
     _scrollController.dispose();
     super.dispose();
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +112,7 @@ class _RecipePageState extends State<RecipePage>
 
       //   onPressed: () {
       //     //TODO: update the user fav recipes
-      //   },
+      //   }, 
       //   elevation: 2.0,
       //   backgroundColor: Constants.primaryColor,
       //   child: Icon(
@@ -113,17 +127,36 @@ class _RecipePageState extends State<RecipePage>
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(15.0))),
         itemBuilder: (BuildContext context) {
-          return {"Share", "Fav"}.map((String choice) {
-            if (choice == "Fav") {
+          return {"Share", "Save"}.map((String choice) {
+            if (choice == "Save") {
               return PopupMenuItem<String>(
+                  onTap: () async {
+                    if (_inFavorites) {
+                      String response =
+                          await api.removeFavRecipe(widget.recipe.id);
+                      if (response == Response.RemovedFavRecipe.name) {
+                        setState(() {
+                          _inFavorites = false;
+                        });
+                      }
+                    } else {
+                      String response =
+                          await api.addFavRecipe(widget.recipe.id);
+                      if (response == Response.AddedFavRecipe.name) {
+                        setState(() {
+                          _inFavorites = true;
+                        });
+                      }
+                    }
+                  },
                   value: choice,
                   child: Row(children: [
-                    Icon(
-                      _inFavorites ? Icons.favorite : Icons.favorite_border,
-                      color: Theme.of(context).iconTheme.color,
-                    ),
+                    Icon(_inFavorites ? Icons.favorite : Icons.favorite_border,
+                        color: Constants.secondaryColor),
                     const SizedBox(width: 5.0),
-                    const Text("Save")
+                    Text("Save",
+                        style: TextStyle(
+                            color: Theme.of(context).secondaryHeaderColor))
                   ]));
             } else {
               return PopupMenuItem<String>(
@@ -140,10 +173,12 @@ class _RecipePageState extends State<RecipePage>
                   child: Row(children: [
                     Icon(
                       Icons.share,
-                      color: Theme.of(context).iconTheme.color,
+                      color: Theme.of(context).secondaryHeaderColor,
                     ),
                     const SizedBox(width: 5.0),
-                    const Text("Share")
+                    Text("Share",
+                        style: TextStyle(
+                            color: Theme.of(context).secondaryHeaderColor))
                   ]));
             }
           }).toList();

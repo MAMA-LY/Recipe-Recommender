@@ -75,7 +75,8 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
                     labelText: "Email",
                     bottomMargin: 20,
                     controller: emailController,
-                    obscureText: true,
+                    obscureText: false,
+                    icon: Icons.email_outlined,
                   ),
                   Row(
                     mainAxisSize: MainAxisSize.min,

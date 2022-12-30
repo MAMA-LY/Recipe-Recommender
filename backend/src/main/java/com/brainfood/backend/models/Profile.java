@@ -1,10 +1,11 @@
 package com.brainfood.backend.models;
 
-import com.brainfood.security.model.UserCredentials;
 import lombok.*;
 
 import java.sql.Timestamp;
 import java.util.List;
+
+import com.brainfood.security.model.UserCredentials;
 
 @Getter
 @Setter

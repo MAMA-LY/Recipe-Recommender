@@ -3,6 +3,10 @@ import 'package:recipe_recommender_frontend/constants.dart';
 import 'package:recipe_recommender_frontend/models/recipe.dart';
 import 'package:recipe_recommender_frontend/screens/widgets/recipe_card.dart';
 
+import '../api/api_constants.dart';
+import '../api/recipes_api.dart';
+import '../main.dart';
+
 class FavoritesPage extends StatefulWidget {
   static String routeName = "/favorites";
 
@@ -13,24 +17,9 @@ class FavoritesPage extends StatefulWidget {
 }
 
 class _FavoritesPageState extends State<FavoritesPage> {
-  final List<Recipe> _recipes = [
-    Recipe(
-        name: "name",
-        image: "https://spoonacular.com/recipeImages/634237-556x370.jpg",
-        id: "ID"),
-    Recipe(
-        name: "name",
-        image: "https://spoonacular.com/recipeImages/634237-556x370.jpg",
-        id: "ID"),
-    Recipe(
-        name: "name",
-        image: "https://spoonacular.com/recipeImages/634237-556x370.jpg",
-        id: "ID"),
-    Recipe(
-        name: "name",
-        image: "https://spoonacular.com/recipeImages/634237-556x370.jpg",
-        id: "ID"),
-  ];
+
+  RecipesAPI api = RecipesAPI.fromCookie(session.cookie);
+
   final bool _isLoading = false;
 
   @override
@@ -61,19 +50,37 @@ class _FavoritesPageState extends State<FavoritesPage> {
             ),
           ],
         ),
-        body: _isLoading
-            ? const Center(
-                child: CircularProgressIndicator(
-                color: Constants.primaryColor,
-              ))
-            : ListView.builder(
-                itemCount: _recipes.length,
+        body: FutureBuilder<List<Recipe>>(
+        future: api.getFavRecipes(),
+        builder: (context, snapshot) {
+          debugPrint("SNAPSHOT1: ${snapshot.data}");
+          if (snapshot.connectionState == ConnectionState.done) {
+            debugPrint("SNAPSHOT2: ${snapshot.data}");
+
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+              Expanded(
+                  child: ListView.builder(
+                itemCount: snapshot.data?.length,
                 itemBuilder: (context, index) {
+                  debugPrint("SNAPSHOT: ${snapshot.data![index]}");
                   return RecipeCard(
-                      id: _recipes[index].id,
-                      name: _recipes[index].name,
-                      thumbnailUrl: _recipes[index].image);
+                      id: snapshot.data![index].id,
+                      name: snapshot.data![index].name,
+                      thumbnailUrl: snapshot.data![index].image);
                 },
-              ));
+              ))
+            ]);
+          } else {
+            return const Center(
+                child: CircularProgressIndicator(
+              color: Constants.primaryColor,
+            ));
+          }
+        },
+      ),
+        );
   }
 }

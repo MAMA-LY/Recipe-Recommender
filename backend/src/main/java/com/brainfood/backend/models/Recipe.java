@@ -31,4 +31,6 @@ public class Recipe {
     public int rates_count;
 
     public float currentUserCount;
+    private boolean favourite;
+
 }
