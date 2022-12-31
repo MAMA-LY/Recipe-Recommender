@@ -4,6 +4,7 @@ import 'package:recipe_recommender_frontend/api/user_profile_api.dart';
 import 'package:recipe_recommender_frontend/constants.dart';
 import 'package:recipe_recommender_frontend/models/recipe.dart';
 import 'package:recipe_recommender_frontend/models/user_profile.dart';
+import 'package:recipe_recommender_frontend/screens/calories_page/calories_page.dart';
 import 'package:recipe_recommender_frontend/screens/recipe_page/widgets/ingredients_view.dart';
 import 'package:recipe_recommender_frontend/screens/recipe_page/widgets/nutrition_view.dart';
 import 'package:recipe_recommender_frontend/screens/recipe_page/widgets/recipe_image.dart';
@@ -133,44 +134,18 @@ class _RecipePageState extends State<RecipePage>
             if (choice == "Eat"){
               return PopupMenuItem<String>(
                   onTap: () async {
+                    CalorieWatcher.validateDailyCalories();
                     SharedPreferences prefs = await SharedPreferences.getInstance();
-                    int estimatedCalories = prefs.getInt("estimatedCalories") ?? 0;
-                    int consumedCalories = prefs.getInt("consumedCalories") ?? 0;
-                    String lastTrackedDate = prefs.getString("lastTrackedDate") ?? "Untracked";
-                    
-                    if(lastTrackedDate == "Untracked" || DateTime.now().difference(DateTime.parse(lastTrackedDate)).inDays >= 1){
-                      UserProfileAPI profileAPI = UserProfileAPI.fromCookie(session.cookie);
-                      UserProfile profile = await profileAPI.getUserProfile();
-                      debugPrint(profile.toString());
-                      debugPrint(DateTime.parse(profile.birthdate).toString());
-                      double age = DateTime.now().difference(DateTime.parse(profile.birthdate)).inDays/365.25;
-                      double weight = profile.weight;
-                      double height = profile.height;
-                      int genderBias = (profile.birthdate == "male"? 5: -161);
-                      double BMR = 10 * weight + 6.25 * height + genderBias;
-                      double TDEE = BMR * 1.2;
-                      int consumableCalories = TDEE.round();
-                      debugPrint(consumableCalories.toString());
-                      prefs.setInt("estimatedCalories", consumableCalories);
-                      prefs.setInt("consumedCalories", 0);
-                      prefs.setInt("consumedCarbs", 0);
-                      prefs.setInt("consumedProteins", 0);
-                      prefs.setInt("consumedFats", 0);
-                      prefs.setString("lastTrackedDate", DateTime.now().toString());
-                      prefs.reload();
-                    }
 
                     int recipeCalories = widget.recipe.nutrition!.calories;
                     int recipeCarbs = widget.recipe.nutrition!.carbs;
                     int recipeProteins = widget.recipe.nutrition!.proteins;
                     int recipeFats = widget.recipe.nutrition!.fats;
 
-                    consumedCalories = prefs.getInt("consumedCalories") ?? 0;
+                    int consumedCalories = prefs.getInt("consumedCalories") ?? 0;
                     int consumedCarbs = prefs.getInt("consumedCarbs") ?? 0;
                     int consumedProteins= prefs.getInt("consumedProteins") ?? 0;
                     int consumedFats = prefs.getInt("consumedFats") ?? 0;
-
-                    debugPrint("Recipe Calories: " + recipeCalories.toString());
 
                     prefs.setInt("consumedCalories", consumedCalories + recipeCalories);
                     prefs.setInt("consumedCarbs", consumedCarbs + recipeCarbs);

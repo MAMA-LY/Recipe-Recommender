@@ -19,42 +19,27 @@ class CaloriesView extends StatefulWidget {
 }
 
 class _CaloriesViewState extends State<CaloriesView> {
+
   @override
   void initState() {
     int remaining = max(widget.dailyCalories.remaining, 0);
     widget.data = [
       ChartData(
           'Fats',
-          widget.dailyCalories.fats /
-              (widget.dailyCalories.fats +
-                widget.dailyCalories.proteins +
-                widget.dailyCalories.carbs +
-                remaining) *
-              100),
+          widget.dailyCalories.fats * 9
+        ),
       ChartData(
           'Proteins',
-          widget.dailyCalories.proteins /
-              (widget.dailyCalories.fats +
-                  widget.dailyCalories.proteins +
-                  widget.dailyCalories.carbs +
-                  remaining) *
-              100),
+          widget.dailyCalories.proteins * 4
+        ),
       ChartData(
           'Carbs',
-          widget.dailyCalories.carbs /
-              (widget.dailyCalories.fats +
-                widget.dailyCalories.proteins +
-                widget.dailyCalories.carbs +
-                remaining) *
-              100),
+          widget.dailyCalories.carbs * 4
+        ),
       ChartData(
         'Remaining',
-        widget.dailyCalories.remaining /
-            (widget.dailyCalories.fats +
-              widget.dailyCalories.proteins +
-              widget.dailyCalories.carbs +
-              remaining) *
-            100),
+         remaining
+      )
     ];
 
     super.initState();
@@ -91,7 +76,7 @@ class _CaloriesViewState extends State<CaloriesView> {
                       isVisible: false,
                       textStyle: TextStyle(
                           fontFamily: "Roboto", fontStyle: FontStyle.normal)),
-                  name: 'Percentage')
+                  )
             ]));
   }
 }
@@ -100,5 +85,5 @@ class ChartData {
   ChartData(this.x, this.y);
 
   final String x;
-  final double y;
+  final int y;
 }
