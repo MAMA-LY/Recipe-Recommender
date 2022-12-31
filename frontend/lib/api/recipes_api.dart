@@ -32,7 +32,8 @@ class RecipesAPI {
 
   Future<Recipe> getRecipeShareByID(String id) async {
     var url = Uri.https(
-        APIConstants.baseUrl, APIConstants.recipeEndPoint, {"id": id});
+        APIConstants.baseUrl, APIConstants.shareRecipeEndPoint, {"id": id});
+        debugPrint(url.toString());
     var response = await http.get(url);
     debugPrint(response.statusCode.toString());
     debugPrint(response.body);

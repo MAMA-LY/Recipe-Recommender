@@ -16,6 +16,8 @@ class APIConstants {
   static String addFavRecipeEndPoint = "/fav/recipe/add";
   static String removeFavRecipeEndPoint = "/fav/recipe/remove";
   static String getFavRecipeEndPoint = "/fav/recipe/fetch";
+  static String shareRecipeEndPoint = "/share/recipe";
+
 
   static Map<String, String> headerCORS(String cookie) {
     if (cookie != "") {

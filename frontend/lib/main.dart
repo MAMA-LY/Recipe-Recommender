@@ -63,7 +63,7 @@ Future<void> initUniLinks() async {
         if (id != null) {
           debugPrint(id);
           debugPrint("wait recipe page");
-          debugPrint(session.cookie);
+          debugPrint(session.cookie.toString());
           RecipesAPI api = RecipesAPI.fromCookie(session.cookie);
           Recipe response = await api.getRecipeShareByID(id.trim());
           debugPrint("open recipe page");
