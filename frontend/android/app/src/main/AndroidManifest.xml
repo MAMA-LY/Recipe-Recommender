@@ -32,7 +32,7 @@
                 <!-- Accepts URIs that begin with https://YOUR_HOST -->
                 <data
                 android:scheme="https"
-                android:host="brainfood-test.azurewebsites.net" />
+                android:host="brainfood.azurewebsites.net" />
         </intent-filter>
         </activity>
         <!-- Don't delete the meta-data below.

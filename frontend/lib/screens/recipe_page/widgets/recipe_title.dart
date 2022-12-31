@@ -42,12 +42,11 @@ class _RecipeTitleState extends State<RecipeTitle> {
                 minRating: 1,
                 direction: Axis.horizontal,
                 allowHalfRating: true,
-                itemCount: 5,
+                itemCount: !widget.share ?  5 : 0,
                 itemPadding: EdgeInsets.symmetric(horizontal: 0.5),
-                itemBuilder: (context, _) => const Icon(
-                  Icons.star,
-                  color: Colors.amber,
-                ),
+                itemBuilder:  (context, _) {
+                    return const Icon(Icons.star, color: Colors.amber);
+                } ,
                 onRatingUpdate: (rating) async {
                   if (!widget.share) {
                     RecipesAPI api = RecipesAPI.fromCookie(session.cookie);
