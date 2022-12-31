@@ -5,8 +5,8 @@ import 'package:recipe_recommender_frontend/models/daily_calories.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class CaloriesView extends StatefulWidget {
-  late List<ChartData> data;
-  late DailyCalories dailyCalories;
+  List<ChartData>? data;
+  DailyCalories dailyCalories;
   final TooltipBehavior tooltip = TooltipBehavior(enable: true);
 
   CaloriesView({

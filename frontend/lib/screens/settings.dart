@@ -131,7 +131,7 @@ class SettingsPage extends StatelessWidget {
                   'Calorie Watcher',
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
-                leading: const Icon(Icons.person),
+                leading: const Icon(Icons.fastfood),
                 onPressed: (BuildContext context) {
                   Navigator.push(
                       context,

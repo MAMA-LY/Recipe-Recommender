@@ -14,7 +14,7 @@ class CaloriesPage extends StatefulWidget {
 }
 class _CaloriesPageState extends State<CaloriesPage> {
   DailyCalories dailyCalories = DailyCalories(calories: 0, proteins: 0, carbs: 0, fats: 0, remaining: 0);
-  late CaloriesView caloriesView;
+  CaloriesView? caloriesView;
 
   DailyCalories getDailyCalories(SharedPreferences prefs){
     String lastTrackedDate = prefs.getString("lastTrackedDate") ?? "Untracked";
@@ -23,17 +23,21 @@ class _CaloriesPageState extends State<CaloriesPage> {
     int consumedCarbs = prefs.getInt("consumedCarbs") ?? 0;
     int consumedProteins= prefs.getInt("consumedProteins") ?? 0;
     int consumedFats = prefs.getInt("consumedFats") ?? 0;
-    debugPrint(estimatedCalories.toString());
+    debugPrint(consumedProteins.toString());
     DailyCalories dailyCalories = DailyCalories(calories: consumedCalories, proteins: consumedProteins, carbs: consumedCarbs, fats: consumedFats, remaining: estimatedCalories - consumedCalories);
     debugPrint(dailyCalories.toString());
     return dailyCalories;
   }
 
+  Future<SharedPreferences> getSharedPreference() async {
+    await CalorieWatcher.validateDailyCalories();
+    return SharedPreferences.getInstance();
+  }
+
   @override
   Widget build(BuildContext context) {
-    CalorieWatcher.validateDailyCalories();
     return FutureBuilder<SharedPreferences>(
-      future: SharedPreferences.getInstance(),
+      future: getSharedPreference(),
       builder: ((context, snapshot) {
         if(snapshot.hasData){
           SharedPreferences prefs = snapshot.data!;
@@ -45,7 +49,8 @@ class _CaloriesPageState extends State<CaloriesPage> {
                 backgroundColor: Theme
                 .of(context)
                 .secondaryHeaderColor,
-                actions: <Widget>[
+                // ignore: dead_code
+                actions: [
                   IconButton(
                     icon: const Icon(
                       Icons.refresh,
@@ -59,7 +64,7 @@ class _CaloriesPageState extends State<CaloriesPage> {
                       });
                     },
                   )
-                ],),
+                ]),
             body: Center(
               child: caloriesView
               ),
@@ -76,8 +81,8 @@ class _CaloriesPageState extends State<CaloriesPage> {
 class CalorieWatcher{
   static Future<void> reset() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString("lastTrackedDate", "Untracked");
-    prefs.reload();
+    await prefs.setString("lastTrackedDate", "Untracked");
+    await prefs.reload();
     await validateDailyCalories();
   }
 
@@ -100,13 +105,13 @@ class CalorieWatcher{
       double TDEE = BMR * 1.2;
       int consumableCalories = TDEE.round();
       debugPrint(consumableCalories.toString());
-      prefs.setInt("estimatedCalories", consumableCalories);
-      prefs.setInt("consumedCalories", 0);
-      prefs.setInt("consumedCarbs", 0);
-      prefs.setInt("consumedProteins", 0);
-      prefs.setInt("consumedFats", 0);
-      prefs.setString("lastTrackedDate", DateTime.now().toString());
-      prefs.reload();
+      await prefs.setInt("estimatedCalories", consumableCalories);
+      await prefs.setInt("consumedCalories", 0);
+      await prefs.setInt("consumedCarbs", 0);
+      await prefs.setInt("consumedProteins", 0);
+      await prefs.setInt("consumedFats", 0);
+      await prefs.setString("lastTrackedDate", DateTime.now().toString());
+      await prefs.reload();
     }
   }
 }

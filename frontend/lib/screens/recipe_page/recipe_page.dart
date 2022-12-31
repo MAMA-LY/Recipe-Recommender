@@ -134,7 +134,7 @@ class _RecipePageState extends State<RecipePage>
             if (choice == "Eat"){
               return PopupMenuItem<String>(
                   onTap: () async {
-                    CalorieWatcher.validateDailyCalories();
+                    await CalorieWatcher.validateDailyCalories();
                     SharedPreferences prefs = await SharedPreferences.getInstance();
 
                     int recipeCalories = widget.recipe.nutrition!.calories;
@@ -147,11 +147,11 @@ class _RecipePageState extends State<RecipePage>
                     int consumedProteins= prefs.getInt("consumedProteins") ?? 0;
                     int consumedFats = prefs.getInt("consumedFats") ?? 0;
 
-                    prefs.setInt("consumedCalories", consumedCalories + recipeCalories);
-                    prefs.setInt("consumedCarbs", consumedCarbs + recipeCarbs);
-                    prefs.setInt("consumedProteins", consumedProteins + recipeProteins);
-                    prefs.setInt("consumedFats", consumedFats + recipeFats);
-                    prefs.reload();
+                    await prefs.setInt("consumedCalories", consumedCalories + recipeCalories);
+                    await prefs.setInt("consumedCarbs", consumedCarbs + recipeCarbs);
+                    await prefs.setInt("consumedProteins", consumedProteins + recipeProteins);
+                    await prefs.setInt("consumedFats", consumedFats + recipeFats);
+                    await prefs.reload();
                   },
                   value: choice,
                   child: Row(children: [
