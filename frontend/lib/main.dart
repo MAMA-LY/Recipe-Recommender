@@ -68,7 +68,7 @@ Future<void> initUniLinks() async {
           Recipe response = await api.getRecipeShareByID(id.trim());
           debugPrint("open recipe page");
           runApp(BuildApp(
-              widget: RecipePage(recipe: response, inFavorites: false)));
+              widget: RecipePage(recipe: response, inFavorites: false, share: true,)));
         }
       } else {
         runApp(const BuildApp(widget: SignInPage(initResp: "")));
@@ -107,7 +107,7 @@ Future<void> initUniLinks() async {
             Recipe response = await api.getRecipeShareByID(id.trim());
             debugPrint("open recipe page");
             runApp(BuildApp(
-                widget: RecipePage(recipe: response, inFavorites: false)));
+                widget: RecipePage(recipe: response, inFavorites: false, share: true,)));
           }
         } else {
           runApp(const BuildApp(widget: SignInPage(initResp: "")));

@@ -13,7 +13,7 @@ void main() {
                     "https://welcome2jordan.com/wp-content/uploads/2022/09/Shakshuka-Recipe-Welcome2Jordan.jpg",
                 id: "125",
                 tags: ["dairy free", "breakfast"], favourite: false),
-            padding: 0.5)));
+            padding: 0.5, share: false,)));
 
     tester.pumpAndSettle();
   });
@@ -26,7 +26,7 @@ void main() {
                     "https://welcome2jordan.com/wp-content/uploads/2022/09/Shakshuka-Recipe-Welcome2Jordan.jpg",
                 id: "125",
                 tags: ["dairy free", "breakfast"], favourite: true),
-            padding: 0.5)));
+            padding: 0.5, share: false,)));
 
     var text = find.text('pizza');
     expect(text, findsOneWidget);

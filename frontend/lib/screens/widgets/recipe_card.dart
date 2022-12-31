@@ -53,7 +53,7 @@ class RecipeCard extends StatelessWidget {
       context,
       MaterialPageRoute(
           builder: (context) =>
-              RecipePage(recipe: apiRecipe, inFavorites: false)),
+              RecipePage(recipe: apiRecipe, inFavorites: false, share: false,)),
     );
   }
 
