@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:recipe_recommender_frontend/screens/calories_page/calories_page.dart';
 import 'package:settings_ui/settings_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:recipe_recommender_frontend/screens/sign/signin.dart';
@@ -122,6 +123,19 @@ class SettingsPage extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => AccountSettingsPage()),
+                    );
+                },
+              ),
+              SettingsTile(
+                title: Text(
+                  'Calorie Watcher',
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+                leading: const Icon(Icons.fastfood),
+                onPressed: (BuildContext context) {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => (CaloriesPage())),
                     );
                 },
               ),

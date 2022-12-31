@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_recommender_frontend/api/api_constants.dart';
+import 'package:recipe_recommender_frontend/api/user_profile_api.dart';
 import 'package:recipe_recommender_frontend/constants.dart';
 import 'package:recipe_recommender_frontend/models/recipe.dart';
+import 'package:recipe_recommender_frontend/models/user_profile.dart';
+import 'package:recipe_recommender_frontend/screens/calories_page/calories_page.dart';
 import 'package:recipe_recommender_frontend/screens/recipe_page/widgets/ingredients_view.dart';
 import 'package:recipe_recommender_frontend/screens/recipe_page/widgets/nutrition_view.dart';
 import 'package:recipe_recommender_frontend/screens/recipe_page/widgets/recipe_image.dart';
 import 'package:recipe_recommender_frontend/screens/recipe_page/widgets/recipe_title.dart';
 import 'package:recipe_recommender_frontend/screens/sign/ResponseEnum.dart';
 import 'package:share_plus/share_plus.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../api/recipes_api.dart';
 import '../../main.dart';
 
@@ -54,7 +57,7 @@ class _RecipePageState extends State<RecipePage>
       }
     }
     if(widget.share == false) {
-      options = {"Share", "Save"};
+      options = {"Eat", "Share", "Save"};
     }
     else {
       options = {"Share"};
@@ -134,8 +137,40 @@ class _RecipePageState extends State<RecipePage>
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(15.0))),
         itemBuilder: (BuildContext context) {
+
           return options.map((String choice) {
-            if (choice == "Save") {
+            if (choice == "Eat"){
+              return PopupMenuItem<String>(
+                  onTap: () async {
+                    await CalorieWatcher.validateDailyCalories();
+                    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+                    int recipeCalories = widget.recipe.nutrition!.calories;
+                    int recipeCarbs = widget.recipe.nutrition!.carbs;
+                    int recipeProteins = widget.recipe.nutrition!.proteins;
+                    int recipeFats = widget.recipe.nutrition!.fats;
+
+                    int consumedCalories = prefs.getInt("consumedCalories") ?? 0;
+                    int consumedCarbs = prefs.getInt("consumedCarbs") ?? 0;
+                    int consumedProteins= prefs.getInt("consumedProteins") ?? 0;
+                    int consumedFats = prefs.getInt("consumedFats") ?? 0;
+
+                    await prefs.setInt("consumedCalories", consumedCalories + recipeCalories);
+                    await prefs.setInt("consumedCarbs", consumedCarbs + recipeCarbs);
+                    await prefs.setInt("consumedProteins", consumedProteins + recipeProteins);
+                    await prefs.setInt("consumedFats", consumedFats + recipeFats);
+                    await prefs.reload();
+                  },
+                  value: choice,
+                  child: Row(children: [
+                    const Icon(Icons.add,
+                        color: Constants.secondaryColor),
+                    const SizedBox(width: 5.0),
+                    Text("Eat",
+                        style: TextStyle(
+                            color: Theme.of(context).secondaryHeaderColor))
+                  ]));
+            } else if (choice == "Save") {
               return PopupMenuItem<String>(
                   onTap: () async {
                     if (_inFavorites) {
