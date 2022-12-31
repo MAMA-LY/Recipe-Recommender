@@ -88,11 +88,17 @@ public class DAO {
 
     public Recipe findRecipe(String id, String username) {
         System.out.println(id);
+
         RecipeDB recipeDB = recipeRepository.findByIdEquals(id);
         List<IngredientDB> ingredientDBS = recipeRepository.findIngredientsByIdEquals(id);
         List<String> tags = recipeRepository.findTagsByIdEquals(id);
-        List<RecipeDB> favRecipes = this.getFavRecipesByUsername(username);
-        return Director.buildRecipe(recipeDB, ingredientDBS, tags, favRecipes.contains(recipeDB));
+        if(username != null) {
+            List<RecipeDB> favRecipes = this.getFavRecipesByUsername(username);
+            return Director.buildRecipe(recipeDB, ingredientDBS, tags, favRecipes.contains(recipeDB));
+        }
+        else {
+            return Director.buildRecipe(recipeDB, ingredientDBS, tags, false);
+        }
     }
 
     public List<String> getAllIngredients() {

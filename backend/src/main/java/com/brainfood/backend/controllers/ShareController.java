@@ -21,7 +21,7 @@ public class ShareController {
     @GetMapping("recipe")
     public Recipe getRecipeDetailsByName(@RequestParam(name = "id") String id) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        return dao.findRecipe(id, username);
+        return dao.findRecipe(id, null);
     }
 
 }
