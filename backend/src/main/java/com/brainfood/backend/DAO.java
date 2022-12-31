@@ -1,11 +1,24 @@
 package com.brainfood.backend;
 
+import com.brainfood.backend.db_entities.*;
+import com.brainfood.backend.db_repositories.*;
+import com.brainfood.backend.models.Recipe;
+import com.brainfood.backend.models.ShortRecipe;
+import com.brainfood.backend.models.UserProfile;
+import com.brainfood.security.Response;
+import com.brainfood.security.repository.UserCredentialsRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
+<<<<<<< HEAD
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
@@ -23,13 +36,22 @@ import com.brainfood.backend.models.Recipe;
 import com.brainfood.backend.models.ShortRecipe;
 import com.brainfood.security.Response;
 
+=======
+>>>>>>> Milestone3
 @Component
 public class DAO {
-    @Autowired
     RecipeRepository recipeRepository;
 
     @Autowired
     IngredientRepository ingredientRepository;
+    @Autowired
+    UserRepository userRepository;
+    @Autowired
+    RecipeRatesRepository recipeRatesRepository;
+    @Autowired
+    UserCredentialsRepository userCredentialsRepository;
+    @Autowired
+    UserFavRecipesRepository userFavRecipesRepository;
 
     @Autowired
     UserRepository userRepository;
@@ -92,6 +114,7 @@ public class DAO {
         RecipeDB recipeDB = recipeRepository.findByIdEquals(id);
         List<IngredientDB> ingredientDBS = recipeRepository.findIngredientsByIdEquals(id);
         List<String> tags = recipeRepository.findTagsByIdEquals(id);
+<<<<<<< HEAD
         if(username != null) {
             List<RecipeDB> favRecipes = this.getFavRecipesByUsername(username);
             return Director.buildRecipe(recipeDB, ingredientDBS, tags, favRecipes.contains(recipeDB));
@@ -99,12 +122,24 @@ public class DAO {
         else {
             return Director.buildRecipe(recipeDB, ingredientDBS, tags, false);
         }
+=======
+
+        String userID = userRepository.findByUsername(username).getID();
+        RecipeRatesDB returned = recipeRatesRepository.findRateForUser(id, userID);
+        float userRate = 0;
+        if (returned != null)
+            userRate = returned.rate;
+
+        List<RecipeDB> favRecipes = this.getFavRecipesByUsername(username);
+        return Director.buildRecipe(recipeDB, ingredientDBS, tags, favRecipes.contains(recipeDB), userRate);
+>>>>>>> Milestone3
     }
 
     public List<String> getAllIngredients() {
         return ingredientRepository.getDistinctByName();
     }
 
+<<<<<<< HEAD
     public Response addFavRecipeByUsername(String username, String recipeid) {
         User user = userRepository.findByUsername(username);
         String userid = user.getID();
@@ -126,6 +161,64 @@ public class DAO {
         String userid = user.getID();
         UserFavRecipes userFavRecipes = new UserFavRecipes();
         userFavRecipes.setCompositeKey(new UserFavRecipesCK(userid, recipeid));
+=======
+    public void rateRecipe(String recipeID, String userName, float rate) {
+        float oldRate = 0, totalRates;
+
+        String userID = userRepository.findByUsername(userName).getID();
+        RecipeRatesDB returned = recipeRatesRepository.findRateForUser(recipeID, userID);
+
+        RecipeDB recipeDB = recipeRepository.findByIdEquals(recipeID);
+        totalRates = recipeDB.rates_count * recipeDB.rate;
+        recipeDB.rates_count++;
+
+        if (returned != null) {
+            recipeDB.rates_count--;
+            oldRate = returned.rate;
+            recipeRatesRepository.delete(returned);
+        }
+
+        RecipeRatesDB recipeRatesDB = RecipeRatesDB.builder().rate(rate).
+                compositeKey(new RecipeRatesCK(recipeID, userID)).build();
+        recipeRatesRepository.save(recipeRatesDB);
+
+        recipeDB.rate = (totalRates - oldRate + rate) / recipeDB.rates_count;
+        recipeRepository.save(recipeDB);
+    }
+
+    public UserProfile getUserProfile() {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userRepository.findByUsername(username);
+        String email = userCredentialsRepository.findByUsername(username).getEmail();
+
+        return UserProfile.builder().username(username)
+                .birthdate(user.getBirthdate())
+                .height(user.getHeight())
+                .weight(user.getWeight())
+                .email(email).build();
+    }
+
+    public Response addFavRecipeByUsername(String username, String recipeID) {
+        User user = userRepository.findByUsername(username);
+        String userID = user.getID();
+        UserFavRecipes userFavRecipes = new UserFavRecipes();
+        userFavRecipes.setCompositeKey(new UserFavRecipesCK(userID, recipeID));
+        userFavRecipesRepository.save(userFavRecipes);
+        return Response.AddedFavRecipe;
+    }
+
+    public List<RecipeDB> getFavRecipesByUsername(String username) {
+        User user = userRepository.findByUsername(username);
+        String userID = user.getID();
+        return userRepository.findFavRecipesById(userID);
+    }
+
+    public Response removeFavRecipeByUsername(String username, String recipeID) {
+        User user = userRepository.findByUsername(username);
+        String userID = user.getID();
+        UserFavRecipes userFavRecipes = new UserFavRecipes();
+        userFavRecipes.setCompositeKey(new UserFavRecipesCK(userID, recipeID));
+>>>>>>> Milestone3
         userFavRecipesRepository.delete(userFavRecipes);
         return Response.RemovedFavRecipe;
     }

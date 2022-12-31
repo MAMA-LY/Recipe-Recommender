@@ -46,9 +46,9 @@ public class RecipeDB implements Serializable {
     @Column(name = "photo")
     public String photo;
 
+    @Column(name = "rate")
+    public float rate;
 
-    @Override
-    public int hashCode() {
-        return this.id.hashCode();
-    }
+    @Column(name = "rates_count")
+    public int rates_count;
 }

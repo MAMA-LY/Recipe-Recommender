@@ -36,7 +36,13 @@ class _SignUpPageState extends State<SignUpPage> {
       loading = true;
     });
     bool emailValid = EmailValidator.validate(emailController.text.trim());
-    if (emailValid) {
+    if (emailValid &&
+        usernameController.text.trim() != "" &&
+        passwordController.text.trim() != "" &&
+        emailController.text.trim() != "" &&
+        heightController.text.trim() != "" &&
+        weightController.text.trim() != "" &&
+        dateController.text.trim() != "") {
       String? body = await SignAPI.signup(
         usernameController.text.trim(),
         passwordController.text.trim(),
@@ -59,6 +65,9 @@ class _SignUpPageState extends State<SignUpPage> {
           case "UsernameAlreadyExists":
             resp = "This username is already taken";
             break;
+          case "MissingInputs":
+            resp = "Some input fields were missing";
+            break;
           case "UserCreated":
             resp = "Account is Created Successfully";
             break;
@@ -67,8 +76,13 @@ class _SignUpPageState extends State<SignUpPage> {
       debugPrint(body);
     } else {
       setState(() {
-        loading = false;
-        resp = "Please enter a valid email address";
+        if (!emailValid) {
+          loading = false;
+          resp = "Please enter a valid email address";
+        } else {
+          loading = false;
+          resp = "Some input fields were missing";
+        }
       });
     }
   }
@@ -113,6 +127,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         bottomMargin: 20,
                         controller: emailController,
                         obscureText: false,
+                        email: true,
                         icon: Icons.email_outlined,
                       ),
                       const SizedBox(height: 2),
@@ -131,6 +146,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         bottomMargin: 15,
                         controller: heightController,
                         obscureText: false,
+                        numeric: true,
                         icon: Icons.height,
                       ),
                       const SizedBox(height: 2),
@@ -140,6 +156,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         bottomMargin: 15,
                         controller: weightController,
                         obscureText: false,
+                        numeric: true,
                         icon: Icons.monitor_weight_outlined,
                       ),
                       const SizedBox(height: 2),
@@ -225,6 +242,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                   color: Colors.green, fontSize: 20)
                               : const TextStyle(
                                   color: Colors.red, fontSize: 20)),
+                      const SizedBox(height: 10),
                     ],
                   ),
                 ),
