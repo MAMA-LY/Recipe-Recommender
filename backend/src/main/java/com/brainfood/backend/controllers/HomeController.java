@@ -23,8 +23,8 @@ public class HomeController {
 
     @GetMapping("recipe")
     public Recipe getRecipeDetails(@RequestParam String id) {
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        return DAO.findRecipe(id, username);
+        String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+        return DAO.findRecipe(id , userName);
     }
 
     @GetMapping("ingredients")

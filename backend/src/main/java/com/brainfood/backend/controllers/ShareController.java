@@ -6,7 +6,6 @@ import com.brainfood.backend.db_repositories.RecipeRatesRepository;
 import com.brainfood.backend.db_repositories.UserRepository;
 import com.brainfood.backend.models.Recipe;
 import com.brainfood.backend.DAO;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -30,6 +29,8 @@ public class ShareController {
 
     @GetMapping("recipe")
     public Recipe getRecipeDetailsByName(@RequestParam(name = "id") String id) {
+
         return dao.findRecipe(id, null);
+
     }
 }
