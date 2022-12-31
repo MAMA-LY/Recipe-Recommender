@@ -14,8 +14,8 @@ class RecipesAPI {
   RecipesAPI.fromCookie(var this.cookie);
 
   Future<Recipe> getRecipeByID(String id) async {
-    var url =
-        Uri.https(APIConstants.baseUrl, APIConstants.recipeEndPoint, {"id": id});
+    var url = Uri.http(
+        APIConstants.baseUrl, APIConstants.recipeEndPoint, {"id": id});
     var response =
         await http.get(url, headers: APIConstants.headerCORS(session.cookie));
     debugPrint(response.statusCode.toString());
@@ -30,9 +30,25 @@ class RecipesAPI {
     }
   }
 
+  Future<Recipe> getRecipeShareByID(String id) async {
+    var url = Uri.http(
+        APIConstants.baseUrl, APIConstants.recipeEndPoint, {"id": id});
+    var response = await http.get(url);
+    debugPrint(response.statusCode.toString());
+    debugPrint(response.body);
+    if (response.statusCode == 200) {
+      return Recipe.recipeFromJson(jsonDecode(response.body));
+    } else if (response.statusCode == 401) {
+      throw Failure(code: 401, message: "fail");
+    } else {
+      throw Failure(
+          code: response.statusCode, message: response.headers.toString());
+    }
+  }
+
   Future<List<Recipe>> getRecipesWithQuery(
       String path, Map<String, String> query) async {
-    var url = Uri.https(APIConstants.baseUrl, path, query);
+    var url = Uri.http(APIConstants.baseUrl, path, query);
     var response =
         await http.get(url, headers: APIConstants.headerCORS(session.cookie));
     debugPrint(response.statusCode.toString());
@@ -49,9 +65,11 @@ class RecipesAPI {
     }
   }
 
-  Future<Recipe> rateRecipe(String id,double rate) async {
-    var url = Uri.https(APIConstants.baseUrl, APIConstants.rateRecipe, {"recipeID": id , "rate":rate.toString()});
-    var response = await http.post(url, headers: APIConstants.headerCORS(session.cookie));
+  Future<Recipe> rateRecipe(String id, double rate) async {
+    var url = Uri.http(APIConstants.baseUrl, APIConstants.rateRecipe,
+        {"recipeID": id, "rate": rate.toString()});
+    var response =
+        await http.post(url, headers: APIConstants.headerCORS(session.cookie));
     if (response.statusCode == 200) {
       return Recipe.recipeFromJson(jsonDecode(response.body));
     } else if (response.statusCode == 401) {
@@ -63,7 +81,8 @@ class RecipesAPI {
   }
 
   Future<List<Recipe>> getFavRecipes() async {
-    var url = Uri.https(APIConstants.baseUrl, APIConstants.getFavRecipeEndPoint);
+    var url =
+        Uri.http(APIConstants.baseUrl, APIConstants.getFavRecipeEndPoint);
     var response =
         await http.get(url, headers: APIConstants.headerCORS(session.cookie));
 
@@ -80,7 +99,7 @@ class RecipesAPI {
   }
 
   Future<String> addFavRecipe(String id) async {
-    var url = Uri.https(
+    var url = Uri.http(
         APIConstants.baseUrl, APIConstants.addFavRecipeEndPoint, {"id": id});
     var response =
         await http.post(url, headers: APIConstants.headerCORS(session.cookie));
@@ -96,7 +115,7 @@ class RecipesAPI {
   }
 
   Future<String> removeFavRecipe(String id) async {
-    var url = Uri.https(
+    var url = Uri.http(
         APIConstants.baseUrl, APIConstants.removeFavRecipeEndPoint, {"id": id});
     var response =
         await http.post(url, headers: APIConstants.headerCORS(session.cookie));

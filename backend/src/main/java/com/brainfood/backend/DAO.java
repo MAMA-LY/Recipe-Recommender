@@ -18,30 +18,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
-<<<<<<< HEAD
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.stereotype.Component;
-
-import com.brainfood.backend.db_entities.IngredientDB;
-import com.brainfood.backend.db_entities.RecipeDB;
-import com.brainfood.backend.db_entities.User;
-import com.brainfood.backend.db_entities.UserFavRecipes;
-import com.brainfood.backend.db_entities.UserFavRecipesCK;
-import com.brainfood.backend.db_repositories.IngredientRepository;
-import com.brainfood.backend.db_repositories.RecipeRepository;
-import com.brainfood.backend.db_repositories.UserFavRecipesRepository;
-import com.brainfood.backend.db_repositories.UserRepository;
-import com.brainfood.backend.models.Recipe;
-import com.brainfood.backend.models.ShortRecipe;
-import com.brainfood.security.Response;
-
-=======
->>>>>>> Milestone3
 @Component
 public class DAO {
+    @Autowired
     RecipeRepository recipeRepository;
-
     @Autowired
     IngredientRepository ingredientRepository;
     @Autowired
@@ -53,11 +33,6 @@ public class DAO {
     @Autowired
     UserFavRecipesRepository userFavRecipesRepository;
 
-    @Autowired
-    UserRepository userRepository;
-
-    @Autowired
-    UserFavRecipesRepository userFavRecipesRepository;
 
     public List<RecipeDB> findSimilarDishes(List<ShortRecipe> dishes) {
         List<RecipeDB> result = new ArrayList<>();
@@ -114,54 +89,26 @@ public class DAO {
         RecipeDB recipeDB = recipeRepository.findByIdEquals(id);
         List<IngredientDB> ingredientDBS = recipeRepository.findIngredientsByIdEquals(id);
         List<String> tags = recipeRepository.findTagsByIdEquals(id);
-<<<<<<< HEAD
+
         if(username != null) {
+            String userID = userRepository.findByUsername(username).getID();
+            RecipeRatesDB returned = recipeRatesRepository.findRateForUser(id, userID);
+            float userRate = 0;
+            if (returned != null)
+                userRate = returned.rate;
+    
             List<RecipeDB> favRecipes = this.getFavRecipesByUsername(username);
-            return Director.buildRecipe(recipeDB, ingredientDBS, tags, favRecipes.contains(recipeDB));
-        }
-        else {
-            return Director.buildRecipe(recipeDB, ingredientDBS, tags, false);
-        }
-=======
+            return Director.buildRecipe(recipeDB, ingredientDBS, tags, favRecipes.contains(recipeDB), userRate);
 
-        String userID = userRepository.findByUsername(username).getID();
-        RecipeRatesDB returned = recipeRatesRepository.findRateForUser(id, userID);
-        float userRate = 0;
-        if (returned != null)
-            userRate = returned.rate;
-
-        List<RecipeDB> favRecipes = this.getFavRecipesByUsername(username);
-        return Director.buildRecipe(recipeDB, ingredientDBS, tags, favRecipes.contains(recipeDB), userRate);
->>>>>>> Milestone3
+        }
+        return Director.buildRecipe(recipeDB, ingredientDBS, tags, false, 0.0F);
+      
     }
 
     public List<String> getAllIngredients() {
         return ingredientRepository.getDistinctByName();
     }
 
-<<<<<<< HEAD
-    public Response addFavRecipeByUsername(String username, String recipeid) {
-        User user = userRepository.findByUsername(username);
-        String userid = user.getID();
-        UserFavRecipes userFavRecipes = new UserFavRecipes();
-        userFavRecipes.setCompositeKey(new UserFavRecipesCK(userid, recipeid));
-        userFavRecipesRepository.save(userFavRecipes);
-        return Response.AddedFavRecipe;
-    } 
-
-    public List<RecipeDB> getFavRecipesByUsername(String username) {
-        User user = userRepository.findByUsername(username);
-        String userid = user.getID();
-        List<RecipeDB> recipesFav = userRepository.findFavRecipesById(userid);
-        return recipesFav;
-    }
-
-    public Response removeFavRecipeByUsername(String username, String recipeid) {
-        User user = userRepository.findByUsername(username);
-        String userid = user.getID();
-        UserFavRecipes userFavRecipes = new UserFavRecipes();
-        userFavRecipes.setCompositeKey(new UserFavRecipesCK(userid, recipeid));
-=======
     public void rateRecipe(String recipeID, String userName, float rate) {
         float oldRate = 0, totalRates;
 
@@ -218,7 +165,6 @@ public class DAO {
         String userID = user.getID();
         UserFavRecipes userFavRecipes = new UserFavRecipes();
         userFavRecipes.setCompositeKey(new UserFavRecipesCK(userID, recipeID));
->>>>>>> Milestone3
         userFavRecipesRepository.delete(userFavRecipes);
         return Response.RemovedFavRecipe;
     }
