@@ -14,7 +14,7 @@ class IngredientsAPI {
   IngredientsAPI.fromCookie(var this.cookie);
 
   Future<List<String>> getIngredients() async {
-    var url = Uri.http(APIConstants.baseUrl, APIConstants.ingredientsEndPoint);
+    var url = Uri.https(APIConstants.baseUrl, APIConstants.ingredientsEndPoint);
     var response = await http.get(url, headers: APIConstants.headerCORS(session.cookie));
     debugPrint(response.statusCode.toString());
 

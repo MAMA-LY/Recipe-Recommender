@@ -1,5 +1,5 @@
 class APIConstants {
-  static const baseUrl = String.fromEnvironment("BrainFoodBackendIP", defaultValue: "192.168.1.101:8080");
+  static const baseUrl = String.fromEnvironment("BrainFoodBackendIP", defaultValue: "brainfood-test.azurewebsites.net");
   static String signupEndPoint = "/signup";
   static String signinEndPoint = "/signin";
   static String signoutEndPoint = "/signout";
