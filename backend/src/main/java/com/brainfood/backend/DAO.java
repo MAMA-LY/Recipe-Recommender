@@ -18,7 +18,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 @Component
 public class DAO {
@@ -34,6 +36,7 @@ public class DAO {
     UserCredentialsRepository userCredentialsRepository;
     @Autowired
     UserFavRecipesRepository userFavRecipesRepository;
+
 
     public List<RecipeDB> findSimilarDishes(List<ShortRecipe> dishes) {
         List<RecipeDB> result = new ArrayList<>();
@@ -86,18 +89,24 @@ public class DAO {
 
     public Recipe findRecipe(String id, String username) {
         System.out.println(id);
+
         RecipeDB recipeDB = recipeRepository.findByIdEquals(id);
         List<IngredientDB> ingredientDBS = recipeRepository.findIngredientsByIdEquals(id);
         List<String> tags = recipeRepository.findTagsByIdEquals(id);
 
-        String userID = userRepository.findByUsername(username).getID();
-        RecipeRatesDB returned = recipeRatesRepository.findRateForUser(id, userID);
-        float userRate = 0;
-        if (returned != null)
-            userRate = returned.rate;
+        if(username != null) {
+            String userID = userRepository.findByUsername(username).getID();
+            RecipeRatesDB returned = recipeRatesRepository.findRateForUser(id, userID);
+            float userRate = 0;
+            if (returned != null)
+                userRate = returned.rate;
+    
+            List<RecipeDB> favRecipes = this.getFavRecipesByUsername(username);
+            return Director.buildRecipe(recipeDB, ingredientDBS, tags, favRecipes.contains(recipeDB), userRate);
 
-        List<RecipeDB> favRecipes = this.getFavRecipesByUsername(username);
-        return Director.buildRecipe(recipeDB, ingredientDBS, tags, favRecipes.contains(recipeDB), userRate);
+        }
+        return Director.buildRecipe(recipeDB, ingredientDBS, tags, false, 0.0F);
+      
     }
 
 

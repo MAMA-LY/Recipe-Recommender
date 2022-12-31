@@ -10,6 +10,7 @@ import 'package:recipe_recommender_frontend/constants.dart';
 import 'package:recipe_recommender_frontend/screens/sign/changePassword.dart';
 import 'package:recipe_recommender_frontend/screens/sign/signin.dart';
 import 'package:recipe_recommender_frontend/screens/splash_screen.dart';
+import 'package:uni_links/uni_links.dart';
 import 'api/api_constants.dart';
 import 'api/recipes_api.dart';
 import 'api/session.dart';
@@ -35,97 +36,91 @@ Future<File> getLocalFile() async {
 Widget startWidget = const MyApp();
 StreamSubscription? _sub;
 
-// Future<void> initUniLinks() async {
-//   try {
-//     final initialUri = await getInitialUri();
-//     debugPrint("init link");
-//     if (initialUri != null) {
-//       List<String?> path = initialUri.pathSegments;
-//       debugPrint(path.toString());
-//       if (path[0] == "resetPassword") {
-//         String? tk = initialUri.queryParameters['tk'];
-//         if (tk != null) {
-//           var response = await SignAPI.resetPassword(tk);
-//           debugPrint(response);
-//           if (response == "InvalidToken") {
-//             runApp(const BuildApp(
-//                 widget: SignInPage(initResp: "Cannot reset password")));
-//           } else if (response == "TokenVerified") {
-//             runApp(BuildApp(widget: ChangePasswordPage(tk: tk)));
-//           }
-//         } else {
-//           runApp(const BuildApp(
-//               widget: SignInPage(initResp: "Cannot reset password")));
-//         }
-//       } else if (path[0] == "share") {
-//         if (Session.login) {
-//           String? id = initialUri.queryParameters['id'];
-//           if (id != null) {
-//             debugPrint(id);
-//             RecipesAPI api = RecipesAPI.fromCookie(session.cookie);
-//             Recipe response = await api.getRecipeByID(id.trim());
-//             runApp(BuildApp(widget:RecipePage(recipe: response, inFavorites: false)));
-//           }
-//         } else {
-//           runApp(const BuildApp(widget: SignInPage(initResp: "")));
-//         }
-//       } else {
-//         runApp(const BuildApp(widget: SignInPage(initResp: "")));
-//       }
-//     }
-//     debugPrint(initialUri.toString());
-//     debugPrint("bodnod2");
-//     _sub = uriLinkStream.listen((Uri? uri) async {
-//       debugPrint("bodnod2");
-//       if (uri != null) {
-//         List<String?> path = uri.pathSegments;
-//         debugPrint(path.toString());
-//         debugPrint(uri.toString());
+Future<void> initUniLinks() async {
+  try {
+    final initialUri = await getInitialUri();
+    debugPrint("init link");
+    if (initialUri != null) {
+      List<String?> path = initialUri.pathSegments;
+      debugPrint(path.toString());
+      if (path[0] == "resetPassword") {
+        String? tk = initialUri.queryParameters['tk'];
+        if (tk != null) {
+          var response = await SignAPI.resetPassword(tk);
+          debugPrint(response);
+          if (response == "InvalidToken") {
+            runApp(const BuildApp(
+                widget: SignInPage(initResp: "Cannot reset password")));
+          } else if (response == "TokenVerified") {
+            runApp(BuildApp(widget: ChangePasswordPage(tk: tk)));
+          }
+        } else {
+          runApp(const BuildApp(
+              widget: SignInPage(initResp: "Cannot reset password")));
+        }
+      } else if (path[0] == "share") {
+        String? id = initialUri.queryParameters['id'];
+        if (id != null) {
+          debugPrint(id);
+          debugPrint("wait recipe page");
+          debugPrint(session.cookie.toString());
+          RecipesAPI api = RecipesAPI.fromCookie(session.cookie);
+          Recipe response = await api.getRecipeShareByID(id.trim());
+          debugPrint("open recipe page");
+          runApp(BuildApp(
+              widget: RecipePage(recipe: response, inFavorites: false, share: true,)));
+        }
+      } else {
+        runApp(const BuildApp(widget: SignInPage(initResp: "")));
+      }
+    }
+    debugPrint(initialUri.toString());
+    debugPrint("bodnod2");
+    _sub = uriLinkStream.listen((Uri? uri) async {
+      debugPrint("bodnod2");
+      if (uri != null) {
+        List<String?> path = uri.pathSegments;
 
-//         if (path[0] == "resetPassword") {
-//           String? tk = uri.queryParameters['tk'];
-//           if (tk != null) {
-//             var response = await SignAPI.resetPassword(tk);
-//             debugPrint("reso");
-//             debugPrint(response);
-//             if (response == "InvalidToken") {
-//               runApp(const BuildApp(
-//                   widget: SignInPage(initResp: "Cannot reset password")));
-//             } else if (response == "TokenVerified") {
-//               debugPrint("lolxd");
-//               runApp(BuildApp(widget: ChangePasswordPage(tk: tk)));
-//             }
-//           } else {
-//             runApp(const BuildApp(
-//                 widget: SignInPage(initResp: "Cannot reset password")));
-//           }
-//         } else if (path[0] == "share") {
-//           if (Session.login) {
-//             String? id = uri.queryParameters['id'];
-//             if (id != null) {
-//               debugPrint(id);
-//               RecipesAPI api = RecipesAPI.fromCookie(session.cookie);
-//               Recipe response = await api.getRecipeByID(id.trim());
-//               runApp(BuildApp(widget:RecipePage(recipe: response, inFavorites: false)));
-//             }
-//           } else {
-//             runApp(const BuildApp(widget: SignInPage(initResp: "")));
-//           }
-//         } else {
-//           runApp(const BuildApp(widget: SignInPage(initResp: "")));
-//         }
-//       }
-//       debugPrint("run");
-//     }, onError: (err) {
-//       debugPrint(err);
-//     });
-//   } on PlatformException {
-//     debugPrint("eror");
-//   }
-// }
-// Use the uri and warn the user, if it is not correct,
-// but keep in mind it could be `null`.
-// ... other exception handling like PlatformException
+        if (path[0] == "resetPassword") {
+          String? tk = uri.queryParameters['tk'];
+          if (tk != null) {
+            var response = await SignAPI.resetPassword(tk);
+            debugPrint("reso");
+            debugPrint(response);
+            if (response == "InvalidToken") {
+              runApp(const BuildApp(
+                  widget: SignInPage(initResp: "Cannot reset password")));
+            } else if (response == "TokenVerified") {
+              runApp(BuildApp(widget: ChangePasswordPage(tk: tk)));
+            }
+          } else {
+            runApp(const BuildApp(
+                widget: SignInPage(initResp: "Cannot reset password")));
+          }
+        } else if (path[0] == "share") {
+          String? id = uri.queryParameters['id'];
+          if (id != null) {
+            debugPrint(id);
+            debugPrint("wait recipe page");
+            debugPrint(session.cookie);
+            RecipesAPI api = RecipesAPI.fromCookie(session.cookie);
+            Recipe response = await api.getRecipeShareByID(id.trim());
+            debugPrint("open recipe page");
+            runApp(BuildApp(
+                widget: RecipePage(recipe: response, inFavorites: false, share: true,)));
+          }
+        } else {
+          runApp(const BuildApp(widget: SignInPage(initResp: "")));
+        }
+      }
+      debugPrint("run");
+    }, onError: (err) {
+      debugPrint(err);
+    });
+  } on PlatformException {
+    debugPrint("eror");
+  }
+}
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -144,7 +139,7 @@ void main() {
             debugPrint("Can't get cache file"),
             runApp(const BuildApp(widget: MyApp()))
           });
-  // initUniLinks();
+  initUniLinks();
 }
 
 Future<String?> getServerInitResponse() async {
@@ -195,24 +190,29 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
 class BuildApp extends StatefulWidget {
-    final Widget widget;
-    const BuildApp({super.key, required this.widget});
+  final Widget widget;
+  const BuildApp({super.key, required this.widget});
 
   @override
   BuildAppState createState() => BuildAppState();
-  static BuildAppState? of(BuildContext context) => context.findAncestorStateOfType<BuildAppState>();
+  static BuildAppState? of(BuildContext context) =>
+      context.findAncestorStateOfType<BuildAppState>();
 }
+
 class BuildAppState extends State<BuildApp> {
   late ThemeMode _themeMode = ThemeMode.light;
-  ThemeMode getTheme(){
+  ThemeMode getTheme() {
     return _themeMode;
   }
+
   void changeTheme(ThemeMode themeMode) {
     setState(() {
       _themeMode = themeMode;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

@@ -18,9 +18,9 @@ import '../../main.dart';
 class RecipePage extends StatefulWidget {
   final Recipe recipe;
   final bool inFavorites;
-
+  final bool share;
   const RecipePage(
-      {super.key, required this.recipe, required this.inFavorites});
+      {super.key, required this.recipe, required this.inFavorites, required this.share});
 
   List<String> getIngredientsNames() {
     List<String> ingredientsNames = [];
@@ -36,8 +36,9 @@ class RecipePage extends StatefulWidget {
 
 class _RecipePageState extends State<RecipePage>
     with SingleTickerProviderStateMixin {
-  RecipesAPI api = RecipesAPI.fromCookie(session.cookie);
 
+  RecipesAPI api = RecipesAPI.fromCookie(session.cookie);
+  Set<String> options = {};
   late TabController _tabController;
   late ScrollController _scrollController;
   late bool _inFavorites = false;
@@ -54,6 +55,12 @@ class _RecipePageState extends State<RecipePage>
           _inFavorites = true;
         });
       }
+    }
+    if(widget.share == false) {
+      options = {"Eat", "Share", "Save"};
+    }
+    else {
+      options = {"Share"};
     }
   }
 
@@ -82,7 +89,7 @@ class _RecipePageState extends State<RecipePage>
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     RecipeImage(imageURL: widget.recipe.image),
-                    RecipeTitle(padding: 25.0, recipe: widget.recipe),
+                    RecipeTitle(padding: 25.0, recipe: widget.recipe, share: widget.share),
                   ],
                 ),
               ),
@@ -130,7 +137,8 @@ class _RecipePageState extends State<RecipePage>
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(15.0))),
         itemBuilder: (BuildContext context) {
-          return {"Eat", "Share", "Save"}.map((String choice) {
+
+          return options.map((String choice) {
             if (choice == "Eat"){
               return PopupMenuItem<String>(
                   onTap: () async {

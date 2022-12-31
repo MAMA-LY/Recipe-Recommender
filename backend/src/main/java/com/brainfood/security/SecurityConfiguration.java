@@ -30,7 +30,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests().requestMatchers(HttpMethod.POST, "/fav/**").authenticated().and()
                 .authorizeHttpRequests().requestMatchers(HttpMethod.GET, "/fav/**").authenticated().and()
                 .authorizeHttpRequests().requestMatchers("/home/**").authenticated().and()
-                .authorizeHttpRequests().requestMatchers(HttpMethod.GET, "/share/recipe/**").permitAll().and()
+                .authorizeHttpRequests().requestMatchers("/share/**").permitAll().and()
                 .authorizeHttpRequests().requestMatchers("/search/**").authenticated().and()
                 .authorizeHttpRequests().requestMatchers(HttpMethod.POST,"/home/rateRecipe/**").authenticated().and()
                 .authorizeHttpRequests().requestMatchers("/account_settings/**").authenticated().and()

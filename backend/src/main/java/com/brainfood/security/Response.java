@@ -19,5 +19,4 @@ public enum Response {
     CannotAddFavRecipe,
     CannotRemoveFavRecipe
 
-
 }

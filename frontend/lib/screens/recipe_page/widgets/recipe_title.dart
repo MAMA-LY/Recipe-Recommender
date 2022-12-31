@@ -11,8 +11,12 @@ import '../../../models/recipe.dart';
 class RecipeTitle extends StatefulWidget {
   Recipe recipe;
   final double padding;
-
-  RecipeTitle({super.key, required this.recipe, required this.padding});
+  final bool share;
+  RecipeTitle(
+      {super.key,
+      required this.recipe,
+      required this.padding,
+      required this.share});
 
   @override
   State<RecipeTitle> createState() => _RecipeTitleState();
@@ -38,19 +42,21 @@ class _RecipeTitleState extends State<RecipeTitle> {
                 minRating: 1,
                 direction: Axis.horizontal,
                 allowHalfRating: true,
-                itemCount: 5,
+                itemCount: !widget.share ?  5 : 0,
                 itemPadding: EdgeInsets.symmetric(horizontal: 0.5),
-                itemBuilder: (context, _) => const Icon(
-                  Icons.star,
-                  color: Colors.amber,
-                ),
-                onRatingUpdate: (rating)async {
-                  RecipesAPI api = RecipesAPI.fromCookie(session.cookie);
-                  Recipe apiRecipe =  await api.rateRecipe(widget.recipe.id, rating);
-                  setState(() {
-                    widget.recipe = apiRecipe;
-                    debugPrint(widget.recipe.rate.toString());
-                  });
+                itemBuilder:  (context, _) {
+                    return const Icon(Icons.star, color: Colors.amber);
+                } ,
+                onRatingUpdate: (rating) async {
+                  if (!widget.share) {
+                    RecipesAPI api = RecipesAPI.fromCookie(session.cookie);
+                    Recipe apiRecipe =
+                        await api.rateRecipe(widget.recipe.id, rating);
+                    setState(() {
+                      widget.recipe = apiRecipe;
+                      debugPrint(widget.recipe.rate.toString());
+                    });
+                  }
                 },
               ),
               const SizedBox(width: 10),
