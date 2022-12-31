@@ -59,16 +59,16 @@ Future<void> initUniLinks() async {
               widget: SignInPage(initResp: "Cannot reset password")));
         }
       } else if (path[0] == "share") {
-        if (Session.login) {
-          String? id = initialUri.queryParameters['id'];
-          if (id != null) {
-            debugPrint(id);
-            RecipesAPI api = RecipesAPI.fromCookie(session.cookie);
-            Recipe response = await api.getRecipeByID(id.trim());
-            runApp(BuildApp(widget:RecipePage(recipe: response, inFavorites: false)));
-          }
-        } else {
-          runApp(const BuildApp(widget: SignInPage(initResp: "")));
+        String? id = initialUri.queryParameters['id'];
+        if (id != null) {
+          debugPrint(id);
+          debugPrint("wait recipe page");
+          debugPrint(session.cookie);
+          RecipesAPI api = RecipesAPI.fromCookie(session.cookie);
+          Recipe response = await api.getRecipeShareByID(id.trim());
+          debugPrint("open recipe page");
+          runApp(BuildApp(
+              widget: RecipePage(recipe: response, inFavorites: false)));
         }
       } else {
         runApp(const BuildApp(widget: SignInPage(initResp: "")));
@@ -80,8 +80,6 @@ Future<void> initUniLinks() async {
       debugPrint("bodnod2");
       if (uri != null) {
         List<String?> path = uri.pathSegments;
-        debugPrint(path.toString());
-        debugPrint(uri.toString());
 
         if (path[0] == "resetPassword") {
           String? tk = uri.queryParameters['tk'];
@@ -93,7 +91,6 @@ Future<void> initUniLinks() async {
               runApp(const BuildApp(
                   widget: SignInPage(initResp: "Cannot reset password")));
             } else if (response == "TokenVerified") {
-              debugPrint("lolxd");
               runApp(BuildApp(widget: ChangePasswordPage(tk: tk)));
             }
           } else {
@@ -101,16 +98,16 @@ Future<void> initUniLinks() async {
                 widget: SignInPage(initResp: "Cannot reset password")));
           }
         } else if (path[0] == "share") {
-          if (Session.login) {
-            String? id = uri.queryParameters['id'];
-            if (id != null) {
-              debugPrint(id);
-              RecipesAPI api = RecipesAPI.fromCookie(session.cookie);
-              Recipe response = await api.getRecipeByID(id.trim());
-              runApp(BuildApp(widget:RecipePage(recipe: response, inFavorites: false)));
-            }
-          } else {
-            runApp(const BuildApp(widget: SignInPage(initResp: "")));
+          String? id = uri.queryParameters['id'];
+          if (id != null) {
+            debugPrint(id);
+            debugPrint("wait recipe page");
+            debugPrint(session.cookie);
+            RecipesAPI api = RecipesAPI.fromCookie(session.cookie);
+            Recipe response = await api.getRecipeShareByID(id.trim());
+            debugPrint("open recipe page");
+            runApp(BuildApp(
+                widget: RecipePage(recipe: response, inFavorites: false)));
           }
         } else {
           runApp(const BuildApp(widget: SignInPage(initResp: "")));
@@ -193,24 +190,29 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
 class BuildApp extends StatefulWidget {
-    final Widget widget;
-    const BuildApp({super.key, required this.widget});
+  final Widget widget;
+  const BuildApp({super.key, required this.widget});
 
   @override
   BuildAppState createState() => BuildAppState();
-  static BuildAppState? of(BuildContext context) => context.findAncestorStateOfType<BuildAppState>();
+  static BuildAppState? of(BuildContext context) =>
+      context.findAncestorStateOfType<BuildAppState>();
 }
+
 class BuildAppState extends State<BuildApp> {
   late ThemeMode _themeMode = ThemeMode.light;
-  ThemeMode getTheme(){
+  ThemeMode getTheme() {
     return _themeMode;
   }
+
   void changeTheme(ThemeMode themeMode) {
     setState(() {
       _themeMode = themeMode;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
