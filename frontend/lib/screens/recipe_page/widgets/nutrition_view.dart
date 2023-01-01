@@ -1,9 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:recipe_recommender_frontend/models/nutrition.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-
-import '../../../constants.dart';
 
 class NutritionView extends StatefulWidget {
   late List<ChartData> data;
@@ -52,13 +49,15 @@ class _NutritionViewState extends State<NutritionView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Constants.secondaryColor,
+        backgroundColor: Theme.of(context).secondaryHeaderColor,
         body: SfCircularChart(
             annotations: [
               CircularChartAnnotation(
                   widget: Text(
+                softWrap: true,
                 "Calories: ${widget.nutrition.calories} kcal",
-                style: Theme.of(context).textTheme.caption,
+                style: TextStyle(
+                    fontSize: 13, color: Theme.of(context).focusColor),
               ))
             ],
             tooltipBehavior: widget.tooltip,

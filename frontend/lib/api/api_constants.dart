@@ -11,6 +11,14 @@ class APIConstants {
   static String forgetPasswordEndPoint = "/forgetPassword";
   static String resetPassword = "/resetPassword";
   static String changePassword = "/changePassword";
+  static String rateRecipe = "/home/rateRecipe";
+  static String userProfileEndPoint ="/account_settings/userProfile";
+  static String addFavRecipeEndPoint = "/fav/recipe/add";
+  static String removeFavRecipeEndPoint = "/fav/recipe/remove";
+  static String getFavRecipeEndPoint = "/fav/recipe/fetch";
+  static String shareRecipeEndPoint = "/share/recipe";
+
+
   static Map<String, String> headerCORS(String cookie) {
     if (cookie != "") {
       return {

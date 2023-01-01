@@ -17,6 +17,6 @@ class UserCredentials {
 
   @override
   String toString() {
-    return 'Recipe {ID: $ID, email: $email, password: $password}';
+    return 'UserCredentials {ID: $ID, email: $email, password: $password}';
   }
 }

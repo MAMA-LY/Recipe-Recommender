@@ -10,6 +10,13 @@ public enum Response {
     NoUserFoundByThisEmail,
     UsernameAlreadyExists,
     EmailAlreadyExists,
-    UserCreated
+    MissingInputs,
+    UserCreated,
+    AddedFavRecipe,
+    RemovedFavRecipe,
+    RecipeAlreadyFav,
+    RecipeAlreadyNotAFav,
+    CannotAddFavRecipe,
+    CannotRemoveFavRecipe
 
 }

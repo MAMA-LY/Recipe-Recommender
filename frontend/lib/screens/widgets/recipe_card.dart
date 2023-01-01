@@ -11,6 +11,7 @@ class RecipeCard extends StatelessWidget {
   final String id;
   final String name;
   final String thumbnailUrl;
+
   // ignore: prefer_final_fields
   final Recipe _recipe = Recipe(
       name: "shaksouka",
@@ -33,8 +34,8 @@ class RecipeCard extends StatelessWidget {
             id: "12222",
             icon: "icon",
             amount: "3 eggs",
-            nutrition: Nutrition(calories: 18, fats: 20, carbs: 9, proteins: 6))
-      ]);
+            nutrition: Nutrition(calories: 18, fats: 20, carbs: 9, proteins: 6)),
+      ], favourite: false);
 
   RecipeCard({
     super.key,
@@ -45,13 +46,14 @@ class RecipeCard extends StatelessWidget {
 
   Future<void> _getRecipeByID(BuildContext context, String id) async {
     RecipesAPI api = RecipesAPI.fromCookie(session.cookie);
+    
     Recipe apiRecipe = await api.getRecipeByID(id);
     // ignore: use_build_context_synchronously
     Navigator.push(
       context,
       MaterialPageRoute(
           builder: (context) =>
-              RecipePage(recipe: apiRecipe, inFavorites: false)),
+              RecipePage(recipe: apiRecipe, inFavorites: false, share: false,)),
     );
   }
 
@@ -59,54 +61,63 @@ class RecipeCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: () => _getRecipeByID(context, id),
-      child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height / 4,
-        decoration: BoxDecoration(
-          color: Colors.black,
-          borderRadius: BorderRadius.circular(15),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.6),
-              offset: const Offset(
-                0.0,
-                10.0,
-              ),
-              blurRadius: 10.0,
-              spreadRadius: -6.0,
-            ),
-          ],
-          image: DecorationImage(
-            colorFilter: ColorFilter.mode(
-              Colors.black.withOpacity(0.20),
-              BlendMode.multiply,
-            ),
-            image: Image.network(thumbnailUrl,
-                    height: MediaQuery.of(context).size.height)
-                .image,
-            fit: BoxFit.cover,
-          ),
+      child: Card(
+        elevation: 2,
+        clipBehavior: Clip.antiAlias,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(25),
         ),
-        child: Stack(
+        child: Column(
           children: [
-            Align(
-              alignment: Alignment.center,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                child: Text(
-                  name,
-                  style: const TextStyle(
-                    fontSize: 24,
-                    color: Constants.secondaryColor,
-                    fontFamily: "Roboto",
-                    fontWeight: FontWeight.bold,
+            Stack(
+              alignment: Alignment.bottomLeft,
+              children: [
+                ShaderMask(
+                  blendMode: BlendMode.multiply,
+                  shaderCallback: (bounds) =>
+                      LinearGradient(
+                          begin: Alignment.bottomCenter,
+                          end: Alignment.topCenter,
+                          colors: [Colors.black, Colors.white.withOpacity(0.0)])
+                          .createShader(bounds),
+                  child: Image.network(
+                    thumbnailUrl,
+                    fit: BoxFit.fitHeight,
+                    height: MediaQuery.of(context).size.height * 0.4,
                   ),
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 2,
-                  textAlign: TextAlign.center,
                 ),
-              ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                  child: Column(
+                    children: [
+                      Align(
+                        alignment: Alignment.center,
+                        child: Text(
+                          name,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "Roboto",
+                            fontSize: 18,
+                            color: Constants.secondaryColor,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      const SizedBox(height: 13),
+                      const Text(
+                        "Cooked in 45 Minutes",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontFamily: "Roboto",
+                          fontSize: 18,
+                          color: Constants.primaryColor,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ],
         ),

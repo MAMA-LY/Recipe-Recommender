@@ -6,15 +6,20 @@ import 'package:flutter/material.dart';
 
 class SignAPI {
   static Future<String?> signup(
-      String username, String password, String email) async {
+      String username, String password, String email, String height, String weight, String gender, String birthdate) async {
     var url = Uri.https(APIConstants.baseUrl, APIConstants.signupEndPoint);
-    var credentials = {
+    var userData = {
       "username": username,
       "password": password,
-      "email": email
+      "email": email,
+      "height": height,
+      "weight": weight,
+      "gender": gender,
+      "birthdate": birthdate
     };
+    debugPrint(userData.toString());
     var response = await http.post(url,
-        body: credentials, headers: APIConstants.headerCORS(""));
+        body: userData, headers: APIConstants.headerCORS(""));
     return response.body;
   }
 
@@ -47,6 +52,11 @@ class SignAPI {
       return "right credentials";
     }
     return null;
+  }
+
+  static Future<void> signout() async {
+    var url = Uri.https(APIConstants.baseUrl, APIConstants.signoutEndPoint);
+    var response = await http.post(url, headers: {"cookie": session.cookie});
   }
 
   static Future<String?> forgetPassword(String email) async {

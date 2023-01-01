@@ -22,10 +22,10 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Constants.secondaryColor,
+      backgroundColor: Theme.of(context).secondaryHeaderColor,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Constants.secondaryColor,
+        backgroundColor: Theme.of(context).secondaryHeaderColor,
         title: Text(
           "ورقة وقلم",
           style: TextStyle(
@@ -33,7 +33,8 @@ class _HomePageState extends State<HomePage> {
               fontSize: 30,
               foreground: Paint()
                 ..color = Constants.primaryColor
-                ..strokeWidth = 10),
+                ..strokeWidth = 10
+          ),
         ),
         actions: [
           IconButton(
@@ -49,13 +50,16 @@ class _HomePageState extends State<HomePage> {
       ),
       body: FutureBuilder<List<Recipe>>(
         future: api.getRecipesWithQuery(
-            APIConstants.homeRecipesEndPoint, {"number": "5"}),
+            APIConstants.homeRecipesEndPoint, {"number": "10"}),
         builder: (context, snapshot) {
           debugPrint("SNAPSHOT1: ${snapshot.data}");
           if (snapshot.connectionState == ConnectionState.done) {
             debugPrint("SNAPSHOT2: ${snapshot.data}");
 
-            return Column(children: <Widget>[
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
               Expanded(
                   child: ListView.builder(
                 itemCount: snapshot.data?.length,

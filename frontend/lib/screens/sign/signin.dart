@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:recipe_recommender_frontend/api/session.dart';
 import 'package:recipe_recommender_frontend/api/sign_api.dart';
+import 'package:recipe_recommender_frontend/constants.dart';
 import 'package:recipe_recommender_frontend/screens/sign/forgetPassword.dart';
 import 'package:recipe_recommender_frontend/screens/sign/signup.dart';
 import 'package:recipe_recommender_frontend/screens/sign/widgets/custom_button.dart';
@@ -11,8 +13,8 @@ import '../page_view_controller.dart';
 class SignInPage extends StatefulWidget {
   static String routeName = "/signin";
   final String initResp;
-  const SignInPage({Key? key, required this.initResp}) : super(key: key); 
-  
+  const SignInPage({Key? key, required this.initResp}) : super(key: key);
+
   @override
   State<SignInPage> createState() => _SignInPageState();
 }
@@ -20,12 +22,22 @@ class SignInPage extends StatefulWidget {
 class _SignInPageState extends State<SignInPage> {
   var usernameController = TextEditingController();
   var passwordController = TextEditingController();
+  bool loading = false;
 
   String resp = "";
 
   Future<void> _signin() async {
-    String? status =
-        await SignAPI.signin(usernameController.text.trim(), passwordController.text.trim());
+    debugPrint(usernameController.text);
+    setState(() {
+      loading = true;
+    });
+    String? status = await SignAPI.signin(
+            usernameController.text.trim(), passwordController.text.trim())
+        .whenComplete(() => {
+              setState(() {
+                loading = false;
+              })
+            });
     debugPrint(status);
     if (status == "wrong credentials") {
       setState(() {
@@ -44,76 +56,137 @@ class _SignInPageState extends State<SignInPage> {
   @override
   void initState() {
     resp = widget.initResp;
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          primarySwatch: Colors.orange,
-        ),
-        home: Scaffold(
-            resizeToAvoidBottomInset: false,
-            body: Center(
-                child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Container(
-                      width: MediaQuery.of(context).size.width / 2,
-                      padding: const EdgeInsets.fromLTRB(20, 20, 20, 40),
-                      child: const Image(
-                          image: AssetImage("assets/images/Logo.png"),
-                          fit: BoxFit.fill)),
-                  CustomTextField(
-                    promptText: "Username",
-                    bottomPadding: 25,
-                    controller: usernameController,
-                    obscureText: false,
-                  ),
-                  CustomTextField(
-                    promptText: "Password",
-                    bottomPadding: 20,
-                    controller: passwordController,
-                    obscureText: true,
-                  ),
-                  CustomButton(onPressFn: _signin, text: "Sign in"),
-                  TextButton(
-                    onPressed: () {
-                      setState(() {
-                        resp = "";
-                      });
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  const ForgetPasswordPage()));
-                    },
-                    child: Text(
-                      'Forgot Password?',
-                      style: TextStyle(color: Colors.grey[600]),
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const SignUpPage()));
-                    },
-                    child: Text(
-                      'Don\'t have an account?',
-                      style: TextStyle(color: Colors.grey[600]),
-                    ),
-                  ),
-                  Text(
-                    resp,
-                    style: const TextStyle(color: Colors.red, fontSize: 15),
-                  )
-                ],
+    if (!loading) {
+      return Scaffold(
+          backgroundColor: Theme.of(context).secondaryHeaderColor,
+          resizeToAvoidBottomInset: false,
+          body: Stack(
+            children: [
+              Positioned(
+                top: MediaQuery.of(context).size.height * 0.8,
+                left: MediaQuery.of(context).size.width * 0.06,
+                child: SvgPicture.asset(
+                  "assets/images/bottom.svg",
+                  color: Colors.orange,
+                ),
               ),
-            ))));
+              Center(
+                  child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.max,
+                    children: <Widget>[
+                      Container(
+                          width: MediaQuery.of(context).size.width / 2,
+                          padding: const EdgeInsets.fromLTRB(20, 20, 20, 40),
+                          child: const Image(
+                              image: AssetImage("assets/images/Logo.png"),
+                              fit: BoxFit.fill)),
+                      CustomTextField(
+                        hintText: "Enter your username here..",
+                        labelText: "Username",
+                        bottomMargin: 20,
+                        controller: usernameController,
+                        obscureText: false,
+                        icon: Icons.person,
+                      ),
+                      CustomTextField(
+                        hintText: "Enter your password here..",
+                        labelText: "Password",
+                        bottomMargin: 15,
+                        controller: passwordController,
+                        obscureText: true,
+                        icon: Icons.password,
+                      ),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            TextButton(
+                              onPressed: () {
+                                setState(() {
+                                  resp = "";
+                                });
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const ForgetPasswordPage()));
+                              },
+                              child: Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    10, 0, 10, 0),
+                                child: Text(
+                                  'Forgot Password?',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: "Roboto",
+                                    color: Theme.of(context).focusColor,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            CustomButton(onPressFn: _signin, text: "Sign in")
+                          ]),
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                20, 0, 0, 0),
+                            child: Text(
+                              "Don't have an account?",
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: "Roboto",
+                                color: Colors.grey.shade800,
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                0, 0, 20, 0),
+                            child: TextButton(
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const SignUpPage()));
+                              },
+                              child: const Text(
+                                'Create Account',
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: Constants.primaryColor),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Text(
+                        resp,
+                        style: const TextStyle(color: Colors.red, fontSize: 15),
+                      )
+                    ],
+                  ),
+                ),
+              )),
+            ],
+          ));
+    } else {
+      return const Scaffold(body: Center(child: CircularProgressIndicator(color: Constants.primaryColor)));
+    }
   }
 }

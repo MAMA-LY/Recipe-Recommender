@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-
-import '../../../constants.dart';
+import 'package:recipe_recommender_frontend/constants.dart';
 
 class CustomExpansionTile extends StatefulWidget {
   final List<String> selectedIngredients;
-  final Function(String) remove;
+  final void Function(String) remove;
 
   const CustomExpansionTile({
     Key? key,
@@ -19,30 +18,41 @@ class CustomExpansionTile extends StatefulWidget {
 class _CustomExpansionTileState extends State<CustomExpansionTile> {
   @override
   Widget build(BuildContext context) {
-    return ExpansionTile(
-      title: const Text("Selected Ingredients"),
-      initiallyExpanded: true,
-      children: widget.selectedIngredients
-          .map((e) => Card(
-        child: ListTile(
-          trailing: SizedBox(
-            width: MediaQuery.of(context).size.width * 0.1,
-            height: MediaQuery.of(context).size.height * 0.1,
-            child: FloatingActionButton(
-              backgroundColor: Colors.red[800],
-              onPressed: () {
-                widget.remove(e);
-              },
-              child: const Icon(
-                Icons.remove_circle_outline,
-                color: Constants.secondaryColor,
-              ),
-            ),
-          ),
-          title: Text(e),
-        ),
-      ))
-          .toList(),
+    return Card(
+      color: Theme.of(context).secondaryHeaderColor,
+      elevation: 1,
+      child: ExpansionTile(
+        leading: const Icon(Icons.fastfood_outlined),
+        title: const Text("Selected Ingredients"),
+        initiallyExpanded: true,
+        children: [
+          Wrap(
+              spacing: 5,
+              children: widget.selectedIngredients
+                  .map(
+                    (e) => Chip(
+                        backgroundColor: Constants.primaryColor,
+                        label: Text(
+                          e,
+                          style: TextStyle(
+                            fontFamily: "Roboto",
+                            fontWeight: FontWeight.bold,
+                            fontStyle: FontStyle.italic,
+                            fontSize: 16,
+                            color: Theme.of(context).secondaryHeaderColor,
+                          ),
+                        ),
+                        deleteIcon: Icon(
+                          Icons.remove_circle,
+                          color: Theme.of(context).secondaryHeaderColor,
+                        ),
+                        onDeleted: () {
+                          widget.remove(e);
+                        }),
+                  )
+                  .toList()),
+        ],
+      ),
     );
   }
 }

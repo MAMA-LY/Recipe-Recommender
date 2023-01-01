@@ -52,23 +52,23 @@ Future<void> initUniLinks() async {
             runApp(const BuildApp(
                 widget: SignInPage(initResp: "Cannot reset password")));
           } else if (response == "TokenVerified") {
-            runApp(BuildApp(widget: changePasswordPage(tk: tk)));
+            runApp(BuildApp(widget: ChangePasswordPage(tk: tk)));
           }
         } else {
           runApp(const BuildApp(
               widget: SignInPage(initResp: "Cannot reset password")));
         }
       } else if (path[0] == "share") {
-        if (Session.login) {
-          String? id = initialUri.queryParameters['id'];
-          if (id != null) {
-            debugPrint(id);
-            RecipesAPI api = RecipesAPI.fromCookie(session.cookie);
-            Recipe response = await api.getRecipeByID(id.trim());
-            runApp(BuildApp(widget:RecipePage(recipe: response, inFavorites: false)));
-          }
-        } else {
-          runApp(const BuildApp(widget: SignInPage(initResp: "")));
+        String? id = initialUri.queryParameters['id'];
+        if (id != null) {
+          debugPrint(id);
+          debugPrint("wait recipe page");
+          debugPrint(session.cookie.toString());
+          RecipesAPI api = RecipesAPI.fromCookie(session.cookie);
+          Recipe response = await api.getRecipeShareByID(id.trim());
+          debugPrint("open recipe page");
+          runApp(BuildApp(
+              widget: RecipePage(recipe: response, inFavorites: false, share: true,)));
         }
       } else {
         runApp(const BuildApp(widget: SignInPage(initResp: "")));
@@ -80,8 +80,6 @@ Future<void> initUniLinks() async {
       debugPrint("bodnod2");
       if (uri != null) {
         List<String?> path = uri.pathSegments;
-        debugPrint(path.toString());
-        debugPrint(uri.toString());
 
         if (path[0] == "resetPassword") {
           String? tk = uri.queryParameters['tk'];
@@ -93,24 +91,23 @@ Future<void> initUniLinks() async {
               runApp(const BuildApp(
                   widget: SignInPage(initResp: "Cannot reset password")));
             } else if (response == "TokenVerified") {
-              debugPrint("lolxd");
-              runApp(BuildApp(widget: changePasswordPage(tk: tk)));
+              runApp(BuildApp(widget: ChangePasswordPage(tk: tk)));
             }
           } else {
             runApp(const BuildApp(
                 widget: SignInPage(initResp: "Cannot reset password")));
           }
         } else if (path[0] == "share") {
-          if (Session.login) {
-            String? id = uri.queryParameters['id'];
-            if (id != null) {
-              debugPrint(id);
-              RecipesAPI api = RecipesAPI.fromCookie(session.cookie);
-              Recipe response = await api.getRecipeByID(id.trim());
-              runApp(BuildApp(widget:RecipePage(recipe: response, inFavorites: false)));
-            }
-          } else {
-            runApp(const BuildApp(widget: SignInPage(initResp: "")));
+          String? id = uri.queryParameters['id'];
+          if (id != null) {
+            debugPrint(id);
+            debugPrint("wait recipe page");
+            debugPrint(session.cookie);
+            RecipesAPI api = RecipesAPI.fromCookie(session.cookie);
+            Recipe response = await api.getRecipeShareByID(id.trim());
+            debugPrint("open recipe page");
+            runApp(BuildApp(
+                widget: RecipePage(recipe: response, inFavorites: false, share: true,)));
           }
         } else {
           runApp(const BuildApp(widget: SignInPage(initResp: "")));
@@ -124,12 +121,11 @@ Future<void> initUniLinks() async {
     debugPrint("eror");
   }
 }
-// Use the uri and warn the user, if it is not correct,
-// but keep in mind it could be `null`.
-// ... other exception handling like PlatformException
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  debugPrint(APIConstants.baseUrl);
+
   var url = Uri.https(APIConstants.baseUrl, APIConstants.homeEndPoint);
   debugPrint(url.toString());
   getLocalFile()
@@ -149,8 +145,10 @@ void main() {
 Future<String?> getServerInitResponse() async {
   session.cookie = cookieStr;
   var url = Uri.https(APIConstants.baseUrl, APIConstants.homeEndPoint);
+  debugPrint(url.toString());
   var serverResponse =
       await http.get(url, headers: APIConstants.headerCORS(session.cookie));
+  debugPrint("xxxx");
   debugPrint(serverResponse.body);
   final bool hasData = serverResponse.body != null;
   if (hasData) {
@@ -166,10 +164,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).secondaryHeaderColor,
       body: FutureBuilder(
         future: getServerInitResponse(),
         initialData: "",
         builder: (builder, snapshot) {
+          debugPrint(APIConstants.baseUrl);
           if (snapshot.connectionState == ConnectionState.done) {
             String response = snapshot.data!;
             if (response == "UserInfo") {
@@ -191,17 +191,41 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class BuildApp extends StatelessWidget {
+class BuildApp extends StatefulWidget {
   final Widget widget;
-  const BuildApp({Key? key, required this.widget}) : super(key: key);
+  const BuildApp({super.key, required this.widget});
+
+  @override
+  BuildAppState createState() => BuildAppState();
+  static BuildAppState? of(BuildContext context) =>
+      context.findAncestorStateOfType<BuildAppState>();
+}
+
+class BuildAppState extends State<BuildApp> {
+  late ThemeMode _themeMode = ThemeMode.light;
+  ThemeMode getTheme() {
+    return _themeMode;
+  }
+
+  void changeTheme(ThemeMode themeMode) {
+    setState(() {
+      _themeMode = themeMode;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      themeMode: _themeMode,
       theme: ThemeData(
+        brightness: Brightness.light,
+        dividerColor: Colors.transparent,
         fontFamily: 'Satoshi',
         primarySwatch: Colors.orange,
         primaryColor: Constants.primaryColor,
+        secondaryHeaderColor: Constants.secondaryColor,
+        focusColor: Constants.fourthColor,
         textTheme: const TextTheme(
           headline1: TextStyle(
             fontFamily: 'Telma',
@@ -211,7 +235,24 @@ class BuildApp extends StatelessWidget {
           ),
         ),
       ),
-      home: widget,
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+        dividerColor: Colors.transparent,
+        fontFamily: 'Satoshi',
+        primarySwatch: Colors.orange,
+        primaryColor: Constants.primaryColor,
+        secondaryHeaderColor: Constants.fourthColor,
+        focusColor: Constants.secondaryColor,
+        textTheme: const TextTheme(
+          headline1: TextStyle(
+            fontFamily: 'Telma',
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            color: Constants.primaryColor,
+          ),
+        ),
+      ),
+      home: widget.widget,
     );
   }
 }

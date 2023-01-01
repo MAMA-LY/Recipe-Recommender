@@ -3,9 +3,9 @@ package com.brainfood.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.brainfood.security.Model.PasswordResetToken;
-import com.brainfood.security.Model.UserCredentials;
-import com.brainfood.security.Repository.PasswordResetTokenRepository;
+import com.brainfood.security.model.PasswordResetToken;
+import com.brainfood.security.repository.PasswordResetTokenRepository;
+import com.brainfood.security.model.UserCredentials;
 
 @Service
 public class PasswordResetManager {

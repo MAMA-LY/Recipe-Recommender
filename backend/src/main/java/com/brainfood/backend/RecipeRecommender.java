@@ -2,7 +2,7 @@ package com.brainfood.backend;
 
 import java.util.List;
 
-import com.brainfood.models.Recipe;
+import com.brainfood.backend.models.Recipe;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
