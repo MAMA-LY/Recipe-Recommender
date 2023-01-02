@@ -88,10 +88,10 @@ Install with flutter
 
 #### Question 1
 >How to request a feature?
-- you can follow the [issue template](https://github.com/MAMA-LY/Recipe-Recommender/blob/main/.github/ISSUE_TEMPLATE/feature_request.md) for request a feature. 
+- you can follow the [issue template](https://github.com/MAMA-LY/Recipe-Recommender/blob/main/.github/ISSUE_TEMPLATE/feature_request.md) to request a feature. 
 #### Question 2
 >How to report a bug?
-- you can follow the [issue template](https://github.com/MAMA-LY/Recipe-Recommender/blob/main/.github/ISSUE_TEMPLATE/bug_report.md) for report a bug. 
+- you can follow the [issue template](https://github.com/MAMA-LY/Recipe-Recommender/blob/main/.github/ISSUE_TEMPLATE/bug_report.md) to report a bug. 
 
 
 
