@@ -9,9 +9,7 @@
 # **Recipe Recommender**
 ## Description
 
-Humans face some decisions that they have to make every day, one of which is “What to eat today?”, our Recipe Recommender will ease that decision a lot for everyone, the housewives thinking of lunch ideas and the napless night owls looking for a midnight snack as well
-
-. Our Recipe Recommender will be a mobile application supporting both Android and iOS, and it will have its web UI as well. It has a broad set of functionalities, mainly oriented about recommending recipes given a small set of ingredients to be used, providing the user a wide range of different cuisines both local and international. It provides the user with the ingredients of a numerous set of recipes, how to make them, nutrition facts for each recipe, and even suggests personalized recipes for returning users! It also has a planner so that you can plan what to eat for days ahead, mentioning the calories that you need each day, and the calories of the meals you planned to make.
+Humans face some decisions that they have to make every day, one of which is “What to eat today?”, our Recipe Recommender will ease that decision a lot for everyone, the housewives thinking of lunch ideas and the napless night owls looking for a midnight snack as well. Our Recipe Recommender will be a mobile application supporting both Android and iOS, and it will have its web UI as well. It has a broad set of functionalities, mainly oriented about recommending recipes given a small set of ingredients to be used, providing the user a wide range of different cuisines both local and international. It provides the user with the ingredients of a numerous set of recipes, how to make them, nutrition facts for each recipe, and even suggests personalized recipes for returning users! It also has a planner so that you can plan what to eat for days ahead, mentioning the calories that you need each day, and the calories of the meals you planned to make.
 
 
 # **Recipe Recommender (Model)**
