@@ -12,7 +12,7 @@
 
     It's the loading screen that shows up when the user open the app.
 
-<img src="https://github.com/MAMA-LY/Recipe-Recommender/blob/UI-Document-Update/docs/pages-UI/Splash.jpg?raw=true" alt="Splash" width="50%" height="50%">
+<img src="https://github.com/MAMA-LY/Recipe-Recommender/blob/UI-Document-Update/docs/pages-UI/Splash.jpg?raw=true" alt="Splash" width="25%" height="25%">
 
 ### **Login Page**
 
@@ -20,7 +20,7 @@
     to make the app remembers him/her.
     And can sign up/ log in using google or facebook account (This feature can change).
 
-<img src="https://github.com/MAMA-LY/Recipe-Recommender/blob/UI-Document-Update/docs/pages-UI/Login-Page.jpg?raw=true" alt="Login-Page" width="50%" height="50%">
+<img src="https://github.com/MAMA-LY/Recipe-Recommender/blob/UI-Document-Update/docs/pages-UI/Login-Page.jpg?raw=true" alt="Login-Page" width="25%" height="25%">
 
 ### **Home Page**
 
@@ -30,7 +30,7 @@
     The navigation bar holds the home page, meals calendar page, search page, favorite recipes page, and settings page,
     where user can navigate the app using it. 
 
-<img src="https://github.com/MAMA-LY/Recipe-Recommender/blob/UI-Document-Update/docs/pages-UI/Home-Page.jpg?raw=true" alt="Home-Page" width="50%" height="50%">
+<img src="https://github.com/MAMA-LY/Recipe-Recommender/blob/UI-Document-Update/docs/pages-UI/Home-Page.jpg?raw=true" alt="Home-Page" width="25%" height="25%">
 
 ### **Search Page**
 
@@ -44,8 +44,8 @@
 
     Where the user can show recipe's ingredients and nutrition, with a friendly UI/UX and a chart view for nutritions.
 
-<img src="https://github.com/MAMA-LY/Recipe-Recommender/blob/UI-Document-Update/docs/pages-UI/Recipe-Page-Ingredients.jpg?raw=true" alt="Recipe-Page-Ingredients" width="50%" height="50%">
-<img src="https://github.com/MAMA-LY/Recipe-Recommender/blob/UI-Document-Update/docs/pages-UI/Recipe-Page-Nutrition.jpg?raw=true" alt="Recipe-Page-Nutrition" width="50%" height="50%">
+<img src="https://github.com/MAMA-LY/Recipe-Recommender/blob/UI-Document-Update/docs/pages-UI/Recipe-Page-Ingredients.jpg?raw=true" alt="Recipe-Page-Ingredients" width="25%" height="25%">
+<img src="https://github.com/MAMA-LY/Recipe-Recommender/blob/UI-Document-Update/docs/pages-UI/Recipe-Page-Nutrition.jpg?raw=true" alt="Recipe-Page-Nutrition" width="25%" height="25%">
 
 ### **Settings Page**
 
@@ -53,11 +53,11 @@
     The second one is to switch between light and dark mode.
     The last one is to go to help page if the user needs to know how to do something in the app. 
     
-<img src="https://github.com/MAMA-LY/Recipe-Recommender/blob/UI-Document-Update/docs/pages-UI/Settings-Page.jpg?raw=true" alt="Settings-Page" width="50%" height="50%">
+<img src="https://github.com/MAMA-LY/Recipe-Recommender/blob/UI-Document-Update/docs/pages-UI/Settings-Page.jpg?raw=true" alt="Settings-Page" width="25%" height="25%">
 
 ### **Account Settings Page**
 
     Where the user can edit his email, password, and profile photo or delete the account
     (This feature we didn't decide if this is the best design or not).
 
-<img src="https://github.com/MAMA-LY/Recipe-Recommender/blob/UI-Document-Update/docs/pages-UI/Account-Setting-Page.jpg?raw=true" alt="Account-Setting-Page" width="50%" height="50%">
+<img src="https://github.com/MAMA-LY/Recipe-Recommender/blob/UI-Document-Update/docs/pages-UI/Account-Setting-Page.jpg?raw=true" alt="Account-Setting-Page" width="25%" height="25%">
