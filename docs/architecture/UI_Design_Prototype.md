@@ -51,4 +51,4 @@
     Where the user can edit his email, password, and profile photo or delete the account
     (This feature we didn't decide if this is the best design or not).
 
-![Account-Setting-Page](Pages-UI/Account-Setting-Page.png)
+![Account-Setting-Page](https://github.com/MAMA-LY/Recipe-Recommender/blob/main/docs/Pages-UI/Account-Setting-Page.png?raw=true)
