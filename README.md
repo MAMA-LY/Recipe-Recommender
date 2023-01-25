@@ -1,5 +1,7 @@
 
-![Logo](https://raw.githubusercontent.com/MAMA-LY/Recipe-Recommender/main/docs/assets/Logo.png)
+<p align="center">
+    <img src="https://raw.githubusercontent.com/MAMA-LY/Recipe-Recommender/main/docs/assets/Logo.png" alt="Logo" width="50%" height="50%">
+</p>
 
 
 # Recipe Recommender - ورقة وقلم
