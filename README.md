@@ -20,7 +20,7 @@ If you are a student and want to eat or a housewife and want to feed your childr
 ## Documentation
 
 - [Overall Designs](https://github.com/MAMA-LY/Recipe-Recommender/blob/main/docs/architecture/overall%20design.md)
-- [UI/UX Primitive Prototypes](https://github.com/MAMA-LY/Recipe-Recommender/tree/main/docs/Pages-UI)
+- [UI/UX Primitive Prototypes](https://github.com/MAMA-LY/Recipe-Recommender/blob/main/docs/architecture/UI_Design_Prototype.md)
 - [Class Diagram](https://github.com/MAMA-LY/Recipe-Recommender/blob/main/docs/architecture/Class%20Diagram.md)
 - [Deployment Details and Capabilities](https://github.com/MAMA-LY/Recipe-Recommender/blob/main/docs/deployment.md)
 ## Environment Variables
